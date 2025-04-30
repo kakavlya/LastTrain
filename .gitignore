@@ -72,3 +72,42 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Temp Yaml Unity Collab and Lock
+/*.swp
+/*.tmp
+*.bak
+*.orig
+*.tmp
+*.gid
+*.suo
+*.sdf
+*.cache
+*.patch
+
+# Ignore Rider project files
+.idea/
+*.sln.iml
+
+# Ignore Unity Cloud Build artifacts 
+/[Bb]uilds/UCB/
+
+# Ignore Cache from Addressables
+/Assets/AddressableAssetsData/*/*.bin*
+/Assets/StreamingAssets/aa/
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore Android/iOS build
+*.apk
+*.aab
+*.ipa
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+*.xcodeproj/*
+
+
