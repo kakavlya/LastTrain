@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7012652851524345463}
   - component: {fileID: 8550494483866862955}
+  - component: {fileID: 8571520508618867802}
   m_Layer: 0
   m_Name: VisualRoot
   m_TagString: Untagged
@@ -54,6 +55,22 @@ MonoBehaviour:
   _bounceSpeed: 4
   _tiltAmount: 1
   _tiltSpeed: 8
+--- !u!114 &8571520508618867802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066105954477270863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae90e5d4410b4a040832d4e2fba44487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualRoot: {fileID: 7012652851524345463}
+  _torqueAmount: 180
+  _upwardForce: 3
+  _duration: 2
 --- !u!1 &1734756418629181979
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +450,11 @@ GameObject:
   - component: {fileID: 4822959857874471302}
   - component: {fileID: 913496932515304477}
   - component: {fileID: 8313919562016199065}
+  - component: {fileID: 8188083939463989365}
+  - component: {fileID: 2740511905581843094}
+  - component: {fileID: 1506431519633432373}
+  - component: {fileID: 3627619592416586722}
+  - component: {fileID: 8339258220731403237}
   m_Layer: 0
   m_Name: EnemyBuggyWobble
   m_TagString: Untagged
@@ -468,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb87a04b3667734cb2b735699774d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 9
+  _speed: 8
 --- !u!114 &8313919562016199065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +503,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3808528bbdcb0d24287464485ae5ee4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8188083939463989365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510949831610658360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18957604ba956f4d8be65c524247a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _logicToDisable:
+  - {fileID: 913496932515304477}
+  _collidersToDisable:
+  - {fileID: 3627619592416586722}
+  _enemyView: {fileID: 2740511905581843094}
+  _deathEffect: {fileID: 8571520508618867802}
+  _delayBeforeDespawn: 2
+  _useObjectPool: 0
+--- !u!114 &2740511905581843094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510949831610658360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73878a91a1495a04b86bb1067a41c832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitVFX: {fileID: 0}
+  _deathVFX: {fileID: 0}
+  _hitSound: {fileID: 0}
+  _deathSound: {fileID: 0}
+  _renderersToFlash:
+  - {fileID: 8441669147791389372}
+  _flashColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashDuration: 0.1
+--- !u!114 &1506431519633432373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510949831610658360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253c9c908ab8abf4d8c8867dadddeaec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &3627619592416586722
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510949831610658360}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4431324, y: 2.173768, z: 5.35}
+  m_Center: {x: -0.06, y: 0.77, z: -0.01}
+--- !u!114 &8339258220731403237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7510949831610658360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7246ee5c3e7695d4883253c44b1b74dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keyCodeToKill: 107
 --- !u!1 &9212850821598585325
 GameObject:
   m_ObjectHideFlags: 0
