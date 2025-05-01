@@ -1,18 +1,17 @@
+using Assets.Source.Scripts.Enemies;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Transform _target;
+    private EnemyMovement _movement;
 
-    // Update is called once per frame
-    void Update()
+    public void Init(Transform target)
     {
-        
+        _target = target;
+        _movement = GetComponent<EnemyMovement>();
+        _movement.SetTarget(_target);
     }
 }
