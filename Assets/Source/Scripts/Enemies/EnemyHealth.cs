@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Assets.Source.Scripts.Enemies
 {
-    public class EnemyHealth : MonoBehaviour
+    public class EnemyHealth : MonoBehaviour, IDamageable
     {
         [SerializeField] private int _maxHealth = 100;
 
@@ -23,7 +23,7 @@ namespace Assets.Source.Scripts.Enemies
 
         private void OnEnable()
         {
-            ResetHealth(); // for pool using
+            ResetHealth(); 
         }
 
         public void TakeDamage(int amount)

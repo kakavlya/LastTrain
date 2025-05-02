@@ -71,6 +71,10 @@ MonoBehaviour:
   _torqueAmount: 180
   _upwardForce: 3
   _duration: 2
+  _flyDuration: 1
+  _rotateDuration: 2
+  _disappearDelay: 0.1
+  _deactivateTime: 1
 --- !u!1 &1734756418629181979
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,10 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18957604ba956f4d8be65c524247a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _logicToDisable:
-  - {fileID: 913496932515304477}
-  _collidersToDisable:
-  - {fileID: 3627619592416586722}
   _enemyView: {fileID: 2740511905581843094}
   _deathEffect: {fileID: 8571520508618867802}
   _delayBeforeDespawn: 2
@@ -574,12 +574,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4431324, y: 2.173768, z: 5.35}
-  m_Center: {x: -0.06, y: 0.77, z: -0.01}
+  m_Size: {x: 2.5984144, y: 2.0616379, z: 5.0373373}
+  m_Center: {x: -0.04139185, y: 0.7139349, z: 0.056656837}
 --- !u!114 &8339258220731403237
 MonoBehaviour:
   m_ObjectHideFlags: 0
