@@ -9,6 +9,7 @@ public class WeaponShooter : MonoBehaviour
     [SerializeField] private Projectile _projectile;
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private GameObject _ownerToIgnore;
+    [SerializeField] private ParticleSystem _muzzleFlash;
 
     public void Fire()
     {
@@ -38,7 +39,14 @@ public class WeaponShooter : MonoBehaviour
                 foreach (var col in ownerColliders)
                     Physics.IgnoreCollision(projectileCollider, col);
             }
+
+            if (_muzzleFlash != null)
+            {
+                _muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                _muzzleFlash.Play();
+            }
         }
+
 
         //Destroy(projectileGO, _projectile.lifetime);
     }

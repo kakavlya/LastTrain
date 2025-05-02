@@ -536,7 +536,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitVFX: {fileID: 0}
-  _deathVFX: {fileID: 0}
+  _deathVFXOptions:
+  - {fileID: 1159970587636746, guid: e7473d9620ab29341b98bf21b400e598, type: 3}
+  - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
+  - {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
+  _deathVFXlife: 2
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
   _renderersToFlash:

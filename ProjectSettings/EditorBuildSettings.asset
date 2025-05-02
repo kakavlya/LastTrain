@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Source/Scenes/Pavel.unity
+    guid: 89cbb7f5bf2417d48a3dcd8c17e0e987
   m_configObjects: {}

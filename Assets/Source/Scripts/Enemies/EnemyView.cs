@@ -8,7 +8,8 @@ namespace Assets.Source.Scripts.Enemies
 
         [Header("Visual FX")]
         [SerializeField] private GameObject _hitVFX;
-        [SerializeField] private GameObject _deathVFX;
+        [SerializeField] private GameObject[] _deathVFXOptions;
+        [SerializeField] private float _deathVFXlife = 2f;
 
         [Header("Audio")]
         [SerializeField] private AudioClip _hitSound;
@@ -56,8 +57,14 @@ namespace Assets.Source.Scripts.Enemies
 
         public void PlayDeathFX()
         {
-            if (_deathVFX)
-                Instantiate(_deathVFX, transform.position, Quaternion.identity);
+            // TODO implement pooling
+            var selectedVFX = GetRandomVFX(_deathVFXOptions);
+            if (selectedVFX != null)
+            {
+                var fx = Instantiate(selectedVFX, transform.position, Quaternion.identity);
+                fx.transform.SetParent(null);
+                Destroy(fx, _deathVFXlife);
+            }
 
             if (_deathSound)
                 AudioSource.PlayClipAtPoint(_deathSound, transform.position);
@@ -74,6 +81,15 @@ namespace Assets.Source.Scripts.Enemies
             // Вернуть цвет
             for (int i = 0; i < _materials.Length; i++)
                 _materials[i].color = _originalColors[i];
+        }
+
+        private GameObject GetRandomVFX(GameObject[] options)
+        {
+            if (options == null || options.Length == 0)
+                return null;
+
+            int index = Random.Range(0, options.Length);
+            return options[index];
         }
     }
 }
