@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 namespace Assets.Source.Scripts.Enemies
 {
@@ -14,6 +12,18 @@ namespace Assets.Source.Scripts.Enemies
         [SerializeField] private Vector2 _randRange = new Vector2(-2, 2);
 
         private float timer;
+        public void Init(GameObject enemyPrefab,
+                         Transform[] spawnPoints,
+                         Transform playerTarget,
+                         float spawnInterval,
+                         Vector2 randRange)
+        {
+            _enemyPrefab = enemyPrefab;
+            _spawnPoints = spawnPoints;
+            _playerTarget = playerTarget;
+            _spawnInterval = spawnInterval;
+            _randRange = randRange;
+        }
 
         private void Update()
         {
