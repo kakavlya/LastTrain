@@ -1,34 +1,73 @@
-using Assets.Source.Scripts.Enemies;
+using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float _lifetime = 3f;
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private int _damage = 50;
-    private void Start()
+    public event Action<Projectile> OnReturnToPool;
+
+    [field: SerializeField] public float Speed { get; private set; } = 100f;
+    [field: SerializeField] public int Damage { get; set; } = 50;
+    [field: SerializeField] public float Lifetime { get; private set; } = 3f;
+    [field: SerializeField] public bool UsePooling { get; private set; } = false;
+
+    public GameObject Owner { get; set; }
+
+    private Rigidbody _rb;
+    private float _spawnTime;
+
+    private void Awake()
     {
-        Destroy(gameObject, _lifetime);
-        Debug.Log($"Projectile created: {name}");
+        _rb = GetComponent<Rigidbody>();
     }
 
-    public float Getspeed()
+    private void OnEnable()
     {
-        return _speed;
+        _spawnTime = Time.time;
+        if (_rb != null)
+            _rb.velocity = transform.forward * Speed;
     }
 
-    public void SetDamage(int damage)
+    private void Update()
     {
-        _damage = damage;
+        if (Time.time - _spawnTime >= Lifetime)
+            Despawn();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Projectile hit: {other.name}");
-        if(other.TryGetComponent(out IDamageable damageable))
+        if (Owner != null && other.transform.IsChildOf(Owner.transform))
+            return;
+
+        if (other.TryGetComponent<IDamageable>(out var dmg))
+            dmg.TakeDamage(Damage);
+
+        Despawn();
+    }
+
+    private void Despawn()
+    {
+        if (UsePooling)
         {
-            damageable.TakeDamage(_damage);
+            OnReturnToPool?.Invoke(this);
+        }
+        else
+        {
             Destroy(gameObject);
         }
+    }
+
+    public void Configure(
+        GameObject owner = null,
+        bool usePooling = false,
+        int damage = 50,
+        float lifetime = 3f,
+        float speed = 10f
+    )
+    {
+        Owner = owner;
+        UsePooling = usePooling;
+        Damage = damage;
+        Lifetime = lifetime;
+        Speed = speed;
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private Transform _target;
-    private EnemyMovement _movement;
+    //private Transform _target;
+    //private EnemyMovement _movement;
 
-    public void Init(Transform target)
-    {
-        _target = target;
-        _movement = GetComponent<EnemyMovement>();
-        _movement.SetTarget(_target);
-    }
+    //public void Init(Transform target)
+    //{
+    //    _target = target;
+    //    _movement = GetComponent<EnemyMovement>();
+    //    _movement.SetTarget(_target);
+    //}
 }

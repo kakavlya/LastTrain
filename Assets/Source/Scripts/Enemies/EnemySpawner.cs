@@ -1,54 +1,59 @@
-﻿using UnityEngine;
-
+﻿// EnemySpawner.cs
+using UnityEngine;
 namespace Assets.Source.Scripts.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
-
-        [SerializeField] private GameObject _enemyPrefab;
-        [SerializeField] private Transform[] _spawnPoints;
-        [SerializeField] private float _spawnInterval = 3f;
         [SerializeField] private Transform _playerTarget;
-        [SerializeField] private Vector2 _randRange = new Vector2(-2, 2);
+        [SerializeField] private Transform[] _spawnPoints;
 
-        private float timer;
-        public void Init(GameObject enemyPrefab,
-                         Transform[] spawnPoints,
-                         Transform playerTarget,
-                         float spawnInterval,
-                         Vector2 randRange)
+        private EnemySpawnEntry[] _entries;
+        private float[] _timers;
+
+        public void Init(EnemySpawnEntry[] entries, Transform playerTarget, Transform[] spawnPoints)
         {
-            _enemyPrefab = enemyPrefab;
-            _spawnPoints = spawnPoints;
+            _entries = entries;
             _playerTarget = playerTarget;
-            _spawnInterval = spawnInterval;
-            _randRange = randRange;
+            _spawnPoints = spawnPoints;
+
+            _timers = new float[_entries.Length];
+            for (int i = 0; i < _entries.Length; i++)
+                _timers[i] = _entries[i].spawnInterval; 
         }
 
         private void Update()
         {
-            timer += Time.deltaTime;
-            if (timer >= _spawnInterval)
+            if (_entries == null) return;
+
+            for (int i = 0; i < _entries.Length; i++)
             {
-                SpawnEnemy();
-                timer = 0f;
+                _timers[i] += Time.deltaTime;
+                if (_timers[i] >= _entries[i].spawnInterval)
+                {
+                    SpawnEnemy(_entries[i]);
+                    _timers[i] = 0f;
+                }
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(EnemySpawnEntry entry)
         {
-            var spawn = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-            Vector3 randomizedPosition = RandomizePosition(spawn.position);
-            var enemy = Instantiate(_enemyPrefab, randomizedPosition, spawn.rotation);
-            enemy.GetComponent<EnemyController>().Init(_playerTarget);
+            var sp = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+            Vector3 pos = sp.position;
+            pos.x += Random.Range(-entry.randRangeXZ.x, entry.randRangeXZ.x);
+            pos.z += Random.Range(-entry.randRangeXZ.y, entry.randRangeXZ.y);
+
+            var go = Instantiate(entry.prefab, pos, sp.rotation);
+            entry.behaviorSettings?.Initialize(go, _playerTarget);
         }
 
-        private Vector3 RandomizePosition(Vector3 position)
+        [System.Serializable]
+        public class EnemySpawnEntry
         {
-            float randomX = position.x + Random.Range(_randRange.x, _randRange.x);
-            float randomY = position.y + Random.Range(_randRange.x, _randRange.x);
-
-            return new Vector3(randomX, position.y, randomY);
+            public GameObject prefab;
+            public float spawnInterval;
+            public Vector2 randRangeXZ;
+            public EnemyBehaviorSettings behaviorSettings;
         }
     }
 }

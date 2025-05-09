@@ -1,55 +1,28 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using Assets.Source.Scripts.Core;
+using Assets.Source.Scripts.Enemies;
 
-namespace Assets.Source.Scripts.Enemies
+public class EnemyHealth : HealthBase
 {
-    public class EnemyHealth : MonoBehaviour, IDamageable
+    private EnemyView _view;
+    private EnemyDeathHandler _deathHandler;
+
+    protected override void Awake()
     {
-        [SerializeField] private int _maxHealth = 100;
+        base.Awake();
+        _view = GetComponent<EnemyView>();
+        _deathHandler = GetComponent<EnemyDeathHandler>();
+    }
 
-        public UnityEvent OnDeath; // для внешних подписок (например, GameManager, UI)
-        public int CurrentHealth { get; private set; }
-        public bool IsDead { get; private set; }
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+        _view?.PlayHitFX();
+    }
 
-        private EnemyDeathHandler _deathHandler;
-        private EnemyView _enemyView;
-
-        private void Awake()
-        {
-            _deathHandler = GetComponent<EnemyDeathHandler>();
-            _enemyView = GetComponent<EnemyView>();
-        }
-
-        private void OnEnable()
-        {
-            ResetHealth(); 
-        }
-
-        public void TakeDamage(int amount)
-        {
-            if (IsDead) return;
-
-            CurrentHealth -= amount;
-            _enemyView?.PlayHitFX();
-
-            if (CurrentHealth <= 0)
-            {
-                Die();
-            }
-        }
-        public void Die()
-        {
-            IsDead = true;
-            OnDeath?.Invoke();
-
-            _deathHandler?.HandleDeath();
-        }
-
-        public void ResetHealth()
-        {
-            CurrentHealth = _maxHealth;
-            IsDead = false;
-        }
+    protected override void Die()
+    {
+        base.Die();
+        _view?.PlayDeathFX();
+        _deathHandler?.HandleDeath();
     }
 }

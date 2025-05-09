@@ -22,7 +22,7 @@ namespace Assets.Source.Scripts.Enemies
         {
             if (Input.GetKeyDown(_keyCodeToKill))
             {
-                _enemyHealth.Die();
+                //_enemyHealth.Die();
             }
         }
     }

@@ -1,26 +1,35 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-namespace Assets.Source.Scripts.Enemies
+public class EnemyMovement : MonoBehaviour
 {
-    public class EnemyMovement : MonoBehaviour
+    [SerializeField] private float _turnSpeed = 120f; // градусы в секунду
+    private float _moveSpeed;
+
+    public void SetSpeed(float speed) => _moveSpeed = speed;
+    public void MoveForwardTo(Vector3 target)
     {
-
-        [SerializeField] private float _speed = 5f;
-        private Transform _target;
-
-        public void SetTarget(Transform target)
+        Vector3 dir = (target - transform.position).WithY(0f).normalized;
+        if (dir.sqrMagnitude > 0.001f)
         {
-            _target = target;
+            Quaternion desired = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation,
+                desired,
+                _turnSpeed * Time.deltaTime
+            );
         }
 
-        private void Update()
-        {
-            if (_target == null) return;
-
-            Vector3 direction = (_target.position - transform.position).normalized;
-            transform.position += direction * _speed * Time.deltaTime;
-            transform.forward = direction; 
-        }
+        transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
     }
+
+    public void MoveForward()
+    {
+        transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
+    }
+}
+
+public static class Vector3Extensions
+{
+    public static Vector3 WithY(this Vector3 v, float y) => new Vector3(v.x, y, v.z);
 }

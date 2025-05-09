@@ -1,58 +1,68 @@
 using Assets.Source.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponShooter : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private Projectile _projectile;
+    [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private AimingTargetProvider _aimingTarget;
-    [SerializeField] private GameObject _ownerToIgnore;
-    [SerializeField] private ParticleSystem _muzzleFlash;
+    [SerializeField] private ParticleSystem _muzzleFlash;        
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private AudioSource _audioSource;
+
+    [Header("Settings")]
+    [SerializeField] private bool _usePooling = false;                
+    [SerializeField] private float _fireDelay = 0.1f;                 
+    private float _lastFireTime;
+
+    private GameObject _owner;
+
+    public void Initialize(GameObject owner, AimingTargetProvider aimer, bool usePooling = false)
+    {
+        _aimingTarget = aimer;
+        _owner = owner;
+        _usePooling = usePooling;
+    }
 
     public void Fire()
     {
+
+        if (Time.time - _lastFireTime < _fireDelay)
+            return;
+
         if (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue)
             return;
 
-        Vector3 target = _aimingTarget.AimPointWorld.Value;
-        target.y = 0f; 
+        _lastFireTime = Time.time;
 
-        Vector3 firePosition = _firePoint.position;
 
-        Vector3 direction = (target - firePosition).normalized;
-
-        GameObject projectileGO = Instantiate(_projectile.gameObject, firePosition, Quaternion.LookRotation(direction));
-
-        Rigidbody rb = projectileGO.GetComponent<Rigidbody>();
-
-        if (rb != null)
+        if (_muzzleFlash != null)
         {
-            rb.velocity = direction * _projectile.Getspeed();
-
-            if (_ownerToIgnore != null)
-            {
-                Collider[] ownerColliders = _ownerToIgnore.GetComponentsInChildren<Collider>();
-                Collider projectileCollider = projectileGO.GetComponent<Collider>();
-
-                foreach (var col in ownerColliders)
-                    Physics.IgnoreCollision(projectileCollider, col);
-            }
-
-            if (_muzzleFlash != null)
-            {
-                _muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                _muzzleFlash.Play();
-            }
+            _muzzleFlash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            _muzzleFlash.Play();
         }
+        if (_audioSource != null && _shootSound != null)
+            _audioSource.PlayOneShot(_shootSound);
 
 
-        //Destroy(projectileGO, _projectile.lifetime);
-    }
+        Vector3 target = _aimingTarget.AimPointWorld.Value;
+        target.y = 0f;
+        Vector3 origin = _firePoint.position;
+        Vector3 direction = (target - origin).normalized;
 
-    public void SetAimer(AimingTargetProvider weaponAimer)
-    {
-        _aimingTarget = weaponAimer;
+
+        var proj = _usePooling
+        ? ProjectilePool.Instance.Spawn(origin, Quaternion.LookRotation(direction), owner: this.gameObject, damage: 50)
+        : Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(direction));
+
+
+        proj.Configure(
+            owner: _owner,
+            usePooling: _usePooling,
+            damage: proj.Damage,       
+            lifetime: proj.Lifetime,
+            speed: proj.Speed
+        );
     }
 }

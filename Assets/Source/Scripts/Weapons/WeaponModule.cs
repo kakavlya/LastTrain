@@ -1,7 +1,3 @@
-using Assets.Source.Scripts.Weapons;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Source.Scripts.Weapons
@@ -14,7 +10,7 @@ namespace Assets.Source.Scripts.Weapons
 
         private void Awake()
         {
-            _weaponShooter.SetAimer(_aimingTarget);
+            _weaponShooter.Initialize(gameObject, _aimingTarget, false);
             _weaponRotator.SetAimingTargetProvider(_aimingTarget);
         }
 
