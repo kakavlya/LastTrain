@@ -21,6 +21,9 @@ namespace Assets.Source.Scripts.Enemies
         public float impactPause;
         public Vector2 holdPauseRange;
 
+        [Header("Ram Damage")]
+        public int damage;
+
         public override void Initialize(GameObject enemy, Transform playerTarget)
         {
             var ram = enemy.GetComponent<EnemyRamController>();
@@ -36,7 +39,8 @@ namespace Assets.Source.Scripts.Enemies
                 retreatSpeed: retreatSpeed,
                 impactPause: impactPause,
                 holdPauseRange: holdPauseRange,
-                turnSpeed: turnSpeed
+                turnSpeed: turnSpeed,
+                damage: damage
             );
         }
     }

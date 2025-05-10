@@ -21,6 +21,7 @@ public class EnemyRamController : MonoBehaviour
     private float _holdPauseMin;
     private float _holdPauseMax;
 
+    private int _damage;
 
     private State _state;
     private float _stateTimer;
@@ -36,7 +37,8 @@ public class EnemyRamController : MonoBehaviour
         float retreatSpeed,
         float impactPause,
         float turnSpeed,
-        Vector2 holdPauseRange // x = min, y = max
+        Vector2 holdPauseRange, // x = min, y = max
+        int damage
     )
     {
         _player = player;
@@ -54,7 +56,7 @@ public class EnemyRamController : MonoBehaviour
         _impactPause = impactPause;
         _holdPauseMin = holdPauseRange.x;
         _holdPauseMax = holdPauseRange.y;
-
+        _damage = damage;
         EnterHold();
     }
 

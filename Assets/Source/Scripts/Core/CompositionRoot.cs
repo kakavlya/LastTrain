@@ -15,7 +15,7 @@ public class CompositionRoot : MonoBehaviour
     private void Awake()
     {
         var entries = _allPrefabs
-            .Select((prefab, i) => new EnemySpawner.EnemySpawnEntry
+            .Select((prefab, i) => new EnemySpawnEntry
             {
                 prefab = prefab,
                 spawnInterval = 3f + i,          // можно свой расчёт
@@ -24,6 +24,6 @@ public class CompositionRoot : MonoBehaviour
             })
             .ToArray();
 
-        _spawner.Init(entries, _playerTarget, _spawnPoints);
+        _spawner.Init(entries, _spawnPoints, _playerTarget);
     }
 }

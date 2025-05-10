@@ -1,59 +1,81 @@
-﻿// EnemySpawner.cs
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+
 namespace Assets.Source.Scripts.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private Transform _playerTarget;
-        [SerializeField] private Transform[] _spawnPoints;
+        [Header("Static Config (optional)")]
+        [SerializeField] private SpawnerConfig _config;
 
         private EnemySpawnEntry[] _entries;
+        private Transform[] _spawnPoints;
+        private Transform _playerTarget;
         private float[] _timers;
+        private bool _useRuntime;
 
-        public void Init(EnemySpawnEntry[] entries, Transform playerTarget, Transform[] spawnPoints)
+        private void Awake()
         {
-            _entries = entries;
-            _playerTarget = playerTarget;
-            _spawnPoints = spawnPoints;
+            if (_useRuntime)
+            {
+                InitTimers(_entries);
+            }
+            else if (_config != null && _config.entries != null && _config.entries.Length > 0)
+            {
+                _entries = _config.entries;
+                InitTimers(_entries);
+            }
+        }
 
-            _timers = new float[_entries.Length];
-            for (int i = 0; i < _entries.Length; i++)
-                _timers[i] = _entries[i].spawnInterval; 
+        private void InitTimers(EnemySpawnEntry[] entries)
+        {
+            _timers = new float[entries.Length];
+            for (int i = 0; i < entries.Length; i++)
+                _timers[i] = entries[i].spawnInterval;
         }
 
         private void Update()
         {
-            if (_entries == null) return;
+            var entriesToUse = _entries;
+            var points = _spawnPoints;
+            var target = _playerTarget;
 
-            for (int i = 0; i < _entries.Length; i++)
+            if (entriesToUse == null) return;
+
+            for (int i = 0; i < entriesToUse.Length; i++)
             {
                 _timers[i] += Time.deltaTime;
-                if (_timers[i] >= _entries[i].spawnInterval)
+                var e = entriesToUse[i];
+                if (_timers[i] >= e.spawnInterval)
                 {
-                    SpawnEnemy(_entries[i]);
+                    Spawn(e, points, target);
                     _timers[i] = 0f;
                 }
             }
         }
 
-        private void SpawnEnemy(EnemySpawnEntry entry)
+        private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)
         {
-            var sp = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
-            Vector3 pos = sp.position;
-            pos.x += Random.Range(-entry.randRangeXZ.x, entry.randRangeXZ.x);
-            pos.z += Random.Range(-entry.randRangeXZ.y, entry.randRangeXZ.y);
+            var spawnPoints = (spawnEntry.overrideSpawnPoints != null && spawnEntry.overrideSpawnPoints.Length > 0)
+                ? spawnEntry.overrideSpawnPoints
+                : points;
 
-            var go = Instantiate(entry.prefab, pos, sp.rotation);
-            entry.behaviorSettings?.Initialize(go, _playerTarget);
+            var sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+            Vector3 pos = sp.position;
+            pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
+            pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
+
+            var go = Instantiate(spawnEntry.prefab, pos, sp.rotation);
+            spawnEntry.behaviorSettings?.Initialize(go, player);
         }
 
-        [System.Serializable]
-        public class EnemySpawnEntry
+        public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
         {
-            public GameObject prefab;
-            public float spawnInterval;
-            public Vector2 randRangeXZ;
-            public EnemyBehaviorSettings behaviorSettings;
+            _useRuntime = true;
+            _entries = entries;
+            _spawnPoints = spawnPoints;
+            _playerTarget = playerTarget;
+            InitTimers(_entries);
         }
     }
 }
