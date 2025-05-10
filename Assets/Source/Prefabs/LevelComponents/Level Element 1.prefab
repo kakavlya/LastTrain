@@ -349,14 +349,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174367e175762fb48ba55d6171e99990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 4300000, guid: 2fa74ebadd88a384aa187d98aa752794, type: 2}
+  mesh: {fileID: 3879808008546690461, guid: 30453bbc27533534faef3d150de351e1, type: 3}
   material: {fileID: 2100000, guid: 333063a283fb20c4a80f3ddcf4888536, type: 2}
   physicMaterial: {fileID: 0}
   translation: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   scale: {x: 1, y: 1, z: 1}
   generateCollider: 1
-  updateInPlayMode: 0
+  updateInPlayMode: 1
   curveSpace: 0
   mode: 1
 --- !u!1 &7686212285948786733
