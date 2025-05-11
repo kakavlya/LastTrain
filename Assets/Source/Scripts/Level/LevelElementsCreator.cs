@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Level
 {
-    public class LevelElementsGenerator : MonoBehaviour
+    public class LevelElementsCreator : MonoBehaviour
     {
         [SerializeField] private List<LevelElement> _levelElementsPrefabs;
+        [SerializeField] private Transform _parentTransform;
 
-        public LevelElement GenerateElement(Vector3 position)
+        public LevelElement CreateElement(Vector3 position)
         {
-            LevelElement element = Instantiate(_levelElementsPrefabs[GetRandomElementNumber()]);
+            LevelElement element = Instantiate(_levelElementsPrefabs[GetRandomElementNumber()], _parentTransform);
             element.transform.position = position;
             return element;
         }
