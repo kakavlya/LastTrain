@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8b29cd5ca2bc4742b1c6a40bbf40778, type: 3}
-  m_Name: SpawnerConfig
+  m_Name: SpawnConfig
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 4899597090557373887, guid: 089a610054aa0a641874cb77263d6dfd, type: 3}

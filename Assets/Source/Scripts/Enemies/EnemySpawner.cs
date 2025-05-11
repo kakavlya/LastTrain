@@ -65,8 +65,8 @@ namespace Assets.Source.Scripts.Enemies
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
-            var go = Instantiate(spawnEntry.prefab, pos, sp.rotation);
-            spawnEntry.behaviorSettings?.Initialize(go, player);
+            var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
+            spawnEntry.behaviorSettings?.Initialize(gameObject, player);
         }
 
         public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)

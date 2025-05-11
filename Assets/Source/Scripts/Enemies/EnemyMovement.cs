@@ -9,6 +9,10 @@ public class EnemyMovement : MonoBehaviour
     public void SetSpeed(float speed) => _moveSpeed = speed;
     public void MoveForwardTo(Vector3 target)
     {
+        //Debug.Log("Moving to target: " + target);
+        //Debug.Log("Current position: " + transform.position);
+        //Debug.Log("Current forward: " + transform.forward);
+        //Debug.Log("Current speed: " + _moveSpeed);
         Vector3 dir = (target - transform.position).WithY(0f).normalized;
         if (dir.sqrMagnitude > 0.001f)
         {
@@ -27,6 +31,10 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
     }
+
+    public float TurnSpeed => _turnSpeed;
+
+    public void SetTurnSpeed(float speed) => _turnSpeed = speed;
 }
 
 public static class Vector3Extensions
