@@ -59,10 +59,10 @@ public class WeaponShooter : MonoBehaviour
 
         proj.Configure(
             owner: _owner,
-            usePooling: _usePooling,
-            damage: proj.Damage,       
-            lifetime: proj.Lifetime,
-            speed: proj.Speed
+            usePooling: _usePooling
+            //damage: proj.Damage,       
+            //lifetime: proj.Lifetime,
+            //speed: proj.Speed
         );
     }
 }

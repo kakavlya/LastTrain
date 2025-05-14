@@ -165,7 +165,6 @@ MonoBehaviour:
   <Speed>k__BackingField: 100
   <Damage>k__BackingField: 50
   <Lifetime>k__BackingField: 2
-  <UsePooling>k__BackingField: 0
 --- !u!54 &7764178993956972349
 Rigidbody:
   m_ObjectHideFlags: 0

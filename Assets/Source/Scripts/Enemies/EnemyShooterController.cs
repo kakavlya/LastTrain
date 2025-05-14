@@ -173,10 +173,10 @@ namespace Assets.Source.Scripts.Enemies
             var proj = go.GetComponent<Projectile>();
             proj.Configure(
                 owner: gameObject,
-                usePooling: false,
-                damage: _projectileDamage,
-                lifetime: proj.Lifetime,
-                speed: _projectileSpeed
+                usePooling: false
+                //damage: _projectileDamage,
+                //lifetime: proj.Lifetime,
+                //speed: _projectileSpeed
             );
         }
     }

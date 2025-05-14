@@ -49,25 +49,25 @@ public class Projectile : MonoBehaviour
         if (UsePooling)
         {
             OnReturnToPool?.Invoke(this);
-        }
+    }
         else
         {
             Destroy(gameObject);
-        }
+}
     }
 
     public void Configure(
         GameObject owner = null,
-        bool usePooling = false,
-        int damage = 50,
-        float lifetime = 3f,
-        float speed = 10f
+        bool usePooling = false
+        //int damage = 50,
+        //float lifetime = 3f,
+        //float speed = 100f
     )
     {
         Owner = owner;
         UsePooling = usePooling;
-        Damage = damage;
-        Lifetime = lifetime;
-        Speed = speed;
+        //Damage = damage;
+        //Lifetime = lifetime;
+        //Speed = speed;
     }
 }

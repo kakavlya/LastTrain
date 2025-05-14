@@ -21,7 +21,7 @@ namespace Assets.Source.Scripts.Weapons
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundMask))
             {
                 AimPointWorld = hit.point;
                 Vector3 flatDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
