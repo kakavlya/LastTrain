@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -9,6 +10,7 @@ public class Projectile : MonoBehaviour
     [field: SerializeField] public int Damage { get; set; } = 50;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
+    [field: SerializeField] public float MaxDistance { get; private set; } = 100;
 
     public GameObject Owner { get; set; }
 
@@ -30,6 +32,11 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         if (Time.time - _spawnTime >= Lifetime)
+            Despawn();
+
+        float currentDistance = Vector3.Distance(transform.position, Owner.transform.position);
+
+        if (currentDistance > MaxDistance)
             Despawn();
     }
 
@@ -57,17 +64,11 @@ public class Projectile : MonoBehaviour
     }
 
     public void Configure(
-        GameObject owner = null,
-        bool usePooling = false
-        //int damage = 50,
-        //float lifetime = 3f,
-        //float speed = 100f
+        GameObject owner,
+        bool usePooling
     )
     {
         Owner = owner;
         UsePooling = usePooling;
-        //Damage = damage;
-        //Lifetime = lifetime;
-        //Speed = speed;
     }
 }

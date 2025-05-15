@@ -19721,7 +19721,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _aimingTarget: {fileID: 0}
   _usePooling: 1
-  _fireDelay: 0.4
+  _fireDelay: 0.3
 --- !u!4 &1530790198974423688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}

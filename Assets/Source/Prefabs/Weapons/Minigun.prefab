@@ -134,7 +134,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _aimingTarget: {fileID: 0}
   _usePooling: 1
-  _fireDelay: 0.2
+  _fireDelay: 0.15
 --- !u!1 &1853186409977549657
 GameObject:
   m_ObjectHideFlags: 0
