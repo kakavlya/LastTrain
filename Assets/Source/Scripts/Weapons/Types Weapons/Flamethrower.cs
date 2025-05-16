@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class Flamethrower : Weapon
 {
+    [SerializeField] private ParticleSystem _flameParticle;
+
+    private bool _isDoingAttack;
+
     protected override void OnWeaponFire()
     {
-        throw new System.NotImplementedException();
+        _isDoingAttack = true;
+        _flameParticle.Play();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StopFire()
     {
-        
+        if (_isDoingAttack)
+        {
+            _flameParticle.Stop();
+            _isDoingAttack = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
