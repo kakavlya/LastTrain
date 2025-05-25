@@ -12,6 +12,12 @@ namespace Assets.Source.Scripts.Weapons
             {
                 _weapon.Fire();
             }
+
+            if (Input.GetMouseButtonUp(0) && _weapon is Flamethrower)
+            {
+                Flamethrower flamethrower = _weapon as Flamethrower;
+                flamethrower.StopFire();
+            }
         }
     }
 }

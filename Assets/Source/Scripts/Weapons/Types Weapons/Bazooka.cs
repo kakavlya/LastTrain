@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Bazooka : Weapon
+{
+    [Header("Explode Settings")]
+    [SerializeField] private int _aoeDamage;
+    [SerializeField] private float _aoeRange;
+
+    protected override void OnWeaponFire()
+    {
+        Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+
+        var proj = UsePooling
+        ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+        rotation, owner: gameObject, Speed, Damage, MaxAttackDistance, _aoeDamage, _aoeRange)
+        : Instantiate(ProjectilePrefab, FirePoint.position, rotation);
+        proj.SetVelocity();
+    }
+}

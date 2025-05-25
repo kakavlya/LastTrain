@@ -22,16 +22,14 @@ public class ProjectileTypesPool : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation, GameObject owner = null)
+    public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
+        GameObject owner, float speed, int damage, float maxDistance, int aoeDamage = 0, float aoeRange = 0)
     {
         Projectile proj = _pool.Count > 0
             ? _pool.Dequeue()
             : CreateNew(projectilePrefab);
 
-        proj.transform.SetParent(null);
-        proj.transform.position = position;
-        proj.transform.rotation = rotation;
-        proj.Owner = owner;
+        proj.Initial(position, rotation, owner, speed, damage, maxDistance, true, aoeDamage, aoeRange);
         proj.gameObject.SetActive(true);
         return proj;
     }
@@ -40,7 +38,6 @@ public class ProjectileTypesPool : MonoBehaviour
     {
         var projectile = Instantiate(projectilePrefab, transform);
         projectile.gameObject.SetActive(false);
-        projectile.Configure(owner: null, usePooling: true);
         projectile.OnReturnToPool += ReturnToPool;
         _pool.Enqueue(projectile);
         return projectile;

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,17 +26,14 @@ public class ProjectilePool : MonoBehaviour
             CreateNew();
     }
 
-    public Projectile Spawn(Vector3 pos, Quaternion rot, GameObject owner = null, int damage = 50)
+    public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
+        GameObject owner, float speed, int damage, float maxDistance)
     {
         Projectile proj = _pool.Count > 0
             ? _pool.Dequeue()
-            : CreateNew();
+        : CreateNew();
 
-        proj.transform.SetParent(null);
-        proj.transform.position = pos;
-        proj.transform.rotation = rot;
-        proj.Owner = owner;
-        proj.Damage = damage;
+        proj.Initial(position, rotation, owner, speed, damage, maxDistance, true);
         proj.gameObject.SetActive(true);
         return proj;
     }
@@ -47,7 +42,6 @@ public class ProjectilePool : MonoBehaviour
     {
         var projectile = Instantiate(_projectilePrefab, transform);
         projectile.gameObject.SetActive(false);
-        projectile.Configure(owner: null, usePooling: true);
         projectile.OnReturnToPool += ReturnToPool;
         _pool.Enqueue(projectile);
         return projectile;

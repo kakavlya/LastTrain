@@ -9,10 +9,13 @@ public abstract class Weapon : MonoBehaviour
 
     [SerializeField] private AimingTargetProvider _aimingTarget;       
 
-    [Header("Settings")]
+    [Header("Shoot Settings")]
     [SerializeField] protected bool UsePooling = true;                
-    [SerializeField] protected float FireDelay = 0.1f;   
-    
+    [SerializeField] protected float FireDelay = 0.1f;
+    [SerializeField] protected float Speed = 100;
+    [SerializeField] protected int Damage = 50;
+    [SerializeField] protected float MaxAttackDistance = 100;
+
     protected Vector3 Direction;
     protected GameObject Owner;
 
@@ -23,7 +26,7 @@ public abstract class Weapon : MonoBehaviour
         Owner = GetComponent<GameObject>();
     }
 
-    private bool FirePossible()
+    private bool FirePossibleCalculate()
     {
         if (Time.time - _lastFireTime < FireDelay)
             return false;
@@ -38,22 +41,21 @@ public abstract class Weapon : MonoBehaviour
     private void CalculateDirection()
     {
         Vector3 target = _aimingTarget.AimPointWorld.Value;
-        target.y = 0f;
         Vector3 origin = FirePoint.position;
         Vector3 direction = (target - origin).normalized;
         Direction = direction;
     }
 
+    protected abstract void OnWeaponFire();
+
     public virtual void Fire()
     {
         CalculateDirection();
 
-        if (FirePossible() == false)
+        if (FirePossibleCalculate() == false)
             return;
 
 
         OnWeaponFire();
     }
-
-    protected abstract void OnWeaponFire();
 }

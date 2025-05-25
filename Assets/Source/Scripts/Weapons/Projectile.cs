@@ -1,32 +1,42 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public event Action<Projectile> OnReturnToPool;
-
-    [field: SerializeField] public float Speed { get; private set; } = 100f;
-    [field: SerializeField] public int Damage { get; set; } = 50;
+    //[SerializeField] private GameObject _particleExplotionPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
-    [field: SerializeField] public float MaxDistance { get; private set; } = 100;
 
-    public GameObject Owner { get; set; }
+    protected Rigidbody ProjectileRigidbody;
 
-    private Rigidbody _rb;
     private float _spawnTime;
+
+    public event Action<Projectile> OnReturnToPool;
+    public event Action Exploded;
+
+    public float Speed { get; private set; } = 100f;
+    public int Damage { get; private set; } = 50;
+    public float MaxAttackDistance { get; private set; } = 100;
+    //public int AoeDamage { get; private set; } = 0;
+    //public float AoeRange { get; private set; } = 0;
+
+    public GameObject Owner { get; private set; }
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        ProjectileRigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
         _spawnTime = Time.time;
-        if (_rb != null)
-            _rb.velocity = transform.forward * Speed;
+        SetVelocity();
+    }
+
+    public virtual void SetVelocity()
+    {
+        if (ProjectileRigidbody != null)
+            ProjectileRigidbody.velocity = transform.forward * Speed;
     }
 
     private void Update()
@@ -34,13 +44,16 @@ public class Projectile : MonoBehaviour
         if (Time.time - _spawnTime >= Lifetime)
             Despawn();
 
-        float currentDistance = Vector3.Distance(transform.position, Owner.transform.position);
+        if (Owner != null)
+        {
+            float currentDistance = Vector3.Distance(transform.position, Owner.transform.position);
 
-        if (currentDistance > MaxDistance)
-            Despawn();
+            if (currentDistance > MaxAttackDistance)
+                Despawn();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (Owner != null && other.transform.IsChildOf(Owner.transform))
             return;
@@ -49,6 +62,45 @@ public class Projectile : MonoBehaviour
             dmg.TakeDamage(Damage);
 
         Despawn();
+
+        //AoeExplode(other.gameObject.layer);
+    }
+
+    //private void AoeExplode(LayerMask layer)
+    //{
+    //    if (AoeRange <= 0) return;
+
+    //    LayerMask targetsLayer = LayerMask.GetMask("Enemy", "Ground");
+        
+    //    if ((targetsLayer.value & (1 << layer)) != 0)
+    //    {
+    //        Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange);
+
+    //        foreach (Collider target in targets)
+    //        {
+    //            if (target.TryGetComponent<IDamageable>(out IDamageable aoeDmg))
+    //            {
+    //                aoeDmg.TakeDamage(AoeDamage);
+    //            }
+    //        }
+
+    //        Instantiate(_particleExplotionPrefab, transform.position, Quaternion.identity);
+    //    }
+    //}
+
+    public virtual void Initial(
+        Vector3 position, Quaternion rotation, GameObject owner, float speed,
+        int damage, float maxAttackDistance, bool usePooling, int aoeDamage = 0, float aoeRange = 0)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+        Owner = owner;
+        Speed = speed;
+        Damage = damage;
+        MaxAttackDistance = maxAttackDistance;
+        UsePooling = usePooling;
+        //AoeDamage = aoeDamage;
+        //AoeRange = aoeRange;
     }
 
     private void Despawn()
@@ -56,19 +108,10 @@ public class Projectile : MonoBehaviour
         if (UsePooling)
         {
             OnReturnToPool?.Invoke(this);
-    }
+        }
         else
         {
             Destroy(gameObject);
-}
-    }
-
-    public void Configure(
-        GameObject owner,
-        bool usePooling
-    )
-    {
-        Owner = owner;
-        UsePooling = usePooling;
+        }
     }
 }

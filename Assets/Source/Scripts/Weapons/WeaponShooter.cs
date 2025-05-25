@@ -52,17 +52,17 @@ public class WeaponShooter : MonoBehaviour
         Vector3 direction = (target - origin).normalized;
 
 
-        var proj = _usePooling
-        ? ProjectilePool.Instance.Spawn(origin, Quaternion.LookRotation(direction), owner: this.gameObject, damage: 50)
-        : Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(direction));
+        //var proj = _usePooling
+        //? ProjectilePool.Instance.Spawn(origin, Quaternion.LookRotation(direction), owner: this.gameObject, damage: 50)
+        //: Instantiate(_projectilePrefab, origin, Quaternion.LookRotation(direction));
 
 
-        proj.Configure(
-            owner: _owner,
-            usePooling: _usePooling
-            //damage: proj.Damage,       
-            //lifetime: proj.Lifetime,
-            //speed: proj.Speed
-        );
+        //proj.Configure(
+        //    owner: _owner,
+        //    usePooling: _usePooling
+        //    //damage: proj.Damage,       
+        //    //lifetime: proj.Lifetime,
+        //    //speed: proj.Speed
+        //);
     }
 }

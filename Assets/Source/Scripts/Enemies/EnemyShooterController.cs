@@ -171,13 +171,13 @@ namespace Assets.Source.Scripts.Enemies
                 _firePoint.rotation
             );
             var proj = go.GetComponent<Projectile>();
-            proj.Configure(
-                owner: gameObject,
-                usePooling: false
-                //damage: _projectileDamage,
-                //lifetime: proj.Lifetime,
-                //speed: _projectileSpeed
-            );
+            //proj.Configure(
+            //    owner: gameObject,
+            //    usePooling: false
+            //    //damage: _projectileDamage,
+            //    //lifetime: proj.Lifetime,
+            //    //speed: _projectileSpeed
+            //);
         }
     }
 }

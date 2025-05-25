@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Flamethrower : Weapon
@@ -10,8 +8,11 @@ public class Flamethrower : Weapon
 
     protected override void OnWeaponFire()
     {
-        _isDoingAttack = true;
-        _flameParticle.Play();
+        if (_isDoingAttack == false)
+        {
+            _isDoingAttack = true;
+            _flameParticle.Play();
+        }
     }
 
     public void StopFire()
@@ -23,8 +24,11 @@ public class Flamethrower : Weapon
         }
     }
 
-    private void Update()
+    private void OnParticleCollision(GameObject other)
     {
-        
+        if (TryGetComponent(out EnemyHealth enemyHealth))
+        {
+            enemyHealth.TakeDamage(Damage);
+        }
     }
 }
