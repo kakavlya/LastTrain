@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class AoeProjectile : Projectile
 {
-    [SerializeField] private GameObject _particleExplotionPrefab;
+    [Header("AoE Settings")]
+    [SerializeField] private LayerMask _hitResponsiveMasks;
 
     public int AoeDamage { get; private set; } = 0;
     public float AoeRange { get; private set; } = 0;
@@ -23,13 +24,10 @@ public class AoeProjectile : Projectile
     private void AoeExplode(LayerMask layer)
     {
         if (AoeRange <= 0) return;
-
-        Debug.Log("Work");
-        LayerMask targetsLayer = LayerMask.GetMask("Enemy", "Ground");
         
-        if ((targetsLayer.value & (1 << layer)) != 0)
+        if ((_hitResponsiveMasks.value & (1 << layer)) != 0)
         {
-            Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange);
+            Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange, _hitResponsiveMasks);
 
             foreach (Collider target in targets)
             {
@@ -39,7 +37,7 @@ public class AoeProjectile : Projectile
                 }
             }
 
-            Instantiate(_particleExplotionPrefab, transform.position, Quaternion.identity);
+            ParticlePool.Instance.GetParticle(transform.position);
         }
     }
 

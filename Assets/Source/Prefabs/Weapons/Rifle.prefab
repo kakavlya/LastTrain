@@ -19577,6 +19577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -19668,7 +19672,7 @@ PrefabInstance:
       addedObject: {fileID: 8060496902759494662}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3149935982449706465}
+      addedObject: {fileID: 8265597460732089849}
   m_SourcePrefab: {fileID: 100100000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}
 --- !u!1 &1530790198974267048 stripped
 GameObject:
@@ -19687,9 +19691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
-  _weapon: {fileID: 0}
-  _weaponRotator: {fileID: 0}
+  _weapon: {fileID: 8265597460732089849}
 --- !u!114 &8060496902759494662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19705,7 +19707,7 @@ MonoBehaviour:
   _weaponPivot: {fileID: 1530790198974423688}
   _targetProvider: {fileID: 0}
   _rotationSpeed: 180
---- !u!114 &3149935982449706465
+--- !u!114 &8265597460732089849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19714,14 +19716,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1530790198974267048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 148858c0f36c79042adf8c4b11235bbc, type: 3}
+  m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firePoint: {fileID: 3714373281497009292}
-  _projectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
+  FirePoint: {fileID: 3714373281497009292}
+  ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _aimingTarget: {fileID: 0}
-  _usePooling: 1
-  _fireDelay: 0.3
+  UsePooling: 1
+  FireDelay: 0.3
+  Speed: 100
+  Damage: 50
+  MaxAttackDistance: 100
 --- !u!4 &1530790198974423688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}

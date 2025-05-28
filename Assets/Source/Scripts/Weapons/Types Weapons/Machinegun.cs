@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rifle : Weapon
+public class Machinegun : Weapon
 {
     protected override void OnWeaponFire()
     {
@@ -8,6 +8,5 @@ public class Rifle : Weapon
         ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
         Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
         : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
-
     }
 }

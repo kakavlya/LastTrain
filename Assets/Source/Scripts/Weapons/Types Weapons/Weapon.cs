@@ -1,25 +1,28 @@
+using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
-    [SerializeField] private AimingTargetProvider _aimingTarget;       
 
     [Header("Shoot Settings")]
-    [SerializeField] protected bool UsePooling = true;                
+    [SerializeField] protected bool UsePooling = true;
     [SerializeField] protected float FireDelay = 0.1f;
     [SerializeField] protected float Speed = 100;
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
+    private float _lastFireTime;
+
     protected Vector3 Direction;
     protected GameObject Owner;
 
-    private float _lastFireTime;
+    public event Action OnFire;
 
     private void OnEnable()
     {
@@ -46,7 +49,13 @@ public abstract class Weapon : MonoBehaviour
         Direction = direction;
     }
 
-    protected abstract void OnWeaponFire();
+    protected virtual void OnWeaponFire()
+    {
+        var proj = UsePooling
+            ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+            Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
+:           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+    }
 
     public virtual void Fire()
     {
@@ -55,6 +64,7 @@ public abstract class Weapon : MonoBehaviour
         if (FirePossibleCalculate() == false)
             return;
 
+        OnFire?.Invoke();
 
         OnWeaponFire();
     }

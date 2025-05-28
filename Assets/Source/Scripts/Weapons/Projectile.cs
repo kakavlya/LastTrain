@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    //[SerializeField] private GameObject _particleExplotionPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
 
@@ -17,8 +16,6 @@ public class Projectile : MonoBehaviour
     public float Speed { get; private set; } = 100f;
     public int Damage { get; private set; } = 50;
     public float MaxAttackDistance { get; private set; } = 100;
-    //public int AoeDamage { get; private set; } = 0;
-    //public float AoeRange { get; private set; } = 0;
 
     public GameObject Owner { get; private set; }
 
@@ -62,31 +59,7 @@ public class Projectile : MonoBehaviour
             dmg.TakeDamage(Damage);
 
         Despawn();
-
-        //AoeExplode(other.gameObject.layer);
     }
-
-    //private void AoeExplode(LayerMask layer)
-    //{
-    //    if (AoeRange <= 0) return;
-
-    //    LayerMask targetsLayer = LayerMask.GetMask("Enemy", "Ground");
-        
-    //    if ((targetsLayer.value & (1 << layer)) != 0)
-    //    {
-    //        Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange);
-
-    //        foreach (Collider target in targets)
-    //        {
-    //            if (target.TryGetComponent<IDamageable>(out IDamageable aoeDmg))
-    //            {
-    //                aoeDmg.TakeDamage(AoeDamage);
-    //            }
-    //        }
-
-    //        Instantiate(_particleExplotionPrefab, transform.position, Quaternion.identity);
-    //    }
-    //}
 
     public virtual void Initial(
         Vector3 position, Quaternion rotation, GameObject owner, float speed,
@@ -99,8 +72,6 @@ public class Projectile : MonoBehaviour
         Damage = damage;
         MaxAttackDistance = maxAttackDistance;
         UsePooling = usePooling;
-        //AoeDamage = aoeDamage;
-        //AoeRange = aoeRange;
     }
 
     private void Despawn()
