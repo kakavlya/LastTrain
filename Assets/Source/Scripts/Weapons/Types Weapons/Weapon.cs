@@ -17,12 +17,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
+    //[field: SerializeField] public bool IsAutomatic;  
+
     private float _lastFireTime;
 
     protected Vector3 Direction;
     protected GameObject Owner;
 
-    public event Action OnFire;
+    public event Action OnFired;
+    public event Action OnStopFired;
 
     private void OnEnable()
     {
@@ -57,15 +60,20 @@ public class Weapon : MonoBehaviour
 :           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
-    public virtual void Fire()
+    public void Fire()
     {
-        CalculateDirection();
-
         if (FirePossibleCalculate() == false)
             return;
 
-        OnFire?.Invoke();
+        CalculateDirection();
 
         OnWeaponFire();
+
+        OnFired?.Invoke();
+    }
+
+    public virtual void StopFire()
+    {
+        OnStopFired?.Invoke();
     }
 }

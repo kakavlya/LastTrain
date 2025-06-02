@@ -15,8 +15,10 @@ public class Flamethrower : Weapon
         }
     }
 
-    public void StopFire()
+    public override void StopFire()
     {
+        base.StopFire();
+
         if (_isDoingAttack)
         {
             _flameParticle.Stop();

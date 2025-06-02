@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace Assets.Source.Scripts.Weapons
 {
-    public class WeaponModule : MonoBehaviour
+    public class WeaponInput : MonoBehaviour
     {
         [SerializeField] private Weapon _weapon;
 
@@ -14,10 +13,9 @@ namespace Assets.Source.Scripts.Weapons
                 _weapon.Fire();
             }
 
-            if (Input.GetMouseButtonUp(0) && _weapon is Flamethrower)
+            if (Input.GetMouseButtonUp(0))
             {
-                Flamethrower flamethrower = _weapon as Flamethrower;
-                flamethrower.StopFire();
+                _weapon.StopFire();
             }
         }
     }
