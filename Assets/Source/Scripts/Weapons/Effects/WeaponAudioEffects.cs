@@ -10,7 +10,7 @@ public class WeaponAudioEffects : MonoBehaviour
     [SerializeField] private float _volume = 0.5f;
 
     private AudioSource _audioSource;
-    //private bool _isPlaying;
+    private bool _isPlaying;
     private float _trackDelay = 0.1f;
     private float _clipLength;
 
@@ -32,40 +32,40 @@ public class WeaponAudioEffects : MonoBehaviour
 
     private void PlayAudioEffect()
     {
-        if (_audioSource != null && _shootSound != null /*&& _isPlaying == false*/)
+        if (_audioSource != null && _shootSound != null && _isPlaying == false)
         {
-            //if (_weapon.IsAutomatic)
-            //{
-            //    _isPlaying = true;
-            //    _audioSource.Play();
-            //    StartCoroutine(PlayNextLoop());
-            //}
-            //else
-            //{
-            //    _audioSource.PlayOneShot(_shootSound);
-            //}
+            if (_weapon.IsParticleFire)
+            {
+                _isPlaying = true;
+                _audioSource.Play();
+                StartCoroutine(PlayNextLoop());
+            }
+            else
+            {
+                _audioSource.PlayOneShot(_shootSound);
+            }
 
             _audioSource.PlayOneShot(_shootSound);
         }
     }
 
-    //private IEnumerator PlayNextLoop()
-    //{
-    //    _clipLength = _audioSource.clip.length;
-    //    yield return new WaitForSeconds(_clipLength - _trackDelay);
+    private IEnumerator PlayNextLoop()
+    {
+        _clipLength = _audioSource.clip.length;
+        yield return new WaitForSeconds(_clipLength - _trackDelay);
 
-    //    if (_isPlaying == true)
-    //    {
-    //        _audioSource.Play();
-    //        StartCoroutine(PlayNextLoop());
-    //    }
-    //}
+        if (_isPlaying == true)
+        {
+            _audioSource.Play();
+            StartCoroutine(PlayNextLoop());
+        }
+    }
 
     private void StopAudioEffect()
     {
-        if (_audioSource != null && _shootSound != null /*&& _isPlaying == true*/)
+        if (_audioSource != null && _shootSound != null && _isPlaying == true)
         {
-            //_isPlaying = false;
+            _isPlaying = false;
             _audioSource.Stop();
         }
     }

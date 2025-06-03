@@ -5,7 +5,7 @@ public class Machinegun : Weapon
     protected override void OnWeaponFire()
     {
         var proj = UsePooling
-        ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+        ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
         Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
         : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }

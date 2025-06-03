@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
-    //[field: SerializeField] public bool IsAutomatic;  
+    [field: SerializeField] public bool IsParticleFire;
 
     private float _lastFireTime;
 
@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
     protected virtual void OnWeaponFire()
     {
         var proj = UsePooling
-            ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+            ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
             Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
 :           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }

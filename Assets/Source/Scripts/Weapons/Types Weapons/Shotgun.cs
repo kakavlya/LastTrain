@@ -11,7 +11,7 @@ public class Shotgun : Weapon
         for (int i = 0; i < _bulletsInShot; i++)
         {
             var proj = UsePooling
-                ? ProjectileTypesPool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+                ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
         Quaternion.LookRotation(GetRandomSpread()), owner: gameObject, Speed, Damage, MaxAttackDistance)
                 : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
         }
