@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc3cb5db3532364a875b61f1bde62b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootSound: {fileID: 8300000, guid: c45d39f1bb6cd9143833cd1ecfc3388d, type: 3}
+  _shootSound: {fileID: 8300000, guid: 3464a74f1e66f58448b62da8c3cbbc97, type: 3}
   _weapon: {fileID: 534415696}
   _volume: 0.5
 --- !u!82 &534415702
@@ -1112,7 +1112,6 @@ MonoBehaviour:
   Speed: 100
   Damage: 50
   MaxAttackDistance: 100
-  IsAutomatic: 0
 --- !u!114 &1003353190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc3cb5db3532364a875b61f1bde62b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootSound: {fileID: 8300000, guid: 6bc713b42742bd346b6c7c4b4c8c9c71, type: 3}
+  _shootSound: {fileID: 8300000, guid: c51fc9a3181ad624a9daa2fed0d6451d, type: 3}
   _weapon: {fileID: 1003353185}
   _volume: 0.5
 --- !u!82 &1003353191
