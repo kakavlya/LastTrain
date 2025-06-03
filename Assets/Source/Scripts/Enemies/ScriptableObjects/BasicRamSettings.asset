@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74277a9078a810f48adc82df6515ce04, type: 3}
   m_Name: BasicRamSettings
   m_EditorClassIdentifier: 
-  holdDistance: 10
+  holdDistance: 17
   impactRadius: 1.5
   retreatDistance: 20
   holdSpeed: 2

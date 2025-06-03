@@ -23,6 +23,7 @@ public class WeaponShooter : MonoBehaviour
         _aimingTarget = aimer;
         _owner = owner;
         _usePooling = usePooling;
+        Debug.Log($"WeaponShooter init aimer: {aimer}, owner: {owner.name}, usePooling: {_usePooling}");
     }
 
     public void Fire()

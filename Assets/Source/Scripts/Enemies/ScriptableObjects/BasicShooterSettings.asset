@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 15
   turnSpeed: 120
+  attackSpeedFactorMin: 0.7
+  attackSpeedFactorMax: 1.1
+  speedChange: 8
   shootingDistance: 30
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
   fireInterval: 2

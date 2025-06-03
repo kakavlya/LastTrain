@@ -12,6 +12,9 @@ namespace Assets.Source.Scripts.Enemies
         [Tooltip("Mooving speed")]
         public float moveSpeed = 4f;
         public float turnSpeed = 120f;
+        public float attackSpeedFactorMin = 0.7f;
+        public float attackSpeedFactorMax = 0.9f;
+        public float speedChange = 10f;
         [Tooltip("Minimal shooting distance")]
         public float shootingDistance = 10f;
 
@@ -32,13 +35,16 @@ namespace Assets.Source.Scripts.Enemies
 
             shooter.Init(
                 player: playerTarget,
-                moveSpeed: moveSpeed,
+                approachSpeed: moveSpeed,
+                attackSpeedFactorMin: attackSpeedFactorMin,
+                attackSpeedFactorMax: attackSpeedFactorMax,
                 shootingDistance: shootingDistance,
                 projectilePrefab: projectilePrefab,
                 fireInterval: fireInterval,
                 projectileSpeed: projectileSpeed,
                 projectileDamage: projectileDamage,
-                turnSpeed: turnSpeed
+                turnSpeed: turnSpeed,
+                speedChange: speedChange
             );
         }
     }

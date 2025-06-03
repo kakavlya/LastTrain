@@ -8,30 +8,35 @@ namespace Assets.Source.Scripts.Enemies
         [Header("Static Config (optional)")]
         [SerializeField] private SpawnerConfig _config;
 
+        //[SerializeField] private EnemySpawnEntry[] _entries;
+        //[SerializeField] private Transform[] _spawnPoints;
+        //[SerializeField] private Transform _playerTarget;
+        //[SerializeField] private float[] _timers;
+        [Header("Scene-bound")]
+        [SerializeField] private Transform[] _spawnPoints;
+        [SerializeField] private Transform _playerTarget;
+
+        [SerializeField] private bool _useRuntime;
+
         private EnemySpawnEntry[] _entries;
-        private Transform[] _spawnPoints;
-        private Transform _playerTarget;
         private float[] _timers;
-        private bool _useRuntime;
 
         private void Awake()
         {
-            if (_useRuntime)
-            {
-                InitTimers(_entries);
-            }
-            else if (_config != null && _config.entries != null && _config.entries.Length > 0)
-            {
-                _entries = _config.entries;
-                InitTimers(_entries);
-            }
+            Init();
         }
 
-        private void InitTimers(EnemySpawnEntry[] entries)
+        public void Init()
         {
-            _timers = new float[entries.Length];
-            for (int i = 0; i < entries.Length; i++)
-                _timers[i] = entries[i].spawnInterval;
+            _entries = _config.entries;
+            InitTimers();
+        }
+
+        private void InitTimers()
+        {
+            _timers = new float[_entries.Length];
+            for (int i = 0; i < _entries.Length; i++)
+                _timers[i] = _entries[i].spawnInterval;
         }
 
         private void Update()
@@ -45,13 +50,18 @@ namespace Assets.Source.Scripts.Enemies
             for (int i = 0; i < entriesToUse.Length; i++)
             {
                 _timers[i] += Time.deltaTime;
-                var e = entriesToUse[i];
-                if (_timers[i] >= e.spawnInterval)
+                var spawnEntry = entriesToUse[i];
+                if (_timers[i] >= spawnEntry.spawnInterval)
                 {
-                    Spawn(e, points, target);
+                    Spawn(spawnEntry, points, target);
                     _timers[i] = 0f;
                 }
             }
+        }
+
+        public void SetSpawnPoint(Transform[] spawnPoints)
+        {
+            _spawnPoints = spawnPoints;
         }
 
         private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)
@@ -68,14 +78,13 @@ namespace Assets.Source.Scripts.Enemies
             var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
             spawnEntry.behaviorSettings?.Initialize(gameObject, player);
         }
-
-        public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
-        {
-            _useRuntime = true;
-            _entries = entries;
-            _spawnPoints = spawnPoints;
-            _playerTarget = playerTarget;
-            InitTimers(_entries);
-        }
+        //public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
+        //{
+        //    _useRuntime = true;
+        //    _entries = entries;
+        //    _spawnPoints = spawnPoints;
+        //    _playerTarget = playerTarget;
+        //    InitTimers(_entries);
+        //}
     }
 }

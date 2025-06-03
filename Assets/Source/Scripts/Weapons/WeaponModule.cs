@@ -8,7 +8,7 @@ namespace Assets.Source.Scripts.Weapons
         [SerializeField] private WeaponShooter _weaponShooter;
         [SerializeField] private WeaponRotator _weaponRotator;
 
-        private void Awake()
+        private void Start()
         {
             _weaponShooter.Initialize(gameObject, _aimingTarget, false);
             _weaponRotator.SetAimingTargetProvider(_aimingTarget);
