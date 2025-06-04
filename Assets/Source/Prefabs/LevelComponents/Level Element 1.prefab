@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 6874171255697969401}
   - component: {fileID: 5428345452773526807}
   - component: {fileID: 7171648271941272417}
-  - component: {fileID: 1943496363974822195}
   m_Layer: 6
   m_Name: Level Element 1
   m_TagString: Untagged
@@ -240,27 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d75db6f9f558cb45aef339cc6b3a3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1943496363974822195
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5014081350939366840}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 2.220446e-16, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5623812664170223922
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,11 +349,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174367e175762fb48ba55d6171e99990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: -2432090755550338912, guid: 92a8ff7c562f0e84f87d013fc9fe9b49, type: 3}
-  material: {fileID: -8469494145858465668, guid: 92a8ff7c562f0e84f87d013fc9fe9b49, type: 3}
+  mesh: {fileID: 3879808008546690461, guid: 30453bbc27533534faef3d150de351e1, type: 3}
+  material: {fileID: 2100000, guid: 333063a283fb20c4a80f3ddcf4888536, type: 2}
   physicMaterial: {fileID: 0}
   translation: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 90, z: 0}
+  rotation: {x: 0, y: 0, z: 0}
   scale: {x: 1, y: 1, z: 1}
   generateCollider: 1
   updateInPlayMode: 1

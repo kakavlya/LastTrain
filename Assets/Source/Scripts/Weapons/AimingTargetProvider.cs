@@ -7,7 +7,7 @@ namespace Assets.Source.Scripts.Weapons
     {
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private LayerMask _groundMask;
-
+        private float _maxDistance = 9000f;
         public Vector3 AimDirection { get; private set; } = Vector3.forward;
         public Vector3? AimPointWorld { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Assets.Source.Scripts.Weapons
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance, _groundMask))
             {
                 AimPointWorld = hit.point;
                 Vector3 flatDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
