@@ -9,11 +9,6 @@ namespace Assets.Source.Scripts.Weapons
         [SerializeField] private AimingTargetProvider _targetProvider;
         [SerializeField] private float _rotationSpeed = 360f;
 
-        public void SetAimingTargetProvider(AimingTargetProvider aimingTargetProvider)
-        {
-            _targetProvider = aimingTargetProvider;
-            //Debug.Log($"WeaponRotator init target: {_targetProvider}");
-        }
         private void Update()
         {
             if (_targetProvider == null || !_targetProvider.AimPointWorld.HasValue)
