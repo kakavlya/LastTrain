@@ -5201,9 +5201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
-  _weaponShooter: {fileID: 6116164815957349564}
-  _weaponRotator: {fileID: 9218886032705585743}
+  _weapon: {fileID: 0}
 --- !u!114 &6116164815957349564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5213,17 +5211,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917561884762478193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19def28f0774f91468f524f9bddf1ba1, type: 3}
+  m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firePoint: {fileID: 2146808825443994380}
-  _projectilePrefab: {fileID: 0}
   _aimingTarget: {fileID: 0}
-  _muzzleFlash: {fileID: 2369177496429726309}
-  _shootSound: {fileID: 0}
-  _audioSource: {fileID: 0}
-  _usePooling: 0
-  _fireDelay: 0.1
+  FirePoint: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  UsePooling: 1
+  FireDelay: 0.1
+  Speed: 100
+  Damage: 50
+  MaxAttackDistance: 100
+  IsParticleFire: 0
 --- !u!114 &9218886032705585743
 MonoBehaviour:
   m_ObjectHideFlags: 0

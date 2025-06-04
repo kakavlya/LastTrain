@@ -2059,6 +2059,10 @@ PrefabInstance:
       propertyPath: _aimingTarget
       value: 
       objectReference: {fileID: 888596584}
+    - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
+      propertyPath: MaxAttackDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4142875306226948026, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

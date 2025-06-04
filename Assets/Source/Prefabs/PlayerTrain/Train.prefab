@@ -14846,9 +14846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
-  _weaponShooter: {fileID: 7163487260869045390}
-  _weaponRotator: {fileID: 3840162708161735726}
+  _weapon: {fileID: 7163487260869045390}
 --- !u!114 &7163487260869045390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14858,14 +14856,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4769702154567626482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19def28f0774f91468f524f9bddf1ba1, type: 3}
+  m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firePoint: {fileID: 8088888886159435121}
-  _projectile: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _aimingTarget: {fileID: 0}
-  _ownerToIgnore: {fileID: 4769702154567626482}
-  _muzzleFlash: {fileID: 3506813690467070341}
+  FirePoint: {fileID: 0}
+  ProjectilePrefab: {fileID: 0}
+  UsePooling: 1
+  FireDelay: 0.1
+  Speed: 100
+  Damage: 50
+  MaxAttackDistance: 100
+  IsParticleFire: 0
 --- !u!114 &3840162708161735726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19985,4 +19987,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _spline: {fileID: 0}
+  _levelGenerator: {fileID: 0}
