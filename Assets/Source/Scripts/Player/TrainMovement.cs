@@ -44,6 +44,11 @@ namespace Player
             transform.rotation = sample.Rotation * Quaternion.Euler(0, 180, 0);
         }
 
+        public float Speed()
+        {
+            return _speed;
+        }
+
         private void SetCurrentSpline(LevelElement levelElement)
         {
             _distance = 0f;
