@@ -830,7 +830,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 562779372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e9f1dd39d988c408a4cba54f7ea1ba, type: 3}
+  m_Script: {fileID: 11500000, guid: f3e4f6f84647f6d4cb8b5bc76454c472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _initialPoolSize: 20
@@ -979,7 +979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6951993914500957437, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _speed
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6951993914500957437, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _levelGenerator
@@ -2049,7 +2049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3491888369040967913, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
       propertyPath: IsAutomatic
