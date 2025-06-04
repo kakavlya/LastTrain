@@ -90,7 +90,7 @@ namespace Assets.Source.Scripts.Enemies
                 case State.Attack: UpdateAttack(); break;
             }
             //Debug.Log($"Current state: {_state}");
-            Debug.Log($"Current speed: {_currentSpeed}");
+            //Debug.Log($"Current speed: {_currentSpeed}");
         }
 
         private void EnterApproach()

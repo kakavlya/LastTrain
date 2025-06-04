@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
-
     [Header("Shoot Settings")]
     [SerializeField] protected bool UsePooling = true;
     [SerializeField] protected float FireDelay = 0.1f;

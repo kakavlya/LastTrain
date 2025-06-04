@@ -18,7 +18,6 @@ namespace Assets.Source.Scripts.Weapons
         {
             if (_targetProvider == null || !_targetProvider.AimPointWorld.HasValue)
                 return;
-
             Vector3 aimPoint = _targetProvider.AimPointWorld.Value;
 
             Vector3 direction = aimPoint - _weaponPivot.position;
@@ -26,12 +25,19 @@ namespace Assets.Source.Scripts.Weapons
 
             if (direction.sqrMagnitude > 0.01f)
             {
+                
+                direction.Normalize();
                 Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 _weaponPivot.rotation = Quaternion.RotateTowards(
                     _weaponPivot.rotation,
                     targetRotation,
                     _rotationSpeed * Time.deltaTime
                 );
+                Debug.Log($"Rotating weapon towards aim point: {aimPoint}, direction: {direction}");
+                float angleDiff = Quaternion.Angle(_weaponPivot.rotation, targetRotation);
+                Debug.Log($"Angle difference: {angleDiff}");
+                Debug.Log($"Current rotation eulerAngles: {_weaponPivot.rotation.eulerAngles}");
+                Debug.Log($"Target rotation eulerAngles: {targetRotation.eulerAngles}");
             }
         }
     }
