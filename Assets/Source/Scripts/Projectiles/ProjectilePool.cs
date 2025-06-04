@@ -5,9 +5,6 @@ public class ProjectilePool : MonoBehaviour
 {
     public static ProjectilePool Instance { get; private set; }
 
-    [Header("Pool Settings")]
-    [SerializeField] private int _initialPoolSize = 20;
-
     private readonly Queue<Projectile> _pool = new Queue<Projectile>();
 
     private void Awake()

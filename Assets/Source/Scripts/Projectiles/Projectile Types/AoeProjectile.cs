@@ -17,7 +17,6 @@ public class AoeProjectile : Projectile
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
         AoeExplode(other.gameObject.layer);
     }
 
@@ -31,7 +30,7 @@ public class AoeProjectile : Projectile
 
             foreach (Collider target in targets)
             {
-                if (target.TryGetComponent<IDamageable>(out IDamageable aoeDmg))
+                if (target.TryGetComponent(out IDamageable aoeDmg))
                 {
                     aoeDmg.TakeDamage(AoeDamage);
                 }

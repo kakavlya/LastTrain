@@ -11,7 +11,6 @@ public class Projectile : MonoBehaviour
     private float _spawnTime;
 
     public event Action<Projectile> OnReturnToPool;
-    public event Action Exploded;
 
     public float Speed { get; private set; } = 100f;
     public int Damage { get; private set; } = 50;

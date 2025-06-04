@@ -14701,7 +14701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4142875306226948026
 Transform:
   m_ObjectHideFlags: 0
@@ -14812,14 +14812,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999914a507c45fd4cb0b2de04fed1745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aimingTarget: {fileID: 0}
   FirePoint: {fileID: 6155232861971313899}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
-  _aimingTarget: {fileID: 0}
   UsePooling: 1
   FireDelay: 0.7
   Speed: 100
   Damage: 10
   MaxAttackDistance: 30
+  IsParticleFire: 0
   _bulletsInShot: 10
   _spreadAngle: 45
 --- !u!1 &3914446080540072786

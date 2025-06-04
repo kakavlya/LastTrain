@@ -231,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e4f6f84647f6d4cb8b5bc76454c472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialPoolSize: 20
 --- !u!4 &562779374
 Transform:
   m_ObjectHideFlags: 0
@@ -354,11 +353,19 @@ PrefabInstance:
       propertyPath: _aimingTarget
       value: 
       objectReference: {fileID: 888596584}
+    - target: {fileID: 1651846477459207578, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
+      propertyPath: _aimingTarget
+      value: 
+      objectReference: {fileID: 888596584}
     - target: {fileID: 1833429383772676086, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _aimingTarget
       value: 
       objectReference: {fileID: 888596584}
-    - target: {fileID: 2282194880382003603, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
+    - target: {fileID: 1916769235159553561, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
+      propertyPath: _aimingTarget
+      value: 
+      objectReference: {fileID: 888596584}
+    - target: {fileID: 3478883212234203834, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _targetProvider
       value: 
       objectReference: {fileID: 888596584}
@@ -366,10 +373,10 @@ PrefabInstance:
       propertyPath: _targetProvider
       value: 
       objectReference: {fileID: 888596584}
-    - target: {fileID: 5109103534390724148, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
-      propertyPath: _aimingTarget
-      value: 
-      objectReference: {fileID: 888596584}
+    - target: {fileID: 4805919304537556417, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5532248437824528913, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _targetProvider
       value: 
@@ -383,10 +390,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 888596584}
     - target: {fileID: 5977224216744695479, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
-      propertyPath: _aimingTarget
-      value: 
-      objectReference: {fileID: 888596584}
-    - target: {fileID: 6527873893418210956, guid: 32163d266d13aab4d9409d9205c1501e, type: 3}
       propertyPath: _aimingTarget
       value: 
       objectReference: {fileID: 888596584}
