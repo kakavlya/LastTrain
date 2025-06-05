@@ -35,8 +35,6 @@ public class AoeProjectile : Projectile
                     aoeDmg.TakeDamage(AoeDamage);
                 }
             }
-
-            ParticlePool.Instance.GetParticle(transform.position);
         }
     }
 

@@ -2,30 +2,27 @@ using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IEventTrigger
 {
     [Header("References")]
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
-
     [Header("Shoot Settings")]
+    [SerializeField] private float FireDelay = 0.1f;
     [SerializeField] protected bool UsePooling = true;
-    [SerializeField] protected float FireDelay = 0.1f;
     [SerializeField] protected float Speed = 100;
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
-
-    [field: SerializeField] public bool IsParticleFire;
 
     private float _lastFireTime;
 
     protected Vector3 Direction;
     protected GameObject Owner;
 
-    public event Action OnFired;
     public event Action OnStopFired;
+    public event Action OnTriggered;
 
     private void OnEnable()
     {
@@ -69,11 +66,13 @@ public class Weapon : MonoBehaviour
 
         OnWeaponFire();
 
-        OnFired?.Invoke();
+        OnTriggered?.Invoke();
     }
 
     public virtual void StopFire()
     {
         OnStopFired?.Invoke();
     }
+
+    public virtual bool GetIsLoopedFireSound() => false;
 }

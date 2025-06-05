@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IEventTrigger
 {
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     private float _spawnTime;
 
     public event Action<Projectile> OnReturnToPool;
+    public event Action OnTriggered;
 
     public float Speed { get; private set; } = 100f;
     public int Damage { get; private set; } = 50;
@@ -56,6 +57,8 @@ public class Projectile : MonoBehaviour
 
         if (other.TryGetComponent<IDamageable>(out var dmg))
             dmg.TakeDamage(Damage);
+
+        OnTriggered?.Invoke();
 
         Despawn();
     }

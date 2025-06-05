@@ -26,6 +26,8 @@ public class Flamethrower : Weapon
         }
     }
 
+    public override bool GetIsLoopedFireSound() => true;
+
     private void OnParticleCollision(GameObject other)
     {
         if (TryGetComponent(out EnemyHealth enemyHealth))
