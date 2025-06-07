@@ -228,9 +228,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8712082064008625206}
     m_Modifications:
-    - target: {fileID: 723946427460052369, guid: c034e17de6b6ae44b802c979956978ce, type: 3}
-      propertyPath: Priority
-      value: 81
+    - target: {fileID: 878583694662822732, guid: c034e17de6b6ae44b802c979956978ce, type: 3}
+      propertyPath: Damage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2140486503458479450, guid: c034e17de6b6ae44b802c979956978ce, type: 3}
       propertyPath: m_LocalPosition.x
@@ -275,10 +275,6 @@ PrefabInstance:
     - target: {fileID: 5335084544677630997, guid: c034e17de6b6ae44b802c979956978ce, type: 3}
       propertyPath: m_Name
       value: FlameThrower
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335084544677630997, guid: c034e17de6b6ae44b802c979956978ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

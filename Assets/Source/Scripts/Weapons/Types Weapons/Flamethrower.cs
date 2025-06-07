@@ -30,7 +30,8 @@ public class Flamethrower : Weapon
 
     private void OnParticleCollision(GameObject other)
     {
-        if (TryGetComponent(out EnemyHealth enemyHealth))
+        Debug.Log("Yes");
+        if (other.TryGetComponent(out EnemyHealth enemyHealth))
         {
             enemyHealth.TakeDamage(Damage);
         }

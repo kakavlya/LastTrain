@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 5469338553170756925}
   - component: {fileID: 9096835208843232576}
   - component: {fileID: 2249419107156347508}
+  - component: {fileID: -5482390200032144320}
   m_Layer: 3
   m_Name: ExplodingBuggy
   m_TagString: Untagged
@@ -584,6 +585,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86f315223ce9434396a81179b902516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-5482390200032144320
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965205965109951990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5984144, y: 2.0616379, z: 5.0373373}
+  m_Center: {x: -0.04139185, y: 0.7139349, z: 0.056656837}
 --- !u!1 &7767080953542559127
 GameObject:
   m_ObjectHideFlags: 0

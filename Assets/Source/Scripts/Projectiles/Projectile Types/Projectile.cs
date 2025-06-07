@@ -59,8 +59,9 @@ public class Projectile : MonoBehaviour
         if (other.TryGetComponent<IDamageable>(out var dmg))
             dmg.TakeDamage(Damage);
 
-        ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
-
+        if (_impactPrefab != null)
+            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+        
         Despawn();
     }
 

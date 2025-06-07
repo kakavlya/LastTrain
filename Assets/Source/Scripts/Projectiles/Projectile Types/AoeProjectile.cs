@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class AoeProjectile : Projectile
 {
-    [Header("AoE Settings")]
-    [SerializeField] private LayerMask _hitResponsiveMasks;
     private float _aoeRange;
     private int _aoeDamage;
 
@@ -16,24 +14,20 @@ public class AoeProjectile : Projectile
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        AoeExplode(other.gameObject.layer);
+        AoeExplode();
     }
 
-    private void AoeExplode(LayerMask layer)
+    private void AoeExplode()
     {
         if (_aoeRange <= 0) return;
-        
-        if ((_hitResponsiveMasks.value & (1 << layer)) != 0)
-        {
-            Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange, _hitResponsiveMasks);
 
-            foreach (Collider target in targets)
+        Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
+
+        foreach (Collider target in targets)
+        {
+            if (target.TryGetComponent(out IDamageable aoeDmg))
             {
-                if (target.TryGetComponent(out IDamageable aoeDmg))
-                {
-                    aoeDmg.TakeDamage(_aoeDamage);
-                    Debug.Log("yes");
-                }
+                aoeDmg.TakeDamage(_aoeDamage);
             }
         }
     }
