@@ -1,11 +1,13 @@
 using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
-public class Weapon : MonoBehaviour, IEventTrigger
+public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AimingTargetProvider _aimingTarget;
+    [SerializeField] private ParticleSystem _muzzleEffectPrefab;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -21,8 +23,8 @@ public class Weapon : MonoBehaviour, IEventTrigger
     protected Vector3 Direction;
     protected GameObject Owner;
 
+    public event Action OnFired;
     public event Action OnStopFired;
-    public event Action OnTriggered;
 
     private void OnEnable()
     {
@@ -63,10 +65,11 @@ public class Weapon : MonoBehaviour, IEventTrigger
             return;
 
         CalculateDirection();
-
         OnWeaponFire();
+        OnFired?.Invoke();
 
-        OnTriggered?.Invoke();
+        if (_muzzleEffectPrefab != null)
+            ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
     }
 
     public virtual void StopFire()

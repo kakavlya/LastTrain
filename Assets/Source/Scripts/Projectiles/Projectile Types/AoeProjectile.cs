@@ -4,9 +4,9 @@ public class AoeProjectile : Projectile
 {
     [Header("AoE Settings")]
     [SerializeField] private LayerMask _hitResponsiveMasks;
+    [field: SerializeField] public float AoeRange { get; private set; } = 0;
 
     public int AoeDamage { get; private set; } = 0;
-    public float AoeRange { get; private set; } = 0;
 
     public override void SetVelocity()
     {

@@ -414,14 +414,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
+  _muzzleEffectPrefab: {fileID: 198381425572196190, guid: 876700647ad17e946961681397b4442b, type: 3}
   FirePoint: {fileID: 2363891053494034821}
   ProjectilePrefab: {fileID: 4317910656311789124, guid: bb959890b0a20a24a82bcf33ef3b2170, type: 3}
-  UsePooling: 1
   FireDelay: 0.8
+  UsePooling: 1
   Speed: 100
   Damage: 200
   MaxAttackDistance: 200
-  IsParticleFire: 0
 --- !u!82 &8132299582682140417
 AudioSource:
   m_ObjectHideFlags: 0

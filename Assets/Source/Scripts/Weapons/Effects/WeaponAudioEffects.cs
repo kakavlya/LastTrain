@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -13,35 +12,20 @@ public class WeaponAudioEffects : MonoBehaviour
     private bool _isPlaying;
     private float _trackDelay = 0.1f;
     private float _clipLength;
-    private IEventTrigger _eventTrigger;
 
     private void OnEnable()
     {
-        if (_weapon is IEventTrigger)
-        {
-            _eventTrigger = _weapon as IEventTrigger;
-            _eventTrigger.OnTriggered += PlayAudioEffect;
-        }
-        else
-        {
-            Debug.LogError("MonoBehaviour object is not an IEventTrigger, its type is" +
-                _eventTrigger.GetType());
-        }
-
+        _weapon.OnFired += PlayAudioEffect;
+        _weapon.OnStopFired += StopAudioEffect;
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _volume;
         _audioSource.clip = _shootSound;
-        _weapon.OnStopFired += StopAudioEffect;
         _clipLength = _audioSource.clip.length;
     }
 
     private void OnDisable()
     {
-        if (_eventTrigger != null)
-        {
-            _eventTrigger.OnTriggered -= PlayAudioEffect;
-        }
-
+        _weapon.OnFired -= PlayAudioEffect;
         _weapon.OnStopFired -= StopAudioEffect;
     }
 

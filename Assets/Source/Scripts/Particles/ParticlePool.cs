@@ -47,7 +47,7 @@ public class ParticlePool : MonoBehaviour
         }
     }
 
-    public ParticleSystem GetParticle(ParticleSystem particleSystem, Vector3 position)
+    public ParticleSystem Spawn(ParticleSystem particleSystem, Vector3 position)
     {
         if (!_pools.ContainsKey(particleSystem))
         {
