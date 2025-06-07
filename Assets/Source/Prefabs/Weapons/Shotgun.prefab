@@ -14817,12 +14817,12 @@ MonoBehaviour:
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 0}
   FirePoint: {fileID: 6155232861971313899}
-  ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
+  ProjectilePrefab: {fileID: 63259604309037807, guid: 5e803b15a24fec64b936cac386976e88, type: 3}
   FireDelay: 0.7
   UsePooling: 1
   Speed: 100
-  Damage: 10
-  MaxAttackDistance: 50
+  Damage: 50
+  MaxAttackDistance: 100
   _bulletsInShot: 10
   _spreadAngle: 45
 --- !u!82 &7834140368202916372

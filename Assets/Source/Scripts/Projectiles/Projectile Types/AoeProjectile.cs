@@ -4,9 +4,8 @@ public class AoeProjectile : Projectile
 {
     [Header("AoE Settings")]
     [SerializeField] private LayerMask _hitResponsiveMasks;
-    [field: SerializeField] public float AoeRange { get; private set; } = 0;
-
-    public int AoeDamage { get; private set; } = 0;
+    private float _aoeRange;
+    private int _aoeDamage;
 
     public override void SetVelocity()
     {
@@ -22,17 +21,18 @@ public class AoeProjectile : Projectile
 
     private void AoeExplode(LayerMask layer)
     {
-        if (AoeRange <= 0) return;
+        if (_aoeRange <= 0) return;
         
         if ((_hitResponsiveMasks.value & (1 << layer)) != 0)
         {
-            Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange, _hitResponsiveMasks);
+            Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange, _hitResponsiveMasks);
 
             foreach (Collider target in targets)
             {
                 if (target.TryGetComponent(out IDamageable aoeDmg))
                 {
-                    aoeDmg.TakeDamage(AoeDamage);
+                    aoeDmg.TakeDamage(_aoeDamage);
+                    Debug.Log("yes");
                 }
             }
         }
@@ -44,7 +44,7 @@ public class AoeProjectile : Projectile
     {
         base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
 
-        AoeDamage = aoeDamage;
-        AoeRange = aoeRange;
+        _aoeDamage = aoeDamage;
+        _aoeRange = aoeRange;
     }
 }

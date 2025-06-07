@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6264318018855306405}
   - component: {fileID: 6478225051970695703}
   - component: {fileID: 4169378433265268266}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisualRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 4018487660860795687}
   - component: {fileID: 7358646837193593047}
   - component: {fileID: 1578270108317604101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RamEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,9 +234,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6264318018855306405}
     m_Modifications:
+    - target: {fileID: 106880, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 131580, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 158454, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 179390, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 182146, guid: a27c877f120f6904099e590f9088807c, type: 3}
       propertyPath: m_Name
       value: SA_Veh_OldCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 182146, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 188000, guid: a27c877f120f6904099e590f9088807c, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 488026, guid: a27c877f120f6904099e590f9088807c, type: 3}
       propertyPath: m_LocalPosition.x

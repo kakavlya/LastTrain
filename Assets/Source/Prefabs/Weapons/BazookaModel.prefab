@@ -15133,10 +15133,10 @@ MonoBehaviour:
   FireDelay: 1
   UsePooling: 1
   Speed: 50
-  Damage: 50
+  Damage: 150
   MaxAttackDistance: 200
-  _aoeDamage: 30
-  _aoeRange: 20
+  _aoeDamage: 150
+  _aoeRange: 50
 --- !u!82 &3019496850700472414
 AudioSource:
   m_ObjectHideFlags: 0

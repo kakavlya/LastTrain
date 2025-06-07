@@ -19720,14 +19720,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
+  _muzzleEffectPrefab: {fileID: 0}
   FirePoint: {fileID: 3714373281497009292}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
+  FireDelay: 0.4
   UsePooling: 1
-  FireDelay: 0.3
   Speed: 100
   Damage: 50
   MaxAttackDistance: 100
-  IsParticleFire: 0
 --- !u!4 &1530790198974423688 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 38a19d87043c1c74eb54c9a80757c364, type: 3}

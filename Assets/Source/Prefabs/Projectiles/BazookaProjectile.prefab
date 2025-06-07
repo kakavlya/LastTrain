@@ -130,13 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df527a2f8bade54ca6e83dd1c48f496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactPrefab: {fileID: 198195352207415246, guid: 20a1c9fad640e1340b22272582b59b8a, type: 3}
+  _impactPrefab: {fileID: 0}
   <Lifetime>k__BackingField: 10
   <UsePooling>k__BackingField: 1
   _hitResponsiveMasks:
     serializedVersion: 2
     m_Bits: 72
-  <AoeRange>k__BackingField: 100
+  <AoeRange>k__BackingField: 200
 --- !u!136 &4737742208478537096
 CapsuleCollider:
   m_ObjectHideFlags: 0

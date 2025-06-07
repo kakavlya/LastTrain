@@ -20,8 +20,7 @@ public class Shotgun : Weapon
     private Vector3 GetRandomSpread()
     {
         float horizontalSpread = Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
-        float verticalSpread = Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
-        Quaternion spreadRotation = Quaternion.Euler(verticalSpread, horizontalSpread, 0);
+        Quaternion spreadRotation = Quaternion.Euler(0, horizontalSpread, 0);
         return spreadRotation * Direction;
     }
 }
