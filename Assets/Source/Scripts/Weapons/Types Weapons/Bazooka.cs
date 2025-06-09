@@ -18,7 +18,7 @@ public class Bazooka : Weapon
             FirePoint.position,
             rotation,
             owner: gameObject,
-            Speed, Damage,
+            ProjectileSpeed, Damage,
             MaxAttackDistance,
             _aoeDamage,
             _aoeRange

@@ -1,7 +1,6 @@
 using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Weapon : MonoBehaviour
 {
@@ -12,9 +11,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Projectile ProjectilePrefab;
 
     [Header("Shoot Settings")]
-    [SerializeField] private float FireDelay = 0.1f;
+    [SerializeField] protected float FireDelay = 0.1f;
     [SerializeField] protected bool UsePooling = true;
-    [SerializeField] protected float Speed = 100;
+    [SerializeField] protected float ProjectileSpeed = 100;
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
@@ -55,7 +54,7 @@ public class Weapon : MonoBehaviour
     {
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
+            Quaternion.LookRotation(Direction), owner: gameObject, ProjectileSpeed, Damage, MaxAttackDistance)
 :           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
@@ -64,9 +63,9 @@ public class Weapon : MonoBehaviour
         if (FirePossibleCalculate() == false)
             return;
 
+        OnFired?.Invoke();
         CalculateDirection();
         OnWeaponFire();
-        OnFired?.Invoke();
 
         if (_muzzleEffectPrefab != null)
             ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
