@@ -18,6 +18,7 @@ public class PlayerHealth : HealthBase
     {
         base.TakeDamage(amount);
         //_ui?.UpdateHealth(CurrentHealth, _maxHealth);
+        Debug.Log($"Player took damage: {amount}. Current health: {CurrentHealth}.");
     }
 
     private void OnPlayerDeath()

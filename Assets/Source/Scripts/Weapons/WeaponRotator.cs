@@ -33,11 +33,6 @@ namespace Assets.Source.Scripts.Weapons
                     targetRotation,
                     _rotationSpeed * Time.deltaTime
                 );
-                Debug.Log($"Rotating weapon towards aim point: {aimPoint}, direction: {direction}");
-                float angleDiff = Quaternion.Angle(_weaponPivot.rotation, targetRotation);
-                Debug.Log($"Angle difference: {angleDiff}");
-                Debug.Log($"Current rotation eulerAngles: {_weaponPivot.rotation.eulerAngles}");
-                Debug.Log($"Target rotation eulerAngles: {targetRotation.eulerAngles}");
             }
         }
     }

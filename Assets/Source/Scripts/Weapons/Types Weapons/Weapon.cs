@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private AimingTargetProvider _aimingTarget;
+    [SerializeField] private GameObject _owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -28,7 +29,8 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
-        Owner = GetComponent<GameObject>();
+        //Owner = GetComponent<GameObject>();
+        Owner = _owner != null ? _owner : gameObject;
     }
 
     private bool FirePossibleCalculate()
@@ -55,7 +57,7 @@ public class Weapon : MonoBehaviour
     {
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), owner: gameObject, Speed, Damage, MaxAttackDistance)
+            Quaternion.LookRotation(Direction), owner: Owner, Speed, Damage, MaxAttackDistance)
 :           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 

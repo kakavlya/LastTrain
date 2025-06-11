@@ -184,13 +184,14 @@ namespace Assets.Source.Scripts.Enemies
                 _firePoint.rotation
             );
             var proj = go.GetComponent<Projectile>();
-            //proj.Configure(
-            //    owner: gameObject,
-            //    usePooling: false
-            //    //damage: _projectileDamage,
-            //    //lifetime: proj.Lifetime,
-            //    //speed: _projectileSpeed
-            //);
+            proj.Initial(position: _firePoint.position,
+                            rotation: _firePoint.rotation,
+                         owner: gameObject,
+                         speed: _projectileSpeed,
+                         damage: _projectileDamage,
+                         maxAttackDistance: _shootingDistance,
+                         usePooling: false
+                         );
         }
     }
 }

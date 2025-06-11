@@ -7,7 +7,7 @@ namespace Assets.Source.Scripts.Weapons
     {
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private LayerMask _groundMask;
-        private float _maxDistance = 9000f;
+        private float _maxDistance = 90000f;
         public Vector3 AimDirection { get; private set; } = Vector3.forward;
         public Vector3? AimPointWorld { get; private set; }
 
