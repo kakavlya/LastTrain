@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Magazine : MonoBehaviour
+public class Ammunition : MonoBehaviour
 {
     [SerializeField] private int _maxCountProjectiles;
 
     private int _currentCountProjectiles;
 
-    public bool HaveProjectiles { get; private set; } = true;
+    public bool HasProjectiles { get; private set; } = true;
 
 
     private void Start()
@@ -22,7 +22,7 @@ public class Magazine : MonoBehaviour
         }
         else
         {
-            HaveProjectiles = false;
+            HasProjectiles = false;
         }
 
         Debug.Log("Projectile count " +  _currentCountProjectiles);
@@ -41,7 +41,7 @@ public class Magazine : MonoBehaviour
 
         if (_currentCountProjectiles > 0)
         {
-            HaveProjectiles = true;
+            HasProjectiles = true;
         }
     }
 }

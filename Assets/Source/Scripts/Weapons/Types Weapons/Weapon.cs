@@ -5,9 +5,10 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private GameObject _owner;
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    [SerializeField] private Magazine _magazine;
+    [SerializeField] private Ammunition _ammunition;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -21,15 +22,9 @@ public class Weapon : MonoBehaviour
     private float _lastFireTime;
 
     protected Vector3 Direction;
-    protected GameObject Owner;
 
     public event Action OnFired;
     public event Action OnStopFired;
-
-    private void OnEnable()
-    {
-        Owner = GetComponent<GameObject>();
-    }
 
     private bool FirePossibleCalculate()
     {
@@ -55,21 +50,28 @@ public class Weapon : MonoBehaviour
     {
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), owner: gameObject, ProjectileSpeed, Damage, MaxAttackDistance)
+            Quaternion.LookRotation(Direction), _owner, ProjectileSpeed, Damage, MaxAttackDistance)
             : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
     public void Fire()
     {
-        if (FirePossibleCalculate() == true && _magazine.HaveProjectiles)
+        if (FirePossibleCalculate() == true)
         {
-            OnFired?.Invoke();
-            CalculateDirection();
-            OnWeaponFire();
-            _magazine.DecreaseProjectilesCount();
+            if (_ammunition.HasProjectiles) 
+            {
+                CalculateDirection();
+                OnFired?.Invoke();
+                _ammunition.DecreaseProjectilesCount();
+                OnWeaponFire();
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+                if (_muzzleEffectPrefab != null)
+                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+            }
+            else
+            {
+                StopFire();
+            }
         }
     }
 
