@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     [Header("References")]
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
+    [SerializeField] private Magazine _magazine;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -55,20 +56,21 @@ public class Weapon : MonoBehaviour
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
             Quaternion.LookRotation(Direction), owner: gameObject, ProjectileSpeed, Damage, MaxAttackDistance)
-:           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+            : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
     public void Fire()
     {
-        if (FirePossibleCalculate() == false)
-            return;
+        if (FirePossibleCalculate() == true && _magazine.HaveProjectiles)
+        {
+            OnFired?.Invoke();
+            CalculateDirection();
+            OnWeaponFire();
+            _magazine.DecreaseProjectilesCount();
 
-        OnFired?.Invoke();
-        CalculateDirection();
-        OnWeaponFire();
-
-        if (_muzzleEffectPrefab != null)
-            ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+        }
     }
 
     public virtual void StopFire()

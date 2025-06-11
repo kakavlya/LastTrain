@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1069202369554064374}
   - component: {fileID: 6790946231802069099}
   - component: {fileID: 4145541452217694962}
+  - component: {fileID: 3446888278540729069}
   - component: {fileID: 356231242550243592}
   - component: {fileID: 7332470666651878799}
   m_Layer: 0
@@ -132,13 +133,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+  _magazine: {fileID: 3446888278540729069}
   FirePoint: {fileID: 1960534411642063156}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   FireDelay: 0.1
   UsePooling: 1
-  Speed: 100
+  ProjectileSpeed: 100
   Damage: 50
   MaxAttackDistance: 100
+--- !u!114 &3446888278540729069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974017237273445047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c7666728101014e8a24c9b97304b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxCountProjectiles: 100
 --- !u!114 &356231242550243592
 MonoBehaviour:
   m_ObjectHideFlags: 0
