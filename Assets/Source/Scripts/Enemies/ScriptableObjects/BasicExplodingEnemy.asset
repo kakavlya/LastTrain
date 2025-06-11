@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9caf2cb48d4cb84797143e441739abe, type: 3}
   m_Name: BasicExplodingEnemy
   m_EditorClassIdentifier: 
-  moveSpeed: 18
+  moveSpeed: 10
   explosionRadius: 3
   damage: 100

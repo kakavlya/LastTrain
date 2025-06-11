@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -16,11 +15,11 @@ public class WeaponAudioEffects : MonoBehaviour
 
     private void OnEnable()
     {
+        _weapon.OnFired += PlayAudioEffect;
+        _weapon.OnStopFired += StopAudioEffect;
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _volume;
         _audioSource.clip = _shootSound;
-        _weapon.OnFired += PlayAudioEffect;
-        _weapon.OnStopFired += StopAudioEffect;
         _clipLength = _audioSource.clip.length;
     }
 
@@ -34,7 +33,7 @@ public class WeaponAudioEffects : MonoBehaviour
     {
         if (_audioSource != null && _shootSound != null && _isPlaying == false)
         {
-            if (_weapon.IsParticleFire)
+            if (_weapon.GetIsLoopedFireSound())
             {
                 _isPlaying = true;
                 _audioSource.Play();
@@ -44,8 +43,6 @@ public class WeaponAudioEffects : MonoBehaviour
             {
                 _audioSource.PlayOneShot(_shootSound);
             }
-
-            _audioSource.PlayOneShot(_shootSound);
         }
     }
 

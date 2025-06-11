@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2960642960229772740}
   - component: {fileID: 490242597104593432}
   - component: {fileID: 8442657393015776454}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_BuggyA_Wheel_RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3174231769048470122}
   - component: {fileID: 3651618048964341226}
   - component: {fileID: 8265032222512685242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_BuggyA_Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4859640508014663142}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BuggyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 3209630958734134741}
   - component: {fileID: 7226066997734818304}
   - component: {fileID: 5794946387610806708}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisualRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3211370798022628479}
   - component: {fileID: 4854786335942396060}
   - component: {fileID: 4815663231042472056}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_BuggyA_Wheel_RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 5738872752396714219}
   - component: {fileID: 7694811432450181395}
   - component: {fileID: 8580376144634268085}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_BuggyA (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,8 @@ GameObject:
   - component: {fileID: 5469338553170756925}
   - component: {fileID: 9096835208843232576}
   - component: {fileID: 2249419107156347508}
-  m_Layer: 0
+  - component: {fileID: -5482390200032144320}
+  m_Layer: 3
   m_Name: ExplodingBuggy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,6 +585,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86f315223ce9434396a81179b902516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-5482390200032144320
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6965205965109951990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5984144, y: 2.0616379, z: 5.0373373}
+  m_Center: {x: -0.04139185, y: 0.7139349, z: 0.056656837}
 --- !u!1 &7767080953542559127
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +617,7 @@ GameObject:
   - component: {fileID: 5843652289392196386}
   - component: {fileID: 7951424715834094855}
   - component: {fileID: 1879233561646735164}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_BuggyA_Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,7 +700,7 @@ GameObject:
   - component: {fileID: 2289244062540216605}
   - component: {fileID: 4141928795512277446}
   - component: {fileID: 6534930827688267756}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FX_Steam_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

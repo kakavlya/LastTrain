@@ -5,9 +5,6 @@ public class ProjectilePool : MonoBehaviour
 {
     public static ProjectilePool Instance { get; private set; }
 
-    [Header("Pool Settings")]
-    [SerializeField] private int _initialPoolSize = 20;
-
     private readonly Queue<Projectile> _pool = new Queue<Projectile>();
 
     private void Awake()
@@ -47,6 +44,13 @@ public class ProjectilePool : MonoBehaviour
     {
         proj.gameObject.SetActive(false);
         proj.transform.SetParent(transform);
+
+        if (proj.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
         _pool.Enqueue(proj);
     }
 }

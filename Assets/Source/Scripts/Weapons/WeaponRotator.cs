@@ -12,7 +12,6 @@ namespace Assets.Source.Scripts.Weapons
         public void SetAimingTargetProvider(AimingTargetProvider aimingTargetProvider)
         {
             _targetProvider = aimingTargetProvider;
-            //Debug.Log($"WeaponRotator init target: {_targetProvider}");
         }
         private void Update()
         {

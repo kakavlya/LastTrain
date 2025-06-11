@@ -13,9 +13,18 @@ public class Bazooka : Weapon
         Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
 
         var proj = UsePooling
-        ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-        rotation, owner: gameObject, Speed, Damage, MaxAttackDistance, _aoeDamage, _aoeRange)
+        ? ProjectilePool.Instance.Spawn(
+            ProjectilePrefab,
+            FirePoint.position,
+            rotation,
+            owner: gameObject,
+            ProjectileSpeed, Damage,
+            MaxAttackDistance,
+            _aoeDamage,
+            _aoeRange
+            )
         : Instantiate(ProjectilePrefab, FirePoint.position, rotation);
+
         proj.SetVelocity();
     }
 }

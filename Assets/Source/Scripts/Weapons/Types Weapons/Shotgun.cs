@@ -12,16 +12,15 @@ public class Shotgun : Weapon
         {
             var proj = UsePooling
                 ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-        Quaternion.LookRotation(GetRandomSpread()), owner: gameObject, Speed, Damage, MaxAttackDistance)
+                Quaternion.LookRotation(GetRandomSpread()), owner: gameObject, ProjectileSpeed, Damage, MaxAttackDistance)
                 : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
         }
     }
 
     private Vector3 GetRandomSpread()
     {
-        float baseAngle = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
-        float randomAngleDegree = baseAngle + Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
-        Vector3 direction = Quaternion.Euler(0, randomAngleDegree, 0) * Vector3.forward;
-        return direction;
+        float horizontalSpread = Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
+        Quaternion spreadRotation = Quaternion.Euler(0, horizontalSpread, 0);
+        return spreadRotation * Direction;
     }
 }

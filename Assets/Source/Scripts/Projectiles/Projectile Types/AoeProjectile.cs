@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class AoeProjectile : Projectile
 {
-    [Header("AoE Settings")]
-    [SerializeField] private LayerMask _hitResponsiveMasks;
-
-    public int AoeDamage { get; private set; } = 0;
-    public float AoeRange { get; private set; } = 0;
+    private float _aoeRange;
+    private int _aoeDamage;
 
     public override void SetVelocity()
     {
@@ -17,27 +14,21 @@ public class AoeProjectile : Projectile
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-
-        AoeExplode(other.gameObject.layer);
+        AoeExplode();
     }
 
-    private void AoeExplode(LayerMask layer)
+    private void AoeExplode()
     {
-        if (AoeRange <= 0) return;
-        
-        if ((_hitResponsiveMasks.value & (1 << layer)) != 0)
+        if (_aoeRange <= 0) return;
+
+        Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
+
+        foreach (Collider target in targets)
         {
-            Collider[] targets = Physics.OverlapSphere(transform.position, AoeRange, _hitResponsiveMasks);
-
-            foreach (Collider target in targets)
+            if (target.TryGetComponent(out IDamageable aoeDmg))
             {
-                if (target.TryGetComponent<IDamageable>(out IDamageable aoeDmg))
-                {
-                    aoeDmg.TakeDamage(AoeDamage);
-                }
+                aoeDmg.TakeDamage(_aoeDamage);
             }
-
-            ParticlePool.Instance.GetParticle(transform.position);
         }
     }
 
@@ -47,7 +38,7 @@ public class AoeProjectile : Projectile
     {
         base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
 
-        AoeDamage = aoeDamage;
-        AoeRange = aoeRange;
+        _aoeDamage = aoeDamage;
+        _aoeRange = aoeRange;
     }
 }
