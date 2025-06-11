@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
     [SerializeField] private Ammunition _ammunition;
-    [SerializeField] private GameObject _owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -30,7 +29,7 @@ public class Weapon : MonoBehaviour
     private void OnEnable()
     {
         //Owner = GetComponent<GameObject>();
-        Owner = _owner != null ? _owner : gameObject;
+        _owner = _owner != null ? _owner : gameObject;
     }
 
     private bool FirePossibleCalculate()
@@ -57,9 +56,7 @@ public class Weapon : MonoBehaviour
     {
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), _owner, ProjectileSpeed, Damage, MaxAttackDistance)
-            : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
-            Quaternion.LookRotation(Direction), owner: Owner, Speed, Damage, MaxAttackDistance)
+            Quaternion.LookRotation(Direction), owner: _owner, ProjectileSpeed, Damage, MaxAttackDistance)
 :           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
