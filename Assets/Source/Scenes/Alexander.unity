@@ -562,6 +562,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 3840162708161735726, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _targetProvider
+      value: 
+      objectReference: {fileID: 888596584}
+    - target: {fileID: 4769702154567626482, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977224216744695479, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _aimingTarget
+      value: 
+      objectReference: {fileID: 888596584}
+    - target: {fileID: 6313094116875273636, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6951993914500957437, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _levelGenerator
       value: 

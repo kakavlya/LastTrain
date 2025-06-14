@@ -131,9 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _owner: {fileID: 0}
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
-  _magazine: {fileID: 3446888278540729069}
+  _ammunition: {fileID: 0}
   FirePoint: {fileID: 1960534411642063156}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   FireDelay: 0.1
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2974017237273445047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c7666728101014e8a24c9b97304b65, type: 3}
+  m_Script: {fileID: 11500000, guid: 856e6f36a26dcd54c9c060cbcb88ab3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxCountProjectiles: 100
