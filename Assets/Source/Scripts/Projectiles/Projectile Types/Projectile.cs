@@ -60,19 +60,9 @@ public class Projectile : MonoBehaviour
         {
             dmg.TakeDamage(Damage);
         }
-        else if (other.TryGetComponent(out PickableAmmunition ammunition))
-        {
-            var ammunitionType = ammunition.PrefabTypeOfWeapon.GetType();
-            var ownerWeaponType = Owner.GetComponentInChildren<Weapon>().GetType();
 
-            if (ownerWeaponType == ammunitionType)
-            {
-                Owner.GetComponentInChildren<Ammunition>().IncreaseProjectilesCount(ammunition.CountProjectiles);
-            }
-        }
-
-            if (_impactPrefab != null)
-                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+        if (_impactPrefab != null)
+            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
         Despawn();
     }
