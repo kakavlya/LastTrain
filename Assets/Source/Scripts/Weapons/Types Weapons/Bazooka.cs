@@ -17,7 +17,7 @@ public class Bazooka : Weapon
             ProjectilePrefab,
             FirePoint.position,
             rotation,
-            owner: gameObject,
+            Owner,
             ProjectileSpeed, Damage,
             MaxAttackDistance,
             _aoeDamage,

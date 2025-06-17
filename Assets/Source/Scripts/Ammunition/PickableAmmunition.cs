@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickableAmmunition : MonoBehaviour
@@ -11,11 +12,15 @@ public class PickableAmmunition : MonoBehaviour
         {
             var ammunitionType = PrefabTypeOfWeapon.GetType();
 
-            var ownerWeaponType = projectile.Owner.GetComponentInChildren<Weapon>().GetType();
+            Debug.Log(projectile.Owner);
+            Ammunition[] ammunitions = projectile.Owner.GetComponentsInChildren<Ammunition>();
 
-            if (ownerWeaponType == ammunitionType)
+            foreach (Ammunition ammunition in ammunitions)
             {
-                projectile.Owner.GetComponentInChildren<Ammunition>().IncreaseProjectilesCount(CountProjectiles);
+                if (ammunition.WeaponPrefab.GetType() == ammunitionType)
+                {
+                    ammunition.IncreaseProjectilesCount(CountProjectiles);
+                }
             }
         }
     }

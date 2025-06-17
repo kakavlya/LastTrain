@@ -5,10 +5,10 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private GameObject _owner;
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    [SerializeField] private Ammunition _ammunition;
+    [SerializeField] private Ammunition _ammunition = null;
+    [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
 
@@ -28,8 +28,7 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
-        //Owner = GetComponent<GameObject>();
-        _owner = _owner != null ? _owner : gameObject;
+        Owner = Owner != null ? Owner : gameObject;
     }
 
     private bool FirePossibleCalculate()
@@ -56,15 +55,15 @@ public class Weapon : MonoBehaviour
     {
         var proj = UsePooling
             ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), owner: _owner, ProjectileSpeed, Damage, MaxAttackDistance)
-:           Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+            Quaternion.LookRotation(Direction), Owner, ProjectileSpeed, Damage, MaxAttackDistance)
+: Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
     }
 
     public void Fire()
     {
         if (FirePossibleCalculate() == true)
         {
-            if (_ammunition.HasProjectiles) 
+            if (_ammunition != null && _ammunition.HasAmmo)
             {
                 CalculateDirection();
                 OnFired?.Invoke();
