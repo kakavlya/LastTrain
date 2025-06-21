@@ -5,7 +5,7 @@ public class ProjectilePool : MonoBehaviour
 {
     public static ProjectilePool Instance { get; private set; }
 
-    private readonly Queue<Projectile> _pool = new Queue<Projectile>();
+    private readonly Dictionary<Projectile, Queue<Projectile>> _pools = new Dictionary<Projectile, Queue<Projectile>>();
 
     private void Awake()
     {
@@ -22,25 +22,31 @@ public class ProjectilePool : MonoBehaviour
     public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
         GameObject owner, float speed, int damage, float maxDistance, int aoeDamage = 0, float aoeRange = 0)
     {
-        Projectile proj = _pool.Count > 0
-            ? _pool.Dequeue()
-            : CreateNew(projectilePrefab);
+        if (!_pools.TryGetValue(projectilePrefab, out var pool))
+        {
+            pool = new Queue<Projectile>();
+            _pools[projectilePrefab] = pool;
+        }
+
+        Projectile proj = pool.Count > 0
+            ? pool.Dequeue()
+            : CreateNew(projectilePrefab, pool);
 
         proj.Initial(position, rotation, owner, speed, damage, maxDistance, true, aoeDamage, aoeRange);
         proj.gameObject.SetActive(true);
         return proj;
     }
 
-    private Projectile CreateNew(Projectile projectilePrefab)
+    private Projectile CreateNew(Projectile projectilePrefab, Queue<Projectile> pool)
     {
         var projectile = Instantiate(projectilePrefab, transform);
         projectile.gameObject.SetActive(false);
-        projectile.OnReturnToPool += ReturnToPool;
-        _pool.Enqueue(projectile);
+        projectile.OnReturnToPool += (proj) => ReturnToPool(projectilePrefab, proj);
+        pool.Enqueue(projectile);
         return projectile;
     }
 
-    private void ReturnToPool(Projectile proj)
+    private void ReturnToPool(Projectile projectilePrefab, Projectile proj)
     {
         proj.gameObject.SetActive(false);
         proj.transform.SetParent(transform);
@@ -51,6 +57,15 @@ public class ProjectilePool : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
 
-        _pool.Enqueue(proj);
+        if (_pools.TryGetValue(projectilePrefab, out var pool))
+        {
+            pool.Enqueue(proj);
+        }
+        else
+        {
+            var newPool = new Queue<Projectile>();
+            newPool.Enqueue(proj);
+            _pools[projectilePrefab] = newPool;
+        }
     }
 }

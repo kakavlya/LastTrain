@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
 {
@@ -9,8 +10,18 @@ namespace Assets.Source.Scripts.Weapons
         public event Action StopFired;
         public event Action<int> WeaponChanged;
 
-
         private void Update()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
+            HandleShooting();
+            HandleWeaponSwitch();
+        }
+
+        private void HandleShooting()
         {
             if (Input.GetMouseButton(0))
             {
@@ -21,20 +32,23 @@ namespace Assets.Source.Scripts.Weapons
             {
                 StopFired?.Invoke();
             }
+        }
 
+        private void HandleWeaponSwitch()
+        {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                WeaponChanged?.Invoke((int)KeyCode.Alpha1 - (int)KeyCode.Alpha0);
+                WeaponChanged?.Invoke(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                WeaponChanged?.Invoke((int)KeyCode.Alpha2 - (int)KeyCode.Alpha0);
+                WeaponChanged?.Invoke(2);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                WeaponChanged?.Invoke((int)KeyCode.Alpha3 - (int)KeyCode.Alpha0);
+                WeaponChanged?.Invoke(3);
             }
         }
     }

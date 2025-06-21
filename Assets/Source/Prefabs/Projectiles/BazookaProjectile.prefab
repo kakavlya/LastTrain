@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,7 +67,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: effb278466e36474989bd577f63840b1, type: 2}
+      objectReference: {fileID: 2100000, guid: 965e421d30d6a2a419dfd5b3597456b8, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: 54e9c8258b1ab154e9ab7a6df08ff767, type: 3}
     - target: {fileID: 919132149155446097, guid: 7c1dc7b8d6ab7cb4288169b08f6b889b, type: 3}
       propertyPath: m_Name
       value: BazookaProjectile
@@ -155,10 +159,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Height: 10.24
-  m_Direction: 1
-  m_Center: {x: -0.00833559, y: 0.72741055, z: -0.00018566847}
+  m_Radius: 0.3
+  m_Height: 2.6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!120 &-5496750624327845486
 LineRenderer:
   serializedVersion: 2
