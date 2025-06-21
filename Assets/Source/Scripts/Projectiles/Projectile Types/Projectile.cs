@@ -70,8 +70,7 @@ public class Projectile : MonoBehaviour
                 Owner.GetComponentInChildren<Ammunition>().IncreaseProjectilesCount(ammunition.CountProjectiles);
             }
         }
-
-            if (_impactPrefab != null)
+        if (_impactPrefab != null)
                 ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
         Despawn();

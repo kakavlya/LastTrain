@@ -14,6 +14,7 @@ namespace Player
         private Spline _spline;
         private float _distance;
         private Transform _splineTransform;
+        private bool _running;
 
         public event Action<LevelElement> SplineIsOvered;
 
@@ -26,10 +27,14 @@ namespace Player
         private void OnDisable()
         {
             _levelGenerator.StartedElementDefined -= SetCurrentSpline;
+            _levelGenerator.ElementChanged -= SetCurrentSpline;
         }
 
         private void Update()
         {
+            if (!_running)
+                return;
+
             _distance += _speed * Time.deltaTime;
 
             if (_spline == null || _distance > _spline.Length)
@@ -43,6 +48,10 @@ namespace Player
             transform.position = new Vector3(globalPosition.x, transform.position.y, globalPosition.z);
             transform.rotation = sample.Rotation * Quaternion.Euler(0, 180, 0);
         }
+
+        public void StartMovement() => _running = true;
+
+        public void StopMovement() => _running = false;
 
         public float Speed()
         {

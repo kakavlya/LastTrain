@@ -14,12 +14,15 @@ namespace Assets.Source.Scripts.Enemies
         //[SerializeField] private float[] _timers;
         [Header("Scene-bound")]
         [SerializeField] private Transform[] _spawnPoints;
-        [SerializeField] private Transform _playerTarget;
 
         [SerializeField] private bool _useRuntime;
 
         private EnemySpawnEntry[] _entries;
+        private Transform _playerTarget;
         private float[] _timers;
+
+        private bool _paused;
+        private bool _stopped;
 
         private void Awake()
         {
@@ -29,6 +32,18 @@ namespace Assets.Source.Scripts.Enemies
         public void Init()
         {
             _entries = _config.entries;
+        }
+
+        public void Init(Transform playerTarget)
+        {
+            _playerTarget = playerTarget;
+            Init();
+        }
+
+        public void Begin()
+        {
+            _stopped = false;
+            _paused = false;
             InitTimers();
         }
 
@@ -41,19 +56,16 @@ namespace Assets.Source.Scripts.Enemies
 
         private void Update()
         {
-            var entriesToUse = _entries;
-            var points = _spawnPoints;
-            var target = _playerTarget;
+            if (_paused || _stopped) return;
+            if (_entries == null || _timers == null) return;
 
-            if (entriesToUse == null) return;
-
-            for (int i = 0; i < entriesToUse.Length; i++)
+            for (int i = 0; i < _entries.Length; i++)
             {
                 _timers[i] += Time.deltaTime;
-                var spawnEntry = entriesToUse[i];
-                if (_timers[i] >= spawnEntry.spawnInterval)
+                var entry = _entries[i];
+                if (_timers[i] >= entry.spawnInterval)
                 {
-                    Spawn(spawnEntry, points, target);
+                    Spawn(entry, _spawnPoints, _playerTarget);
                     _timers[i] = 0f;
                 }
             }
@@ -78,6 +90,16 @@ namespace Assets.Source.Scripts.Enemies
             var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
             spawnEntry.behaviorSettings?.Initialize(gameObject, player);
         }
+
+        public void Pause() => _paused = true;
+        public void Resume() => _paused = false;
+
+        public void Stop()
+        {
+            _stopped = true;
+            _paused = false;
+        }
+
         //public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
         //{
         //    _useRuntime = true;

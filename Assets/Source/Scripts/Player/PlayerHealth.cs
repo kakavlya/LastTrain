@@ -1,4 +1,5 @@
 ﻿using Assets.Source.Scripts.Core;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class PlayerHealth : HealthBase
     // Todo : добавить UI для отображения здоровья
     //[SerializeField] private PlayerUI _ui;      
     [SerializeField] private float _respawnDelay = 3f;
+
+    public event Action Died;
 
     protected override void Awake()
     {
@@ -23,8 +26,8 @@ public class PlayerHealth : HealthBase
 
     private void OnPlayerDeath()
     {
-        // например, обнулить управление, показать меню
-        StartCoroutine(RespawnRoutine());
+        Debug.Log("[PlayerHealth] Player died");
+        Died?.Invoke();
     }
 
     private IEnumerator RespawnRoutine()
