@@ -193,9 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be4530a72871c0469d348bc9b79a881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _weapons:
-  - {fileID: 5879944412009858589}
-  - {fileID: 858798262385907555}
+  - {fileID: 5671528450328693545}
+  - {fileID: 5977224216744695479}
   - {fileID: 7138497894523935682}
   _weaponInput: {fileID: 4444791174602866357}
 --- !u!114 &6094426346783559762
@@ -554,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116537474024852836, guid: b6ae7488962959646977395a80386d76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.79
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 4116537474024852836, guid: b6ae7488962959646977395a80386d76, type: 3}
       propertyPath: m_LocalPosition.z
@@ -586,6 +590,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4116537474024852836, guid: b6ae7488962959646977395a80386d76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460137585123696934, guid: b6ae7488962959646977395a80386d76, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7409557611656525477, guid: b6ae7488962959646977395a80386d76, type: 3}
@@ -654,6 +662,7 @@ MonoBehaviour:
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 0}
   _ammunition: {fileID: 4730529177903028540}
+  _uiSprite: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   Owner: {fileID: 781245857482172249}
   FirePoint: {fileID: 1171210759468432667}
   ProjectilePrefab: {fileID: 0}
@@ -739,6 +748,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781245857482172249}
     - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
+      propertyPath: _uiSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}
+    - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
       propertyPath: IsAutomatic
       value: 0
       objectReference: {fileID: 0}
@@ -779,7 +792,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -916,6 +929,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781245857482172249}
     - target: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
+      propertyPath: _uiSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
+    - target: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 948380861982024859}
@@ -923,9 +940,13 @@ PrefabInstance:
       propertyPath: _weaponInput
       value: 
       objectReference: {fileID: 4444791174602866357}
+    - target: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
+      propertyPath: ProjectileSpeed
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7164209955959781297, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: m_Name
-      value: BazookaModel
+      value: Bazooka
       objectReference: {fileID: 0}
     - target: {fileID: 7164209955959781297, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: m_IsActive
@@ -937,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7667303753311643874, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.324
+      value: 1.319
       objectReference: {fileID: 0}
     - target: {fileID: 7667303753311643874, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1018,7 +1039,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1135,6 +1156,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781245857482172249}
     - target: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
+      propertyPath: _uiSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
+    - target: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 46033499604228434}
@@ -1148,6 +1173,10 @@ PrefabInstance:
       objectReference: {fileID: 8226285592677434412, guid: bb959890b0a20a24a82bcf33ef3b2170, type: 3}
     - target: {fileID: 5379980766513139774, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132299582682140417, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9107309904343047272, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
@@ -1235,6 +1264,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781245857482172249}
     - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
+      propertyPath: _uiSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
+    - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 7290900981494458158}
@@ -1318,17 +1351,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4142875306226948026, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
   m_PrefabInstance: {fileID: 4100178372026346950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &858798262385907555 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
-  m_PrefabInstance: {fileID: 4100178372026346950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 999914a507c45fd4cb0b2de04fed1745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7743014033421872197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1398,6 +1420,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781245857482172249}
     - target: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
+      propertyPath: _uiSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98b8f6b5fdc827e43aa42a4862a8b604, type: 3}
+    - target: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 4794859836469653075}
@@ -1417,6 +1443,10 @@ PrefabInstance:
       propertyPath: InitialModule.gravityModifier.scalar
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 7332470666651878799, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3446888278540729069, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
     - {fileID: 1069202369554064374, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
@@ -1425,6 +1455,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
+--- !u!114 &5977224216744695479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
+  m_PrefabInstance: {fileID: 7743014033421872197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7178805834132231342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 636287251186039019, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}

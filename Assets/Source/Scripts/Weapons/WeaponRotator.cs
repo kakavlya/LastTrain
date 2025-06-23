@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
 {
@@ -30,6 +31,12 @@ namespace Assets.Source.Scripts.Weapons
         {
             if (_targetProvider == null || !_targetProvider.AimPointWorld.HasValue)
                 return;
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             Vector3 aimPoint = _targetProvider.AimPointWorld.Value;
 
             Vector3 direction = aimPoint - _weaponPivot.position;

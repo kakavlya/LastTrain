@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class WeaponsHandler : MonoBehaviour
 {
+    [SerializeField] private WeaponCell[] _weaponCells;
     [SerializeField] private Weapon[] _weapons;
     [SerializeField] private WeaponInput _weaponInput;
 
     private Weapon _currentWeapon;
 
-    public event Action <Weapon> OnWeaponChange;
+    public event Action<Weapon> OnWeaponChange;
 
     private void OnEnable()
     {
-        _weaponInput.WeaponChanged += ChangeWeapon;
+        foreach (var cell in _weaponCells)
+        {
+            cell.UconClicked += ChooseWeapon;
+        }
+
+        _weaponInput.WeaponChanged += ChooseWeapon;
     }
 
     private void OnDisable()
     {
-        _weaponInput.WeaponChanged -= ChangeWeapon;
+        foreach (var cell in _weaponCells)
+        {
+            cell.UconClicked -= ChooseWeapon;
+        }
+
+        _weaponInput.WeaponChanged -= ChooseWeapon;
     }
 
     private void Start()
@@ -33,13 +44,14 @@ public class WeaponsHandler : MonoBehaviour
         OnWeaponChange?.Invoke(_currentWeapon);
     }
 
-    private void ChangeWeapon(int weaponNumber)
+    private void ChooseWeapon(int weaponNumber)
     {
-        if (weaponNumber > 0)
+        if (weaponNumber > 0 && weaponNumber <= _weapons.Length)
         {
             _currentWeapon.gameObject.SetActive(false);
             _currentWeapon = _weapons[weaponNumber - 1];
             _currentWeapon.gameObject.SetActive(true);
+            _weaponCells[weaponNumber - 1].SetIcon(_currentWeapon);
             OnWeaponChange?.Invoke(_currentWeapon);
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
     [SerializeField] private Ammunition _ammunition = null;
+    [SerializeField] private Sprite _uiSprite;
+
     [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
@@ -26,6 +29,8 @@ public class Weapon : MonoBehaviour
 
     public event Action OnFired;
     public event Action OnStopFired;
+
+    public Sprite UISprite => _uiSprite;
 
     private void OnEnable()
     {
