@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Ammunition : MonoBehaviour
@@ -5,45 +6,47 @@ public class Ammunition : MonoBehaviour
     [SerializeField] private Weapon _weaponPrefab;
     [SerializeField] private int _maxAmmo;
 
-    private int _currentAmmo;
+    public event Action <int> Updated;
 
     public Weapon WeaponPrefab => _weaponPrefab;
-    public int CurrentAmmo => _currentAmmo;
+    public int CurrentAmmo { get; private set; }
     public bool HasAmmo { get; private set; } = true;
 
     private void Start()
     {
-        _currentAmmo = _maxAmmo;
+        CurrentAmmo = _maxAmmo;
     }
 
     public void DecreaseProjectilesCount()
     {
-        if (_currentAmmo > 0)
+        if (CurrentAmmo > 0)
         {
-            _currentAmmo--;
+            CurrentAmmo--;
         }
         else
         {
             HasAmmo = false;
         }
 
-        Debug.Log("Projectile count " + _currentAmmo);
+        Updated?.Invoke(CurrentAmmo);
     }
 
     public void IncreaseProjectilesCount(int count)
     {
-        if (_currentAmmo + count < _maxAmmo)
+        if (CurrentAmmo + count < _maxAmmo)
         {
-            _currentAmmo += count;
+            CurrentAmmo += count;
         }
         else
         {
-            _currentAmmo = _maxAmmo;
+            CurrentAmmo = _maxAmmo;
         }
 
-        if (_currentAmmo > 0)
+        if (CurrentAmmo > 0)
         {
             HasAmmo = true;
         }
+
+        Updated?.Invoke(CurrentAmmo);
     }
 }

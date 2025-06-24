@@ -1,7 +1,6 @@
 using System;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,7 +8,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
     [SerializeField] private Ammunition _ammunition = null;
-    [SerializeField] private Sprite _uiSprite;
+    [SerializeField] private Sprite _uiSpriteActive;
+    [SerializeField] private Sprite _uiSpriteDeactive;
 
     [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
@@ -30,7 +30,9 @@ public class Weapon : MonoBehaviour
     public event Action OnFired;
     public event Action OnStopFired;
 
-    public Sprite UISprite => _uiSprite;
+    public Sprite UISpriteActive => _uiSpriteActive;
+    public Sprite UISpriteDeactive => _uiSpriteDeactive;
+    public Ammunition Ammunition => _ammunition;
 
     private void OnEnable()
     {
@@ -43,6 +45,13 @@ public class Weapon : MonoBehaviour
     {
         _weaponInput.Fired -= Fire;
         _weaponInput.StopFired -= StopFire;
+    }
+
+    public virtual bool GetIsLoopedFireSound() => false;
+
+    protected virtual void StopFire()
+    {
+        OnStopFired?.Invoke();
     }
 
     private bool FirePossibleCalculate()
@@ -95,11 +104,4 @@ public class Weapon : MonoBehaviour
             }
         }
     }
-
-    protected virtual void StopFire()
-    {
-        OnStopFired?.Invoke();
-    }
-
-    public virtual bool GetIsLoopedFireSound() => false;
 }

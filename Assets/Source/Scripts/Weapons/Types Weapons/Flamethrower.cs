@@ -27,6 +27,8 @@ public class Flamethrower : Weapon
         }
     }
 
+    public override bool GetIsLoopedFireSound() => true;
+
     protected override void OnWeaponFire()
     {
         if (!_isFiring)
@@ -84,6 +86,4 @@ public class Flamethrower : Weapon
             _flameParticle.Stop();
         }
     }
-
-    public override bool GetIsLoopedFireSound() => true;
 }
