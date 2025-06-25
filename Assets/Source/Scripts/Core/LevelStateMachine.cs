@@ -86,8 +86,8 @@ public class LevelStateMachine : MonoBehaviour
 
     private void OnPlayerDied()
     {
-        Time.timeScale = 0f;
         PlayerDied?.Invoke();
         _playerHealth.Died -= OnPlayerDied;
+        Time.timeScale = 0f;
     }
 }
