@@ -27,6 +27,8 @@ public class Flamethrower : Weapon
         }
     }
 
+    public override bool GetIsLoopedFireSound() => true;
+
     protected override void OnWeaponFire()
     {
         if (!_isFiring)
@@ -74,7 +76,7 @@ public class Flamethrower : Weapon
         return verticalAngle <= _verticalAngle / 2f;
     }
 
-    public override void StopFire()
+    protected override void StopFire()
     {
         base.StopFire();
 
@@ -84,6 +86,4 @@ public class Flamethrower : Weapon
             _flameParticle.Stop();
         }
     }
-
-    public override bool GetIsLoopedFireSound() => true;
 }

@@ -1,21 +1,54 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
 {
     public class WeaponInput : MonoBehaviour
     {
-        [SerializeField] private Weapon _weapon;
+        public event Action Fired;
+        public event Action StopFired;
+        public event Action<int> WeaponChanged;
 
         private void Update()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
+            HandleShooting();
+            HandleWeaponSwitch();
+        }
+
+        private void HandleShooting()
+        {
             if (Input.GetMouseButton(0))
             {
-                _weapon.Fire();
+                Fired?.Invoke();
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                _weapon.StopFire();
+                StopFired?.Invoke();
+            }
+        }
+
+        private void HandleWeaponSwitch()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                WeaponChanged?.Invoke(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                WeaponChanged?.Invoke(2);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                WeaponChanged?.Invoke(3);
             }
         }
     }

@@ -1,22 +1,42 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
 {
     public class WeaponRotator : MonoBehaviour
     {
-        [SerializeField] private Transform _weaponPivot;
+        [SerializeField] private WeaponsHandler _weaponHandler;
         [SerializeField] private AimingTargetProvider _targetProvider;
-        [SerializeField] private float _rotationSpeed = 360f;
+        [SerializeField] private float _rotationSpeed = 180f;
 
-        public void SetAimingTargetProvider(AimingTargetProvider aimingTargetProvider)
+        private Transform _weaponPivot;
+
+        private void OnEnable()
         {
-            _targetProvider = aimingTargetProvider;
+            _weaponHandler.OnWeaponChange += SetWeaponPivot;
         }
+
+        private void OnDisable()
+        {
+            _weaponHandler.OnWeaponChange -= SetWeaponPivot;
+        }
+
+        private void SetWeaponPivot(Weapon weapon)
+        {
+            _weaponPivot = weapon.transform;
+        }
+
         private void Update()
         {
             if (_targetProvider == null || !_targetProvider.AimPointWorld.HasValue)
                 return;
+
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             Vector3 aimPoint = _targetProvider.AimPointWorld.Value;
 
             Vector3 direction = aimPoint - _weaponPivot.position;

@@ -10,14 +10,14 @@ public class Bazooka : Weapon
 
     protected override void OnWeaponFire()
     {
-        Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+        Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.forward);
 
         var proj = UsePooling
         ? ProjectilePool.Instance.Spawn(
             ProjectilePrefab,
             FirePoint.position,
             rotation,
-            owner: gameObject,
+            Owner,
             ProjectileSpeed, Damage,
             MaxAttackDistance,
             _aoeDamage,

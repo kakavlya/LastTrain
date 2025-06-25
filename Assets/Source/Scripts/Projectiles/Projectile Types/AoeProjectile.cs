@@ -5,12 +5,6 @@ public class AoeProjectile : Projectile
     private float _aoeRange;
     private int _aoeDamage;
 
-    public override void SetVelocity()
-    {
-        if (ProjectileRigidbody != null)
-            ProjectileRigidbody.velocity = transform.up * Speed;
-    }
-
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
