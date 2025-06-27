@@ -462,7 +462,6 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 3c144ccc0e9003c488e20253b9090d4f, type: 2}
   _spawnPoints:
   - {fileID: 518268323}
-  _playerTarget: {fileID: 1501784743}
   _useRuntime: 0
 --- !u!4 &851371661
 Transform:
@@ -519,7 +518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5014081350939366840, guid: 790a3a8d5369e984e824aeb169524ec2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5301721059730973178, guid: 790a3a8d5369e984e824aeb169524ec2, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1398,6 +1397,26 @@ PrefabInstance:
     - target: {fileID: 1268517231774393479, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
       propertyPath: m_Name
       value: WeaponUi
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268517231774393479, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749234456291580032, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628745180676618855, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6628745180676618855, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7044737292986511470, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7578282067901777672, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
       propertyPath: m_Pivot.x
