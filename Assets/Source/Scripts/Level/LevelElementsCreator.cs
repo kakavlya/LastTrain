@@ -6,11 +6,11 @@ namespace Level
     public class LevelElementsCreator : MonoBehaviour
     {
         [SerializeField] private List<LevelElement> _levelElementsPrefabs;
-        [SerializeField] private Transform _parentTransform;
+        [SerializeField] private Transform _parentTransformForElements;
 
         public LevelElement CreateElement(Vector3 position)
         {
-            LevelElement element = Instantiate(_levelElementsPrefabs[GetRandomElementNumber()], _parentTransform);
+            LevelElement element = Instantiate(_levelElementsPrefabs[GetRandomElementNumber()], _parentTransformForElements);
             element.transform.position = position;
             return element;
         }

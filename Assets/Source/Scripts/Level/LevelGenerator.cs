@@ -32,7 +32,7 @@ namespace Level
             _trainMovement.SplineIsOvered -= ChangeCurrentElementAndExtendLevel;
         }
 
-        private void Awake()
+        private void Start()
         {
             _workingPosition = _startElementPosition;
 
@@ -63,7 +63,9 @@ namespace Level
             if (_elementsOnScene.Count == 0) return;
 
             LevelElement lastElement = _elementsOnScene[_elementsOnScene.Count - 1];
-            float elementWidth = lastElement.GetComponent<MeshRenderer>().bounds.size.x;
+            //float elementWidth = lastElement.GetComponent<MeshRenderer>().bounds.size.x;
+
+            float elementWidth = lastElement.GetComponent<Terrain>().terrainData.size.x;
             _workingPosition.x = lastElement.transform.position.x + elementWidth;
         }
 
