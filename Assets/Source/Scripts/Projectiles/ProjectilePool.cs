@@ -7,7 +7,7 @@ public class ProjectilePool : MonoBehaviour
 
     private readonly Dictionary<Projectile, Queue<Projectile>> _pools = new Dictionary<Projectile, Queue<Projectile>>();
 
-    private void Awake()
+    public void Init()
     {
         if (Instance != null && Instance != this)
         {

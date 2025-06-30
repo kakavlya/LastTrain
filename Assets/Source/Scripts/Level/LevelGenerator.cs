@@ -22,21 +22,17 @@ namespace Level
         public event Action<LevelElement> StartedElementDefined;
         public event Action<LevelElement> ElementChanged;
 
-        private void OnEnable()
+        public void Init()
         {
             _trainMovement.SplineIsOvered += ChangeCurrentElementAndExtendLevel;
+            _workingPosition = _startElementPosition;
+
+            InitStartedElements();
         }
 
         private void OnDisable()
         {
             _trainMovement.SplineIsOvered -= ChangeCurrentElementAndExtendLevel;
-        }
-
-        private void Start()
-        {
-            _workingPosition = _startElementPosition;
-
-            InitStartedElements();
         }
 
         private void AddElementOnLevel()

@@ -12,7 +12,7 @@ public class PickableAmmunitionPool : MonoBehaviour
 
     public static PickableAmmunitionPool Instance { get; private set; }
 
-    private void Awake()
+    public void Init()
     {
         if (Instance != null && Instance != this)
         {
@@ -22,8 +22,6 @@ public class PickableAmmunitionPool : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        
     }
 
     private void CreatePoolForPrefab(PickableAmmunition pickableAmmunitionPrefab)

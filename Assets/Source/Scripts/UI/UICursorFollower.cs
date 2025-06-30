@@ -6,7 +6,7 @@ public class UICursorFollower : MonoBehaviour
 {
     private RectTransform _rectTransform;
 
-    private void Awake()
+    public void Init()
     {
         _rectTransform = GetComponent<RectTransform>();
     }

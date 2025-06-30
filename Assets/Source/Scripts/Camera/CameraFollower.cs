@@ -6,7 +6,7 @@ public class CameraFollower : MonoBehaviour
     [SerializeField] private Vector3 _offset;
     [SerializeField] private Vector3 _angles;
 
-    private void Awake()
+    public void Init()
     {
         transform.rotation = Quaternion.Euler(_angles);
     }

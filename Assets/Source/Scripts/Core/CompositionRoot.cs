@@ -1,4 +1,5 @@
 using Assets.Source.Scripts.Enemies;
+using Assets.Source.Scripts.Weapons;
 using Level;
 using Player;
 using UnityEngine;
@@ -13,9 +14,29 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private TrainMovement _trainMovement;
     [SerializeField] private LevelGenerator _levelGenerator;
+    [SerializeField] private WeaponsHandler _weaponHandler;
+    [SerializeField] private WeaponRotator _weaponRotator;
+    [SerializeField] private AimingTargetProvider _aimingTargetProvider;
+    [SerializeField] private UICursorFollower _uiCursorFollower;
+    [SerializeField] private ParticlePool _particlePool;
+    [SerializeField] private PickableAmmunitionPool _pickableAmmunitionPool;
+    [SerializeField] private ProjectilePool _projectilePool;
+    [SerializeField] private CameraFollower _cameraFollower;
 
     private void Awake()
     {
+        _aimingTargetProvider.Init();
+        _uiCursorFollower.Init();
+        _weaponHandler.Init();
+        _weaponRotator.Init();
+        _trainMovement.Init();
+        _particlePool.Init();
+        _pickableAmmunitionPool.Init();
+        _projectilePool.Init();
+        _levelGenerator.Init();
+        _cameraFollower.Init();
+
+
         _levelStateMachine.Construct(_spawner, _player, _playerHealth, _trainMovement, _levelGenerator);
         _uIStateMachine.Construct(_levelStateMachine);
 

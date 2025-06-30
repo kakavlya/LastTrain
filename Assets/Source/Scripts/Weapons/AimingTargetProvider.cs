@@ -5,16 +5,16 @@ namespace Assets.Source.Scripts.Weapons
 {
     public class AimingTargetProvider : MonoBehaviour
     {
-        [SerializeField] private Camera _mainCamera;
         [SerializeField] private LayerMask _groundMask;
+
+        private Camera _mainCamera;
         private float _maxDistance = 90000f;
         public Vector3 AimDirection { get; private set; } = Vector3.forward;
         public Vector3? AimPointWorld { get; private set; }
 
-        private void Awake()
+        public void Init()
         {
-            if (_mainCamera == null)
-                _mainCamera = Camera.main;
+            _mainCamera = Camera.main;
         }
 
         private void Update()

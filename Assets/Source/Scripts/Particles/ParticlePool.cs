@@ -12,7 +12,7 @@ public class ParticlePool : MonoBehaviour
 
     public static ParticlePool Instance { get; private set; }
 
-    private void Awake()
+    public void Init()
     {
         if (Instance != null && Instance != this)
         {

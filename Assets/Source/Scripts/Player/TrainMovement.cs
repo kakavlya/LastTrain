@@ -18,7 +18,7 @@ namespace Player
 
         public event Action<LevelElement> SplineIsOvered;
 
-        private void OnEnable()
+        public void Init()
         {
             _levelGenerator.StartedElementDefined += SetCurrentSpline;
             _levelGenerator.ElementChanged += SetCurrentSpline;

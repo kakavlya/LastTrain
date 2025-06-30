@@ -13,7 +13,7 @@ public class WeaponsHandler : MonoBehaviour
 
     public event Action<Weapon> OnWeaponChange;
 
-    private void OnEnable()
+    public void Init()
     {
         foreach (var cell in _weaponUI)
         {

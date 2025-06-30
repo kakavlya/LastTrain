@@ -12,7 +12,7 @@ namespace Assets.Source.Scripts.Weapons
 
         private Transform _weaponPivot;
 
-        private void OnEnable()
+        public void Init()
         {
             _weaponHandler.OnWeaponChange += SetWeaponPivot;
         }
