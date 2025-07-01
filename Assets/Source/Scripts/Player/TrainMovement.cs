@@ -60,10 +60,34 @@ namespace Player
 
         private void SetCurrentSpline(LevelElement levelElement)
         {
-            _distance = 0f;
             _currentLevelElement = levelElement;
             _spline = levelElement.GetComponentInChildren<Spline>();
             _splineTransform = _spline.transform;
+
+            Vector3 localPosition = _splineTransform.InverseTransformPoint(transform.position);
+            float nearestDistance = FindNearestDistanceOnSpline(_spline, localPosition);
+            _distance = nearestDistance;
+        }
+
+        private float FindNearestDistanceOnSpline(Spline spline, Vector3 targetLocalPosition)
+        {
+            float step = 0.1f;
+            float bestDistance = 0f;
+            float minSqrDistance = float.MaxValue;
+
+            for (float d = 0f; d < spline.Length; d += step)
+            {
+                Vector3 pos = spline.GetSampleAtDistance(d).location;
+                float sqrDist = (pos - targetLocalPosition).sqrMagnitude;
+
+                if (sqrDist < minSqrDistance)
+                {
+                    minSqrDistance = sqrDist;
+                    bestDistance = d;
+                }
+            }
+
+            return bestDistance;
         }
     }
 }
