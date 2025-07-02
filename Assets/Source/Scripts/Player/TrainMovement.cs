@@ -68,7 +68,6 @@ namespace Player
                     _currentSpline = _nextSpline;
                     _currentSplineTransform = _nextSplineTransform;
                     _distance = 0;
-                    _firstPosition = true;
                 }
 
                 return;
@@ -106,17 +105,18 @@ namespace Player
             _nextSpline = nextLevelElement.GetComponentInChildren<Spline>();
             _nextSplineTransform = _nextSpline.transform;
 
-            CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
-            Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
-            transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
-            transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
-
             if (!_isTrainStart)
             {
                 _isTransition = true;
+                _transitionProgress = 0;
+                _firstPosition = true;
             }
             else
             {
+                CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
+                Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
+                transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
+                transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
                 _isTrainStart = false;
             }
         }
