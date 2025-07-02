@@ -21,6 +21,7 @@ namespace Player
         private bool _isTrainStart = true;
         private float _transitionProgress;
         private Vector3 _currentPosition;
+        private bool _firstPosition = true;
 
         public event Action<LevelElement> SplineIsOvered;
 
@@ -43,22 +44,21 @@ namespace Player
 
             if (_isTransition)
             {
-                Debug.Log("Step");
                 _transitionProgress += _speed * Time.deltaTime;
 
                 CurveSample currentSample = _currentSpline.GetSampleAtDistance(_distance);
                 CurveSample nextSample = _nextSpline.GetSampleAtDistance(0);
 
-                _currentPosition = _currentSplineTransform.TransformPoint(currentSample.location);
+                if (_firstPosition)
+                {
+                    _currentPosition = _currentSplineTransform.TransformPoint(currentSample.location);
+                    _firstPosition = false;
+                }
+
                 Vector3 nextPosition = _nextSplineTransform.TransformPoint(nextSample.location);
 
-                transform.position = Vector3.MoveTowards(_currentPosition, nextPosition, _transitionProgress);
+                transform.position = Vector3.MoveTowards(_currentPosition, nextPosition, _speed * Time.deltaTime);
                 _currentPosition = transform.position;
-
-                //transform.rotation = Quaternion.Slerp(
-                //    currentSample.Rotation * Quaternion.Euler(0, 180, 0),
-                //    nextSample.Rotation * Quaternion.Euler(0, 180, 0),
-                //    _transitionProgress);
 
                 transform.rotation = nextSample.Rotation * Quaternion.Euler(0, 180, 0);
 
@@ -68,6 +68,7 @@ namespace Player
                     _currentSpline = _nextSpline;
                     _currentSplineTransform = _nextSplineTransform;
                     _distance = 0;
+                    _firstPosition = true;
                 }
 
                 return;
@@ -75,7 +76,7 @@ namespace Player
 
             _distance += _speed * Time.deltaTime;
 
-            if (_currentSpline == null || _distance >= _currentSpline.Length - 1)
+            if (_currentSpline == null || _distance >= _currentSpline.Length)
             {
                 SplineIsOvered?.Invoke(_currentLevelElement);
                 return;
