@@ -22,6 +22,7 @@ namespace Player
         private float _transitionProgress;
         private Vector3 _currentPosition;
         private bool _firstPosition = true;
+        private bool _justFinishedTransition;
 
         public event Action<LevelElement> SplineIsOvered;
 
@@ -73,12 +74,20 @@ namespace Player
                 return;
             }
 
-            _distance += _speed * Time.deltaTime;
-
-            if (_currentSpline == null || _distance >= _currentSpline.Length)
+            if (_justFinishedTransition)
             {
-                SplineIsOvered?.Invoke(_currentLevelElement);
-                return;
+                _justFinishedTransition = false;
+                _distance += _speed * Time.deltaTime; 
+            }
+            else
+            {
+                _distance += _speed * Time.deltaTime;
+
+                if (_distance >= _currentSpline.Length)
+                {
+                    SplineIsOvered?.Invoke(_currentLevelElement);
+                    return;
+                }
             }
 
             CurveSample sample = _currentSpline.GetSampleAtDistance(_distance);
