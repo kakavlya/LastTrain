@@ -2,6 +2,7 @@ using System;
 using SplineMesh;
 using UnityEngine;
 using Level;
+using Unity.VisualScripting;
 
 namespace Player
 {
@@ -9,6 +10,7 @@ namespace Player
     {
         [SerializeField] private float _speed;
         [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private float _transitionDuration = 2f;
 
         private LevelElement _currentLevelElement;
         private Spline _currentSpline;
@@ -22,7 +24,6 @@ namespace Player
         private float _transitionProgress;
         private Vector3 _currentPosition;
         private bool _firstPosition = true;
-        private bool _justFinishedTransition;
 
         public event Action<LevelElement> SplineIsOvered;
 
@@ -45,49 +46,53 @@ namespace Player
 
             if (_isTransition)
             {
-                _transitionProgress += _speed * Time.deltaTime;
+                _transitionProgress += Time.deltaTime * _speed;
 
-                CurveSample currentSample = _currentSpline.GetSampleAtDistance(_distance);
-                CurveSample nextSample = _nextSpline.GetSampleAtDistance(0);
+                var currentEndSample = _currentSpline.GetSampleAtDistance(_currentSpline.Length - 0.01f);
+                var nextStartSample = _nextSpline.GetSampleAtDistance(0);
 
-                if (_firstPosition)
-                {
-                    _currentPosition = _currentSplineTransform.TransformPoint(currentSample.location);
-                    _firstPosition = false;
-                }
+                Vector3 startPoint = _currentSplineTransform.TransformPoint(currentEndSample.location);
+                Vector3 endPoint = _nextSplineTransform.TransformPoint(nextStartSample.location);
 
-                Vector3 nextPosition = _nextSplineTransform.TransformPoint(nextSample.location);
-
-                transform.position = Vector3.MoveTowards(_currentPosition, nextPosition, _speed * Time.deltaTime);
-                _currentPosition = transform.position;
-
-                transform.rotation = nextSample.Rotation * Quaternion.Euler(0, 180, 0);
+                transform.position = Vector3.Lerp(startPoint, endPoint, _transitionProgress);
+                transform.rotation = Quaternion.Slerp(
+                    currentEndSample.Rotation * Quaternion.Euler(0, 180, 0),
+                    nextStartSample.Rotation * Quaternion.Euler(0, 180, 0),
+                    _transitionProgress
+                );
 
                 if (_transitionProgress >= 1f)
                 {
                     _isTransition = false;
+
                     _currentSpline = _nextSpline;
                     _currentSplineTransform = _nextSplineTransform;
                     _distance = 0;
+
+                    CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
+                    Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
+                    transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
+                    transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
                 }
 
                 return;
             }
 
-            if (_justFinishedTransition)
-            {
-                _justFinishedTransition = false;
-                _distance += _speed * Time.deltaTime; 
-            }
-            else
-            {
-                _distance += _speed * Time.deltaTime;
+            _distance += _speed * Time.deltaTime;
 
-                if (_distance >= _currentSpline.Length)
+            if (_distance >= _currentSpline.Length)
+            {
+                if (_nextSpline != null)
                 {
-                    SplineIsOvered?.Invoke(_currentLevelElement);
+                    // НАЧИНАЕМ ПЛАВНЫЙ ПЕРЕХОД
+                    _isTransition = true;
+                    _transitionProgress = 0f;
                     return;
                 }
+
+                // Если следующего сплайна нет — остановка
+                SplineIsOvered?.Invoke(_currentLevelElement);
+                return;
             }
 
             CurveSample sample = _currentSpline.GetSampleAtDistance(_distance);
@@ -107,20 +112,13 @@ namespace Player
 
         private void SetCurrentSpline(LevelElement currentLevelElement, LevelElement nextLevelElement)
         {
-            _distance = 0;
             _currentLevelElement = currentLevelElement;
             _currentSpline = currentLevelElement.GetComponentInChildren<Spline>();
             _currentSplineTransform = _currentSpline.transform;
             _nextSpline = nextLevelElement.GetComponentInChildren<Spline>();
             _nextSplineTransform = _nextSpline.transform;
 
-            if (!_isTrainStart)
-            {
-                _isTransition = true;
-                _transitionProgress = 0;
-                _firstPosition = true;
-            }
-            else
+            if (_isTrainStart)
             {
                 CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
                 Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
@@ -128,6 +126,8 @@ namespace Player
                 transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
                 _isTrainStart = false;
             }
+
+            _distance = 0;
         }
     }
 }
