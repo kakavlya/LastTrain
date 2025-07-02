@@ -30,10 +30,10 @@ public class CompositionRoot : MonoBehaviour
         _weaponHandler.Init();
         _weaponRotator.Init();
         _trainMovement.Init();
+        _levelGenerator.Init();
         _particlePool.Init();
         _pickableAmmunitionPool.Init();
         _projectilePool.Init();
-        _levelGenerator.Init();
         _cameraFollower.Init();
 
 

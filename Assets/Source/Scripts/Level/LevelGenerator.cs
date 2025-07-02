@@ -14,13 +14,14 @@ namespace Level
 
         private List<LevelElement> _elementsOnScene = new List<LevelElement>();
         private LevelElement _currentElement;
+        private LevelElement _nextElement;
         private int _maxCount = 5;
         private Vector3 _workingPosition;
 
         public Vector3 StartTrainPosition { get; private set; }
 
-        public event Action<LevelElement> StartedElementDefined;
-        public event Action<LevelElement> ElementChanged;
+        public event Action<LevelElement, LevelElement> StartedElementDefined;
+        public event Action<LevelElement, LevelElement> ElementChanged;
 
         public void Init()
         {
@@ -50,7 +51,8 @@ namespace Level
             }
 
             _currentElement = _elementsOnScene[_elementsOnScene.Count / 2];
-            StartedElementDefined?.Invoke(_currentElement);
+            _nextElement = _elementsOnScene[_elementsOnScene.Count / 2 + 1];
+            StartedElementDefined?.Invoke(_currentElement, _nextElement);
             StartTrainPosition = _currentElement.transform.position;
         }
 
@@ -59,7 +61,6 @@ namespace Level
             if (_elementsOnScene.Count == 0) return;
 
             LevelElement lastElement = _elementsOnScene[_elementsOnScene.Count - 1];
-            //float elementWidth = lastElement.GetComponent<MeshRenderer>().bounds.size.x;
 
             float elementWidth = lastElement.GetComponent<Terrain>().terrainData.size.x;
             _workingPosition.x = lastElement.transform.position.x + elementWidth;
@@ -69,10 +70,11 @@ namespace Level
         {
             int index = _elementsOnScene.IndexOf(element);
 
-            if (_elementsOnScene.Count > index + 1)
+            if (_elementsOnScene.Count > index + 2)
             {
                 _currentElement = _elementsOnScene[index + 1];
-                ElementChanged?.Invoke(_currentElement);
+                _nextElement = _elementsOnScene[index + 2];
+                ElementChanged?.Invoke(_currentElement, _nextElement);
                 AddElementOnLevel();
                 CalculateNextPosition();
                 Destroy(_elementsOnScene[0].gameObject);
