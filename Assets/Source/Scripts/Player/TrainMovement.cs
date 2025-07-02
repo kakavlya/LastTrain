@@ -22,8 +22,6 @@ namespace Player
         private bool _isTransition;
         private bool _isTrainStart = true;
         private float _transitionProgress;
-        private Vector3 _currentPosition;
-        private bool _firstPosition = true;
 
         public event Action<LevelElement> SplineIsOvered;
 
@@ -71,7 +69,7 @@ namespace Player
 
                     CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
                     Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
-                    transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
+                    transform.position = startPos;
                     transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
                 }
 
@@ -84,20 +82,18 @@ namespace Player
             {
                 if (_nextSpline != null)
                 {
-                    // НАЧИНАЕМ ПЛАВНЫЙ ПЕРЕХОД
                     _isTransition = true;
                     _transitionProgress = 0f;
                     return;
                 }
 
-                // Если следующего сплайна нет — остановка
                 SplineIsOvered?.Invoke(_currentLevelElement);
                 return;
             }
 
             CurveSample sample = _currentSpline.GetSampleAtDistance(_distance);
             Vector3 globalPosition = _currentSplineTransform.TransformPoint(sample.location);
-            transform.position = new Vector3(globalPosition.x, transform.position.y, globalPosition.z);
+            transform.position = globalPosition;
             transform.rotation = sample.Rotation * Quaternion.Euler(0, 180, 0);
         }
 
@@ -122,7 +118,7 @@ namespace Player
             {
                 CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
                 Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
-                transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
+                transform.position = startPos;
                 transform.rotation = startSample.Rotation * Quaternion.Euler(0, 180, 0);
                 _isTrainStart = false;
             }
