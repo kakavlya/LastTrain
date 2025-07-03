@@ -127,6 +127,7 @@ namespace Player
                 Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
                 transform.position = startPos;
                 transform.rotation = startSample.Rotation * _rottationCorrection;
+                SplineIsOvered?.Invoke(_currentLevelElement);
             }
         }
     }
