@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PackableAmmunitionSpawner : MonoBehaviour
 {
-    [SerializeField] private PickableAmmunition[] _pickableAmmunitionsPrefabs;
+    private PickableAmmunition[] _pickableAmmunitionPrefabs;
 }

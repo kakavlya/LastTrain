@@ -8,10 +8,6 @@ namespace Assets.Source.Scripts.Enemies
         [Header("Static Config (optional)")]
         [SerializeField] private SpawnerConfig _config;
 
-        //[SerializeField] private EnemySpawnEntry[] _entries;
-        //[SerializeField] private Transform[] _spawnPoints;
-        //[SerializeField] private Transform _playerTarget;
-        //[SerializeField] private float[] _timers;
         [Header("Scene-bound")]
         [SerializeField] private Transform[] _spawnPoints;
 
