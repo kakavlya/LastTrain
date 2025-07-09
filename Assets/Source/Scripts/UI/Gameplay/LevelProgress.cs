@@ -8,7 +8,8 @@ public class LevelProgress : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _countdownText;
     [SerializeField] private Slider _progressSlider;
-    [SerializeField] private int _spawnDelaySeconds;
+    [SerializeField] private int _startDelaySeconds;
+    [SerializeField] private SharedData _sharedData;
 
     private int _levelDurationSeconds;
     private int _progressValue = 1;
@@ -16,6 +17,10 @@ public class LevelProgress : MonoBehaviour
     public event Action CountdownFinished;
     public event Action LevelComplited;
 
+    public void Init()
+    {
+        _levelDurationSeconds = _sharedData.LevelSetting.LevelDurationSec;
+    }
 
     public void StartCountdown()
     {
@@ -23,12 +28,10 @@ public class LevelProgress : MonoBehaviour
         CountdownFinished?.Invoke();
     }
 
-    private void SetLevelDuration(int levelDuration) => _levelDurationSeconds = levelDuration;
-
     private IEnumerator CountdownBeforePlaying()
     {
         _countdownText.enabled = true;
-        int seconds = _spawnDelaySeconds;
+        int seconds = _startDelaySeconds;
 
         while (seconds >= 0)
         {
