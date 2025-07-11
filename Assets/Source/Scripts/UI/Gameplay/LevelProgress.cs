@@ -19,7 +19,8 @@ public class LevelProgress : MonoBehaviour
 
     public void Init()
     {
-        _levelDurationSeconds = _sharedData.LevelSetting.LevelDurationSec;
+        if (_sharedData.LevelSetting.LevelDurationSec > 0)
+            _levelDurationSeconds = _sharedData.LevelSetting.LevelDurationSec;
     }
 
     public void StartCountdown()

@@ -35,8 +35,8 @@ public class CompositionRoot : MonoBehaviour
         _particlePool.Init();
         _pickableAmmunitionPool.Init();
         _projectilePool.Init();
-        _cameraFollower.Init();
         _levelProgress.Init();
+        _cameraFollower.Init();
 
 
         _levelStateMachine.Construct(_spawner, _player, _playerHealth, _trainMovement, _levelGenerator, _levelProgress);

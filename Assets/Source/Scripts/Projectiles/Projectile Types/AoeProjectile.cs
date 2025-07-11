@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class AoeProjectile : Projectile
 {
@@ -19,7 +20,7 @@ public class AoeProjectile : Projectile
 
         foreach (Collider target in targets)
         {
-            if (target.TryGetComponent(out IDamageable aoeDmg))
+            if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
             {
                 aoeDmg.TakeDamage(_aoeDamage);
             }
@@ -27,12 +28,24 @@ public class AoeProjectile : Projectile
     }
 
     public override void Initial(
-        Vector3 position, Quaternion rotation, GameObject owner, float speed,
-        int damage, float maxAttackDistance, bool usePooling, int aoeDamage = 0, float aoeRange = 0)
+        Vector3 position,
+        Quaternion rotation,
+        GameObject owner,
+        float speed,
+        int damage,
+        float maxAttackDistance,
+        bool usePooling,
+        int aoeDamage = 0,
+        float aoeRange = 0)
     {
         base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
 
         _aoeDamage = aoeDamage;
         _aoeRange = aoeRange;
+
+        if (owner != null)
+        {
+            gameObject.layer = owner.layer;
+        }
     }
 }

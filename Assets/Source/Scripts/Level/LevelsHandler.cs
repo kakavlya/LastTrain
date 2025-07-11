@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelsHandler : MonoBehaviour
@@ -12,9 +10,14 @@ public class LevelsHandler : MonoBehaviour
     [SerializeField] private Transform _buttonTransform;
     [SerializeField] private SharedData _sharedData;
 
-    private void Awake()
+    public event Action<LevelSetting> LevelChosed;
+
+    public bool IsChosed { get; private set; }
+
+    private void OnEnable()
     {
         CreateLevelButtons();
+        IsChosed = false;
     }
 
     private void CreateLevelButtons()
@@ -28,13 +31,13 @@ public class LevelsHandler : MonoBehaviour
             button.enabled = _levelSettings[i].IsAvailable;
             LevelSetting currentLevel = _levelSettings[i];
             button.onClick.AddListener(() => LoadLevelSettings(currentLevel));
-        }
-            
+        } 
     }
 
     private void LoadLevelSettings(LevelSetting levelSetting)
     {
         _sharedData.LevelSetting = levelSetting;
-        SceneManager.LoadScene(1);
+        LevelChosed?.Invoke(levelSetting);
+        IsChosed = true;
     }
 }
