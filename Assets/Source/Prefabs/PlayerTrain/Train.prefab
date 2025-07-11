@@ -894,6 +894,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4478ee94733de6a4c87e940aecf4c5dd, type: 3}
     - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
+      propertyPath: MaxAttackDistance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
       propertyPath: _uiSpriteDeactive
       value: 
       objectReference: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}

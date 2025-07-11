@@ -5,8 +5,11 @@ namespace Level
 {
     public class LevelElement : MonoBehaviour
     {
-        [SerializeField] private List<Transform> _enemySpawnPoints;
-        [SerializeField] private List<Transform> _pickableAmmunitionSpawnPoints;
+        [SerializeField] private Transform[] _enemySpawnPoints;
+        [SerializeField] private Transform[] _pickableAmmunitionSpawnPoints;
+
+        public Transform[] EnemySpawnPoints => _enemySpawnPoints;
+        public Transform[] PickableAmmunitionPoints => _pickableAmmunitionSpawnPoints;
 
         public void RandomSetPickableAmmunitions(PickableAmmunition[] pickableAmmunitions, float succesfullPersent)
         {
