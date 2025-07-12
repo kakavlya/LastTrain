@@ -1,4 +1,5 @@
 using System;
+using Assets.Source.Scripts.Core;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -51,12 +52,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider collider)
     {
-        if (Owner != null && other.transform.IsChildOf(Owner.transform))
+        if (Owner != null && collider.transform.IsChildOf(Owner.transform))
             return;
 
-        if (other.TryGetComponent<IDamageable>(out var dmg))
+        if (collider.TryGetComponent<IDamageable>(out var dmg))
         {
             dmg.TakeDamage(Damage);
         }
@@ -68,8 +69,15 @@ public class Projectile : MonoBehaviour
     }
 
     public virtual void Initial(
-        Vector3 position, Quaternion rotation, GameObject owner, float speed,
-        int damage, float maxAttackDistance, bool usePooling, int aoeDamage = 0, float aoeRange = 0)
+        Vector3 position,
+        Quaternion rotation,
+        GameObject owner,
+        float speed,
+        int damage,
+        float maxAttackDistance,
+        bool usePooling,
+        int aoeDamage = 0,
+        float aoeRange = 0)
     {
         transform.position = position;
         transform.rotation = rotation;
@@ -78,6 +86,11 @@ public class Projectile : MonoBehaviour
         Damage = damage;
         MaxAttackDistance = maxAttackDistance;
         UsePooling = usePooling;
+
+        if (owner != null)
+        {
+            gameObject.layer = owner.layer;
+        }
     }
 
     private void Despawn()

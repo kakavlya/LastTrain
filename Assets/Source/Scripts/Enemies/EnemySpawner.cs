@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System;
+using Level;
 
 namespace Assets.Source.Scripts.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField] private LevelGenerator _levelGenerator;
+
         [Header("Static Config (optional)")]
         [SerializeField] private SpawnerConfig _config;
 
-        //[SerializeField] private EnemySpawnEntry[] _entries;
-        //[SerializeField] private Transform[] _spawnPoints;
-        //[SerializeField] private Transform _playerTarget;
-        //[SerializeField] private float[] _timers;
         [Header("Scene-bound")]
-        [SerializeField] private Transform[] _spawnPoints;
 
         [SerializeField] private bool _useRuntime;
 
+        private Transform[] _spawnPoints;
         private EnemySpawnEntry[] _entries;
         private Transform _playerTarget;
         private float[] _timers;
@@ -24,14 +24,11 @@ namespace Assets.Source.Scripts.Enemies
         private bool _paused;
         private bool _stopped;
 
-        private void Awake()
-        {
-            Init();
-        }
-
         public void Init()
         {
             _entries = _config.entries;
+            _levelGenerator.StartedElementDefined += SetSpawnPoint;
+            _levelGenerator.ElementChanged += SetSpawnPoint;
         }
 
         public void Init(Transform playerTarget)
@@ -57,12 +54,16 @@ namespace Assets.Source.Scripts.Enemies
         private void Update()
         {
             if (_paused || _stopped) return;
+
             if (_entries == null || _timers == null) return;
+
+            if (_spawnPoints == null) return;
 
             for (int i = 0; i < _entries.Length; i++)
             {
                 _timers[i] += Time.deltaTime;
                 var entry = _entries[i];
+
                 if (_timers[i] >= entry.spawnInterval)
                 {
                     Spawn(entry, _spawnPoints, _playerTarget);
@@ -71,9 +72,10 @@ namespace Assets.Source.Scripts.Enemies
             }
         }
 
-        public void SetSpawnPoint(Transform[] spawnPoints)
+        public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)
         {
-            _spawnPoints = spawnPoints;
+            Debug.Log("Work");
+            _spawnPoints = currentElement.EnemySpawnPoints;
         }
 
         private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)

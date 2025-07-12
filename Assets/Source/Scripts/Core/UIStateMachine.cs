@@ -36,6 +36,7 @@ public class UIStateMachine : MonoBehaviour
 
     private UIState _currentState = UIState.None;
     private LevelStateMachine _levelStateMachine;
+
     private void Awake()
     {
         _startButton.onClick.AddListener(OnStartButton);
@@ -60,7 +61,6 @@ public class UIStateMachine : MonoBehaviour
         switch (state)
         {
             case UIState.LevelStart:
-                Debug.Log("Switching to LevelStart state");
                 _startScreen.SetActive(true);
                 break;
             case UIState.Playing:

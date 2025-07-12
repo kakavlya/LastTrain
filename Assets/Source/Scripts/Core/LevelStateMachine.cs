@@ -4,7 +4,6 @@ using Player;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LevelStateMachine : MonoBehaviour
 {
@@ -15,30 +14,33 @@ public class LevelStateMachine : MonoBehaviour
     private PlayerHealth _playerHealth;
     private TrainMovement _trainMovement;
     private LevelGenerator _levelGenerator;
+    private LevelProgress _levelProgress;
 
     private bool _running;
     private bool _paused;
 
     internal void Construct(EnemySpawner spawner, 
         Transform player, PlayerHealth playerHealth,
-        TrainMovement trainMovement, LevelGenerator levelGenerator)
+        TrainMovement trainMovement, LevelGenerator levelGenerator, LevelProgress levelProgress)
     {
         _spawner = spawner;
         _playerHealth = playerHealth;
         _levelGenerator = levelGenerator;
         _trainMovement = trainMovement;
         _spawner.Init(player);
+        _levelProgress = levelProgress;
     }
 
     public void StartLevel()
     {
+        Time.timeScale = 1f;
+        _trainMovement.StartMovement();
+        _levelProgress.StartCountdown();
+
+
         _spawner.Begin();
         _playerHealth.Died += OnPlayerDied;
 
-        _spawner.Begin();
-        _trainMovement.StartMovement();
-
-        Time.timeScale = 1f;
         _running = true;
         _paused = false;
     }

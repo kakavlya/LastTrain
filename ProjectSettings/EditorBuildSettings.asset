@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Source/Scenes/Pavel.unity
     guid: 89cbb7f5bf2417d48a3dcd8c17e0e987
+  - enabled: 1
+    path: Assets/Source/Scenes/Alexander - menu.unity
+    guid: c0575057a12ae1a4ba38e6e4968929fe
+  - enabled: 1
+    path: Assets/Source/Scenes/Alexander.unity
+    guid: e2119e3f3e53f69458f5423735e6082d
   m_configObjects: {}

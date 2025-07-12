@@ -16,7 +16,7 @@ MonoBehaviour:
   impactRadius: 1.5
   retreatDistance: 20
   holdSpeed: 2
-  chargeSpeed: 12
+  chargeSpeed: 40
   retreatSpeed: 8
   turnSpeed: 100
   impactPause: 0.5

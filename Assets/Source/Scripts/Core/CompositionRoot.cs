@@ -9,7 +9,7 @@ public class CompositionRoot : MonoBehaviour
 {
     [SerializeField] private UIStateMachine _uIStateMachine;
     [SerializeField] private LevelStateMachine _levelStateMachine;
-    [SerializeField] private EnemySpawner _spawner;
+    [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Transform _player;
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private TrainMovement _trainMovement;
@@ -22,22 +22,25 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private PickableAmmunitionPool _pickableAmmunitionPool;
     [SerializeField] private ProjectilePool _projectilePool;
     [SerializeField] private CameraFollower _cameraFollower;
+    [SerializeField] private LevelProgress _levelProgress;
 
     private void Awake()
     {
+        _enemySpawner.Init();
         _aimingTargetProvider.Init();
         _uiCursorFollower.Init();
         _weaponHandler.Init();
         _weaponRotator.Init();
         _trainMovement.Init();
+        _levelGenerator.Init();
         _particlePool.Init();
         _pickableAmmunitionPool.Init();
         _projectilePool.Init();
-        _levelGenerator.Init();
+        _levelProgress.Init();
         _cameraFollower.Init();
 
 
-        _levelStateMachine.Construct(_spawner, _player, _playerHealth, _trainMovement, _levelGenerator);
+        _levelStateMachine.Construct(_enemySpawner, _player, _playerHealth, _trainMovement, _levelGenerator, _levelProgress);
         _uIStateMachine.Construct(_levelStateMachine);
 
         _uIStateMachine.StartClicked += _levelStateMachine.StartLevel;
