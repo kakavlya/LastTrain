@@ -1,0 +1,3 @@
+# Unity Smart Merge for scenes and prefabs
+*.unity   merge=unityyamlmerge
+*.prefab  merge=unityyamlmerge
