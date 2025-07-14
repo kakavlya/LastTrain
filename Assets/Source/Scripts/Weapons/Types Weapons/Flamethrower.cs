@@ -70,8 +70,8 @@ public class Flamethrower : Weapon
 
     private bool CheckVerticalAngle(Vector3 directionToTarget)
     {
-        Vector3 verticalDirection = new Vector3(0, directionToTarget.y, directionToTarget.z).normalized;
-        Vector3 verticalForward = new Vector3(0, transform.forward.y, transform.forward.z).normalized;
+        Vector3 verticalDirection = new Vector3(0, directionToTarget.y, 0).normalized;
+        Vector3 verticalForward = new Vector3(0, transform.forward.y, 0).normalized;
         float verticalAngle = Vector3.Angle(verticalForward, verticalDirection);
         return verticalAngle <= _verticalAngle / 2f;
     }

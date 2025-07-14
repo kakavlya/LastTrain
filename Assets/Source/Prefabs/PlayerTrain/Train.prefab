@@ -738,7 +738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 0}
-  _ammunition: {fileID: 4730529177903028540}
+  _ammunition: {fileID: 0}
   _uiSpriteActive: {fileID: 21300000, guid: 8ea25020e2e1dda4f9fc6bd7e25b48e4, type: 3}
   _uiSpriteDeactive: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   Owner: {fileID: 781245857482172249}
@@ -749,9 +749,9 @@ MonoBehaviour:
   UsePooling: 1
   ProjectileSpeed: 100
   Damage: 30
-  MaxAttackDistance: 30
+  MaxAttackDistance: 50
   _horisontalAngle: 30
-  _verticalAngle: 60
+  _verticalAngle: 90
   _flameParticle: {fileID: 5573442070546788394}
 --- !u!1001 &2534558276673770468
 PrefabInstance:
