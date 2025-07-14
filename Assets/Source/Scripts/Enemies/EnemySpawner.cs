@@ -8,14 +8,13 @@ namespace Assets.Source.Scripts.Enemies
     {
         [Header("References")]
         [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private SharedData _sharedData;
 
-        [Header("Static Config (optional)")]
-        [SerializeField] private SpawnerConfig _config;
 
         [Header("Scene-bound")]
-
         [SerializeField] private bool _useRuntime;
 
+        private SpawnerConfig _spawnerConfig;
         private Transform[] _spawnPoints;
         private EnemySpawnEntry[] _entries;
         private Transform _playerTarget;
@@ -26,9 +25,16 @@ namespace Assets.Source.Scripts.Enemies
 
         public void Init()
         {
-            _entries = _config.entries;
+            _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
+            _entries = _spawnerConfig.entries;
             _levelGenerator.StartedElementDefined += SetSpawnPoint;
             _levelGenerator.ElementChanged += SetSpawnPoint;
+        }
+
+        private void OnDisable()
+        {
+            _levelGenerator.StartedElementDefined -= SetSpawnPoint;
+            _levelGenerator.ElementChanged -= SetSpawnPoint;
         }
 
         public void Init(Transform playerTarget)
@@ -47,17 +53,14 @@ namespace Assets.Source.Scripts.Enemies
         private void InitTimers()
         {
             _timers = new float[_entries.Length];
+
             for (int i = 0; i < _entries.Length; i++)
                 _timers[i] = _entries[i].spawnInterval;
         }
 
         private void Update()
         {
-            if (_paused || _stopped) return;
-
-            if (_entries == null || _timers == null) return;
-
-            if (_spawnPoints == null) return;
+            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null) return;
 
             for (int i = 0; i < _entries.Length; i++)
             {
@@ -74,7 +77,6 @@ namespace Assets.Source.Scripts.Enemies
 
         public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)
         {
-            Debug.Log("Work");
             _spawnPoints = currentElement.EnemySpawnPoints;
         }
 

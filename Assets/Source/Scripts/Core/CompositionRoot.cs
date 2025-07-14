@@ -23,6 +23,7 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private ProjectilePool _projectilePool;
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private LevelProgress _levelProgress;
+    [SerializeField] private LevelElementsCreator _levelElementsCreator;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class CompositionRoot : MonoBehaviour
         _weaponHandler.Init();
         _weaponRotator.Init();
         _trainMovement.Init();
+        _levelElementsCreator.Init();
         _levelGenerator.Init();
         _particlePool.Init();
         _pickableAmmunitionPool.Init();
