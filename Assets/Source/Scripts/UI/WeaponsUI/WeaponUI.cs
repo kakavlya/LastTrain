@@ -15,6 +15,11 @@ public class WeaponUI : MonoBehaviour
 
     public int CellNumber => _cellNumber;
 
+    private void OnDisable()
+    {
+        _currentAmmunition.Updated -= UpdateAmmoText;
+    }
+
     public void ActivateWeapon(Weapon currentWeapon)
     {
         if (currentWeapon != null)
@@ -37,11 +42,6 @@ public class WeaponUI : MonoBehaviour
 
     public void DeactivateWeapon(Weapon lastWeapon)
     {
-        if (_currentAmmunition != null)
-        {
-            _currentAmmunition.Updated -= UpdateAmmoText;
-        }
-
         _image.sprite = lastWeapon.UISpriteDeactive;
     }
 

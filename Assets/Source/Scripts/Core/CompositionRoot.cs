@@ -24,6 +24,7 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private CameraFollower _cameraFollower;
     [SerializeField] private LevelProgress _levelProgress;
     [SerializeField] private LevelElementsCreator _levelElementsCreator;
+    [SerializeField] private PickableAmmunitionSpawner _pickableAmmunitionSpawner;
 
     private void Awake()
     {
@@ -34,9 +35,10 @@ public class CompositionRoot : MonoBehaviour
         _weaponRotator.Init();
         _trainMovement.Init();
         _levelElementsCreator.Init();
+        _pickableAmmunitionPool.Init();
+        _pickableAmmunitionSpawner.Init();
         _levelGenerator.Init();
         _particlePool.Init();
-        _pickableAmmunitionPool.Init();
         _projectilePool.Init();
         _levelProgress.Init();
         _cameraFollower.Init();

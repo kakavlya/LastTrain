@@ -6,13 +6,14 @@ public class PickableAmmunition : MonoBehaviour
     [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
     [field: SerializeField] public int CountProjectiles { get; private set; }
 
+    private PickableAmmunition _ammoPrefabKey;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Projectile projectile))
         {
             var ammunitionType = PrefabTypeOfWeapon.GetType();
 
-            Debug.Log(projectile.Owner);
             Ammunition[] ammunitions = projectile.Owner.GetComponentsInChildren<Ammunition>();
 
             foreach (Ammunition ammunition in ammunitions)
@@ -22,6 +23,10 @@ public class PickableAmmunition : MonoBehaviour
                     ammunition.IncreaseProjectilesCount(CountProjectiles);
                 }
             }
+
+            PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
         }
     }
+
+    public void SetPrefabKey(PickableAmmunition pickableAmmunition) => _ammoPrefabKey = pickableAmmunition;
 }
