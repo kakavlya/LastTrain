@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using Level;
+using Player;
+using System.Collections.Generic;
 
 namespace Assets.Source.Scripts.Enemies
 {
@@ -9,9 +11,10 @@ namespace Assets.Source.Scripts.Enemies
         [Header("References")]
         [SerializeField] private LevelGenerator _levelGenerator;
         [SerializeField] private SharedData _sharedData;
-
+        [SerializeField] private TrainMovement _trainMovement;
 
         [Header("Scene-bound")]
+        [SerializeField] private float _allowTrainDistance = 200f;
         [SerializeField] private bool _useRuntime;
 
         private SpawnerConfig _spawnerConfig;
@@ -86,8 +89,19 @@ namespace Assets.Source.Scripts.Enemies
                 ? spawnEntry.overrideSpawnPoints
                 : points;
 
-            var sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+            List<Transform> spawnPointsList = new List<Transform>(spawnPoints);
+
+            foreach (var point in spawnPoints)
+            {
+                if (point.position.x - _trainMovement.transform.position.x <= _allowTrainDistance)
+                {
+                    spawnPointsList.Add(point);
+                }
+            }
+
+            var sp = spawnPointsList[UnityEngine.Random.Range(0, spawnPointsList.Count)];
             Vector3 pos = sp.position;
+
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
@@ -103,14 +117,5 @@ namespace Assets.Source.Scripts.Enemies
             _stopped = true;
             _paused = false;
         }
-
-        //public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
-        //{
-        //    _useRuntime = true;
-        //    _entries = entries;
-        //    _spawnPoints = spawnPoints;
-        //    _playerTarget = playerTarget;
-        //    InitTimers(_entries);
-        //}
     }
 }

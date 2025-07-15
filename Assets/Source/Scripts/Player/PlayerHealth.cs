@@ -27,7 +27,6 @@ public class PlayerHealth : HealthBase
         base.TakeDamage(amount);
         _healthText.text = CurrentHealth.ToString();
         _healthSlider.value = CurrentHealth;
-        Debug.Log($"Player took damage: {amount}. Current health: {CurrentHealth}.");
     }
 
     private void OnPlayerDeath()
