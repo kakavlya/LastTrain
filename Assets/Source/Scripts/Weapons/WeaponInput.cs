@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,9 +11,9 @@ namespace Assets.Source.Scripts.Weapons
         public event Action StopFired;
         public event Action<int> WeaponChanged;
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (IsPointerOverUI())
             {
                 return;
             }
@@ -50,6 +51,16 @@ namespace Assets.Source.Scripts.Weapons
             {
                 WeaponChanged?.Invoke(3);
             }
+        }
+
+        private bool IsPointerOverUI()
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            return results.Count > 0;
         }
     }
 }

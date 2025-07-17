@@ -31,8 +31,8 @@ public class CompositionRoot : MonoBehaviour
         _enemySpawner.Init();
         _aimingTargetProvider.Init();
         _uiCursorFollower.Init();
-        _weaponHandler.Init();
         _weaponRotator.Init();
+        _weaponHandler.Init();
         _trainMovement.Init();
         _levelElementsCreator.Init();
         _pickableAmmunitionPool.Init();
@@ -56,6 +56,5 @@ public class CompositionRoot : MonoBehaviour
         _levelStateMachine.LevelCompleted += () => _uIStateMachine.SwitchState(UIState.EndLevel);
 
         _uIStateMachine.SwitchState(UIState.LevelStart);
-        //_spawner.Init();
     }
 }

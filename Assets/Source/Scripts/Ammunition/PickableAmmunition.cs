@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 public class PickableAmmunition : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class PickableAmmunition : MonoBehaviour
     [field: SerializeField] public int CountProjectiles { get; private set; }
 
     private PickableAmmunition _ammoPrefabKey;
+    private float _distanceCatch = 30f;
+    private float _durationMovement = 1f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,9 +28,20 @@ public class PickableAmmunition : MonoBehaviour
                 }
             }
 
-            PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
+            StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
         }
     }
 
     public void SetPrefabKey(PickableAmmunition pickableAmmunition) => _ammoPrefabKey = pickableAmmunition;
+
+    private IEnumerator DoPickableAnimation(Transform owner)
+    {
+        while (Vector3.Distance(transform.position, owner.position) > _distanceCatch)
+        {
+            transform.DOMove(owner.position, _durationMovement);
+            yield return null;
+        }
+
+        PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
+    }
 }

@@ -23,7 +23,6 @@ public class PickableAmmunitionSpawner : MonoBehaviour
 
     private void SetStartedRandomAmmunition(LevelElement currentElement, LevelElement nextElement)
     {
-        Debug.Log(currentElement);
         var points = currentElement.PickableAmmunitionPoints;
 
         foreach (var point in points)
