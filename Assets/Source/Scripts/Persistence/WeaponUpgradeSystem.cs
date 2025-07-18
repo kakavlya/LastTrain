@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class WeaponUpgradeSystem : MonoBehaviour
 {
+    [SerializeField] private WeaponUpgradeConfig[] configs;
+
+    private WeaponUpgradeConfig GetConfig(string weaponId)
+        => configs.FirstOrDefault(c => c.WeaponId == weaponId);
+
     public void UpgradeWeapon(string weaponId)
     {
         var wp = SaveManager.Instance.Data.Weapons

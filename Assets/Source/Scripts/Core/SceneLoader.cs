@@ -1,17 +1,17 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
+    [SerializeField] private String _shopScene;
+    public void OnShopButtonClick()
     {
-
+        LoadScene(_shopScene);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LoadScene(string shopSceneName)
     {
-
+        SceneManager.LoadScene(shopSceneName);
     }
 }

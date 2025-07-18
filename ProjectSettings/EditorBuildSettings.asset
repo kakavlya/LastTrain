@@ -5,13 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Source/Scenes/0_BootStrap.unity
+    guid: ba9f4e580c6ff3043b3e576fa2292038
+  - enabled: 1
     path: Assets/Source/Scenes/Pavel.unity
     guid: 89cbb7f5bf2417d48a3dcd8c17e0e987
+  - enabled: 1
+    path: Assets/Source/Scenes/StartingScene.unity
+    guid: 02fb9c422decbb1489ba1e2c9480fb86
   - enabled: 1
     path: Assets/Source/Scenes/Alexander - menu.unity
     guid: c0575057a12ae1a4ba38e6e4968929fe
   - enabled: 1
     path: Assets/Source/Scenes/Alexander.unity
     guid: e2119e3f3e53f69458f5423735e6082d
+  - enabled: 1
+    path: Assets/Source/Scenes/ShopScene.unity
+    guid: ea072290f1156fb4387fcda57901ab0b
   m_configObjects: {}
