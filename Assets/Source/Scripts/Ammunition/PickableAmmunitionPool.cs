@@ -54,7 +54,6 @@ public class PickableAmmunitionPool : MonoBehaviour
     {
         if (_pools.ContainsKey(ammunitionKey))
         {
-            Debug.Log("Work");
             _pools[ammunitionKey].Release(pickableAmmunition);
         }
         else

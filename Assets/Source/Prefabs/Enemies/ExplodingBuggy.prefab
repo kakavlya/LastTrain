@@ -548,7 +548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _currentHealth: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -571,8 +570,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5984144, y: 2.0616379, z: 5.0373373}
-  m_Center: {x: -0.04139185, y: 0.7139349, z: 0.056656837}
+  m_Size: {x: 2.5984144, y: 15, z: 5.0373373}
+  m_Center: {x: -0.04139185, y: 7.25, z: 0.056656837}
 --- !u!114 &2249419107156347508
 MonoBehaviour:
   m_ObjectHideFlags: 0

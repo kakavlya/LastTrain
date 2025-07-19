@@ -70,6 +70,7 @@ public class Weapon : MonoBehaviour
     {
         Vector3 target = _aimingTarget.AimPointWorld.Value;
         Vector3 origin = FirePoint.position;
+        target.y = origin.y;
         Vector3 direction = (target - origin).normalized;
         Direction = direction;
     }
