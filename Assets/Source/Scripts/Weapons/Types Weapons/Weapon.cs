@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float MaxAttackDistance = 100;
 
     private float _lastFireTime;
+    private bool _isMobilePlatform;
 
     protected Vector3 Direction;
 
@@ -36,6 +37,15 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
+        if (PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+        {
+            _isMobilePlatform = true;
+        }
+        else
+        {
+            _isMobilePlatform = false;
+        }
+
         _weaponInput.Fired += Fire;
         _weaponInput.StopFired += StopFire;
         Owner = Owner != null ? Owner : gameObject;
@@ -59,7 +69,7 @@ public class Weapon : MonoBehaviour
         if (Time.time - _lastFireTime < FireDelay)
             return false;
 
-        if (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue)
+        if (_isMobilePlatform == false && (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue))
             return false;
 
         _lastFireTime = Time.time;
@@ -68,19 +78,35 @@ public class Weapon : MonoBehaviour
 
     private void CalculateDirection()
     {
-        Vector3 target = _aimingTarget.AimPointWorld.Value;
-        Vector3 origin = FirePoint.position;
-        target.y = origin.y;
-        Vector3 direction = (target - origin).normalized;
-        Direction = direction;
+        if (_isMobilePlatform)
+        {
+            Direction = FirePoint.forward;
+        }
+        else
+        {
+            Vector3 target = _aimingTarget.AimPointWorld.Value;
+            Vector3 origin = FirePoint.position;
+            target.y = origin.y;
+            Vector3 direction = (target - origin).normalized;
+            Direction = direction;
+        }
     }
 
     protected virtual void OnWeaponFire()
     {
         var proj = UsePooling
-            ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), Owner, ProjectileSpeed, Damage, MaxAttackDistance)
-: Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+            ? ProjectilePool.Instance.Spawn(
+                ProjectilePrefab,
+                FirePoint.position,
+                Quaternion.LookRotation(Direction),
+                Owner,
+                ProjectileSpeed,
+                Damage,
+                MaxAttackDistance)
+                    : Instantiate(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(Direction));
     }
 
     private void Fire()

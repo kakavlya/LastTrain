@@ -11,18 +11,47 @@ namespace Assets.Source.Scripts.Weapons
         public event Action StopFired;
         public event Action<int> WeaponChanged;
 
-        private void LateUpdate()
-        {
-            if (IsPointerOverUI())
-            {
-                return;
-            }
+        private bool _isMobilePlatform;
 
-            HandleShooting();
-            HandleWeaponSwitch();
+        private void Awake()
+        {
+            if (PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+            {
+                _isMobilePlatform = true;
+            }
+            else
+            {
+                _isMobilePlatform = false;
+            }
         }
 
-        private void HandleShooting()
+        private void LateUpdate()
+        {
+            if (_isMobilePlatform == false)
+            {
+                if (IsPointerOverUI())
+                {
+                    return;
+                }
+
+                HandleMouseShooting();
+                HandleWeaponSwitch();
+            }
+        }
+
+        public void UIButtonShoot(BaseEventData eventData)
+        {
+            Debug.Log("Work");
+            Fired?.Invoke();
+        }
+
+        public void UIButtonStopShoot(BaseEventData eventData)
+        {
+            StopFired?.Invoke();
+        }
+
+
+        private void HandleMouseShooting()
         {
             if (Input.GetMouseButton(0))
             {
