@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideControl: 1
-  overrideScheme: 0
+  overrideScheme: 1
 --- !u!4 &525227042
 Transform:
   m_ObjectHideFlags: 0

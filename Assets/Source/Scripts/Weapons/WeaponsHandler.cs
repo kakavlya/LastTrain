@@ -6,7 +6,7 @@ public class WeaponsHandler : MonoBehaviour
 {
     [SerializeField] private WeaponUI[] cells;
     [SerializeField] private Weapon[] _weapons;
-    [SerializeField] private WeaponInput _weaponInput;
+    [SerializeField] private PlayerInput _weaponInput;
 
     private Weapon _currentWeapon;
     private int _currentNumberWeapon;

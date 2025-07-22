@@ -5,18 +5,22 @@ using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
 {
-    public class WeaponInput : MonoBehaviour
+    public class PlayerInput : MonoBehaviour
     {
+        [SerializeField] private Joystick _joystick;
+
         public event Action Fired;
         public event Action StopFired;
         public event Action<int> WeaponChanged;
+        public event Action<float> Rotated;
 
+        private float _rotateValue;
         private bool _isMobilePlatform;
-        private bool _isShootingButtonPressed;
 
         private void Awake()
         {
-            if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+            if (PlatformDetector.Instance != null &&
+                PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
             {
                 _isMobilePlatform = true;
             }
@@ -28,36 +32,25 @@ namespace Assets.Source.Scripts.Weapons
 
         private void LateUpdate()
         {
-            if (_isMobilePlatform == false)
+            if (IsPointerOverUI())
             {
-                if (IsPointerOverUI())
-                {
-                    return;
-                }
-
-                HandleMouseShooting();
-                HandleWeaponSwitch();
+                return;
             }
-            else if (_isShootingButtonPressed)
+
+            HandleShooting();
+            HandleWeaponSwitch();
+
+            if (_isMobilePlatform)
             {
-                Fired?.Invoke();
+                HandleRotateJoystick();
+            }
+            else
+            {
+                HandleRotateKeys();
             }
         }
 
-        public void UIButtonShoot(BaseEventData eventData)
-        {
-            _isShootingButtonPressed = true;
-            Fired?.Invoke();
-        }
-
-        public void UIButtonStopShoot(BaseEventData eventData)
-        {
-            _isShootingButtonPressed = false;
-            StopFired?.Invoke();
-        }
-
-
-        private void HandleMouseShooting()
+        private void HandleShooting()
         {
             if (Input.GetMouseButton(0))
             {
@@ -86,6 +79,30 @@ namespace Assets.Source.Scripts.Weapons
             {
                 WeaponChanged?.Invoke(3);
             }
+        }
+
+        private void HandleRotateKeys()
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                _rotateValue = -1;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                _rotateValue = 1;
+            }
+            else
+            {
+                _rotateValue = 0;
+            }
+
+            Rotated?.Invoke(_rotateValue);
+        }
+
+        private void HandleRotateJoystick()
+        {
+            Debug.Log(_joystick.Horizontal);
+                Rotated?.Invoke(_joystick.Horizontal);
         }
 
         private bool IsPointerOverUI()

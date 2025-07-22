@@ -31,7 +31,6 @@ public class UIStateMachine : MonoBehaviour
 
     [Header("Mobile Platorm Buttons")]
     [SerializeField] private GameObject _joustick;
-    [SerializeField] private GameObject _fireButton;
 
     public event Action StartClicked;
     public event Action PauseClicked;
@@ -51,12 +50,11 @@ public class UIStateMachine : MonoBehaviour
         if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
         {
             _joustick.SetActive(true);
-            _fireButton.SetActive(true);
+
         }
         else
         {
             _joustick.SetActive(false);
-            _fireButton.SetActive(false);
         }
     }
 

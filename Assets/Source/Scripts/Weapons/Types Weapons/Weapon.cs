@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
-    [SerializeField] protected WeaponInput _weaponInput;
+    [SerializeField] protected PlayerInput _weaponInput;
 
     [Header("Shoot Settings")]
     [SerializeField] protected float FireDelay = 0.1f;
@@ -24,9 +24,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float MaxAttackDistance = 100;
 
     private float _lastFireTime;
-    private bool _isMobilePlatform;
 
-    protected Vector3 Direction;
+    protected Vector3 Direction => FirePoint.forward;
 
     public event Action OnFired;
     public event Action OnStopFired;
@@ -37,15 +36,6 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
-        if (PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
-        {
-            _isMobilePlatform = true;
-        }
-        else
-        {
-            _isMobilePlatform = false;
-        }
-
         _weaponInput.Fired += Fire;
         _weaponInput.StopFired += StopFire;
         Owner = Owner != null ? Owner : gameObject;
@@ -69,27 +59,11 @@ public class Weapon : MonoBehaviour
         if (Time.time - _lastFireTime < FireDelay)
             return false;
 
-        if (_isMobilePlatform == false && (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue))
+        if (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue)
             return false;
 
         _lastFireTime = Time.time;
         return true;
-    }
-
-    private void CalculateDirection()
-    {
-        if (_isMobilePlatform)
-        {
-            Direction = FirePoint.forward;
-        }
-        else
-        {
-            Vector3 target = _aimingTarget.AimPointWorld.Value;
-            Vector3 origin = FirePoint.position;
-            target.y = origin.y;
-            Vector3 direction = (target - origin).normalized;
-            Direction = direction;
-        }
     }
 
     protected virtual void OnWeaponFire()
@@ -115,7 +89,6 @@ public class Weapon : MonoBehaviour
         {
             if (_ammunition == null || _ammunition.HasAmmo)
             {
-                CalculateDirection();
                 OnFired?.Invoke();
                 OnWeaponFire();
 
