@@ -668,7 +668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8875905541705627026
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1073,13 +1073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567ee3d79dcc4804f88f3de2832663c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleText: {fileID: 8219652342471929942}
+  _icon: {fileID: 7446264961512243367}
   _levelText: {fileID: 6450058499758295127}
-  _costText: {fileID: 5846467709293754711}
-  _damageText: {fileID: 2394625482026716912}
-  _rangeText: {fileID: 1880987597791900626}
-  _upgradeButton: {fileID: 7252365949472535831}
-  _itemIcon: {fileID: 7446264961512243367}
 --- !u!1 &8865644716329421339
 GameObject:
   m_ObjectHideFlags: 0

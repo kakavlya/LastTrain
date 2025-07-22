@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
   m_Name: GrenadeLauncherUpgradeConfig
   m_EditorClassIdentifier: 
-  WeaponId: 3
-  MinDamage: 30
-  MaxDamage: 300
-  MinRange: 1
-  MaxRange: 5
-  BaseCost: 200
-  CostMultiplier: 1.4
+  _weaponId: 
   DamageCurve:
     serializedVersion: 2
     m_Curve:
@@ -67,5 +61,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxLevel: 10
+  MaxDamageLevel: 5
+  MaxRangeLevel: 5
+  DamageCosts: fa000000f4010000e8030000dc050000c4090000
+  RangeCosts: 9001000020030000140500006c070000c4090000
+  DamageMin: 15
+  DamageMax: 40
+  RangeMin: 9
+  RangeMax: 20
   Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}

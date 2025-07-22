@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
   m_Name: MachineGunUpgradeConfig
   m_EditorClassIdentifier: 
-  WeaponId: 2
-  MinDamage: 20
-  MaxDamage: 250
-  MinRange: 1
-  MaxRange: 6
-  BaseCost: 150
-  CostMultiplier: 1.3
+  _weaponId: 
   DamageCurve:
     serializedVersion: 2
     m_Curve:
@@ -67,5 +61,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxLevel: 10
+  MaxDamageLevel: 10
+  MaxRangeLevel: 10
+  DamageCosts: c800000090010000200300004006000060090000100e0000c01200005014000000190000401f0000
+  RangeCosts: c800000090010000200300004006000060090000100e0000c01200005014000000190000401f0000
+  DamageMin: 8
+  DamageMax: 20
+  RangeMin: 10
+  RangeMax: 20
   Icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}

@@ -1,52 +1,40 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Configs/Weapon Upgrade Config")]
+[CreateAssetMenu(menuName = "Config/WeaponUpgrade")]
 public class WeaponUpgradeConfig : ScriptableObject
 {
-    public string WeaponId;
+    [SerializeField] string _weaponId;
 
-    [Header("Damage Range")]
-    public int MinDamage = 10;
-    public int MaxDamage = 300;
+    public string WeaponId => 
+        string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
 
-    [Header("Range (units)")]
-    public float MinRange = 1f;
-    public float MaxRange = 5f;
+    public AnimationCurve DamageCurve; // 0 - 1
+    public AnimationCurve RangeCurve;  // 0 - 1 
 
-    [Header("Cost")]
-    public int BaseCost = 100;
-    public float CostMultiplier = 1.5f;
+    public int MaxDamageLevel = 10;
+    public int MaxRangeLevel = 10;
 
-    [Header("Stats")]
-    public AnimationCurve DamageCurve;
-    public AnimationCurve RangeCurve;
+    public int[] DamageCosts;
+    public int[] RangeCosts;  
 
-    [Header("Limits")]
-    public int MaxLevel = 10;
+    public float DamageMin, DamageMax;
+    public float RangeMin, RangeMax;
 
-    [Header("Icon")]
     public Sprite Icon;
 
-    public int GetCost(int nextLevel)
+    public float GetStat(StatType stat, int level)
     {
-        if(nextLevel < 1 || nextLevel > MaxLevel)
-            return 0;
-        return Mathf.RoundToInt(BaseCost * Mathf.Pow(CostMultiplier, nextLevel - 1));
+        float t = level / (float)GetMaxLevel(stat);
+        return Mathf.Lerp(stat == StatType.Damage ? DamageMin : RangeMin,
+                          stat == StatType.Damage ? DamageMax : RangeMax,
+                          (stat == StatType.Damage ? DamageCurve : RangeCurve).Evaluate(t));
     }
 
-    public int GetDamage(int level)
-    {
-        level = Mathf.Clamp(level, 1, MaxLevel);
-        float t = (level - 1f) / (MaxLevel - 1f);    // 0.1      
-        float pct = DamageCurve.Evaluate(t);         // 0.1    
-        return Mathf.RoundToInt(Mathf.Lerp(MinDamage, MaxDamage, pct));
-    }
+    public int GetCost(StatType stat, int level) =>
+        stat == StatType.Damage ? DamageCosts[level] : RangeCosts[level];
 
-    public float GetRange(int level)
-    {
-        level = Mathf.Clamp(level, 1, MaxLevel);
-        float t = (level - 1f) / (MaxLevel - 1f);
-        float pct = RangeCurve.Evaluate(t);
-        return Mathf.Lerp(MinRange, MaxRange, pct);
-    }
+    public int GetMaxLevel(StatType stat) =>
+        stat == StatType.Damage ? MaxDamageLevel : MaxRangeLevel;
 }
+
+public enum StatType { Damage, Range }

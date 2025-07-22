@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
   m_Name: RifleUpgrade
   m_EditorClassIdentifier: 
-  WeaponId: 1
-  MinDamage: 10
-  MaxDamage: 100
-  MinRange: 1
-  MaxRange: 5
-  BaseCost: 100
-  CostMultiplier: 1.5
+  _weaponId: 
   DamageCurve:
     serializedVersion: 2
     m_Curve:
@@ -67,5 +61,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaxLevel: 10
+  MaxDamageLevel: 10
+  MaxRangeLevel: 10
+  DamageCosts: 640000007800000096000000c80000002c01000090010000580200002003000084030000b0040000
+  RangeCosts: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+  DamageMin: 2
+  DamageMax: 20
+  RangeMin: 10
+  RangeMax: 15
   Icon: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}

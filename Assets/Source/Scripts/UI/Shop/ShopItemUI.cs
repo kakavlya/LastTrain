@@ -3,76 +3,43 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
-public class ShopItemUI : MonoBehaviour
+public class ShopItemUI : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private TMP_Text _titleText;
+    [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _levelText;
-    [SerializeField] private TMP_Text _costText;
-    [SerializeField] private TMP_Text _damageText;
-    [SerializeField] private TMP_Text _rangeText;
-    [SerializeField] private Button _upgradeButton;
-    [SerializeField] private Image _itemIcon;
 
-    private WeaponUpgradeConfig _config;
-    private int _currentLevel;
+    private WeaponUpgradeConfig _cfg;
+    private WeaponProgress _progress;
+    private Action<WeaponUpgradeConfig, WeaponProgress> _onSelected;
 
-    public void Init(WeaponUpgradeConfig config, int savedLevel)
+    public void Init(WeaponUpgradeConfig cfg,
+                     WeaponProgress progress,
+                     Action<WeaponUpgradeConfig, WeaponProgress> onSelected)
     {
-        _config = config;
-        _currentLevel = savedLevel;
-        _currentLevel = Mathf.Clamp(savedLevel, 0, config.MaxLevel);
+        _cfg = cfg;
+        _progress = progress;
+        _onSelected = onSelected;
 
-        _upgradeButton.onClick.RemoveAllListeners();
-        _upgradeButton.onClick.AddListener(OnUpgradePressed);
-        RefreshUI();
+        _icon.sprite = cfg.Icon;
+        UpdateLevelLabel();
     }
 
-    private void RefreshUI()
+    public void OnPointerClick(PointerEventData _)
     {
-        int nextLevel = _currentLevel+1;
-        bool canUpgrade = nextLevel <= _config.MaxLevel;
-
-        _levelText.text = $"Level: {_currentLevel}/{_config.MaxLevel}";
-        _costText.text = canUpgrade ? $"Cost: {_config.GetCost(nextLevel)}" : "MAX";
-        _damageText.text = $"Damage: {_config.GetDamage(_currentLevel)}";
-        _rangeText.text = $"Range:  {_config.GetRange(_currentLevel):0.#}";
-        _itemIcon.sprite = _config.Icon;
-
-        _upgradeButton.interactable = canUpgrade;
+        _onSelected?.Invoke(_cfg, _progress);
     }
 
-    private void OnUpgradePressed()
+    private void UpdateLevelLabel()
     {
-        int nextLevel = _currentLevel + 1;
-        int cost = _config.GetCost(nextLevel);
-
-        var data = SaveManager.Instance.Data;
-
-        if (data.Coins < cost || nextLevel > _config.MaxLevel)
-        {
-            Debug.Log($"Not enough coins (have {data.Coins}, need {cost})");
-            return;
-        }
-
-        data.Coins -= cost;
-        _currentLevel = nextLevel;
-
-        var wp = data.Weapons.Find(w => w.WeaponId == _config.WeaponId);
-        if (wp != null) wp.UpgradeLevel = _currentLevel;
-
-        SaveManager.Instance.Save();
-
-        RefreshUI();
-        FindObjectOfType<Shop>()?.RefreshCoins();
+        int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
+        _levelText.text = $"Lvl {sumLevel}";
     }
 
-    private void SaveProgress(ProgressData data)
+    public void Refresh()
     {
-        var wp = data.Weapons.Find(w => w.WeaponId == _config.WeaponId);
-        if (wp != null) { 
-            wp.UpgradeLevel = _currentLevel;
-        }
-        SaveManager.Instance.Save();
+        UpdateLevelLabel();
     }
 }
