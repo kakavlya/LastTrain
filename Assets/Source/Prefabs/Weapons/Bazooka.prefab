@@ -15004,8 +15004,6 @@ GameObject:
   - component: {fileID: 7667303753311643874}
   - component: {fileID: 7961144939141388862}
   - component: {fileID: 2743336358647330913}
-  - component: {fileID: 49373408667425408}
-  - component: {fileID: 2826416831230570639}
   - component: {fileID: 7063093083045466000}
   - component: {fileID: 3019496850700472414}
   - component: {fileID: 7145509771630451274}
@@ -15086,34 +15084,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &49373408667425408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7164209955959781297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 7063093083045466000}
---- !u!114 &2826416831230570639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7164209955959781297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPivot: {fileID: 7667303753311643874}
-  _targetProvider: {fileID: 0}
-  _rotationSpeed: 180
 --- !u!114 &7063093083045466000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15128,11 +15098,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198252652730714422, guid: 6f4758541f6876948b8a32b86be9b011, type: 3}
+  _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 0}
+  _uiSpriteDeactive: {fileID: 0}
+  Owner: {fileID: 0}
   FirePoint: {fileID: 464443241279884211}
   ProjectilePrefab: {fileID: -7589564598912326102, guid: 801d21a0dd66a424494082745481b4c2, type: 3}
+  _weaponInput: {fileID: 0}
   FireDelay: 1
   UsePooling: 1
-  Speed: 50
+  ProjectileSpeed: 100
   Damage: 150
   MaxAttackDistance: 200
   _aoeDamage: 150

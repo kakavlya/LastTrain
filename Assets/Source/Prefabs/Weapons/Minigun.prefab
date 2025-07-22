@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 636287251186039019}
   - component: {fileID: 2661160403040069262}
   - component: {fileID: 3470129900391912475}
-  - component: {fileID: 1069202369554064374}
-  - component: {fileID: 6790946231802069099}
   - component: {fileID: 4145541452217694962}
-  - component: {fileID: 3446888278540729069}
   - component: {fileID: 356231242550243592}
   - component: {fileID: 7332470666651878799}
   m_Layer: 0
@@ -91,34 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1069202369554064374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974017237273445047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 4145541452217694962}
---- !u!114 &6790946231802069099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974017237273445047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPivot: {fileID: 636287251186039019}
-  _targetProvider: {fileID: 0}
-  _rotationSpeed: 180
 --- !u!114 &4145541452217694962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,30 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 0}
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
   _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 0}
+  _uiSpriteDeactive: {fileID: 0}
+  Owner: {fileID: 0}
   FirePoint: {fileID: 1960534411642063156}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
+  _weaponInput: {fileID: 0}
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 100
   Damage: 50
   MaxAttackDistance: 100
---- !u!114 &3446888278540729069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2974017237273445047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856e6f36a26dcd54c9c060cbcb88ab3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxCountProjectiles: 100
 --- !u!114 &356231242550243592
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,10 +12,11 @@ namespace Assets.Source.Scripts.Weapons
         public event Action<int> WeaponChanged;
 
         private bool _isMobilePlatform;
+        private bool _isShootingButtonPressed;
 
         private void Awake()
         {
-            if (PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+            if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
             {
                 _isMobilePlatform = true;
             }
@@ -37,16 +38,21 @@ namespace Assets.Source.Scripts.Weapons
                 HandleMouseShooting();
                 HandleWeaponSwitch();
             }
+            else if (_isShootingButtonPressed)
+            {
+                Fired?.Invoke();
+            }
         }
 
         public void UIButtonShoot(BaseEventData eventData)
         {
-            Debug.Log("Work");
+            _isShootingButtonPressed = true;
             Fired?.Invoke();
         }
 
         public void UIButtonStopShoot(BaseEventData eventData)
         {
+            _isShootingButtonPressed = false;
             StopFired?.Invoke();
         }
 

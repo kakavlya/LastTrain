@@ -4876,8 +4876,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116537474024852836}
-  - component: {fileID: 8705878265329051063}
-  - component: {fileID: 88646265982345316}
   - component: {fileID: 637492717409913579}
   - component: {fileID: 6460137585123696934}
   - component: {fileID: 1003300737019911048}
@@ -4904,34 +4902,6 @@ Transform:
   - {fileID: 8597894466120892595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8705878265329051063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639000250642475742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 0}
---- !u!114 &88646265982345316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639000250642475742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPivot: {fileID: 4116537474024852836}
-  _targetProvider: {fileID: 0}
-  _rotationSpeed: 180
 --- !u!114 &637492717409913579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4947,9 +4917,12 @@ MonoBehaviour:
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 0}
   _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 0}
+  _uiSpriteDeactive: {fileID: 0}
   Owner: {fileID: 0}
   FirePoint: {fileID: 3476638899428692577}
   ProjectilePrefab: {fileID: 0}
+  _weaponInput: {fileID: 0}
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 100

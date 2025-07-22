@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Assets.Source.Scripts.Weapons
@@ -13,11 +14,13 @@ namespace Assets.Source.Scripts.Weapons
         private Transform _weaponPivot;
         private bool _isMobilePlatform;
 
+        public event Action<Vector3> Rotated;
+
         public void Init()
         {
             _weaponHandler.OnWeaponChange += SetWeaponPivot;
 
-            if (PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+            if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
             {
                 _isMobilePlatform = true;
             }
@@ -75,6 +78,7 @@ namespace Assets.Source.Scripts.Weapons
             {
                 direction.Normalize();
                 RotateTowardsDirection(direction);
+
             }
         }
 
@@ -90,6 +94,8 @@ namespace Assets.Source.Scripts.Weapons
                     targetRotation,
                     _rotationSpeed * Time.deltaTime
                 );
+
+                Rotated?.Invoke(direction);
             }
         }
     }
