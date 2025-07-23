@@ -7,13 +7,16 @@ namespace Assets.Source.Scripts.Core
     {
         [Header("Health Settings")]
         [SerializeField] private int _maxHealth = 100;
-        [SerializeField] private int _currentHealth;
+        
+        private int _currentHealth;
 
         public UnityEvent OnDeath;
 
         public bool IsDead { get; private set; }
 
         public int CurrentHealth => _currentHealth;
+
+        public int MaxHealth => _maxHealth;
 
         protected virtual void Awake()
         {

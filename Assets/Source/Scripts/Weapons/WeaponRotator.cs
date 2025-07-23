@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,11 +6,14 @@ namespace Assets.Source.Scripts.Weapons
 {
     public class WeaponRotator : MonoBehaviour
     {
+        [SerializeField] private Joystick _joystick;
         [SerializeField] private WeaponsHandler _weaponHandler;
         [SerializeField] private AimingTargetProvider _targetProvider;
         [SerializeField] private float _rotationSpeed = 180f;
 
         private Transform _weaponPivot;
+
+        public event Action<Vector3> Rotated;
 
         public void Init()
         {
@@ -29,6 +32,11 @@ namespace Assets.Source.Scripts.Weapons
 
         private void Update()
         {
+            Rotate();
+        }
+
+        private void Rotate()
+        {
             if (_targetProvider == null || !_targetProvider.AimPointWorld.HasValue)
                 return;
 
@@ -42,9 +50,14 @@ namespace Assets.Source.Scripts.Weapons
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;
 
+            RotateTowardsDirection(direction);
+        }
+
+        private void RotateTowardsDirection(Vector3 direction)
+        {
             if (direction.sqrMagnitude > 0.01f)
             {
-                
+
                 direction.Normalize();
                 Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 _weaponPivot.rotation = Quaternion.RotateTowards(
@@ -52,6 +65,8 @@ namespace Assets.Source.Scripts.Weapons
                     targetRotation,
                     _rotationSpeed * Time.deltaTime
                 );
+
+                Rotated?.Invoke(direction);
             }
         }
     }

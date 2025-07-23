@@ -14692,8 +14692,6 @@ GameObject:
   - component: {fileID: 4142875306226948026}
   - component: {fileID: 4423207888733218150}
   - component: {fileID: 8433983049546041145}
-  - component: {fileID: 6032193320111121880}
-  - component: {fileID: 8367894978342621143}
   - component: {fileID: 3678828438717905573}
   - component: {fileID: 7834140368202916372}
   - component: {fileID: 575378161337958201}
@@ -14774,34 +14772,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6032193320111121880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3491888369040967913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 3678828438717905573}
---- !u!114 &8367894978342621143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3491888369040967913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPivot: {fileID: 4142875306226948026}
-  _targetProvider: {fileID: 0}
-  _rotationSpeed: 180
 --- !u!114 &3678828438717905573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14816,11 +14786,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 0}
+  _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 0}
+  _uiSpriteDeactive: {fileID: 0}
+  Owner: {fileID: 0}
   FirePoint: {fileID: 6155232861971313899}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 5e803b15a24fec64b936cac386976e88, type: 3}
+  _weaponInput: {fileID: 0}
   FireDelay: 0.7
   UsePooling: 1
-  Speed: 100
+  ProjectileSpeed: 100
   Damage: 50
   MaxAttackDistance: 100
   _bulletsInShot: 10

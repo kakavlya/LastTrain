@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
-    [SerializeField] protected WeaponInput _weaponInput;
+    [SerializeField] protected PlayerInput _weaponInput;
 
     [Header("Shoot Settings")]
     [SerializeField] protected float FireDelay = 0.1f;
@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
 
     private float _lastFireTime;
 
-    protected Vector3 Direction;
+    protected Vector3 Direction => FirePoint.forward;
 
     public event Action OnFired;
     public event Action OnStopFired;
@@ -66,20 +66,21 @@ public class Weapon : MonoBehaviour
         return true;
     }
 
-    private void CalculateDirection()
-    {
-        Vector3 target = _aimingTarget.AimPointWorld.Value;
-        Vector3 origin = FirePoint.position;
-        Vector3 direction = (target - origin).normalized;
-        Direction = direction;
-    }
-
     protected virtual void OnWeaponFire()
     {
         var proj = UsePooling
-            ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-            Quaternion.LookRotation(Direction), Owner, ProjectileSpeed, Damage, MaxAttackDistance)
-: Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+            ? ProjectilePool.Instance.Spawn(
+                ProjectilePrefab,
+                FirePoint.position,
+                Quaternion.LookRotation(Direction),
+                Owner,
+                ProjectileSpeed,
+                Damage,
+                MaxAttackDistance)
+                    : Instantiate(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(Direction));
     }
 
     private void Fire()
@@ -88,7 +89,6 @@ public class Weapon : MonoBehaviour
         {
             if (_ammunition == null || _ammunition.HasAmmo)
             {
-                CalculateDirection();
                 OnFired?.Invoke();
                 OnWeaponFire();
 

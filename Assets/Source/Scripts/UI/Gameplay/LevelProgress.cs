@@ -34,7 +34,7 @@ public class LevelProgress : MonoBehaviour
         _countdownText.enabled = true;
         int seconds = _startDelaySeconds;
 
-        while (seconds >= 0)
+        while (seconds > 0)
         {
             _countdownText.text = seconds.ToString();
             seconds -= _progressValue;

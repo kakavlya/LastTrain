@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using Level;
+using Player;
+using System.Collections.Generic;
 
 namespace Assets.Source.Scripts.Enemies
 {
@@ -8,14 +10,14 @@ namespace Assets.Source.Scripts.Enemies
     {
         [Header("References")]
         [SerializeField] private LevelGenerator _levelGenerator;
-
-        [Header("Static Config (optional)")]
-        [SerializeField] private SpawnerConfig _config;
+        [SerializeField] private SharedData _sharedData;
+        [SerializeField] private TrainMovement _trainMovement;
 
         [Header("Scene-bound")]
-
+        [SerializeField] private float _allowTrainDistance = 200f;
         [SerializeField] private bool _useRuntime;
 
+        private SpawnerConfig _spawnerConfig;
         private Transform[] _spawnPoints;
         private EnemySpawnEntry[] _entries;
         private Transform _playerTarget;
@@ -26,15 +28,21 @@ namespace Assets.Source.Scripts.Enemies
 
         public void Init()
         {
-            _entries = _config.entries;
+            _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
+            _entries = _spawnerConfig.entries;
             _levelGenerator.StartedElementDefined += SetSpawnPoint;
             _levelGenerator.ElementChanged += SetSpawnPoint;
+        }
+
+        private void OnDisable()
+        {
+            _levelGenerator.StartedElementDefined -= SetSpawnPoint;
+            _levelGenerator.ElementChanged -= SetSpawnPoint;
         }
 
         public void Init(Transform playerTarget)
         {
             _playerTarget = playerTarget;
-            Init();
         }
 
         public void Begin()
@@ -47,17 +55,14 @@ namespace Assets.Source.Scripts.Enemies
         private void InitTimers()
         {
             _timers = new float[_entries.Length];
+
             for (int i = 0; i < _entries.Length; i++)
                 _timers[i] = _entries[i].spawnInterval;
         }
 
         private void Update()
         {
-            if (_paused || _stopped) return;
-
-            if (_entries == null || _timers == null) return;
-
-            if (_spawnPoints == null) return;
+            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null) return;
 
             for (int i = 0; i < _entries.Length; i++)
             {
@@ -74,7 +79,6 @@ namespace Assets.Source.Scripts.Enemies
 
         public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)
         {
-            Debug.Log("Work");
             _spawnPoints = currentElement.EnemySpawnPoints;
         }
 
@@ -84,8 +88,19 @@ namespace Assets.Source.Scripts.Enemies
                 ? spawnEntry.overrideSpawnPoints
                 : points;
 
-            var sp = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
+            List<Transform> spawnPointsList = new List<Transform>(spawnPoints);
+
+            foreach (var point in spawnPoints)
+            {
+                if (point.position.x - _trainMovement.transform.position.x <= _allowTrainDistance)
+                {
+                    spawnPointsList.Add(point);
+                }
+            }
+
+            var sp = spawnPointsList[UnityEngine.Random.Range(0, spawnPointsList.Count)];
             Vector3 pos = sp.position;
+
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
@@ -101,14 +116,5 @@ namespace Assets.Source.Scripts.Enemies
             _stopped = true;
             _paused = false;
         }
-
-        //public void Init(EnemySpawnEntry[] entries, Transform[] spawnPoints, Transform playerTarget)
-        //{
-        //    _useRuntime = true;
-        //    _entries = entries;
-        //    _spawnPoints = spawnPoints;
-        //    _playerTarget = playerTarget;
-        //    InitTimers(_entries);
-        //}
     }
 }

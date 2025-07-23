@@ -46,6 +46,19 @@ public class PickableAmmunitionPool : MonoBehaviour
 
         var currentPickableAmmo = _pools[pickableAmmunition].Get();
         currentPickableAmmo.transform.position = position;
+        currentPickableAmmo.SetPrefabKey(pickableAmmunition);
         return currentPickableAmmo;
+    }
+
+    public void RealeseAmmunition(PickableAmmunition pickableAmmunition, PickableAmmunition ammunitionKey)
+    {
+        if (_pools.ContainsKey(ammunitionKey))
+        {
+            _pools[ammunitionKey].Release(pickableAmmunition);
+        }
+        else
+        {
+            Destroy(pickableAmmunition.gameObject);
+        }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using Assets.Source.Scripts.Core;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : HealthBase
 {
-    // Todo : добавить UI для отображения здоровья
-    //[SerializeField] private PlayerUI _ui;      
+    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private float _respawnDelay = 3f;
 
     public event Action Died;
@@ -15,13 +17,16 @@ public class PlayerHealth : HealthBase
     {
         base.Awake();
         OnDeath.AddListener(OnPlayerDeath);
+        _healthText.text = MaxHealth.ToString();
+        _healthSlider.maxValue = MaxHealth;
+        _healthSlider.value = MaxHealth;
     }
 
     public override void TakeDamage(int amount)
     {
         base.TakeDamage(amount);
-        //_ui?.UpdateHealth(CurrentHealth, _maxHealth);
-        Debug.Log($"Player took damage: {amount}. Current health: {CurrentHealth}.");
+        _healthText.text = CurrentHealth.ToString();
+        _healthSlider.value = CurrentHealth;
     }
 
     private void OnPlayerDeath()

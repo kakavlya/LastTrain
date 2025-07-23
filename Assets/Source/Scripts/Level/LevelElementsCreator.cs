@@ -5,11 +5,17 @@ namespace Level
 {
     public class LevelElementsCreator : MonoBehaviour
     {
-        [SerializeField] private List<LevelElement> _levelElementsPrefabs;
         [SerializeField] private Transform _parentTransformForElements;
+        [SerializeField] private SharedData _sharedData;
 
+        private LevelElement[] _levelElementsPrefabs;
         private float _pickableAmmoPersent;
         private PickableAmmunition[] _pickableAmmunitionsPrefabs;
+
+        public void Init()
+        {
+            _levelElementsPrefabs = _sharedData.LevelSetting.LevelElements;
+        }
 
         public void SetPickableAmmoParameters(PickableAmmunition[] pickableAmmunitions,float pickableAmmoPersent)
         {
@@ -27,7 +33,7 @@ namespace Level
 
         private int GetRandomElementNumber()
         {
-            int randomNumber = Random.Range(0, _levelElementsPrefabs.Count);
+            int randomNumber = Random.Range(0, _levelElementsPrefabs.Length);
             return randomNumber;
         }
     }

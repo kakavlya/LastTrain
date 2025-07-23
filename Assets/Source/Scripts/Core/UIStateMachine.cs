@@ -29,6 +29,9 @@ public class UIStateMachine : MonoBehaviour
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _resumeButton;
 
+    [Header("Mobile Platorm Buttons")]
+    [SerializeField] private GameObject _joustick;
+
     public event Action StartClicked;
     public event Action PauseClicked;
     public event Action ResumeClicked;
@@ -43,6 +46,16 @@ public class UIStateMachine : MonoBehaviour
         _pauseButton.onClick.AddListener(() => { PauseClicked?.Invoke(); SwitchState(UIState.Pause); });
         _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); SwitchState(UIState.Playing); });
         _restartButton.onClick.AddListener(OnRestartButton);
+
+        if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+        {
+            _joustick.SetActive(true);
+
+        }
+        else
+        {
+            _joustick.SetActive(false);
+        }
     }
 
     public void Construct(LevelStateMachine levelStateMachine)

@@ -291,8 +291,6 @@ GameObject:
   - component: {fileID: 9107309904343128948}
   - component: {fileID: 9107309904346023964}
   - component: {fileID: 9107309904345330278}
-  - component: {fileID: 5379980766513139774}
-  - component: {fileID: 3985775575955691531}
   - component: {fileID: 3412282889252128567}
   - component: {fileID: 8132299582682140417}
   - component: {fileID: 6070119265725364353}
@@ -373,34 +371,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5379980766513139774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9107309904343047272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weapon: {fileID: 3412282889252128567}
---- !u!114 &3985775575955691531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9107309904343047272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponPivot: {fileID: 9107309904343128948}
-  _targetProvider: {fileID: 0}
-  _rotationSpeed: 180
 --- !u!114 &3412282889252128567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,11 +385,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198381425572196190, guid: 876700647ad17e946961681397b4442b, type: 3}
+  _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 0}
+  _uiSpriteDeactive: {fileID: 0}
+  Owner: {fileID: 0}
   FirePoint: {fileID: 2363891053494034821}
-  ProjectilePrefab: {fileID: 4317910656311789124, guid: bb959890b0a20a24a82bcf33ef3b2170, type: 3}
+  ProjectilePrefab: {fileID: 0}
+  _weaponInput: {fileID: 0}
   FireDelay: 0.8
   UsePooling: 1
-  Speed: 100
+  ProjectileSpeed: 100
   Damage: 200
   MaxAttackDistance: 200
 --- !u!82 &8132299582682140417

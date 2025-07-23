@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -44, y: 14.816568, z: 62.6}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7713027448094081599}
@@ -67,8 +67,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 10, z: 1}
+  m_Center: {x: 0, y: 4, z: 0}
 --- !u!1001 &7717839709001593397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,11 +135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198566955500219250, guid: e2c40f781ea42fb45b1a2a4d36542415, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 198566955500219250, guid: e2c40f781ea42fb45b1a2a4d36542415, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 199536504798512130, guid: e2c40f781ea42fb45b1a2a4d36542415, type: 3}
       propertyPath: m_Mesh

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606304c35b63a734289f99c5ce19a2ac, type: 3}
   m_Name: SharedData
   m_EditorClassIdentifier: 
-  LevelSetting: {fileID: 0}
+  LevelSetting: {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}

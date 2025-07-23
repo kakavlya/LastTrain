@@ -1,19 +1,37 @@
 ﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class WeaponUI : MonoBehaviour
 {
     [SerializeField] private int _cellNumber;
-    [SerializeField] private Image _image;
     [SerializeField] private TextMeshProUGUI _ammoCountText;
+    [SerializeField] private TextMeshProUGUI _addedCountText;
 
+    private int _showTime = 2;
+    private Image _image;
     private Ammunition _currentAmmunition;
 
     public event Action<int> UconClicked;
 
     public int CellNumber => _cellNumber;
+
+    private void Awake()
+    {
+        _image = GetComponent<Image>();
+    }
+
+    private void OnDisable()
+    {
+        if (_currentAmmunition != null)
+        {
+            _currentAmmunition.Updated -= UpdateAmmoText;
+            _currentAmmunition.AmmoAdded -= LaunchAddedAmmo;
+        }
+    }
 
     public void ActivateWeapon(Weapon currentWeapon)
     {
@@ -24,6 +42,7 @@ public class WeaponUI : MonoBehaviour
             if (_currentAmmunition != null)
             {
                 _currentAmmunition.Updated += UpdateAmmoText;
+                _currentAmmunition.AmmoAdded += LaunchAddedAmmo;
                 UpdateAmmoText(_currentAmmunition.CurrentAmmo);
             }
             else
@@ -35,14 +54,9 @@ public class WeaponUI : MonoBehaviour
         }
     }
 
-    public void DeactivateWeapon(Weapon lastWeapon)
+    public void DeactivateWeapon(Weapon weapon)
     {
-        if (_currentAmmunition != null)
-        {
-            _currentAmmunition.Updated -= UpdateAmmoText;
-        }
-
-        _image.sprite = lastWeapon.UISpriteDeactive;
+        _image.sprite = weapon.UISpriteDeactive;
     }
 
     public void OnClickHandle()
@@ -53,5 +67,17 @@ public class WeaponUI : MonoBehaviour
     private void UpdateAmmoText(int num)
     {
         _ammoCountText.text = num.ToString();
+    }
+
+    private void LaunchAddedAmmo(int addedAmmo)
+    {
+        StartCoroutine(ShowAddedAmmo(addedAmmo));
+    }
+
+    private IEnumerator ShowAddedAmmo(int addedAmmo)
+    {
+        _addedCountText.text = "+ " + addedAmmo.ToString();
+        yield return new WaitForSeconds(_showTime);
+        _addedCountText.text = null;
     }
 }

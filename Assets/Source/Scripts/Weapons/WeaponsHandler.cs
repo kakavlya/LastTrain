@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WeaponsHandler : MonoBehaviour
 {
-    [SerializeField] private WeaponUI[] _weaponUI;
+    [SerializeField] private WeaponUI[] cells;
     [SerializeField] private Weapon[] _weapons;
-    [SerializeField] private WeaponInput _weaponInput;
+    [SerializeField] private PlayerInput _weaponInput;
 
     private Weapon _currentWeapon;
     private int _currentNumberWeapon;
@@ -15,34 +15,36 @@ public class WeaponsHandler : MonoBehaviour
 
     public void Init()
     {
-        foreach (var cell in _weaponUI)
+        foreach (var cell in cells)
         {
-            cell.UconClicked += ChooseWeapon;
+            cell.gameObject.SetActive(false);
         }
 
+        for (int i = 0;  i < _weapons.Length; i++)
+        {
+            _weapons[i].gameObject.SetActive(false);
+            cells[i].gameObject.SetActive(true);
+            cells[i].UconClicked += ChooseWeapon;
+            cells[i].ActivateWeapon(_weapons[i]);
+            cells[i].DeactivateWeapon(_weapons[i]);
+        }
+
+        _currentNumberWeapon = 0;
+        _currentWeapon = _weapons[0];
+        _weapons[0].gameObject.SetActive(true);
+        cells[0].ActivateWeapon(_currentWeapon);
+        OnWeaponChange?.Invoke(_currentWeapon);
         _weaponInput.WeaponChanged += ChooseWeapon;
     }
 
     private void OnDisable()
     {
-        foreach (var cell in _weaponUI)
+        foreach (var cell in cells)
         {
             cell.UconClicked -= ChooseWeapon;
         }
 
         _weaponInput.WeaponChanged -= ChooseWeapon;
-    }
-
-    private void Start()
-    {
-        foreach (var weapon in _weapons)
-        {
-            weapon.gameObject.SetActive(false);
-        }
-
-        _currentWeapon = _weapons[0];
-        _weapons[0].gameObject.SetActive(true);
-        OnWeaponChange?.Invoke(_currentWeapon);
     }
 
     private void ChooseWeapon(int weaponNumber)
@@ -51,16 +53,16 @@ public class WeaponsHandler : MonoBehaviour
         {
             _currentWeapon.gameObject.SetActive(false);
 
-            if (_currentNumberWeapon > 0 && _currentNumberWeapon <= _weapons.Length)
+            if (_currentNumberWeapon >= 0 && _currentNumberWeapon < _weapons.Length)
             {
-            _weaponUI[_currentNumberWeapon - 1].DeactivateWeapon(_currentWeapon);
+            cells[_currentNumberWeapon].DeactivateWeapon(_currentWeapon);
 
             }
 
-            _currentNumberWeapon = weaponNumber;
-            _currentWeapon = _weapons[weaponNumber - 1];
+            _currentNumberWeapon = weaponNumber - 1;
+            _currentWeapon = _weapons[_currentNumberWeapon];
             _currentWeapon.gameObject.SetActive(true);
-            _weaponUI[weaponNumber - 1].ActivateWeapon(_currentWeapon);
+            cells[_currentNumberWeapon].ActivateWeapon(_currentWeapon);
             OnWeaponChange?.Invoke(_currentWeapon);
         }
     }

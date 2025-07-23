@@ -1,10 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
 
 public class PickableAmmunition : MonoBehaviour
 {
     [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
     [field: SerializeField] public int CountProjectiles { get; private set; }
+
+    private PickableAmmunition _ammoPrefabKey;
+    private float _distanceCatch = 30f;
+    private float _durationMovement = 1f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,7 +18,6 @@ public class PickableAmmunition : MonoBehaviour
         {
             var ammunitionType = PrefabTypeOfWeapon.GetType();
 
-            Debug.Log(projectile.Owner);
             Ammunition[] ammunitions = projectile.Owner.GetComponentsInChildren<Ammunition>();
 
             foreach (Ammunition ammunition in ammunitions)
@@ -22,6 +27,21 @@ public class PickableAmmunition : MonoBehaviour
                     ammunition.IncreaseProjectilesCount(CountProjectiles);
                 }
             }
+
+            StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
         }
+    }
+
+    public void SetPrefabKey(PickableAmmunition pickableAmmunition) => _ammoPrefabKey = pickableAmmunition;
+
+    private IEnumerator DoPickableAnimation(Transform owner)
+    {
+        while (Vector3.Distance(transform.position, owner.position) > _distanceCatch)
+        {
+            transform.DOMove(owner.position, _durationMovement);
+            yield return null;
+        }
+
+        PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
     }
 }

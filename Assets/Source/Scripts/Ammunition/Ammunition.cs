@@ -7,14 +7,16 @@ public class Ammunition : MonoBehaviour
     [SerializeField] private int _maxAmmo;
 
     public event Action <int> Updated;
+    public event Action<int> AmmoAdded;
 
     public Weapon WeaponPrefab => _weaponPrefab;
-    public int CurrentAmmo { get; private set; }
     public bool HasAmmo { get; private set; } = true;
+    public int CurrentAmmo { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         CurrentAmmo = _maxAmmo;
+        Updated?.Invoke(CurrentAmmo);
     }
 
     public void DecreaseProjectilesCount()
@@ -31,11 +33,11 @@ public class Ammunition : MonoBehaviour
         Updated?.Invoke(CurrentAmmo);
     }
 
-    public void IncreaseProjectilesCount(int count)
+    public void IncreaseProjectilesCount(int addedCount)
     {
-        if (CurrentAmmo + count < _maxAmmo)
+        if (CurrentAmmo + addedCount < _maxAmmo)
         {
-            CurrentAmmo += count;
+            CurrentAmmo += addedCount;
         }
         else
         {
@@ -48,5 +50,6 @@ public class Ammunition : MonoBehaviour
         }
 
         Updated?.Invoke(CurrentAmmo);
+        AmmoAdded?.Invoke(addedCount);
     }
 }
