@@ -25,9 +25,11 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private LevelProgress _levelProgress;
     [SerializeField] private LevelElementsCreator _levelElementsCreator;
     [SerializeField] private PickableAmmunitionSpawner _pickableAmmunitionSpawner;
+    [SerializeField] private EnemyPool _enemyPool;
 
     private void Awake()
     {
+        //_enemyPool.Init();
         _enemySpawner.Init();
         _aimingTargetProvider.Init();
         _uiCursorFollower.Init();

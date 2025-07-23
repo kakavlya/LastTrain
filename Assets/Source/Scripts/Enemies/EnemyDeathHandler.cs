@@ -13,7 +13,6 @@ namespace Assets.Source.Scripts.Enemies
         [SerializeField] private EnemyDeathEffect _deathEffect;
 
         [SerializeField] private float _delayBeforeDespawn = 2f;
-        [SerializeField] private bool _useObjectPool = false;
 
         private void Awake()
         {
@@ -41,8 +40,7 @@ namespace Assets.Source.Scripts.Enemies
 
         private void DespawnOrDestroy()
         {
-            // Todo: Implement object pooling logic here if useObjectPool is true
-            Destroy(gameObject);
+            EnemyPool.Instance.ReleaseEnemy(gameObject);
         }
 
         public void ResetState()

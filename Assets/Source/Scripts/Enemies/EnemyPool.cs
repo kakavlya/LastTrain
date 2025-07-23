@@ -11,7 +11,7 @@ public class EnemyPool : MonoBehaviour
 
     public static EnemyPool Instance { get; private set; }
 
-    public void Init()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -38,7 +38,7 @@ public class EnemyPool : MonoBehaviour
         if (!_pools.ContainsKey(enemyPrefab))
         {
             _pools[enemyPrefab] = new ObjectPool<GameObject>(
-                createFunc: () => Instantiate(enemyPrefab),
+                createFunc: () => Instantiate(enemyPrefab, gameObject.transform),
                 actionOnGet: (enemy) => enemy.gameObject.SetActive(true),
                 actionOnRelease: (enemy) => enemy.gameObject.SetActive(false),
                 actionOnDestroy: (enemy) => Destroy(enemy.gameObject)
@@ -55,15 +55,20 @@ public class EnemyPool : MonoBehaviour
 
         var enemyInstance = _pools[enemyPrefab].Get();
         enemyInstance.transform.SetPositionAndRotation(position, rotation);
-        //enemyInstance.SetPrefabKey(enemyPrefab);  нужен ключ но не знаю как сделать
+
+        var pooled = enemyInstance.GetComponent<PooledEnemyKey>();
+        pooled.SetKey(enemyPrefab);
+
         return enemyInstance;
     }
 
-    public void ReleaseEnemy(GameObject enemyInstance, GameObject prefabKey)
+    public void ReleaseEnemy(GameObject enemyInstance)
     {
-        if (_pools.ContainsKey(prefabKey))
+        var key = enemyInstance.GetComponent<PooledEnemyKey>();
+
+        if (key != null && _pools.ContainsKey(key.PrefabKey))
         {
-            _pools[prefabKey].Release(enemyInstance);
+            _pools[key.PrefabKey].Release(enemyInstance);
         }
         else
         {

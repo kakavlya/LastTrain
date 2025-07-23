@@ -937,6 +937,7 @@ MonoBehaviour:
   _levelProgress: {fileID: 1505221486}
   _levelElementsCreator: {fileID: 1624335203}
   _pickableAmmunitionSpawner: {fileID: 2060328544}
+  _enemyPool: {fileID: 1700526723}
 --- !u!4 &329617154
 Transform:
   m_ObjectHideFlags: 0
@@ -3544,7 +3545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1700526723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3558,8 +3559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6965205965109951990, guid: dca6b9b3394e5c94c938bd8b5f7f3c8c, type: 3}
+  - {fileID: 4899597090557373887, guid: 089a610054aa0a641874cb77263d6dfd, type: 3}
 --- !u!4 &1700526724
 Transform:
   m_ObjectHideFlags: 0
