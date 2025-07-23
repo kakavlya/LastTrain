@@ -441,6 +441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textCurrentLevel: {fileID: 1463964856}
   _levelsHandler: {fileID: 2124672939}
+  _gameplayScene: Alexander
 --- !u!114 &787608292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,11 +1078,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2311998636339760404, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -6
+      value: -5.999939
       objectReference: {fileID: 0}
     - target: {fileID: 2311998636339760404, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 14.999943
+      value: 14.999939
       objectReference: {fileID: 0}
     - target: {fileID: 2311998636339760404, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

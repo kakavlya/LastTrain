@@ -6,6 +6,7 @@ public class PlayHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textCurrentLevel;
     [SerializeField] private LevelsHandler _levelsHandler;
+    [SerializeField] private string _gameplayScene;
 
     private void OnEnable()
     {
@@ -26,7 +27,7 @@ public class PlayHandler : MonoBehaviour
     {
         if (_levelsHandler.IsChosed)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(_gameplayScene);
         }
     }
 }

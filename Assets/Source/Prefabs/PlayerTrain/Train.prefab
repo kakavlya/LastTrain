@@ -137,7 +137,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8712082064008625206}
-  - component: {fileID: 4444791174602866357}
   - component: {fileID: 4064344279607870458}
   - component: {fileID: 6094426346783559762}
   m_Layer: 7
@@ -169,18 +168,6 @@ Transform:
   - {fileID: 5208643179574199221}
   m_Father: {fileID: 116067038430510563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4444791174602866357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1467216178549182896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7bb56cdcce06d4580c20d6b76297d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4064344279607870458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +188,7 @@ MonoBehaviour:
   - {fileID: 5879944412009858589}
   - {fileID: 1833429383772676086}
   - {fileID: 7138497894523935682}
-  _weaponInput: {fileID: 4444791174602866357}
+  _weaponInput: {fileID: 0}
 --- !u!114 &6094426346783559762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +733,7 @@ MonoBehaviour:
   Owner: {fileID: 781245857482172249}
   FirePoint: {fileID: 1171210759468432667}
   ProjectilePrefab: {fileID: 0}
-  _weaponInput: {fileID: 4444791174602866357}
+  _weaponInput: {fileID: 0}
   FireDelay: 0.05
   UsePooling: 1
   ProjectileSpeed: 100
@@ -895,10 +882,6 @@ PrefabInstance:
       propertyPath: IsAutomatic
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 4444791174602866357}
     - target: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
       propertyPath: ProjectileSpeed
       value: 150
@@ -1133,10 +1116,6 @@ PrefabInstance:
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 948380861982024859}
-    - target: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 4444791174602866357}
     - target: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
       propertyPath: ProjectileSpeed
       value: 100
@@ -1385,10 +1364,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 46033499604228434}
     - target: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 4444791174602866357}
-    - target: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
       propertyPath: _uiSpriteActive
       value: 
       objectReference: {fileID: 21300000, guid: 33336cec50573bd4d96de7519012435e, type: 3}
@@ -1563,10 +1538,6 @@ PrefabInstance:
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 7290900981494458158}
-    - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 4444791174602866357}
     - target: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
       propertyPath: _uiSpriteActive
       value: 
@@ -1755,10 +1726,6 @@ PrefabInstance:
       propertyPath: _ammunition
       value: 
       objectReference: {fileID: 4794859836469653075}
-    - target: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 4444791174602866357}
     - target: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
       propertyPath: _uiSpriteActive
       value: 

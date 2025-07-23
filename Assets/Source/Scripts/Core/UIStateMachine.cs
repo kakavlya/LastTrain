@@ -28,14 +28,16 @@ public class UIStateMachine : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _menuButton;
 
-    [Header("Mobile Platorm Buttons")]
+    [Header("Mobile Platorm Control")]
     [SerializeField] private GameObject _joustick;
 
     public event Action StartClicked;
     public event Action PauseClicked;
     public event Action ResumeClicked;
     public event Action RestartClicked;
+    public event Action MenuClicked;
 
     private UIState _currentState = UIState.None;
     private LevelStateMachine _levelStateMachine;
@@ -46,6 +48,7 @@ public class UIStateMachine : MonoBehaviour
         _pauseButton.onClick.AddListener(() => { PauseClicked?.Invoke(); SwitchState(UIState.Pause); });
         _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); SwitchState(UIState.Playing); });
         _restartButton.onClick.AddListener(OnRestartButton);
+        _menuButton.onClick.AddListener(OnMenuButton);
 
         if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
         {
@@ -101,6 +104,12 @@ public class UIStateMachine : MonoBehaviour
         RestartClicked?.Invoke();
         SwitchState(UIState.LevelStart);
     }
+
+    public void OnMenuButton()
+    {
+        MenuClicked?.Invoke();
+    }
+
     private void DisableAll()
     {
         _startScreen.SetActive(false);

@@ -50,6 +50,7 @@ public class CompositionRoot : MonoBehaviour
         _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;
         _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
         _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
+        _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
 
         _levelStateMachine.PlayerDied += () => _uIStateMachine.SwitchState(UIState.GameOver);
         _levelStateMachine.LevelCompleted += () => _uIStateMachine.SwitchState(UIState.EndLevel);

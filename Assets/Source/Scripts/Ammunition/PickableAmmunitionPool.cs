@@ -22,6 +22,16 @@ public class PickableAmmunitionPool : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        InitializePools();
+    }
+
+    private void InitializePools()
+    {
+        foreach (var ammoPrefab in _pickableAmmunitionPrefabs)
+        {
+            CreatePoolForPrefab(ammoPrefab);
+        }
     }
 
     private void CreatePoolForPrefab(PickableAmmunition pickableAmmunitionPrefab)
