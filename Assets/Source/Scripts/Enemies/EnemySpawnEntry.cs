@@ -6,7 +6,7 @@ namespace Assets.Source.Scripts.Enemies
     [Serializable]
     public struct EnemySpawnEntry
     {
-        public EnemyPrefabKey prefab;
+        public GameObject prefab;
         public float spawnInterval;
         public Vector2 randRangeXZ;
         public EnemyBehaviorSettings behaviorSettings;

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2137595282720326009}
   - component: {fileID: 7572648718052685582}
   - component: {fileID: -4024881536416202738}
-  - component: {fileID: -2328591716955571486}
   m_Layer: 0
   m_Name: ShootingEnemy
   m_TagString: Untagged
@@ -151,18 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 2020841652727510337}
---- !u!114 &-2328591716955571486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2062925629298986392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0076d47459ee8e4a9a9ed21cfce6d7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4604700698658126156
 GameObject:
   m_ObjectHideFlags: 0

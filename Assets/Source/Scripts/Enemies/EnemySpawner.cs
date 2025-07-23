@@ -106,7 +106,7 @@ namespace Assets.Source.Scripts.Enemies
 
             EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
             var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
-            //spawnEntry.behaviorSettings?.Initialize(gameObject, player);
+            spawnEntry.behaviorSettings?.Initialize(gameObject, player);
         }
 
         public void Pause() => _paused = true;

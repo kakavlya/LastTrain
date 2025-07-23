@@ -5,9 +5,9 @@ using UnityEngine.Pool;
 
 public class EnemyPool : MonoBehaviour
 {
-    [SerializeField] private EnemyPrefabKey[] _enemyPrefabs;
+    [SerializeField] private GameObject[] _enemyPrefabs;
 
-    private Dictionary<EnemyPrefabKey, ObjectPool<EnemyPrefabKey>> _pools = new Dictionary<EnemyPrefabKey, ObjectPool<EnemyPrefabKey>>();
+    private Dictionary<GameObject, ObjectPool<GameObject>> _pools = new Dictionary<GameObject, ObjectPool<GameObject>>();
 
     public static EnemyPool Instance { get; private set; }
 
@@ -33,11 +33,11 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    private void CreatePoolForPrefab(EnemyPrefabKey enemyPrefab)
+    private void CreatePoolForPrefab(GameObject enemyPrefab)
     {
         if (!_pools.ContainsKey(enemyPrefab))
         {
-            _pools[enemyPrefab] = new ObjectPool<EnemyPrefabKey>(
+            _pools[enemyPrefab] = new ObjectPool<GameObject>(
                 createFunc: () => Instantiate(enemyPrefab),
                 actionOnGet: (enemy) => enemy.gameObject.SetActive(true),
                 actionOnRelease: (enemy) => enemy.gameObject.SetActive(false),
@@ -46,7 +46,7 @@ public class EnemyPool : MonoBehaviour
         }
     }
 
-    public EnemyPrefabKey Spawn(EnemyPrefabKey enemyPrefab, Vector3 position, Quaternion rotation)
+    public GameObject Spawn(GameObject enemyPrefab, Vector3 position, Quaternion rotation)
     {
         if (!_pools.ContainsKey(enemyPrefab))
         {
@@ -55,11 +55,11 @@ public class EnemyPool : MonoBehaviour
 
         var enemyInstance = _pools[enemyPrefab].Get();
         enemyInstance.transform.SetPositionAndRotation(position, rotation);
-        enemyInstance.SetPrefabKey(enemyPrefab);
+        //enemyInstance.SetPrefabKey(enemyPrefab);  нужен ключ но не знаю как сделать
         return enemyInstance;
     }
 
-    public void ReleaseEnemy(EnemyPrefabKey enemyInstance, EnemyPrefabKey prefabKey)
+    public void ReleaseEnemy(GameObject enemyInstance, GameObject prefabKey)
     {
         if (_pools.ContainsKey(prefabKey))
         {
