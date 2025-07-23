@@ -19,14 +19,13 @@ public class CameraFollower : MonoBehaviour
     [SerializeField] private float _rotationSmoothing = 10f;
 
     private float _rotationAngle;
-    private float _input;
 
     private void Awake()
     {
-        _playerInput.Rotated += Rotate;
+        _playerInput.Rotated += UpdateCameraPositionAndRotate;
     }
 
-    private void Rotate(float rotateValue)
+    private void UpdateCameraPositionAndRotate(float rotateValue)
     {
         _rotationAngle += rotateValue * _rotationSpeed * Time.deltaTime;
 

@@ -32,17 +32,22 @@ namespace Assets.Source.Scripts.Weapons
 
         private void LateUpdate()
         {
-            if (IsPointerOverUI())
+            if (!IsPointerOverAnyUI())
             {
-                return;
+                HandleShooting();
+                HandleWeaponSwitch();
             }
-
-            HandleShooting();
-            HandleWeaponSwitch();
 
             if (_isMobilePlatform)
             {
-                HandleRotateJoystick();
+                if (!IsPointerOverUIWithJoystick())
+                {
+                    HandleRotateJoystick();
+                }
+                else
+                {
+                    Rotated?.Invoke(0);
+                }
             }
             else
             {
@@ -101,14 +106,34 @@ namespace Assets.Source.Scripts.Weapons
 
         private void HandleRotateJoystick()
         {
-            Debug.Log(_joystick.Horizontal);
-                Rotated?.Invoke(_joystick.Horizontal);
+            Rotated?.Invoke(_joystick.Horizontal);
         }
 
-        private bool IsPointerOverUI()
+        private bool IsPointerOverUIWithJoystick()
         {
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = Input.mousePosition;
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            foreach (var result in results)
+            {
+                if (result.gameObject.GetComponentInParent<Joystick>() != null)
+                    continue;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsPointerOverAnyUI()
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
 
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);

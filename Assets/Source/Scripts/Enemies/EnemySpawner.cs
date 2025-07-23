@@ -43,7 +43,6 @@ namespace Assets.Source.Scripts.Enemies
         public void Init(Transform playerTarget)
         {
             _playerTarget = playerTarget;
-            Init();
         }
 
         public void Begin()
