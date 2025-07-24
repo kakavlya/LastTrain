@@ -5,6 +5,7 @@ public class EnemyHealth : HealthBase
 {
     private EnemyView _view;
     private EnemyDeathHandler _deathHandler;
+    private int _rewardForKill;
 
     protected override void Awake()
     {
@@ -19,10 +20,16 @@ public class EnemyHealth : HealthBase
         _view?.PlayHitFX();
     }
 
+    public void SetRewardForKill(int reward)
+    {
+        _rewardForKill = reward;
+    }
+
     protected override void Die()
     {
         base.Die();
         _view?.PlayDeathFX();
         _deathHandler?.HandleDeath();
+        RewardHandler.Instance.AddReward(_rewardForKill);
     }
 }

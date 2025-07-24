@@ -4,15 +4,15 @@ namespace Assets.Source.Scripts.Enemies
 {
     public class EnemyDeathHandler : MonoBehaviour
     {
+        [SerializeField] private EnemyView _enemyView;
+        [SerializeField] private EnemyDeathEffect _deathEffect;
+        [SerializeField] private float _delayBeforeDespawn = 2f;
+
         private EnemyMovement _movement;
         private EnemyController _controller;
         private EnemyVisualWobble _wobble;
         private Collider[] _collidersToDisable;
-
-        [SerializeField] private EnemyView _enemyView;
-        [SerializeField] private EnemyDeathEffect _deathEffect;
-
-        [SerializeField] private float _delayBeforeDespawn = 2f;
+        private int _rewardForKill;
 
         private void Awake()
         {
@@ -35,12 +35,7 @@ namespace Assets.Source.Scripts.Enemies
             _enemyView?.PlayDeathFX();
             _deathEffect?.Play();
 
-            Invoke(nameof(DespawnOrDestroy), _delayBeforeDespawn);
-        }
-
-        private void DespawnOrDestroy()
-        {
-            EnemyPool.Instance.ReleaseEnemy(gameObject);
+            Invoke(nameof(Despawn), _delayBeforeDespawn);
         }
 
         public void ResetState()
@@ -53,6 +48,11 @@ namespace Assets.Source.Scripts.Enemies
                 if (col != null) col.enabled = true;
 
             _deathEffect?.ResetEffect();
+        }
+
+        private void Despawn()
+        {
+            EnemyPool.Instance.ReleaseEnemy(gameObject);
         }
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Source.Scripts.Enemies;
 using Level;
 using UnityEngine;
@@ -12,6 +10,7 @@ public class LevelSetting : ScriptableObject
     public bool IsAvailable;
     public LevelElement[] LevelElements;
     public int LevelDurationSec;
+    public int LevelReward;
 
     [Range(0, 100)]
     public int AmmunitionGeneratePercent;

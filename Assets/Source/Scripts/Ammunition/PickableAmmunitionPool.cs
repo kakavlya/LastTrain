@@ -39,7 +39,7 @@ public class PickableAmmunitionPool : MonoBehaviour
         if (!_pools.ContainsKey(pickableAmmunitionPrefab))
         {
             _pools[pickableAmmunitionPrefab] = new ObjectPool<PickableAmmunition>(
-                createFunc: () => Instantiate(pickableAmmunitionPrefab),
+                createFunc: () => Instantiate(pickableAmmunitionPrefab, transform),
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
                 actionOnDestroy: (obj) => Destroy(obj.gameObject)
