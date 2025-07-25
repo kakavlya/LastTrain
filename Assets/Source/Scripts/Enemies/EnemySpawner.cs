@@ -15,7 +15,6 @@ namespace Assets.Source.Scripts.Enemies
 
         [Header("Scene-bound")]
         [SerializeField] private float _allowTrainDistance = 200f;
-        [SerializeField] private bool _useRuntime;
 
         private SpawnerConfig _spawnerConfig;
         private Transform[] _spawnPoints;

@@ -30,6 +30,6 @@ public class EnemyHealth : HealthBase
         base.Die();
         _view?.PlayDeathFX();
         _deathHandler?.HandleDeath();
-        RewardHandler.Instance.AddReward(_rewardForKill);
+        CoinsHandler.Instance.AddCoins(_rewardForKill);
     }
 }

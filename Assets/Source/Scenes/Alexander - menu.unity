@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 2104463641}
   - component: {fileID: 2104463640}
   m_Layer: 0
-  m_Name: RewardHandler
+  m_Name: CoinsHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104463639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2800d63767ad8fc408db01a0edd2e8bb, type: 3}
+  m_Script: {fileID: 11500000, guid: d7a85316232ea5347a534915d72a5e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2104463641
@@ -956,36 +956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelSettings:
   - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
+  - {fileID: 11400000, guid: a4fb585520731b44482bfe137c2cfcc9, type: 2}
   _buttonPrefab: {fileID: 5453967792360712563, guid: 919eb5a91423c4646b40f45f2952da2d, type: 3}
   _buttonTransform: {fileID: 1853077272}
   _sharedData: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
@@ -1122,7 +1093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2311998636339760404, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.999939
+      value: -5.9999695
       objectReference: {fileID: 0}
     - target: {fileID: 2311998636339760404, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1178,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4965367011953121997, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.2199707
+      value: -0.21994019
       objectReference: {fileID: 0}
     - target: {fileID: 4965367011953121997, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchoredPosition.y

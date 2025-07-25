@@ -7,15 +7,15 @@ public class UIReward : MonoBehaviour
 
     private void OnEnable()
     {
-        RewardHandler.Instance.RewardChanged += UpdateRewardUI;
+        CoinsHandler.Instance.coinsChanged += UpdateCoinsUI;
     }
 
     private void OnDisable()
     {
-        RewardHandler.Instance.RewardChanged -= UpdateRewardUI;
+        CoinsHandler.Instance.coinsChanged -= UpdateCoinsUI;
     }
 
-    private void UpdateRewardUI(int newRewardCount)
+    private void UpdateCoinsUI(int newRewardCount)
     {
         _textCount.text = newRewardCount.ToString();
     }
