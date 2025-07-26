@@ -11,14 +11,17 @@ public class WeaponDetailsPanel : MonoBehaviour
     [Header("Common")]
     [SerializeField] private Button _closeBtn;
     [SerializeField] private CanvasGroup _cg;
+    [SerializeField] private Image _weaponIcon;
 
     [Header("Damage Row")]
+    [SerializeField] private Slider _damageSlider;
     [SerializeField] private TextMeshProUGUI _damageLvl;
     [SerializeField] private TextMeshProUGUI _damageAmount;
     [SerializeField] private TextMeshProUGUI _damageCost;
     [SerializeField] private Button _damageUpgrade;
 
     [Header("Range Row")]
+    [SerializeField] private Slider _rangeSlider;
     [SerializeField] private TextMeshProUGUI _rangeLvl;
     [SerializeField] private TextMeshProUGUI _rangeDistance;
     [SerializeField] private TextMeshProUGUI _rangeCost;
@@ -33,6 +36,7 @@ public class WeaponDetailsPanel : MonoBehaviour
         _cfg = cfg;
         _prog = prog;
         _onClose = onClose;
+        _weaponIcon.sprite = _cfg.Icon;
 
         _closeBtn.onClick.RemoveAllListeners();
         _damageUpgrade.onClick.RemoveAllListeners();
@@ -70,8 +74,14 @@ public class WeaponDetailsPanel : MonoBehaviour
 
     private void Refresh()
     {
+        float dmgRatio = _prog.DamageLevel / (float)_cfg.MaxDamageLevel;
+        float rngRatio = _prog.RangeLevel / (float)_cfg.MaxRangeLevel;
+
         _damageLvl.text = $"{_prog.DamageLevel}/{_cfg.MaxDamageLevel}";
         _rangeLvl.text = $"{_prog.RangeLevel}/{_cfg.MaxRangeLevel}";
+
+        _damageSlider.value = dmgRatio;
+        _rangeSlider.value = rngRatio;
 
         _rangeDistance.text = _cfg.GetStat(StatType.Range, _prog.RangeLevel).ToString("F1");
         _damageAmount.text = _cfg.GetStat(StatType.Damage, _prog.DamageLevel).ToString("F1");
