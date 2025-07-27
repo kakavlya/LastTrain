@@ -3,10 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Config/WeaponUpgrade")]
 public class WeaponUpgradeConfig : ScriptableObject
 {
-    [SerializeField] string _weaponId;
+    [SerializeField] private string _weaponId;
+    [SerializeField] private string _weaponName;
 
     public string WeaponId => 
         string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
+
+    public string WeaponName =>
+        string.IsNullOrWhiteSpace(_weaponName) ? _weaponName : _weaponName;
 
     public AnimationCurve DamageCurve; // 0 - 1
     public AnimationCurve RangeCurve;  // 0 - 1 

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
   m_Name: MachineGunUpgradeConfig
   m_EditorClassIdentifier: 
-  _weaponId: 
+  _weaponId: MachineGun
+  _weaponName: Machine Gun
   DamageCurve:
     serializedVersion: 2
     m_Curve:

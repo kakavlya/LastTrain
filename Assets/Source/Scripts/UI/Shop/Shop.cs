@@ -68,7 +68,9 @@ public class Shop : MonoBehaviour
     private void OnDetailsClosed()
     {
         _blocker.gameObject.SetActive(false);
-        RefreshCoins();                              
+        Debug.Log("[Shop] Details closed");
+        RefreshCoins();
+        BuildShop();
     }
 
     private void RefreshCoins()

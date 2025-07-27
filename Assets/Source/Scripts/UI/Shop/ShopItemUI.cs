@@ -9,7 +9,10 @@ using UnityEngine.EventSystems;
 public class ShopItemUI : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image _icon;
+    [SerializeField] private TMP_Text _weaponName;
     [SerializeField] private TMP_Text _levelText;
+    [SerializeField] private TMP_Text _dmgText;
+    [SerializeField] private TMP_Text _rangeText;
 
     private WeaponUpgradeConfig _cfg;
     private WeaponProgress _progress;
@@ -24,7 +27,7 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
         _onSelected = onSelected;
 
         _icon.sprite = cfg.Icon;
-        UpdateLevelLabel();
+        Refresh();
     }
 
     public void OnPointerClick(PointerEventData _)
@@ -32,14 +35,19 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
         _onSelected?.Invoke(_cfg, _progress);
     }
 
-    private void UpdateLevelLabel()
+    private void UpdateTextLabels()
     {
         int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
+
+        _rangeText.text = _cfg.GetStat(StatType.Range, _progress.RangeLevel).ToString("F1");
+        _dmgText.text = _cfg.GetStat(StatType.Damage, _progress.DamageLevel).ToString("F1");
+
         _levelText.text = $"Lvl {sumLevel}";
+        _weaponName.text = _cfg.WeaponName;
     }
 
     public void Refresh()
     {
-        UpdateLevelLabel();
+        UpdateTextLabels();
     }
 }
