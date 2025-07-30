@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ProgressData : MonoBehaviour
+[System.Serializable]
+public class ProgressData
 {
     public List<WeaponProgress> Weapons = new List<WeaponProgress>();
     public List<int> UnlockedLevels = new List<int>();    

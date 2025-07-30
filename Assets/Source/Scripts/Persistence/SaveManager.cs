@@ -22,6 +22,8 @@ public class SaveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _savePath = Path.Combine(Application.persistentDataPath, "progress.json");
+        string fullPath = System.IO.Path.Combine(Application.persistentDataPath, "progress.json");
+        Debug.Log($"Full save file = {fullPath}");
         Load();
     }
 
