@@ -5,9 +5,10 @@ public class UIReward : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textCount;
 
-    private void OnEnable()
+    private void Start()
     {
         CoinsHandler.Instance.coinsChanged += UpdateCoinsUI;
+        UpdateCoinsUI(CoinsHandler.Instance.CoinsCount);
     }
 
     private void OnDisable()

@@ -241,17 +241,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2066991887361248507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51308146dff97ba48ba2adcdcf235826, type: 3}
+  m_Script: {fileID: 11500000, guid: 975596389ebec644cb925a7f905fc815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _visualRoot: {fileID: 3209630958734134741}
-  _massFactor: 1.8
+  _massFactor: 1
   _swayAmount: 0.2
-  _swaySpeed: 3
-  _bounceAmount: 0.25
-  _bounceSpeed: 4
-  _tiltAmount: 1
-  _tiltSpeed: 8
+  _swaySpeed: 1.5
+  _bounceAmount: 0.15
+  _bounceSpeed: 2.5
+  _tiltAmount: 6
+  _tiltSpeed: 2
 --- !u!114 &5794946387610806708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +511,6 @@ MonoBehaviour:
   _enemyView: {fileID: 416923362260610303}
   _deathEffect: {fileID: 5794946387610806708}
   _delayBeforeDespawn: 2
-  _useObjectPool: 0
 --- !u!114 &416923362260610303
 MonoBehaviour:
   m_ObjectHideFlags: 0

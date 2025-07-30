@@ -32,10 +32,13 @@ public class CoinsHandler : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        CoinsCount = SaveManager.Instance.Data.Coins;
     }
 
     public void AddCoins(int addedCoins)
     {
         CoinsCount += addedCoins;
+        SaveManager.Instance.Data.Coins += addedCoins;
     }
 }

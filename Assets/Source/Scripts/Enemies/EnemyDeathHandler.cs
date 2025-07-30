@@ -4,13 +4,13 @@ namespace Assets.Source.Scripts.Enemies
 {
     public class EnemyDeathHandler : MonoBehaviour
     {
-        [SerializeField] private EnemyView _enemyView;
+        [SerializeField] private ModelEffects _enemyView;
         [SerializeField] private EnemyDeathEffect _deathEffect;
         [SerializeField] private float _delayBeforeDespawn = 2f;
 
         private EnemyMovement _movement;
         private EnemyController _controller;
-        private EnemyVisualWobble _wobble;
+        private VisualWobble _wobble;
         private Collider[] _collidersToDisable;
         private int _rewardForKill;
 
@@ -18,7 +18,7 @@ namespace Assets.Source.Scripts.Enemies
         {
             _movement = GetComponent<EnemyMovement>();
             _controller = GetComponent<EnemyController>();
-            _wobble = GetComponentInChildren<EnemyVisualWobble>();
+            _wobble = GetComponentInChildren<VisualWobble>();
             _collidersToDisable = GetComponentsInChildren<Collider>();
         }
 

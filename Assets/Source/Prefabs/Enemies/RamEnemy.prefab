@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3616746351612052061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51308146dff97ba48ba2adcdcf235826, type: 3}
+  m_Script: {fileID: 11500000, guid: 975596389ebec644cb925a7f905fc815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _visualRoot: {fileID: 6264318018855306405}
@@ -155,7 +155,6 @@ MonoBehaviour:
   _enemyView: {fileID: 4380234752805251115}
   _deathEffect: {fileID: 4169378433265268266}
   _delayBeforeDespawn: 2.5
-  _useObjectPool: 0
 --- !u!114 &4380234752805251115
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ namespace Assets.Source.Scripts.Core
         [SerializeField] private int _maxHealth = 100;
         
         private int _currentHealth;
+        private ModelEffects _view;
 
         public UnityEvent OnDeath;
 
@@ -20,6 +21,7 @@ namespace Assets.Source.Scripts.Core
 
         protected virtual void Awake()
         {
+            _view = GetComponent<ModelEffects>();
         }
 
         protected virtual void OnEnable()
@@ -34,6 +36,8 @@ namespace Assets.Source.Scripts.Core
                 return;
 
             _currentHealth -= damage;
+            _view?.PlayHitFX();
+
             if (_currentHealth <= 0)
             {
                 Die();
@@ -41,6 +45,7 @@ namespace Assets.Source.Scripts.Core
         }
         protected virtual void Die()
         {
+            _view?.PlayDeathFX();
             IsDead = true;
             OnDeath?.Invoke();
         }

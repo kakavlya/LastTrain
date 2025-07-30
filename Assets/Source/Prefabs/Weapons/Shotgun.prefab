@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6710116274282371748}
   - component: {fileID: 6802534749321436909}
   - component: {fileID: 922528089908031343}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Tracer_Single_Smoke_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4907,7 +4907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5059232316731760637}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VFXParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4940,7 +4940,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2073479243912769807}
   - component: {fileID: 7831339479136425627}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5035,7 +5035,7 @@ GameObject:
   - component: {fileID: 3258541172598065649}
   - component: {fileID: 686627100713005269}
   - component: {fileID: 2862045286540917953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Heavy_Flash_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9871,7 +9871,7 @@ GameObject:
   - component: {fileID: 1180752219424591382}
   - component: {fileID: 1349146643530419618}
   - component: {fileID: 7138727914327316349}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9954,7 +9954,7 @@ GameObject:
   - component: {fileID: 5586103643007433488}
   - component: {fileID: 5957007955267950674}
   - component: {fileID: 1880125605555996079}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Heavy_Single_Tracers_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14695,13 +14695,13 @@ GameObject:
   - component: {fileID: 3678828438717905573}
   - component: {fileID: 7834140368202916372}
   - component: {fileID: 575378161337958201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4142875306226948026
 Transform:
   m_ObjectHideFlags: 0
@@ -14785,10 +14785,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aimingTarget: {fileID: 0}
-  _muzzleEffectPrefab: {fileID: 0}
+  _muzzleEffectPrefab: {fileID: 198586439706424864, guid: f9f016040c11f4a45a8904688623ce0a, type: 3}
   _ammunition: {fileID: 0}
-  _uiSpriteActive: {fileID: 0}
-  _uiSpriteDeactive: {fileID: 0}
+  _uiSpriteActive: {fileID: 21300000, guid: c487b782e3ca11c46adc9edd4c22a198, type: 3}
+  _uiSpriteDeactive: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
   Owner: {fileID: 0}
   FirePoint: {fileID: 6155232861971313899}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 5e803b15a24fec64b936cac386976e88, type: 3}
@@ -14922,7 +14922,7 @@ GameObject:
   - component: {fileID: 2757703607563347246}
   - component: {fileID: 6191377900681935041}
   - component: {fileID: 3762353726363798138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Acog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15005,7 +15005,7 @@ GameObject:
   - component: {fileID: 6183562029669904015}
   - component: {fileID: 4316941331518609287}
   - component: {fileID: 270126502620745073}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Tracer_Single_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19940,7 +19940,7 @@ GameObject:
   - component: {fileID: 3366889634388143133}
   - component: {fileID: 1131754218610350509}
   - component: {fileID: 5712956417377449191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Reddot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20023,7 +20023,7 @@ GameObject:
   - component: {fileID: 162505396254770212}
   - component: {fileID: 3282394482751522333}
   - component: {fileID: 3277662061144428904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20104,7 +20104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6155232861971313899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20120,7 +20120,7 @@ Transform:
   m_GameObject: {fileID: 8857610175303106503}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.098, z: 2.129}
+  m_LocalPosition: {x: 0.01, y: 0.21, z: 1.161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

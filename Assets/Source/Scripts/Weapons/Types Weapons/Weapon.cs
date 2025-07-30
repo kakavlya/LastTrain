@@ -5,7 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
     [SerializeField] private Ammunition _ammunition = null;
     [SerializeField] private Sprite _uiSpriteActive;
@@ -57,9 +56,6 @@ public class Weapon : MonoBehaviour
     private bool FirePossibleCalculate()
     {
         if (Time.time - _lastFireTime < FireDelay)
-            return false;
-
-        if (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue)
             return false;
 
         _lastFireTime = Time.time;

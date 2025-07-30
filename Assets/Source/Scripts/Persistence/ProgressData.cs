@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressData : MonoBehaviour
+public class ProgressData
 {
     public List<WeaponProgress> Weapons = new List<WeaponProgress>();
-    public List<int> UnlockedLevels = new List<int>();    
+    public List<int> UnlockedLevels = new List<int>();
     public int Coins;
 
     public ProgressData()

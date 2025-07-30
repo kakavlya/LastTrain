@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8597894466120892595}
   - component: {fileID: 6116238183674549921}
   - component: {fileID: 7865432686051139408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlameThrowerFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3476638899428692577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4876,16 +4876,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116537474024852836}
-  - component: {fileID: 637492717409913579}
   - component: {fileID: 6460137585123696934}
   - component: {fileID: 1003300737019911048}
-  m_Layer: 0
+  - component: {fileID: 4888273117753640418}
+  m_Layer: 7
   m_Name: FlameThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4116537474024852836
 Transform:
   m_ObjectHideFlags: 0
@@ -4902,35 +4902,6 @@ Transform:
   - {fileID: 8597894466120892595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &637492717409913579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639000250642475742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff3448c2f62857f46a102bba46223474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
-  _muzzleEffectPrefab: {fileID: 0}
-  _ammunition: {fileID: 0}
-  _uiSpriteActive: {fileID: 0}
-  _uiSpriteDeactive: {fileID: 0}
-  Owner: {fileID: 0}
-  FirePoint: {fileID: 3476638899428692577}
-  ProjectilePrefab: {fileID: 0}
-  _weaponInput: {fileID: 0}
-  FireDelay: 0.1
-  UsePooling: 1
-  ProjectileSpeed: 100
-  Damage: 10
-  MaxAttackDistance: 30
-  _horisontalAngle: 30
-  _verticalAngle: 60
-  _flameParticle: {fileID: 7865432686051139408}
 --- !u!82 &6460137585123696934
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4942,7 +4913,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5040,8 +5011,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 8300000, guid: a68cd189059509f4e9a7d5e2333fffc3, type: 3}
-  _weapon: {fileID: 0}
+  _weapon: {fileID: 4888273117753640418}
   _volume: 0.5
+--- !u!114 &4888273117753640418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639000250642475742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff3448c2f62857f46a102bba46223474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aimingTarget: {fileID: 0}
+  _muzzleEffectPrefab: {fileID: 0}
+  _ammunition: {fileID: 0}
+  _uiSpriteActive: {fileID: 21300000, guid: 8ea25020e2e1dda4f9fc6bd7e25b48e4, type: 3}
+  _uiSpriteDeactive: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
+  Owner: {fileID: 0}
+  FirePoint: {fileID: 3476638899428692577}
+  ProjectilePrefab: {fileID: 0}
+  _weaponInput: {fileID: 0}
+  FireDelay: 0.05
+  UsePooling: 1
+  ProjectileSpeed: 100
+  Damage: 30
+  MaxAttackDistance: 50
+  _horisontalAngle: 30
+  _verticalAngle: 90
+  _flameParticle: {fileID: 7865432686051139408}
 --- !u!1001 &7029888338804750894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5053,6 +5053,10 @@ PrefabInstance:
     - target: {fileID: 168810, guid: 45d2bc2c9ccd4e440ab916f134b20ad1, type: 3}
       propertyPath: m_Name
       value: SA_Wep_FlamethrowerHandle
+      objectReference: {fileID: 0}
+    - target: {fileID: 168810, guid: 45d2bc2c9ccd4e440ab916f134b20ad1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 168810, guid: 45d2bc2c9ccd4e440ab916f134b20ad1, type: 3}
       propertyPath: m_IsActive
