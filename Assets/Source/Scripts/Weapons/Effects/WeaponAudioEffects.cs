@@ -1,14 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class WeaponAudioEffects : MonoBehaviour
 {
     [SerializeField] private AudioClip _shootSound;
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private float _volume = 0.5f;
 
-    private AudioSource _audioSource;
     private bool _isPlaying;
     private float _trackDelay = 0.1f;
     private float _clipLength;
@@ -17,10 +14,7 @@ public class WeaponAudioEffects : MonoBehaviour
     {
         _weapon.OnFired += PlayAudioEffect;
         _weapon.OnStopFired += StopAudioEffect;
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.volume = _volume;
-        _audioSource.clip = _shootSound;
-        _clipLength = _audioSource.clip.length;
+        _clipLength = _shootSound.length;
     }
 
     private void OnDisable()
@@ -31,39 +25,26 @@ public class WeaponAudioEffects : MonoBehaviour
 
     private void PlayAudioEffect()
     {
-        if (_audioSource != null && _shootSound != null && _isPlaying == false)
+        if (_shootSound == null && _isPlaying)
+            return;
+
+        if (_weapon.GetIsLoopedFireSound())
         {
-            if (_weapon.GetIsLoopedFireSound())
-            {
-                _isPlaying = true;
-                _audioSource.Play();
-                StartCoroutine(PlayNextLoop());
-            }
-            else
-            {
-                _audioSource.PlayOneShot(_shootSound);
-            }
+            _isPlaying = true;
+            AudioManager.Instance.PlayWeaponSound(_shootSound, true);
         }
-    }
-
-    private IEnumerator PlayNextLoop()
-    {
-        _clipLength = _audioSource.clip.length;
-        yield return new WaitForSeconds(_clipLength - _trackDelay);
-
-        if (_isPlaying == true)
+        else
         {
-            _audioSource.Play();
-            StartCoroutine(PlayNextLoop());
+            AudioManager.Instance.PlayWeaponSound(_shootSound, false);
         }
     }
 
     private void StopAudioEffect()
     {
-        if (_audioSource != null && _shootSound != null && _isPlaying == true)
+        if (_shootSound != null && _isPlaying == true)
         {
             _isPlaying = false;
-            _audioSource.Stop();
+            AudioManager.Instance.StopWeaponSound();
         }
     }
 }
