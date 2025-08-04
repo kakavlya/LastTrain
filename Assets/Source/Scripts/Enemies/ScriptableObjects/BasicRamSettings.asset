@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74277a9078a810f48adc82df6515ce04, type: 3}
   m_Name: BasicRamSettings
   m_EditorClassIdentifier: 
-  holdDistance: 17
-  impactRadius: 1.5
+  holdDistance: 30
+  impactRadius: 20
   retreatDistance: 20
-  holdSpeed: 2
-  chargeSpeed: 40
-  retreatSpeed: 8
+  holdSpeed: 1
+  chargeSpeed: 100
+  retreatSpeed: 10
   turnSpeed: 100
-  impactPause: 0.5
+  impactPause: 2
   holdPauseRange: {x: 8, y: 15}
   damage: 20

@@ -3,7 +3,7 @@
 [RequireComponent(typeof(EnemyMovement))]
 public class EnemyRamController : MonoBehaviour
 {
-    public enum State { Hold, Charge, Impact, Retreat }
+    public enum State { Hold, Charge, Impact }
 
     private Transform _player;
     private EnemyMovement _movement;
@@ -72,7 +72,6 @@ public class EnemyRamController : MonoBehaviour
             case State.Hold: UpdateHold(); break;
             case State.Charge: UpdateCharge(); break;
             case State.Impact: UpdateImpact(); break;
-            case State.Retreat: UpdateRetreat(); break;
         }
     }
 
@@ -115,30 +114,20 @@ public class EnemyRamController : MonoBehaviour
         _state = State.Impact;
         _stateTimer = _impactPause;
 
+        _movement.SetSpeed(0f);
         _player.GetComponent<IDamageable>()?.TakeDamage(20);
     }
 
     private void UpdateImpact()
     {
         _stateTimer -= Time.deltaTime;
+
+        float t = 1f - (_stateTimer / _impactPause);         // 0 → 1
+        float speedNow = Mathf.Lerp(0f, _chargeSpeed, t);
+        _movement.SetSpeed(speedNow);
+
         if (_stateTimer <= 0f)
-            EnterRetreat();
+            EnterCharge();
     }
 
-    private void EnterRetreat()
-    {
-        _state = State.Retreat;
-        _movement.SetSpeed(_retreatSpeed);
-
-        Vector3 awayDir = (transform.position - _player.position).WithY(0f).normalized;
-        _retreatTarget = transform.position + awayDir * _retreatDistance;
-    }
-
-    private void UpdateRetreat()
-    {
-        _movement.MoveForwardTo(_retreatTarget);
-
-        if (Vector3.Distance(transform.position, _retreatTarget) < 0.5f)
-            EnterHold();
-    }
 }
