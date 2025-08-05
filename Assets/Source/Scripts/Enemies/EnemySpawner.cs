@@ -12,6 +12,7 @@ namespace Assets.Source.Scripts.Enemies
         [SerializeField] private LevelGenerator _levelGenerator;
         [SerializeField] private SharedData _sharedData;
         [SerializeField] private TrainMovement _trainMovement;
+        [SerializeField] private BoxCollider _trainCollider;
 
         [Header("Scene-bound")]
         [SerializeField] private float _allowTrainDistance = 200f;
@@ -105,7 +106,7 @@ namespace Assets.Source.Scripts.Enemies
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
             var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
-            spawnEntry.behaviorSettings?.Initialize(gameObject, player);
+            spawnEntry.behaviorSettings?.Initialize(gameObject, player, _trainCollider);
         }
 
         public void Pause() => _paused = true;

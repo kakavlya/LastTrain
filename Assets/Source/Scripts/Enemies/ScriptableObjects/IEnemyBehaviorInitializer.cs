@@ -4,6 +4,6 @@ namespace Assets.Source.Scripts.Enemies
 {
     public interface IEnemyBehaviorInitializer
     {
-        void Initialize(GameObject enemy, Transform playerTarget);
+        void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider);
     }
 }

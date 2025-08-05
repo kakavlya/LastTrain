@@ -1670,6 +1670,7 @@ MonoBehaviour:
   _levelGenerator: {fileID: 817780961}
   _sharedData: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
   _trainMovement: {fileID: 1957784517}
+  _trainCollider: {fileID: 1957784518}
   _allowTrainDistance: 500
   _useRuntime: 0
 --- !u!4 &851371661
@@ -3208,6 +3209,22 @@ PrefabInstance:
       propertyPath: cells.Array.data[2]
       value: 
       objectReference: {fileID: 1822635294}
+    - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_Size.x
+      value: 3.9436977
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_Size.z
+      value: 18.278086
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_Center.x
+      value: -0.099323116
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: m_Center.z
+      value: 0.63903505
+      objectReference: {fileID: 0}
     - target: {fileID: 5879944412009858589, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _weaponInput
       value: 
@@ -3484,6 +3501,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9197781d5783740448a83c4bd131c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1957784518 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+  m_PrefabInstance: {fileID: 1888580353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2028138678
 GameObject:
   m_ObjectHideFlags: 0

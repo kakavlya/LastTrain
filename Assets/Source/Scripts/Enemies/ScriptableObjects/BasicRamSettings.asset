@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: BasicRamSettings
   m_EditorClassIdentifier: 
   holdDistance: 30
-  impactRadius: 20
-  retreatDistance: 20
+  impactOffset: 7
   holdSpeed: 1
   chargeSpeed: 100
-  retreatSpeed: 10
   turnSpeed: 100
   impactPause: 2
   holdPauseRange: {x: 8, y: 15}

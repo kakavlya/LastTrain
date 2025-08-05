@@ -15,7 +15,7 @@ namespace Assets.Source.Scripts.Enemies
         public float explosionRadius = 3f;
         [Tooltip("Damage in radius")]
         public int damage = 100;
-        public override void Initialize(GameObject enemy, Transform playerTarget)
+        public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var exploder = enemy.GetComponent<EnemyExplodingController>();
             if (exploder == null)

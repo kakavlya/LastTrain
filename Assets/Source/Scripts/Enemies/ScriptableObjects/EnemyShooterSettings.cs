@@ -28,7 +28,7 @@ namespace Assets.Source.Scripts.Enemies
         [Tooltip("Projectile Damage")]
         public int projectileDamage = 25;
 
-        public override void Initialize(GameObject enemy, Transform playerTarget)
+        public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var shooter = enemy.GetComponent<EnemyShooterController>();
             if (shooter == null) shooter = enemy.AddComponent<EnemyShooterController>();

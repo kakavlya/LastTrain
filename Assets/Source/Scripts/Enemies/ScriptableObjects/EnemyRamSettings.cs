@@ -8,13 +8,11 @@ namespace Assets.Source.Scripts.Enemies
     {
         [Header("Ram Distances")]
         public float holdDistance;
-        public float impactRadius;
-        public float retreatDistance;
+        public float impactOffset;
 
         [Header("Ram Speeds")]
         public float holdSpeed;
         public float chargeSpeed;
-        public float retreatSpeed;
         public float turnSpeed;
 
         [Header("Ram Delays")]
@@ -24,22 +22,20 @@ namespace Assets.Source.Scripts.Enemies
         [Header("Ram Damage")]
         public int damage;
 
-        public override void Initialize(GameObject enemy, Transform playerTarget)
+        public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var ram = enemy.GetComponent<EnemyRamController>();
             if (ram == null) ram = enemy.AddComponent<EnemyRamController>();
 
             ram.Init(
                 player: playerTarget,
+                playerCollider: playerCollider,
+                impactOffset: impactOffset,
                 holdDistance: holdDistance,
-                impactRadius: impactRadius,
-                retreatDistance: retreatDistance,
                 holdSpeed: holdSpeed,
                 chargeSpeed: chargeSpeed,
-                retreatSpeed: retreatSpeed,
                 impactPause: impactPause,
                 holdPauseRange: holdPauseRange,
-                turnSpeed: turnSpeed,
                 damage: damage
             );
         }

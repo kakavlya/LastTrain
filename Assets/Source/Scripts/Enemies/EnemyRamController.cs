@@ -6,16 +6,14 @@ public class EnemyRamController : MonoBehaviour
     public enum State { Hold, Charge, Impact }
 
     private Transform _player;
+    private BoxCollider _playerCollider; 
     private EnemyMovement _movement;
+    private float _safeOffset = 5f;
 
     private float _holdDistance;
-    private float _impactRadius;
-    private float _retreatDistance;
 
     private float _holdSpeed;
     private float _chargeSpeed;
-    private float _retreatSpeed;
-    private float _turnSpeed;
 
     private float _impactPause;
     private float _holdPauseMin;
@@ -27,31 +25,27 @@ public class EnemyRamController : MonoBehaviour
     private float _stateTimer;
     private Vector3 _retreatTarget;
 
+
     public void Init(
         Transform player,
+        BoxCollider playerCollider,
+        float impactOffset,
         float holdDistance,
-        float impactRadius,
-        float retreatDistance,
         float holdSpeed,
         float chargeSpeed,
-        float retreatSpeed,
         float impactPause,
-        float turnSpeed,
         Vector2 holdPauseRange, // x = min, y = max
         int damage
     )
     {
         _player = player;
+        _playerCollider = playerCollider;
         _movement = GetComponent<EnemyMovement>();
-
-        _holdDistance = holdDistance;
-        _impactRadius = impactRadius;
-        _retreatDistance = retreatDistance;
+        _safeOffset = impactOffset;
+        _holdDistance = holdDistance;        
 
         _holdSpeed = holdSpeed;
         _chargeSpeed = chargeSpeed;
-        _retreatSpeed = retreatSpeed;
-        _turnSpeed = turnSpeed;
 
         _impactPause = impactPause;
         _holdPauseMin = holdPauseRange.x;
@@ -105,8 +99,20 @@ public class EnemyRamController : MonoBehaviour
     {
         _movement.MoveForwardTo(_player.position);
 
-        if (Vector3.Distance(transform.position, _player.position) <= _impactRadius)
+        // closest point on player collider
+        Vector3 closest = _playerCollider.ClosestPoint(transform.position);
+        Vector3 dirFromSurface = (transform.position - closest).WithY(0f);
+        float dist = dirFromSurface.magnitude;
+
+        if (dist <= _safeOffset)
+        {
+            if (dist > 0.001f)                    // null divide protection
+                transform.position = closest + dirFromSurface.normalized * _safeOffset;
+            else
+                transform.position = closest - _player.forward * _safeOffset;
+
             EnterImpact();
+        }
     }
 
     private void EnterImpact()
