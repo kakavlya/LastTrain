@@ -7,6 +7,8 @@ public class ProgressData
     public List<WeaponProgress> Weapons = new List<WeaponProgress>();
     public List<int> UnlockedLevels = new List<int>();
     public int Coins;
+    public float MusicVolume;
+    public float EffectsVolume;
 
     public ProgressData()
     {
@@ -19,5 +21,7 @@ public class ProgressData
         // Unlocking 1 level on start
         UnlockedLevels.Add(1);
         Coins = 0;
+        MusicVolume = 0.5f;
+        EffectsVolume = 0.5f;
     }
 }

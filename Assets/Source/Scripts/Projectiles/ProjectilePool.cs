@@ -9,14 +9,7 @@ public class ProjectilePool : MonoBehaviour
 
     public void Init()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
