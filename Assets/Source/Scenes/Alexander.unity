@@ -3211,19 +3211,19 @@ PrefabInstance:
       objectReference: {fileID: 1822635294}
     - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: m_Size.x
-      value: 3.9436977
+      value: 4.3471146
       objectReference: {fileID: 0}
     - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: m_Size.z
-      value: 18.278086
+      value: 18.897388
       objectReference: {fileID: 0}
     - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: m_Center.x
-      value: -0.099323116
+      value: -0.028674763
       objectReference: {fileID: 0}
     - target: {fileID: 5827961806859840045, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: m_Center.z
-      value: 0.63903505
+      value: 0.9486832
       objectReference: {fileID: 0}
     - target: {fileID: 5879944412009858589, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _weaponInput

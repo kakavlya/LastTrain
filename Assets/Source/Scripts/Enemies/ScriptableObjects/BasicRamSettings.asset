@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicRamSettings
   m_EditorClassIdentifier: 
   holdDistance: 30
-  impactOffset: 7
+  impactOffset: 1
   holdSpeed: 1
   chargeSpeed: 100
   turnSpeed: 100

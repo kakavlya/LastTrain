@@ -83,7 +83,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7516327925800580733}
-  - component: {fileID: 6332248324821449746}
   - component: {fileID: 6167158445026718390}
   - component: {fileID: 6509556857058219270}
   - component: {fileID: 4380234752805251115}
@@ -114,18 +113,6 @@ Transform:
   - {fileID: 6264318018855306405}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6332248324821449746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899597090557373887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3808528bbdcb0d24287464485ae5ee4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6167158445026718390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +199,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.1547642, y: 15, z: 7.4879746}
-  m_Center: {x: -0.013474464, y: 7, z: -0.2131269}
+  m_Size: {x: 3.1547642, y: 15, z: 8.013972}
+  m_Center: {x: -0.013474464, y: 7, z: 0.049869537}
 --- !u!114 &1578270108317604101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24995e0fc73b6b244aaf7cc7aea2d737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyCollider: {fileID: 7358646837193593047}
+  checkRadius: 20
 --- !u!65 &-3354779207204422643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -245,8 +234,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.1547642, y: 3.383674, z: 7.4879746}
-  m_Center: {x: -0.013474464, y: 1.1918374, z: -0.2131269}
+  m_Size: {x: 3.1547642, y: 3.3836741, z: 8.0993}
+  m_Center: {x: -0.013474464, y: 1.1918377, z: 0.092534706}
 --- !u!1001 &2652764040312189799
 PrefabInstance:
   m_ObjectHideFlags: 0

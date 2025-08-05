@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using Assets.Source.Scripts.Enemies;
+using UnityEngine;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class EnemyRamController : MonoBehaviour
 {
     public enum State { Hold, Charge, Impact }
 
+    [SerializeField] private BoxCollider _enemyCollider;
+    [SerializeField] private float checkRadius = 10f;
+
     private Transform _player;
     private BoxCollider _playerCollider; 
     private EnemyMovement _movement;
-    private float _safeOffset = 5f;
+    private float _safeOffset;
 
     private float _holdDistance;
 
@@ -24,7 +28,7 @@ public class EnemyRamController : MonoBehaviour
     private State _state;
     private float _stateTimer;
     private Vector3 _retreatTarget;
-
+    private float _checkRadiusSqr;
 
     public void Init(
         Transform player,
@@ -51,6 +55,9 @@ public class EnemyRamController : MonoBehaviour
         _holdPauseMin = holdPauseRange.x;
         _holdPauseMax = holdPauseRange.y;
         _damage = damage;
+
+        _checkRadiusSqr = checkRadius * checkRadius;
+
         EnterHold();
     }
 
@@ -99,18 +106,20 @@ public class EnemyRamController : MonoBehaviour
     {
         _movement.MoveForwardTo(_player.position);
 
-        // closest point on player collider
-        Vector3 closest = _playerCollider.ClosestPoint(transform.position);
-        Vector3 dirFromSurface = (transform.position - closest).WithY(0f);
-        float dist = dirFromSurface.magnitude;
+        float sqr = (_player.position - transform.position).sqrMagnitude;
+        if (sqr > _checkRadiusSqr)
+            return;
 
-        if (dist <= _safeOffset)
+        bool overlapped;
+        Vector3 dir;
+        float dist = ColliderUtils.Distance(_enemyCollider, _playerCollider, out dir, out overlapped);
+
+        if (overlapped || dist <= _safeOffset)
         {
-            if (dist > 0.001f)                    // null divide protection
-                transform.position = closest + dirFromSurface.normalized * _safeOffset;
-            else
-                transform.position = closest - _player.forward * _safeOffset;
+            float maxBack = _chargeSpeed * Time.deltaTime;      
+            float correction = _safeOffset - dist;
 
+            transform.position += dir * Mathf.Clamp(correction, 0f, maxBack);
             EnterImpact();
         }
     }
