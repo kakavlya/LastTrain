@@ -6,4 +6,5 @@ using UnityEngine;
 public class SharedData : ScriptableObject
 {
     public LevelSetting LevelSetting;
+    public List<WeaponInfo> WeaponInfos;
 }

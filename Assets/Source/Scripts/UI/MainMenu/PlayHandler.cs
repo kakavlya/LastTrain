@@ -1,32 +1,27 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayHandler : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textCurrentLevel;
     [SerializeField] private LevelsHandler _levelsHandler;
     [SerializeField] private string _gameplayScene;
+    [SerializeField] private Button _playButton;
 
-    private void OnEnable()
+    public event Action GameStarted;
+
+    private void Awake()
     {
-        _levelsHandler.LevelChosed += ShowCurrentLevel;
+        _playButton.onClick.AddListener(StartPlay);
     }
 
-    private void OnDisable()
-    {
-        _levelsHandler.LevelChosed -= ShowCurrentLevel;
-    }
-
-    private void ShowCurrentLevel(LevelSetting levelSetting)
-    {
-        _textCurrentLevel.text = levelSetting.LevelName;
-    }
-
-    public void StartPlay()
+    private void StartPlay()
     {
         if (_levelsHandler.IsChosed)
         {
+            GameStarted?.Invoke();
             SceneManager.LoadScene(_gameplayScene);
         }
     }

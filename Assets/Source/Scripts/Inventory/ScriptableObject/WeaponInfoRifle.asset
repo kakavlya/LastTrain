@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606304c35b63a734289f99c5ce19a2ac, type: 3}
-  m_Name: SharedData
+  m_Script: {fileID: 11500000, guid: 52a8be3938dca144f805fd88929269c7, type: 3}
+  m_Name: WeaponInfoRifle
   m_EditorClassIdentifier: 
-  LevelSetting: {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
-  WeaponInfos: []
+  WeaponName: Rifle
+  Icon: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}
+  WeaponPrefab: {fileID: 1530790198974267048, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}

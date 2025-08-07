@@ -35,6 +35,8 @@ public class WeaponsHandler : MonoBehaviour
         cells[0].ActivateWeapon(_currentWeapon);
         OnWeaponChange?.Invoke(_currentWeapon);
         _weaponInput.WeaponChanged += ChooseWeapon;
+        _weaponInput.Fired += HandleFire;
+        _weaponInput.StopFired += HandleStopFire;
     }
 
     private void OnDisable()
@@ -45,6 +47,8 @@ public class WeaponsHandler : MonoBehaviour
         }
 
         _weaponInput.WeaponChanged -= ChooseWeapon;
+        _weaponInput.Fired -= HandleFire;
+        _weaponInput.StopFired -= HandleStopFire;
     }
 
     private void ChooseWeapon(int weaponNumber)
@@ -65,5 +69,15 @@ public class WeaponsHandler : MonoBehaviour
             cells[_currentNumberWeapon].ActivateWeapon(_currentWeapon);
             OnWeaponChange?.Invoke(_currentWeapon);
         }
+    }
+
+    private void HandleFire()
+    {
+        _currentWeapon?.Fire();
+    }
+
+    private void HandleStopFire()
+    {
+        _currentWeapon?.StopFire();
     }
 }

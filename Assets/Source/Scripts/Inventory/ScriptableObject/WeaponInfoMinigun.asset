@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a8be3938dca144f805fd88929269c7, type: 3}
+  m_Name: WeaponInfoMinigun
+  m_EditorClassIdentifier: 
+  WeaponName: Minigun
+  Icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
+  WeaponPrefab: {fileID: 2974017237273445047, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}

@@ -10,10 +10,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Sprite _uiSpriteActive;
     [SerializeField] private Sprite _uiSpriteDeactive;
 
-    [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
-    [SerializeField] protected PlayerInput _weaponInput;
 
     [Header("Shoot Settings")]
     [SerializeField] protected float FireDelay = 0.1f;
@@ -22,6 +20,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
+    protected GameObject Owner;
     private float _lastFireTime;
 
     protected Vector3 Direction => FirePoint.forward;
@@ -35,20 +34,12 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
-        _weaponInput.Fired += Fire;
-        _weaponInput.StopFired += StopFire;
-        Owner = Owner != null ? Owner : gameObject;
-    }
-
-    private void OnDisable()
-    {
-        _weaponInput.Fired -= Fire;
-        _weaponInput.StopFired -= StopFire;
+        Owner = gameObject;
     }
 
     public virtual bool GetIsLoopedFireSound() => false;
 
-    protected virtual void StopFire()
+    public virtual void StopFire()
     {
         OnStopFired?.Invoke();
     }
@@ -79,7 +70,7 @@ public class Weapon : MonoBehaviour
                         Quaternion.LookRotation(Direction));
     }
 
-    private void Fire()
+    public void Fire()
     {
         if (FirePossibleCalculate() == true)
         {

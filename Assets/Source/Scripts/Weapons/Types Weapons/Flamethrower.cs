@@ -86,7 +86,7 @@ public class Flamethrower : Weapon
         return verticalAngle <= _verticalAngle / 2f;
     }
 
-    protected override void StopFire()
+    public override void StopFire()
     {
         base.StopFire();
 
