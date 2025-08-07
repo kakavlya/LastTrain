@@ -310,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 9107309904343047272}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.511, z: 0.089}
+  m_LocalPosition: {x: 0, y: 0.22, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -383,15 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198381425572196190, guid: 876700647ad17e946961681397b4442b, type: 3}
-  _ammunition: {fileID: 0}
   _uiSpriteActive: {fileID: 21300000, guid: 33336cec50573bd4d96de7519012435e, type: 3}
   _uiSpriteDeactive: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
-  Owner: {fileID: 0}
   FirePoint: {fileID: 2363891053494034821}
   ProjectilePrefab: {fileID: 8226285592677434412, guid: bb959890b0a20a24a82bcf33ef3b2170, type: 3}
-  _weaponInput: {fileID: 0}
   FireDelay: 0.8
   UsePooling: 1
   ProjectileSpeed: 100
@@ -507,7 +503,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 8300000, guid: c81be6f341c32f942951b27ce20aae65, type: 3}
   _weapon: {fileID: 3412282889252128567}
-  _volume: 0.5
 --- !u!1 &9107309904343047756
 GameObject:
   m_ObjectHideFlags: 0

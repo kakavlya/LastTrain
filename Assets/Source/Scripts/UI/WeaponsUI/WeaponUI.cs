@@ -37,7 +37,7 @@ public class WeaponUI : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            _currentAmmunition = currentWeapon.Ammunition;
+            //_currentAmmunition = currentWeapon.Ammunition;
 
             if (_currentAmmunition != null)
             {

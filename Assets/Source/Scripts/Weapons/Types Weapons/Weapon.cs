@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    [SerializeField] private Ammunition _ammunition = null;
+    //[SerializeField] private Ammunition _ammunition = null;
     [SerializeField] private Sprite _uiSpriteActive;
     [SerializeField] private Sprite _uiSpriteDeactive;
 
@@ -28,9 +28,10 @@ public class Weapon : MonoBehaviour
     public event Action OnFired;
     public event Action OnStopFired;
 
+    public Weapon PrefabReference { get; private set; }
     public Sprite UISpriteActive => _uiSpriteActive;
     public Sprite UISpriteDeactive => _uiSpriteDeactive;
-    public Ammunition Ammunition => _ammunition;
+    //public Ammunition Ammunition => _ammunition;
 
     private void OnEnable()
     {
@@ -74,21 +75,26 @@ public class Weapon : MonoBehaviour
     {
         if (FirePossibleCalculate() == true)
         {
-            if (_ammunition == null || _ammunition.HasAmmo)
-            {
-                OnFired?.Invoke();
-                OnWeaponFire();
+            //if (_ammunition == null || _ammunition.HasAmmo)
+            //{
+            OnFired?.Invoke();
+            OnWeaponFire();
 
-                if (_muzzleEffectPrefab != null)
-                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
 
-                if (_ammunition != null)
-                    _ammunition.DecreaseProjectilesCount();
-            }
-            else
-            {
-                StopFire();
-            }
+            //if (_ammunition != null)
+            //    _ammunition.DecreaseProjectilesCount();
+            //}
+            //else
+            //{
+            //    StopFire();
+            //}
         }
+    }
+
+    public void SetPrefabReference(Weapon prefab)
+    {
+        PrefabReference = prefab;
     }
 }
