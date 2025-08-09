@@ -81,7 +81,7 @@ namespace Assets.Source.Scripts.Enemies
             _currentSpeed = Mathf.MoveTowards(_currentSpeed,
                 _targetSpeed, _speedChange * Time.deltaTime);
 
-            
+
             _movement.SetSpeed(_currentSpeed);
 
             switch (_state)
@@ -176,7 +176,13 @@ namespace Assets.Source.Scripts.Enemies
 
         private void Fire()
         {
-            if (_projectilePrefab == null || _firePoint == null) return;
+            if (_projectilePrefab == null || _firePoint == null)
+            {
+                Debug.Log($"Projectile {_projectilePrefab} or fire point {_firePoint} is not set.");
+                return;
+            }
+
+            Debug.Log("Fire");
 
             var go = Instantiate(
                 _projectilePrefab.gameObject,

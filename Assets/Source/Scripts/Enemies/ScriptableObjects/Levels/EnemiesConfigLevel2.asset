@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8b29cd5ca2bc4742b1c6a40bbf40778, type: 3}
-  m_Name: EnemiesConfigLevel1
+  m_Name: EnemiesConfigLevel2
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 6965205965109951990, guid: dca6b9b3394e5c94c938bd8b5f7f3c8c, type: 3}
@@ -22,9 +22,4 @@ MonoBehaviour:
     spawnInterval: 3
     randRangeXZ: {x: 10, y: 10}
     behaviorSettings: {fileID: 11400000, guid: ddcf9ef515707c3448b4e3bae816ce75, type: 2}
-    overrideSpawnPoints: []
-  - prefab: {fileID: 9087697433412347612, guid: b9141b48a1159144eacc538045159ae2, type: 3}
-    spawnInterval: 3
-    randRangeXZ: {x: 10, y: 10}
-    behaviorSettings: {fileID: 11400000, guid: acf12740dd9215c4aabf438851170167, type: 2}
     overrideSpawnPoints: []

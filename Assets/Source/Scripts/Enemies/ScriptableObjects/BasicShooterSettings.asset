@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: BasicShooterSettings
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 55
   turnSpeed: 120
   attackSpeedFactorMin: 0.7
   attackSpeedFactorMax: 1.1
   speedChange: 8
-  shootingDistance: 40
+  shootingDistance: 50
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
   fireInterval: 2
   projectileSpeed: 50
