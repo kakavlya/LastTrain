@@ -23,6 +23,7 @@ namespace Assets.Source.Scripts.Enemies
 
             exploder.Init(
                 player: playerTarget,
+                playerCollider: playerCollider,
                 speed: moveSpeed,
                 explosionRadius: explosionRadius,
                 damage: damage

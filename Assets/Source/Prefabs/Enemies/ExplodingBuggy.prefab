@@ -584,6 +584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86f315223ce9434396a81179b902516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCollider: {fileID: -5482390200032144320}
+  _checkRadius: 10
 --- !u!65 &-5482390200032144320
 BoxCollider:
   m_ObjectHideFlags: 0

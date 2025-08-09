@@ -25,4 +25,9 @@ public class EnemyHealth : HealthBase
         _view?.PlayDeathFX();
         _deathHandler?.HandleDeath();
     }
+
+    public void HandleDie()
+    {
+        Die();
+    }
 }

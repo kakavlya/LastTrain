@@ -5,53 +5,60 @@ namespace Assets.Source.Scripts.Enemies
     public class EnemyExplodingController : MonoBehaviour
     {
 
+        [SerializeField] private Collider _playerCollider;
+        [SerializeField] private float _checkRadius = 10f;
+
         private Transform _player;
         private EnemyMovement _movement;
+        private EnemyHealth _health;
         private float _explosionRadius;
         private int _damage;
         private bool _hasExploded;
+        private float _checkRadiusSqr;
 
-        public void Init(Transform player, float speed, float explosionRadius, int damage)
+        public void Init(Transform player, Collider playerCollider, float speed, float explosionRadius, int damage)
         {
             _player = player;
+            _playerCollider = playerCollider;
             _movement = GetComponent<EnemyMovement>();
             _movement.SetSpeed(speed);
+
+            _health = GetComponent<EnemyHealth>();
 
             _explosionRadius = explosionRadius;
             _damage = damage;
             _hasExploded = false;
+
+            _checkRadiusSqr = _checkRadius * _checkRadius;
         }
 
         private void Update()
         {
-            if (_hasExploded || _player == null)
+            if (_hasExploded || _player == null || _playerCollider == null)
                 return;
 
             _movement.MoveForwardTo(_player.position);
 
-            float dist = Vector3.Distance(transform.position.Flat(), _player.position.Flat());
+            if ((_player.position - transform.position).sqrMagnitude > _checkRadiusSqr)
+                return;
+
+            Vector3 closest = _playerCollider.ClosestPoint(transform.position);
+            float dist = Vector3.Distance(closest, transform.position);
+
             if (dist <= _explosionRadius)
+            {
                 Explode();
+            }
         }
 
         private void Explode()
         {
+            if (_hasExploded) return;
+
             _hasExploded = true;
             _player.GetComponent<IDamageable>()?.TakeDamage(_damage);
-            //Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
-            //foreach (var hit in hits)
-            //{
-            //    // Maybe Playerhealth can be replaced by something more generic, like shield or armor
-            //    if (hit.TryGetComponent<PlayerHealth>(out var playerHealth))
-            //    {
-            //        Debug.Log(hit.name);
-            //        playerHealth.TakeDamage(_damage);
-            //    }
-            //}
-
-            // TODO: запустить VFX/SFX взрыва
-
-            Destroy(gameObject);
+            _health?.HandleDie();
+            //Destroy(gameObject);
         }
 
         private void OnDrawGizmosSelected()
