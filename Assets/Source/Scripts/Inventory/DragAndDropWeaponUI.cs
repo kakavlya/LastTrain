@@ -12,9 +12,11 @@ public class DragAndDropWeaponUI : MonoBehaviour, IBeginDragHandler, IEndDragHan
     private Transform _originalParent;
     private string _dragLayerName = "DragLayer";
     private Transform _dragLayer;
+    private WeaponSlotUI _originalWeaponSlotUI;
 
     private void Start()
     {
+        _originalWeaponSlotUI = GetComponentInParent<WeaponSlotUI>();
         _rectTransform = GetComponent<RectTransform>();
         _canvas = GetComponentInParent<Canvas>();
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -29,7 +31,7 @@ public class DragAndDropWeaponUI : MonoBehaviour, IBeginDragHandler, IEndDragHan
 
         _originalParent = transform.parent;
         transform.SetParent(_dragLayer);
-        transform.SetAsLastSibling();    
+        transform.SetAsLastSibling();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,9 +44,15 @@ public class DragAndDropWeaponUI : MonoBehaviour, IBeginDragHandler, IEndDragHan
         if (transform.parent == _dragLayer)
         {
             transform.SetParent(_originalParent);
+            transform.localPosition = Vector3.zero;
+            _canvasGroup.blocksRaycasts = true;
         }
-
-        transform.localPosition = Vector3.zero;
-        _canvasGroup.blocksRaycasts = true;
+        else
+        {
+            _originalWeaponSlotUI.SetSlotUnfilled();
+            _originalWeaponSlotUI = GetComponentInParent<WeaponSlotUI>();
+            transform.localPosition = Vector3.zero;
+            _canvasGroup.blocksRaycasts = true;
+        }
     }
 }

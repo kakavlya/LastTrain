@@ -6,15 +6,23 @@ using UnityEngine.UI;
 [RequireComponent(typeof (Image))]
 public class InventoryWeapon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] WeaponInfo _weaponInfo;
+    [SerializeField] private WeaponInfo _defaultWeaponInfo;
 
+    private WeaponInfo _weaponInfo;
     private Image _currentIcon;
     private TextMeshProUGUI _currentText;
 
     public WeaponInfo WeaponInfo => _weaponInfo;
 
-    private void Start()
+    private void Awake()
     {
+        if (_defaultWeaponInfo != null)
+            Init(_defaultWeaponInfo);
+    }
+
+    public void Init(WeaponInfo weaponInfo)
+    {
+        _weaponInfo = weaponInfo;
         _currentIcon = GetComponent<Image>();
         _currentIcon.sprite = _weaponInfo.Icon;
         _currentText = GetComponentInChildren<TextMeshProUGUI>();

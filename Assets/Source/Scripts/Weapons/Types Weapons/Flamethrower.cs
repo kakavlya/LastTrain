@@ -13,11 +13,8 @@ public class Flamethrower : Weapon
     private void Awake()
     {
         var mainSetting = _flameParticle.main;
-        var shapeSetting = _flameParticle.shape;
         mainSetting.startSpeed = ProjectileSpeed;
         mainSetting.startLifetime = MaxAttackDistance / ProjectileSpeed;
-        shapeSetting.angle = _horisontalAngle;
-        
     }
 
     private void Update()

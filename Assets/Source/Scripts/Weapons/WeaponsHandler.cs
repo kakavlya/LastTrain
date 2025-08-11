@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class WeaponsHandler : MonoBehaviour
 {
-    [SerializeField] private WeaponUI[] cells;
-    [SerializeField] private Weapon[] _weaponPrefabs;
+    [SerializeField] private WeaponUI[] _uiCells;
     [SerializeField] private Ammunition[] _ammunitions;
     [SerializeField] private PlayerInput _weaponInput;
+    [SerializeField] private SharedData _sharedData;
 
     private Weapon[] _weapons;
     private Weapon _currentWeapon;
@@ -22,27 +22,27 @@ public class WeaponsHandler : MonoBehaviour
         CreateWeapons();
         FillAmmoDictonary();
 
-        foreach (var cell in cells)
+        foreach (var cell in _uiCells)
         {
             cell.gameObject.SetActive(false);
         }
 
-        for (int i = 0;  i < _weapons.Length; i++)
+        for (int i = 0; i < _weapons.Length; i++)
         {
             _weapons[i].gameObject.SetActive(false);
-            cells[i].gameObject.SetActive(true);
-            cells[i].UconClicked += ChooseWeapon;
-            cells[i].ActivateWeapon(_weapons[i]);
-            cells[i].DeactivateWeapon(_weapons[i]);
+            _uiCells[i].gameObject.SetActive(true);
+            _uiCells[i].UconClicked += ChangeWeapon;
+            _uiCells[i].ActivateWeapon(_weapons[i]);
+            _uiCells[i].DeactivateWeapon(_weapons[i]);
         }
 
 
         _currentNumberWeapon = 0;
         _currentWeapon = _weapons[0];
         _weapons[0].gameObject.SetActive(true);
-        cells[0].ActivateWeapon(_currentWeapon);
+        _uiCells[0].ActivateWeapon(_currentWeapon);
         OnWeaponChange?.Invoke(_currentWeapon);
-        _weaponInput.WeaponChanged += ChooseWeapon;
+        _weaponInput.WeaponChanged += ChangeWeapon;
         _weaponInput.Fired += HandleFire;
         _weaponInput.StopFired += HandleStopFire;
 
@@ -50,17 +50,17 @@ public class WeaponsHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (var cell in cells)
+        foreach (var cell in _uiCells)
         {
-            cell.UconClicked -= ChooseWeapon;
+            cell.UconClicked -= ChangeWeapon;
         }
 
-        _weaponInput.WeaponChanged -= ChooseWeapon;
+        _weaponInput.WeaponChanged -= ChangeWeapon;
         _weaponInput.Fired -= HandleFire;
         _weaponInput.StopFired -= HandleStopFire;
     }
 
-    private void ChooseWeapon(int weaponNumber)
+    private void ChangeWeapon(int weaponNumber)
     {
         if (weaponNumber > 0 && weaponNumber <= _weapons.Length)
         {
@@ -68,14 +68,13 @@ public class WeaponsHandler : MonoBehaviour
 
             if (_currentNumberWeapon >= 0 && _currentNumberWeapon < _weapons.Length)
             {
-            cells[_currentNumberWeapon].DeactivateWeapon(_currentWeapon);
-
+                _uiCells[_currentNumberWeapon].DeactivateWeapon(_currentWeapon);
             }
 
             _currentNumberWeapon = weaponNumber - 1;
             _currentWeapon = _weapons[_currentNumberWeapon];
             _currentWeapon.gameObject.SetActive(true);
-            cells[_currentNumberWeapon].ActivateWeapon(_currentWeapon);
+            _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon);
             OnWeaponChange?.Invoke(_currentWeapon);
         }
     }
@@ -89,16 +88,17 @@ public class WeaponsHandler : MonoBehaviour
         {
             if (ammo.HasAmmo)
             {
-                _currentWeapon.Fire();
-                ammo.DecreaseProjectilesCount();
+                _currentWeapon.Fire(ammo);
             }
             else
             {
                 _currentWeapon.StopFire();
             }
         }
-
-        _currentWeapon?.Fire();
+        else
+        {
+            _currentWeapon.Fire();
+        }
     }
 
     private void HandleStopFire()
@@ -108,12 +108,12 @@ public class WeaponsHandler : MonoBehaviour
 
     private void CreateWeapons()
     {
-        _weapons = new Weapon[_weaponPrefabs.Length];
+        _weapons = new Weapon[_sharedData.WeaponInfos.Count];
 
-        for (int i = 0; i < _weaponPrefabs.Length; i++)
+        for (int i = 0; i < _sharedData.WeaponInfos.Count; i++)
         {
-            Weapon weaponInstance = Instantiate(_weaponPrefabs[i], transform);
-            weaponInstance.SetPrefabReference(_weaponPrefabs[i]);
+            Weapon weaponInstance = Instantiate(_sharedData.WeaponInfos[i].WeaponPrefab, transform);
+            weaponInstance.SetPrefabReference(_sharedData.WeaponInfos[i].WeaponPrefab);
             weaponInstance.gameObject.SetActive(false);
             _weapons[i] = weaponInstance;
         }
@@ -125,11 +125,12 @@ public class WeaponsHandler : MonoBehaviour
 
         foreach (var weapon in _weapons)
         {
-            foreach (var ammo in _ammunitions)
+            foreach (var ammoPrefab in _ammunitions)
             {
-                if (ammo.WeaponPrefab == weapon.PrefabReference)
+                if (ammoPrefab.WeaponPrefab == weapon.PrefabReference)
                 {
-                    _weaponAmmoDictonary[weapon] = ammo;
+                    var ammoInstance = Instantiate(ammoPrefab, transform);
+                    _weaponAmmoDictonary[weapon] = ammoInstance;
                     break;
                 }
             }

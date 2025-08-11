@@ -6548,9 +6548,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106592264}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _sharedData
+      value: 
+      objectReference: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
+    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _weaponInput
       value: 
       objectReference: {fileID: 1538978594}
+    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _uiCells.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: cells.Array.data[0]
       value: 
@@ -6561,6 +6569,18 @@ PrefabInstance:
       objectReference: {fileID: 279672678}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: cells.Array.data[2]
+      value: 
+      objectReference: {fileID: 1822635292}
+    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _uiCells.Array.data[0]
+      value: 
+      objectReference: {fileID: 1364141600}
+    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _uiCells.Array.data[1]
+      value: 
+      objectReference: {fileID: 279672678}
+    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _uiCells.Array.data[2]
       value: 
       objectReference: {fileID: 1822635292}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
@@ -6651,6 +6671,7 @@ PrefabInstance:
     - {fileID: 617960143595758895, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
     - {fileID: 4769702154567626482, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
     - {fileID: 6313094116875273636, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+    - {fileID: 113229159542288987, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
@@ -6664,7 +6685,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1268517231774393479, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
       propertyPath: m_Name
-      value: WeaponUi
+      value: WeaponUiCells
       objectReference: {fileID: 0}
     - target: {fileID: 1268517231774393479, guid: e1cb79d9e4c9eac4bb6f218d515d125f, type: 3}
       propertyPath: m_IsActive

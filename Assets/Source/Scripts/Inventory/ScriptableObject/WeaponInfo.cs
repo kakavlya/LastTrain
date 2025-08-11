@@ -7,5 +7,5 @@ public class WeaponInfo : ScriptableObject
 {
     public string WeaponName;
     public Sprite Icon;
-    public GameObject WeaponPrefab;
+    public Weapon WeaponPrefab;
 }

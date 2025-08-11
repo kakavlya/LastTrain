@@ -71,25 +71,35 @@ public class Weapon : MonoBehaviour
                         Quaternion.LookRotation(Direction));
     }
 
-    public void Fire()
+    public void Fire(Ammunition ammo)
     {
         if (FirePossibleCalculate() == true)
         {
-            //if (_ammunition == null || _ammunition.HasAmmo)
-            //{
+            if (ammo != null && !ammo.HasAmmo)
+            {
+                StopFire();
+                return;
+            }
+
             OnFired?.Invoke();
             OnWeaponFire();
 
             if (_muzzleEffectPrefab != null)
                 ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
 
-            //if (_ammunition != null)
-            //    _ammunition.DecreaseProjectilesCount();
-            //}
-            //else
-            //{
-            //    StopFire();
-            //}
+            ammo?.DecreaseProjectilesCount();
+        }
+    }
+
+    public void Fire()
+    {
+        if (FirePossibleCalculate() == true)
+        {
+            OnFired?.Invoke();
+            OnWeaponFire();
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
         }
     }
 

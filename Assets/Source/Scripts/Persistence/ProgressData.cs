@@ -9,6 +9,8 @@ public class ProgressData
     public int Coins;
     public float MusicVolume;
     public float EffectsVolume;
+    public int InventorySlotsCount;
+    public List<string> InventorySlots = new List<string>();
 
     public ProgressData()
     {
@@ -20,8 +22,13 @@ public class ProgressData
 
         // Unlocking 1 level on start
         UnlockedLevels.Add(1);
+
         Coins = 0;
         MusicVolume = 0.5f;
         EffectsVolume = 0.5f;
+        InventorySlotsCount = 3;
+
+        for (int i = 0; i < InventorySlotsCount; i++)
+            InventorySlots.Add("");
     }
 }
