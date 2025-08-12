@@ -7,7 +7,8 @@ public class CoinsHandler : MonoBehaviour
 
     public static CoinsHandler Instance { get; private set; }
 
-    public event Action<int> coinsChanged;
+    public event Action<int> CoinsChanged;
+    public event Action<int> Added;
 
     public int CoinsCount
     {
@@ -17,7 +18,7 @@ public class CoinsHandler : MonoBehaviour
             if (_coinsCount != value)
             {
                 _coinsCount = value;
-                coinsChanged?.Invoke(_coinsCount);
+                CoinsChanged?.Invoke(_coinsCount);
             }
         }
     }
@@ -40,5 +41,6 @@ public class CoinsHandler : MonoBehaviour
     {
         CoinsCount += addedCoins;
         SaveManager.Instance.Data.Coins += addedCoins;
+        Added?.Invoke(addedCoins);
     }
 }

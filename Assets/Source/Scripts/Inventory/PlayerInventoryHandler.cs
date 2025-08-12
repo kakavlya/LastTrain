@@ -1,50 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventoryHandler : MonoBehaviour
+public class PlayerInventoryHandler : InventoryHandler
 {
-    [SerializeField] private GameObject[] _playerSlots;
-    [SerializeField] private PlayHandler _playHandler;
-    [SerializeField] private InventoryWeapon _weaponUIPrefab;
     [SerializeField] private SharedData _sharedData;
+    [SerializeField] protected PlayHandler _playHandler;
 
-    private List<WeaponSlotUI> _activeSlotUIs = new List<WeaponSlotUI>();
-    private string _weaponInfosFolder = "WeaponInfos";
-
-    private void Awake()
+    protected override void Awake()
     {
-        GetActiveSlots();
+        base.Awake();
         _playHandler.GameStarted += GiveInventoryWeaponFromSlots;
-        _playHandler.GameStarted += SaveLocationInInventory;
     }
 
     private void OnDisable()
     {
         _playHandler.GameStarted -= GiveInventoryWeaponFromSlots;
-        _playHandler.GameStarted -= SaveLocationInInventory;
     }
 
-    private void GetActiveSlots()
+    protected override List<string> GetAllSlotsFromSave()
     {
-        foreach (var slot in _playerSlots)
-        {
-            slot.SetActive(false);
-
-            if (slot.TryGetComponent(out WeaponSlotUI weaponSlotUI) && weaponSlotUI.IsActive)
-            {
-                slot.SetActive(true);
-                _activeSlotUIs.Add(weaponSlotUI);
-            }
-        }
-
-        LoadLocationInInventory();
+        return SaveManager.Instance.Data.PlayerInventorySlots;
     }
 
     private void GiveInventoryWeaponFromSlots()
     {
         _sharedData.WeaponInfos.Clear();
 
-        foreach (var slot in _activeSlotUIs)
+        foreach (var slot in ActiveSlotUIs)
         {
             if (slot.GetComponentInChildren<InventoryWeapon>() != null)
             {
@@ -53,62 +35,27 @@ public class PlayerInventoryHandler : MonoBehaviour
         }
     }
 
-    private void SaveLocationInInventory()
+    protected override void SaveLocationInInventory()
     {
-        while (SaveManager.Instance.Data.InventorySlots.Count < _activeSlotUIs.Count)
+        while (InventorySlots.Count < ActiveSlotUIs.Count)
         {
-            SaveManager.Instance.Data.InventorySlots.Add("");
+            InventorySlots.Add("");
         }
 
-        for (int i = 1; i < _activeSlotUIs.Count; i++)
+        for (int i = 1; i < ActiveSlotUIs.Count; i++)
         {
-            var inventoryWeapon = _activeSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
+            var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
-            if (inventoryWeapon != null)
+            if (inventoryWeapon != null && inventoryWeapon.WeaponInfo != null)
             {
-                SaveManager.Instance.Data.InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
+                InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
             }
             else
             {
-                SaveManager.Instance.Data.InventorySlots[i] = "";
+                InventorySlots[i] = "";
             }
-
         }
 
         SaveManager.Instance.Save();
-    }
-
-    private void LoadLocationInInventory()
-    {
-        List<string> weaponsNames = SaveManager.Instance.Data.InventorySlots;
-
-        for (int i = 0; i < _activeSlotUIs.Count && i < weaponsNames.Count; i++)
-        {
-            string name = weaponsNames[i];
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                WeaponInfo weaponInfo = GetWeaponInfoByName(name);
-
-                if (weaponInfo != null)
-                {
-                    InventoryWeapon inventoryWeapon = Instantiate(_weaponUIPrefab, _playerSlots[i].transform);
-                    inventoryWeapon.Init(weaponInfo);
-                }
-            }
-        }
-    }
-
-    private WeaponInfo GetWeaponInfoByName(string weaponName)
-    {
-        WeaponInfo[] weaponInfos = Resources.LoadAll<WeaponInfo>(_weaponInfosFolder);
-
-        foreach (var weaponInfo in weaponInfos)
-        {
-            if (weaponInfo.WeaponName == weaponName)
-                return weaponInfo;
-        }
-
-        return null;
     }
 }

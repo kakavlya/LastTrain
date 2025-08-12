@@ -10,7 +10,9 @@ public class ProgressData
     public float MusicVolume;
     public float EffectsVolume;
     public int InventorySlotsCount;
+    public int PlayerInventorySlotsCount;
     public List<string> InventorySlots = new List<string>();
+    public List<string> PlayerInventorySlots = new List<string>();
 
     public ProgressData()
     {
@@ -26,7 +28,11 @@ public class ProgressData
         Coins = 0;
         MusicVolume = 0.5f;
         EffectsVolume = 0.5f;
-        InventorySlotsCount = 3;
+        InventorySlotsCount = 5;
+        PlayerInventorySlotsCount = 3;
+
+        for (int i = 0; i < PlayerInventorySlotsCount; i++)
+            PlayerInventorySlots.Add("");
 
         for (int i = 0; i < InventorySlotsCount; i++)
             InventorySlots.Add("");

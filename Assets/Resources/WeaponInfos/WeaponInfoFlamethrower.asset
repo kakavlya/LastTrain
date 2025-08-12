@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a8be3938dca144f805fd88929269c7, type: 3}
   m_Name: WeaponInfoFlamethrower
   m_EditorClassIdentifier: 
-  WeaponName: 
+  WeaponName: Flamethrower
   Icon: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   WeaponPrefab: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}

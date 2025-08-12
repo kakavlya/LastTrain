@@ -27,10 +27,10 @@ public class UIStateMachine : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button _startButton;
-    [SerializeField] private Button _restartButton;
+    [SerializeField] private Button[] _restartButtons;
     [SerializeField] private Button[] _pauseButtons;
     [SerializeField] private Button _resumeButton;
-    [SerializeField] private Button _menuButton;
+    [SerializeField] private Button[] _menuButtons;
     [SerializeField] private Button _settingsButton;
 
     [Header("Mobile Platorm Control")]
@@ -53,8 +53,13 @@ public class UIStateMachine : MonoBehaviour
             button.onClick.AddListener(() => { PauseClicked?.Invoke(); SwitchState(UIState.Pause); });
 
         _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); SwitchState(UIState.Playing); });
-        _restartButton.onClick.AddListener(OnRestartButton);
-        _menuButton.onClick.AddListener(OnMenuButton);
+
+        foreach (var button in _restartButtons)
+            button.onClick.AddListener(OnRestartButton);
+
+        foreach (var button in _menuButtons)
+            button.onClick.AddListener(OnMenuButton);
+
         _settingsButton.onClick.AddListener(OnSettingsButton);
 
         if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
@@ -142,6 +147,8 @@ public class UIStateMachine : MonoBehaviour
             button.onClick.RemoveAllListeners();
 
         _resumeButton.onClick.RemoveAllListeners();
-        _restartButton.onClick.RemoveListener(OnRestartButton);
+
+        foreach (var button in _restartButtons)
+            button.onClick.RemoveListener(OnRestartButton);
     }
 }

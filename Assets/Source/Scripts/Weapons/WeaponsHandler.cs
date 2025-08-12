@@ -32,7 +32,16 @@ public class WeaponsHandler : MonoBehaviour
             _weapons[i].gameObject.SetActive(false);
             _uiCells[i].gameObject.SetActive(true);
             _uiCells[i].UconClicked += ChangeWeapon;
-            _uiCells[i].ActivateWeapon(_weapons[i]);
+
+            if (_weaponAmmoDictonary.TryGetValue(_weapons[i], out Ammunition ammunition))
+            {
+                _uiCells[i].ActivateWeapon(_weapons[i], ammunition);
+            }
+            else
+            {
+                _uiCells[i].ActivateWeapon(_weapons[i], null);
+            }
+
             _uiCells[i].DeactivateWeapon(_weapons[i]);
         }
 
@@ -40,7 +49,16 @@ public class WeaponsHandler : MonoBehaviour
         _currentNumberWeapon = 0;
         _currentWeapon = _weapons[0];
         _weapons[0].gameObject.SetActive(true);
-        _uiCells[0].ActivateWeapon(_currentWeapon);
+
+        if (_weaponAmmoDictonary.TryGetValue(_currentWeapon, out Ammunition ammo))
+        {
+            _uiCells[0].ActivateWeapon(_currentWeapon, ammo);
+        }
+        else
+        {
+            _uiCells[0].ActivateWeapon(_currentWeapon, null);
+        }
+
         OnWeaponChange?.Invoke(_currentWeapon);
         _weaponInput.WeaponChanged += ChangeWeapon;
         _weaponInput.Fired += HandleFire;
@@ -74,7 +92,16 @@ public class WeaponsHandler : MonoBehaviour
             _currentNumberWeapon = weaponNumber - 1;
             _currentWeapon = _weapons[_currentNumberWeapon];
             _currentWeapon.gameObject.SetActive(true);
-            _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon);
+
+            if (_weaponAmmoDictonary.TryGetValue(_currentWeapon, out Ammunition ammo))
+            {
+                _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, ammo);
+            }
+            else
+            {
+                _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, null);
+            }
+
             OnWeaponChange?.Invoke(_currentWeapon);
         }
     }

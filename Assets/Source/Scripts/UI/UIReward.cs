@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class UIReward : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textCount;
+    [SerializeField] private TextMeshProUGUI _textAllCount;
 
     private void Start()
     {
-        CoinsHandler.Instance.coinsChanged += UpdateCoinsUI;
+        CoinsHandler.Instance.CoinsChanged += UpdateCoinsUI;
         UpdateCoinsUI(CoinsHandler.Instance.CoinsCount);
     }
 
     private void OnDisable()
     {
-        CoinsHandler.Instance.coinsChanged -= UpdateCoinsUI;
+        CoinsHandler.Instance.CoinsChanged -= UpdateCoinsUI;
     }
 
     private void UpdateCoinsUI(int newRewardCount)
     {
-        _textCount.text = newRewardCount.ToString();
+        _textAllCount.text = newRewardCount.ToString();
     }
 }

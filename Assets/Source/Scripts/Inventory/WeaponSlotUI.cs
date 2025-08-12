@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,6 +9,8 @@ public class WeaponSlotUI : MonoBehaviour, IDropHandler
 
     public bool IsActive => _isActive;
     public bool IsFilled => _isFilled;
+
+    public event Action Filled;
 
     private void Start()
     {
@@ -25,6 +28,7 @@ public class WeaponSlotUI : MonoBehaviour, IDropHandler
     public void SetSlotUnfilled()
     {
         _isFilled = false;
+        Filled?.Invoke();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -36,5 +40,6 @@ public class WeaponSlotUI : MonoBehaviour, IDropHandler
         otherItemTranform.SetParent(transform);
         otherItemTranform.position = Vector3.zero;
         _isFilled = true;
+        Filled?.Invoke();
     }
 }
