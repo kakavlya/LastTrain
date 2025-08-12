@@ -105,6 +105,7 @@ namespace Assets.Source.Scripts.Enemies
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
             var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
+
             enemy.GetComponent<EnemyHealth>().SetRewardForKill(spawnEntry.behaviorSettings.Reward);
             spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
         }
