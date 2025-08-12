@@ -16,7 +16,6 @@ namespace Assets.Source.Scripts.Enemies
 
         [Header("Scene-bound")]
         [SerializeField] private float _allowTrainDistance = 200f;
-        [SerializeField] private bool _useRuntime;
 
         private SpawnerConfig _spawnerConfig;
         private Transform[] _spawnPoints;
@@ -105,8 +104,9 @@ namespace Assets.Source.Scripts.Enemies
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
-            var gameObject = Instantiate(spawnEntry.prefab, pos, sp.rotation);
-            spawnEntry.behaviorSettings?.Initialize(gameObject, player, _trainCollider);
+            var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
+            enemy.GetComponent<EnemyHealth>().SetRewardForKill(spawnEntry.behaviorSettings.Reward);
+            spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
         }
 
         public void Pause() => _paused = true;

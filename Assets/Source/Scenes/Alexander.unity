@@ -680,6 +680,7 @@ MonoBehaviour:
   _levelProgress: {fileID: 1505221486}
   _levelElementsCreator: {fileID: 1624335203}
   _pickableAmmunitionSpawner: {fileID: 2060328544}
+  _enemyPool: {fileID: 1139137091}
 --- !u!4 &329617154
 Transform:
   m_ObjectHideFlags: 0
@@ -729,10 +730,13 @@ MonoBehaviour:
   _gameOverScreen: {fileID: 596466271}
   _gameEndScreen: {fileID: 596466271}
   _gamePauseScreen: {fileID: 566044985}
+  _settingsScreen: {fileID: 0}
   _startButton: {fileID: 1856736270}
-  _restartButton: {fileID: 766185669}
-  _pauseButton: {fileID: 576388633}
+  _restartButtons: []
+  _pauseButtons: []
   _resumeButton: {fileID: 974559184}
+  _menuButtons: []
+  _settingsButton: {fileID: 0}
   _joustick: {fileID: 55073248}
 --- !u!4 &344213184
 Transform:
@@ -1259,6 +1263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4028d93449e258e4e8af889acd10e0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menuScene: Alexander - menu
 --- !u!4 &634939151
 Transform:
   m_ObjectHideFlags: 0
@@ -1672,7 +1677,6 @@ MonoBehaviour:
   _trainMovement: {fileID: 1957784517}
   _trainCollider: {fileID: 1957784518}
   _allowTrainDistance: 500
-  _useRuntime: 0
 --- !u!4 &851371661
 Transform:
   m_ObjectHideFlags: 0
@@ -1957,6 +1961,53 @@ MonoBehaviour:
   _rotationSpeed: 90
   _fixedPitch: 20
   _rotationSmoothing: 50
+--- !u!1 &1139137090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1139137092}
+  - component: {fileID: 1139137091}
+  m_Layer: 0
+  m_Name: EnemyPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1139137091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139137090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8721b32cd2a0d054d9ece2fad9fbbddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyPrefabs:
+  - {fileID: 6965205965109951990, guid: dca6b9b3394e5c94c938bd8b5f7f3c8c, type: 3}
+  - {fileID: 4899597090557373887, guid: 089a610054aa0a641874cb77263d6dfd, type: 3}
+--- !u!4 &1139137092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139137090}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.486025, y: 9.57, z: -45.52829}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143995403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4085,7 @@ SceneRoots:
   - {fileID: 1624335204}
   - {fileID: 1505221487}
   - {fileID: 562779374}
+  - {fileID: 1139137092}
   - {fileID: 1143995405}
   - {fileID: 1523583554}
   - {fileID: 1538978595}
