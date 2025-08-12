@@ -14,14 +14,17 @@ public class PickableAmmunitionPool : MonoBehaviour
 
     public void Init()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        InitializePools();
+    }
+
+    private void InitializePools()
+    {
+        foreach (var ammoPrefab in _pickableAmmunitionPrefabs)
+        {
+            CreatePoolForPrefab(ammoPrefab);
+        }
     }
 
     private void CreatePoolForPrefab(PickableAmmunition pickableAmmunitionPrefab)
@@ -29,7 +32,7 @@ public class PickableAmmunitionPool : MonoBehaviour
         if (!_pools.ContainsKey(pickableAmmunitionPrefab))
         {
             _pools[pickableAmmunitionPrefab] = new ObjectPool<PickableAmmunition>(
-                createFunc: () => Instantiate(pickableAmmunitionPrefab),
+                createFunc: () => Instantiate(pickableAmmunitionPrefab, transform),
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
                 actionOnDestroy: (obj) => Destroy(obj.gameObject)

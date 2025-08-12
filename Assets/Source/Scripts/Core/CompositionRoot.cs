@@ -25,9 +25,11 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField] private LevelProgress _levelProgress;
     [SerializeField] private LevelElementsCreator _levelElementsCreator;
     [SerializeField] private PickableAmmunitionSpawner _pickableAmmunitionSpawner;
+    [SerializeField] private EnemyPool _enemyPool;
 
     private void Awake()
     {
+        //_enemyPool.Init();
         _enemySpawner.Init();
         _aimingTargetProvider.Init();
         _uiCursorFollower.Init();
@@ -50,6 +52,7 @@ public class CompositionRoot : MonoBehaviour
         _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;
         _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
         _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
+        _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
 
         _levelStateMachine.PlayerDied += () => _uIStateMachine.SwitchState(UIState.GameOver);
         _levelStateMachine.LevelCompleted += () => _uIStateMachine.SwitchState(UIState.EndLevel);

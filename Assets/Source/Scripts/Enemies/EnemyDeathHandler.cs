@@ -4,22 +4,21 @@ namespace Assets.Source.Scripts.Enemies
 {
     public class EnemyDeathHandler : MonoBehaviour
     {
+        [SerializeField] private ModelEffects _enemyView;
+        [SerializeField] private EnemyDeathEffect _deathEffect;
+        [SerializeField] private float _delayBeforeDespawn = 2f;
+
         private EnemyMovement _movement;
         private EnemyController _controller;
-        private EnemyVisualWobble _wobble;
+        private VisualWobble _wobble;
         private Collider[] _collidersToDisable;
-
-        [SerializeField] private EnemyView _enemyView;
-        [SerializeField] private EnemyDeathEffect _deathEffect;
-
-        [SerializeField] private float _delayBeforeDespawn = 2f;
-        [SerializeField] private bool _useObjectPool = false;
+        private int _rewardForKill;
 
         private void Awake()
         {
             _movement = GetComponent<EnemyMovement>();
             _controller = GetComponent<EnemyController>();
-            _wobble = GetComponentInChildren<EnemyVisualWobble>();
+            _wobble = GetComponentInChildren<VisualWobble>();
             _collidersToDisable = GetComponentsInChildren<Collider>();
         }
 
@@ -36,13 +35,7 @@ namespace Assets.Source.Scripts.Enemies
             _enemyView?.PlayDeathFX();
             _deathEffect?.Play();
 
-            Invoke(nameof(DespawnOrDestroy), _delayBeforeDespawn);
-        }
-
-        private void DespawnOrDestroy()
-        {
-            // Todo: Implement object pooling logic here if useObjectPool is true
-            Destroy(gameObject);
+            Invoke(nameof(Despawn), _delayBeforeDespawn);
         }
 
         public void ResetState()
@@ -55,6 +48,11 @@ namespace Assets.Source.Scripts.Enemies
                 if (col != null) col.enabled = true;
 
             _deathEffect?.ResetEffect();
+        }
+
+        private void Despawn()
+        {
+            EnemyPool.Instance.ReleaseEnemy(gameObject);
         }
     }
 }

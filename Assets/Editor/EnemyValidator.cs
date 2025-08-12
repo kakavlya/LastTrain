@@ -52,7 +52,7 @@ public class EnemyValidator : EditorWindow
 
         Check<EnemyHealth>("Урон и смерть");
         Check<EnemyDeathHandler>("Отключение поведения и despawn");
-        Check<EnemyView>("VFX, звук, мерцание");
+        Check<ModelEffects>("VFX, звук, мерцание");
         Check<EnemyMovement>("Движение");
         Check<EnemyController>("Логика и инициализация");
         Check<Collider>("Физика/столкновения");

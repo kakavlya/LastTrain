@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AudioManager : MonoBehaviour
+{
+    public static AudioManager Instance { get; private set; }
+
+    [SerializeField] private AudioSource _effectsAudioSource;
+    [SerializeField] private AudioSource _musicAudioSource;
+
+    public float EffectsAudioVolume => _effectsAudioSource.volume;
+    public float MusicAudioVolume => _musicAudioSource.volume;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        _effectsAudioSource.volume = SaveManager.Instance.Data.EffectsVolume;
+        _musicAudioSource.volume = SaveManager.Instance.Data.MusicVolume;
+    }
+
+    public void PlayWeaponSound(AudioClip clip, bool loop)
+    {
+        if (_effectsAudioSource == null || clip == null)
+            return;
+
+        if (_effectsAudioSource.isPlaying && _effectsAudioSource.clip == clip && _effectsAudioSource.loop == loop)
+            return;
+
+        _effectsAudioSource.loop = loop;
+        _effectsAudioSource.clip = clip;
+        _effectsAudioSource.Play();
+    }
+
+    public void StopWeaponSound()
+    {
+        if (_effectsAudioSource != null && _effectsAudioSource.isPlaying)
+        {
+            _effectsAudioSource.Stop();
+            _effectsAudioSource.loop = false;
+        }
+    }
+
+    public void PlayBackgroundMusic(AudioClip clip)
+    {
+        if (_musicAudioSource ==  null || clip == null)
+            return;
+
+        _musicAudioSource.clip = clip;
+        _musicAudioSource.Play();
+    }
+
+    public void ChangeEffectsVolume(float value)
+    {
+        _effectsAudioSource.volume = value;
+        SaveManager.Instance.Data.EffectsVolume = value;
+    }
+
+    public void ChangeMusicVolume(float value)
+    {
+        _musicAudioSource.volume = value;
+        SaveManager.Instance.Data.MusicVolume = value;
+    }
+}

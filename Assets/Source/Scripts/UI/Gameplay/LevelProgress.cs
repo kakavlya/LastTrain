@@ -58,5 +58,6 @@ public class LevelProgress : MonoBehaviour
         }
 
         LevelComplited?.Invoke();
+        CoinsHandler.Instance.AddCoins(_sharedData.LevelSetting.LevelReward);
     }
 }

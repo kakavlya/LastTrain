@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 606304c35b63a734289f99c5ce19a2ac, type: 3}
   m_Name: SharedData
   m_EditorClassIdentifier: 
-  LevelSetting: {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
+  LevelSetting: {fileID: 11400000, guid: a4fb585520731b44482bfe137c2cfcc9, type: 2}
+  WeaponInfos:
+  - {fileID: 11400000, guid: 7ff38bb9ecf234c44a5e8cea2dafd771, type: 2}
+  - {fileID: 11400000, guid: 5f887a8343d05f646ada3e1896a04909, type: 2}

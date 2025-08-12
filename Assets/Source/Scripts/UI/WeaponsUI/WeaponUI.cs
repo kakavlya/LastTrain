@@ -33,11 +33,11 @@ public class WeaponUI : MonoBehaviour
         }
     }
 
-    public void ActivateWeapon(Weapon currentWeapon)
+    public void ActivateWeapon(Weapon currentWeapon, Ammunition ammunition)
     {
         if (currentWeapon != null)
         {
-            _currentAmmunition = currentWeapon.Ammunition;
+            _currentAmmunition = ammunition;
 
             if (_currentAmmunition != null)
             {

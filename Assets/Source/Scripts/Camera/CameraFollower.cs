@@ -23,6 +23,7 @@ public class CameraFollower : MonoBehaviour
     private void Awake()
     {
         _playerInput.Rotated += UpdateCameraPositionAndRotate;
+        InitializeCameraPosition();
     }
 
     private void UpdateCameraPositionAndRotate(float rotateValue)
@@ -37,5 +38,18 @@ public class CameraFollower : MonoBehaviour
 
         transform.rotation = smoothRotation;
         transform.position = targetPosition;
+    }
+
+    private void InitializeCameraPosition()
+    {
+        _rotationAngle = 0f;
+
+        Quaternion initialRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
+
+        Vector3 initialOffset = new Vector3(0, 0, -_distance);
+        Vector3 initialPosition = initialRotation * initialOffset + _target.position + _targetOffset;
+
+        transform.rotation = initialRotation;
+        transform.position = initialPosition;
     }
 }

@@ -5,16 +5,13 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private AimingTargetProvider _aimingTarget;
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    [SerializeField] private Ammunition _ammunition = null;
+    //[SerializeField] private Ammunition _ammunition = null;
     [SerializeField] private Sprite _uiSpriteActive;
     [SerializeField] private Sprite _uiSpriteDeactive;
 
-    [SerializeField] protected GameObject Owner;
     [SerializeField] protected Transform FirePoint;
     [SerializeField] protected Projectile ProjectilePrefab;
-    [SerializeField] protected PlayerInput _weaponInput;
 
     [Header("Shoot Settings")]
     [SerializeField] protected float FireDelay = 0.1f;
@@ -23,6 +20,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected int Damage = 50;
     [SerializeField] protected float MaxAttackDistance = 100;
 
+    protected GameObject Owner;
     private float _lastFireTime;
 
     protected Vector3 Direction => FirePoint.forward;
@@ -30,26 +28,19 @@ public class Weapon : MonoBehaviour
     public event Action OnFired;
     public event Action OnStopFired;
 
+    public Weapon PrefabReference { get; private set; }
     public Sprite UISpriteActive => _uiSpriteActive;
     public Sprite UISpriteDeactive => _uiSpriteDeactive;
-    public Ammunition Ammunition => _ammunition;
+    //public Ammunition Ammunition => _ammunition;
 
     private void OnEnable()
     {
-        _weaponInput.Fired += Fire;
-        _weaponInput.StopFired += StopFire;
-        Owner = Owner != null ? Owner : gameObject;
-    }
-
-    private void OnDisable()
-    {
-        _weaponInput.Fired -= Fire;
-        _weaponInput.StopFired -= StopFire;
+        Owner = gameObject;
     }
 
     public virtual bool GetIsLoopedFireSound() => false;
 
-    protected virtual void StopFire()
+    public virtual void StopFire()
     {
         OnStopFired?.Invoke();
     }
@@ -57,9 +48,6 @@ public class Weapon : MonoBehaviour
     private bool FirePossibleCalculate()
     {
         if (Time.time - _lastFireTime < FireDelay)
-            return false;
-
-        if (_aimingTarget == null || !_aimingTarget.AimPointWorld.HasValue)
             return false;
 
         _lastFireTime = Time.time;
@@ -83,25 +71,40 @@ public class Weapon : MonoBehaviour
                         Quaternion.LookRotation(Direction));
     }
 
-    private void Fire()
+    public void Fire(Ammunition ammo)
     {
         if (FirePossibleCalculate() == true)
         {
-            if (_ammunition == null || _ammunition.HasAmmo)
-            {
-                OnFired?.Invoke();
-                OnWeaponFire();
-
-                if (_muzzleEffectPrefab != null)
-                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
-
-                if (_ammunition != null)
-                    _ammunition.DecreaseProjectilesCount();
-            }
-            else
+            if (ammo != null && !ammo.HasAmmo)
             {
                 StopFire();
+                return;
             }
+
+            OnFired?.Invoke();
+            OnWeaponFire();
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+
+            ammo?.DecreaseProjectilesCount();
         }
+    }
+
+    public void Fire()
+    {
+        if (FirePossibleCalculate() == true)
+        {
+            OnFired?.Invoke();
+            OnWeaponFire();
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+        }
+    }
+
+    public void SetPrefabReference(Weapon prefab)
+    {
+        PrefabReference = prefab;
     }
 }

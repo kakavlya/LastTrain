@@ -10,11 +10,18 @@ public class Flamethrower : Weapon
     private Collider[] _hits = new Collider[30];
     private float _nextDamageTime;
 
+    private void Awake()
+    {
+        var mainSetting = _flameParticle.main;
+        mainSetting.startSpeed = ProjectileSpeed;
+        mainSetting.startLifetime = MaxAttackDistance / ProjectileSpeed;
+    }
+
     private void Update()
     {
         if (_isFiring)
         {
-            if (!_flameParticle.isPlaying)
+            if (!_flameParticle.isEmitting)
             {
                 _flameParticle.Play();
             }
@@ -76,7 +83,7 @@ public class Flamethrower : Weapon
         return verticalAngle <= _verticalAngle / 2f;
     }
 
-    protected override void StopFire()
+    public override void StopFire()
     {
         base.StopFire();
 

@@ -20,5 +20,6 @@ MonoBehaviour:
   - {fileID: 1456816861291629571, guid: a22368415c84fc44db5d24504502e709, type: 3}
   - {fileID: 789032710577607464, guid: 313268c1ccdb06e41bee70e9d49d030d, type: 3}
   LevelDurationSec: 60
+  LevelReward: 100
   AmmunitionGeneratePercent: 80
   SpawnerConfig: {fileID: 11400000, guid: bcbaddb4151d19145b4ba8e3ece16ee7, type: 2}

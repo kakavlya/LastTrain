@@ -661,7 +661,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5567930976789200317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51308146dff97ba48ba2adcdcf235826, type: 3}
+  m_Script: {fileID: 11500000, guid: 975596389ebec644cb925a7f905fc815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _visualRoot: {fileID: 2026353489567958849}
@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: 4647971876647877547}
   - component: {fileID: 4828383747889648310}
   - component: {fileID: 1419257632058573301}
+  - component: {fileID: 1298204711765028295}
   m_Layer: 0
   m_Name: ShootingRamEnemyTest
   m_TagString: Untagged
@@ -772,7 +773,6 @@ MonoBehaviour:
   _enemyView: {fileID: 5451089375779463683}
   _deathEffect: {fileID: 6221278349584701046}
   _delayBeforeDespawn: 2.5
-  _useObjectPool: 0
 --- !u!114 &5451089375779463683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,3 +846,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 4183980290887206902}
+--- !u!114 &1298204711765028295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087697433412347612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c817347d0c51c43a45b7a9fc76caef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

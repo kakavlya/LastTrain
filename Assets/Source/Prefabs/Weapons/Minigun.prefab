@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 4145541452217694962}
   - component: {fileID: 356231242550243592}
   - component: {fileID: 7332470666651878799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Minigun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &636287251186039019
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2974017237273445047}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.63, z: -0.34}
+  m_LocalPosition: {x: 0, y: 0.8, z: -0.45}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100,20 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b9f3079f824434bb98d92e95582d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
-  _ammunition: {fileID: 0}
-  _uiSpriteActive: {fileID: 0}
-  _uiSpriteDeactive: {fileID: 0}
-  Owner: {fileID: 0}
+  _uiSpriteActive: {fileID: 21300000, guid: 09ea2be66dd108243a5a9e12b4366785, type: 3}
+  _uiSpriteDeactive: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
   FirePoint: {fileID: 1960534411642063156}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
-  _weaponInput: {fileID: 0}
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 100
   Damage: 50
-  MaxAttackDistance: 100
+  MaxAttackDistance: 200
 --- !u!114 &356231242550243592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +124,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 8300000, guid: c51fc9a3181ad624a9daa2fed0d6451d, type: 3}
   _weapon: {fileID: 4145541452217694962}
-  _volume: 0.5
 --- !u!82 &7332470666651878799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -143,7 +138,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -234,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960534411642063156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +263,7 @@ GameObject:
   - component: {fileID: 7193468162332974512}
   - component: {fileID: 180630059802840636}
   - component: {fileID: 5365074659490288398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_Minigun_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,6 +347,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MinigunMuzzleEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 1174029534445386, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1745397036871518, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877946767318028, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4365013515911150, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.078
@@ -391,6 +398,14 @@ PrefabInstance:
     - target: {fileID: 4365013515911150, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

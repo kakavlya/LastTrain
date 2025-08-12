@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelStateMachine : MonoBehaviour
 {
-    public event Action PlayerDied;
-    public event Action LevelCompleted;
+    [SerializeField] private string _menuScene;
 
     private EnemySpawner _spawner;
     private PlayerHealth _playerHealth;
@@ -18,6 +17,9 @@ public class LevelStateMachine : MonoBehaviour
 
     private bool _running;
     private bool _paused;
+
+    public event Action PlayerDied;
+    public event Action LevelCompleted;
 
     internal void Construct(EnemySpawner spawner, 
         Transform player, PlayerHealth playerHealth,
@@ -40,6 +42,7 @@ public class LevelStateMachine : MonoBehaviour
 
         _spawner.Begin();
         _playerHealth.Died += OnPlayerDied;
+        _levelProgress.LevelComplited += OnLevelComplited;
 
         _running = true;
         _paused = false;
@@ -71,10 +74,6 @@ public class LevelStateMachine : MonoBehaviour
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }
-    public void OnAllEnemiesDestroyed()
-    {
-        LevelCompleted?.Invoke();
-    }
 
     public void StopGameplay()
     {
@@ -86,10 +85,22 @@ public class LevelStateMachine : MonoBehaviour
         _playerHealth.Died -= OnPlayerDied;
     }
 
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(_menuScene);
+    }
+
     private void OnPlayerDied()
     {
         PlayerDied?.Invoke();
         _playerHealth.Died -= OnPlayerDied;
         Time.timeScale = 0f;
+    }
+
+    private void OnLevelComplited()
+    {
+        StopGameplay();
+        _levelProgress.LevelComplited -= OnLevelComplited;
+        LevelCompleted?.Invoke();
     }
 }

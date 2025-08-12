@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9052331249823880005}
   - component: {fileID: 6677997606127019765}
   - component: {fileID: 2040606238871374783}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Reddot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5861605115325348732}
   - component: {fileID: 9121099193209239877}
   - component: {fileID: 9107781756920278576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 464443241279884211}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 489102219839050199}
   - component: {fileID: 7561847527529752799}
   - component: {fileID: 5811439677322637865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Tracer_Single_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5144,7 +5144,7 @@ GameObject:
   - component: {fileID: 9088658675265746601}
   - component: {fileID: 6529846390614019981}
   - component: {fileID: 8404218290063786905}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Heavy_Flash_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9980,7 +9980,7 @@ GameObject:
   - component: {fileID: 1010724092365956604}
   - component: {fileID: 972419456422896053}
   - component: {fileID: 6905343617800622135}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Tracer_Single_Smoke_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14876,7 +14876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526667477452644517}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VFXParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14909,7 +14909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5755518295002123863}
   - component: {fileID: 4591224949924342211}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15005,15 +15005,15 @@ GameObject:
   - component: {fileID: 7961144939141388862}
   - component: {fileID: 2743336358647330913}
   - component: {fileID: 7063093083045466000}
-  - component: {fileID: 3019496850700472414}
-  - component: {fileID: 7145509771630451274}
-  m_Layer: 0
+  - component: {fileID: 4716221909597274126}
+  - component: {fileID: 2508176021536842434}
+  m_Layer: 7
   m_Name: Bazooka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7667303753311643874
 Transform:
   m_ObjectHideFlags: 0
@@ -15022,8 +15022,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7164209955959781297}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17, y: 1.324, z: -0.07}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: 0.04, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15096,15 +15096,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb36504402e45784a9ddf723d77bc118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aimingTarget: {fileID: 0}
   _muzzleEffectPrefab: {fileID: 198252652730714422, guid: 6f4758541f6876948b8a32b86be9b011, type: 3}
-  _ammunition: {fileID: 0}
-  _uiSpriteActive: {fileID: 0}
-  _uiSpriteDeactive: {fileID: 0}
-  Owner: {fileID: 0}
+  _uiSpriteActive: {fileID: 21300000, guid: 64bcb340f2ac0d44eb2f690774574a01, type: 3}
+  _uiSpriteDeactive: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
   FirePoint: {fileID: 464443241279884211}
   ProjectilePrefab: {fileID: -7589564598912326102, guid: 801d21a0dd66a424494082745481b4c2, type: 3}
-  _weaponInput: {fileID: 0}
   FireDelay: 1
   UsePooling: 1
   ProjectileSpeed: 100
@@ -15112,7 +15108,7 @@ MonoBehaviour:
   MaxAttackDistance: 200
   _aoeDamage: 150
   _aoeRange: 15
---- !u!82 &3019496850700472414
+--- !u!82 &4716221909597274126
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15123,7 +15119,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -15208,7 +15204,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7145509771630451274
+--- !u!114 &2508176021536842434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15222,7 +15218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootSound: {fileID: 8300000, guid: db6604c86ed0cea40b03796fc356a186, type: 3}
   _weapon: {fileID: 7063093083045466000}
-  _volume: 0.5
 --- !u!1 &7298972699488887818
 GameObject:
   m_ObjectHideFlags: 0
@@ -15234,7 +15229,7 @@ GameObject:
   - component: {fileID: 8456805544490801782}
   - component: {fileID: 501586632010647449}
   - component: {fileID: 7435266788486935842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Acog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15317,7 +15312,7 @@ GameObject:
   - component: {fileID: 4862498798003515726}
   - component: {fileID: 4729042111717405434}
   - component: {fileID: 3461038514067007525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SA_Wep_DoublebarrelShotgun_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15400,7 +15395,7 @@ GameObject:
   - component: {fileID: 2205669448716960840}
   - component: {fileID: 122235094061672202}
   - component: {fileID: 5264218961918425847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FX_Gunshot_Heavy_Single_Tracers_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
