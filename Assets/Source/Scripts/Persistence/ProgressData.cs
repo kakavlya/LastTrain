@@ -6,6 +6,12 @@ public class ProgressData
     public List<WeaponProgress> Weapons = new List<WeaponProgress>();
     public List<int> UnlockedLevels = new List<int>();    
     public int Coins;
+    public float EffectsVolume;
+    public float MusicVolume;
+    public int InventorySlotsCount;
+    public int PlayerInventorySlotsCount;
+    public List<string> InventorySlots = new List<string>();
+    public List<string> PlayerInventorySlots = new List<string>();
 
     public ProgressData()
     {
@@ -18,5 +24,15 @@ public class ProgressData
         // Unlocking 1 level on start
         UnlockedLevels.Add(1);
         Coins = 0;
+        EffectsVolume = 0.5f;
+        MusicVolume = 0.5f;
+        InventorySlotsCount = 5;
+        PlayerInventorySlotsCount = 3;
+
+        for (int i = 0; i < InventorySlotsCount; i++)
+            InventorySlots.Add("");
+
+        for (int i = 0; i < PlayerInventorySlotsCount; i++)
+            PlayerInventorySlots.Add("");
     }
 }
