@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: BasicShooterSettings
   m_EditorClassIdentifier: 
+  Reward: 20
   moveSpeed: 55
   turnSpeed: 120
   attackSpeedFactorMin: 0.7
