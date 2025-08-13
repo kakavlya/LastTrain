@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class LevelsHandler : MonoBehaviour
     [SerializeField] private Transform _contentButtonsTransform;
     [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private TextMeshProUGUI _textCurrentLevel;
+    [SerializeField] private Sprite _unavailableIcon;
     [SerializeField] private SharedData _sharedData;
 
     public event Action LevelChosed;
@@ -19,6 +21,7 @@ public class LevelsHandler : MonoBehaviour
 
     private void Start()
     {
+        LoadLevels();
         CreateLevelButtons();
         IsChosed = false;
     }
@@ -28,15 +31,50 @@ public class LevelsHandler : MonoBehaviour
         StartCoroutine(CreateLevelButtonsAndResetScroll());
     }
 
+    private void LoadLevels()
+    {
+        var levelsAvailability = SaveManager.Instance.Data.LevelsAvailability;
+
+        if (levelsAvailability.Count == 0)
+        {
+            foreach (var setting in _levelSettings)
+            {
+                levelsAvailability.Add(new LevelAvailability(setting.LevelName, setting.IsAvailable));
+            }
+
+            SaveManager.Instance.Save();
+        }
+
+        foreach (var setting in _levelSettings)
+        {
+            foreach (var level in levelsAvailability)
+            {
+                if (setting.LevelName == level.Name)
+                {
+                    setting.IsAvailable = level.Available;
+                }
+            }
+        }
+
+        _sharedData.SetAllLevels(_levelSettings);
+    }
+
     private void CreateLevelButtons()
     {
-        for (int i = 0;  i < _levelSettings.Length; i++)
+        for (int i = 0; i < _levelSettings.Length; i++)
         {
             GameObject objectButton = Instantiate(_buttonPrefab, _contentButtonsTransform);
             TextMeshProUGUI buttonText = objectButton.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = _levelSettings[i].LevelName;
             Button button = objectButton.GetComponent<Button>();
-            button.enabled = _levelSettings[i].IsAvailable;
+
+            if (!_levelSettings[i].IsAvailable)
+            {
+                button.enabled = false;
+                var buttonIcon = objectButton.GetComponent<Image>();
+                buttonIcon.sprite = _unavailableIcon;
+            }
+
             LevelSetting currentLevel = _levelSettings[i];
             button.onClick.AddListener(() => LoadLevelSettings(currentLevel));
         }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Level;
 using UnityEngine;
@@ -10,16 +9,33 @@ public class PickableAmmunitionSpawner : MonoBehaviour
     [SerializeField] private SharedData _sharedData;
     [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
 
+    private List<PickableAmmunition> _selectedAmmunitionPrefabs = new List<PickableAmmunition>();
     private int _generatePercent;
     private int _maxGeneratePercent = 100;
 
     public void Init()
     {
+        SelectAmmunition();
         _generatePercent = _sharedData.LevelSetting.AmmunitionGeneratePercent;
         _levelGenerator.StartedElementDefined += SetStartedRandomAmmunition;
         _levelGenerator.ElementChanged += SetNextRandomAmmunition;
     }
 
+    private void SelectAmmunition()
+    {
+        var selectedWeapons = _sharedData.WeaponInfos;
+
+        for (int i = 0; i < _pickableAmmunitionPrefabs.Length; i++)
+        {
+            for (int j = 0; j < selectedWeapons.Count; j++)
+            {
+                if (selectedWeapons[j].WeaponPrefab == _pickableAmmunitionPrefabs[i].PrefabTypeOfWeapon)
+                {
+                    _selectedAmmunitionPrefabs.Add(_pickableAmmunitionPrefabs[i]);
+                }
+            }
+        }
+    }
 
     private void SetStartedRandomAmmunition(LevelElement currentElement, LevelElement nextElement)
     {
@@ -27,10 +43,10 @@ public class PickableAmmunitionSpawner : MonoBehaviour
 
         foreach (var point in points)
         {
-            if (Random.Range(0, _maxGeneratePercent + 1) <= _generatePercent)
+            if (Random.Range(0, _maxGeneratePercent + 1) <= _generatePercent && _selectedAmmunitionPrefabs.Count > 0)
             {
-                int ammoNum = Random.Range(0, _pickableAmmunitionPrefabs.Length);
-                PickableAmmunitionPool.Instance.Spawn(_pickableAmmunitionPrefabs[ammoNum], point.position);
+                int ammoNum = Random.Range(0, _selectedAmmunitionPrefabs.Count);
+                PickableAmmunitionPool.Instance.Spawn(_selectedAmmunitionPrefabs[ammoNum], point.position);
             }
         }
 
@@ -43,10 +59,10 @@ public class PickableAmmunitionSpawner : MonoBehaviour
 
         foreach (var point in points)
         {
-            if (Random.Range(0, _maxGeneratePercent + 1) <= _generatePercent)
+            if (Random.Range(0, _maxGeneratePercent + 1) <= _generatePercent && _selectedAmmunitionPrefabs.Count > 0)
             {
-                int ammoNum = Random.Range(0, _pickableAmmunitionPrefabs.Length);
-                PickableAmmunitionPool.Instance.Spawn(_pickableAmmunitionPrefabs[ammoNum], point.position);
+                int ammoNum = Random.Range(0, _selectedAmmunitionPrefabs.Count);
+                PickableAmmunitionPool.Instance.Spawn(_selectedAmmunitionPrefabs[ammoNum], point.position);
             }
         }
     }

@@ -18,7 +18,8 @@ public class PickableAmmunition : MonoBehaviour
         {
             var ammunitionType = PrefabTypeOfWeapon.GetType();
 
-            Ammunition[] ammunitions = projectile.Owner.GetComponentsInChildren<Ammunition>();
+            Ammunition[] ammunitions = projectile.Owner.transform.parent.GetComponentsInChildren<Ammunition>();
+            Debug.Log(projectile.Owner.name);
 
             foreach (Ammunition ammunition in ammunitions)
             {

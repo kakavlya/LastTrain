@@ -31,7 +31,6 @@ public class Ammunition : MonoBehaviour
         }
 
         Updated?.Invoke(CurrentAmmo);
-        Debug.Log(CurrentAmmo);
     }
 
     public void IncreaseProjectilesCount(int addedCount)

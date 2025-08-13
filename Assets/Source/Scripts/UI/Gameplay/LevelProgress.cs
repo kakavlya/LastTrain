@@ -58,6 +58,32 @@ public class LevelProgress : MonoBehaviour
         }
 
         LevelComplited?.Invoke();
+        OpenNextLevel();
         CoinsHandler.Instance.AddCoins(_sharedData.LevelSetting.LevelReward);
+    }
+
+    private void OpenNextLevel()
+    {
+        var currentLevel = _sharedData.LevelSetting;
+        var levelsArray = _sharedData.AllLevels;
+
+        for (int i = 0; i < levelsArray.Length; i++)
+        {
+            if (levelsArray[i] == currentLevel && i + 1 < levelsArray.Length)
+            {
+                var nextLevel = levelsArray[i + 1];
+                nextLevel.IsAvailable = true;
+
+                var savedLevel = SaveManager.Instance.Data.LevelsAvailability.Find(level => level.Name == nextLevel.LevelName);
+                
+                if (savedLevel != null)
+                {
+                    savedLevel.Available = true;
+                }
+
+                SaveManager.Instance.Save();
+                return;
+            }
+        }
     }
 }

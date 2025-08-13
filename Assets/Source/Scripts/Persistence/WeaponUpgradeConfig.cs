@@ -24,7 +24,10 @@ public class WeaponUpgradeConfig : ScriptableObject
     public float DamageMin, DamageMax;
     public float RangeMin, RangeMax;
 
-    public Sprite Icon;
+    public Sprite IconAwailable;
+    public Sprite IconUnawailable;
+
+    public int UnblockingCost;
 
     public float GetStat(StatType stat, int level)
     {

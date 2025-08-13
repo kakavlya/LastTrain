@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Unity.VisualScripting.FullSerializer;
-using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
 public class ShopItemUI : MonoBehaviour, IPointerClickHandler
@@ -17,6 +15,7 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
     private WeaponUpgradeConfig _cfg;
     private WeaponProgress _progress;
     private Action<WeaponUpgradeConfig, WeaponProgress> _onSelected;
+    private bool _isAvailable;
 
     public void Init(WeaponUpgradeConfig cfg,
                      WeaponProgress progress,
@@ -26,7 +25,8 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
         _progress = progress;
         _onSelected = onSelected;
 
-        _icon.sprite = cfg.Icon;
+        _icon.sprite = cfg.IconAwailable;
+        _isAvailable = progress.IsAvailable;
         Refresh();
     }
 

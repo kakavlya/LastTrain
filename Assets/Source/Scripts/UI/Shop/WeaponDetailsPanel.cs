@@ -12,6 +12,7 @@ public class WeaponDetailsPanel : MonoBehaviour
     [SerializeField] private Button _closeBtn;
     [SerializeField] private CanvasGroup _cg;
     [SerializeField] private Image _weaponIcon;
+    [SerializeField] private TextMeshProUGUI _weaponLevelText;
 
     [Header("Damage Row")]
     [SerializeField] private Slider _damageSlider;
@@ -28,15 +29,15 @@ public class WeaponDetailsPanel : MonoBehaviour
     [SerializeField] private Button _rangeUpgrade;
 
     private WeaponUpgradeConfig _cfg;
-    private WeaponProgress _prog;
+    private WeaponProgress _weaponProgress;
     private Action _onClose;
 
     public void Show(WeaponUpgradeConfig cfg, WeaponProgress prog, Action onClose)
     {
         _cfg = cfg;
-        _prog = prog;
+        _weaponProgress = prog;
         _onClose = onClose;
-        _weaponIcon.sprite = _cfg.Icon;
+        _weaponIcon.sprite = _cfg.IconAwailable;
 
         _closeBtn.onClick.RemoveAllListeners();
         _damageUpgrade.onClick.RemoveAllListeners();
@@ -52,7 +53,7 @@ public class WeaponDetailsPanel : MonoBehaviour
 
     private void Upgrade(StatType stat)
     {
-        int level = _prog.GetLevel(stat);
+        int level = _weaponProgress.GetLevel(stat);
         int maxLevel = _cfg.GetMaxLevel(stat);
         if (level >= maxLevel) return;
 
@@ -66,7 +67,7 @@ public class WeaponDetailsPanel : MonoBehaviour
         }
 
         save.Coins -= cost;
-        _prog.Increment(stat);
+        _weaponProgress.Increment(stat);
 
         SaveManager.Instance.Save();
         Refresh();
@@ -74,20 +75,22 @@ public class WeaponDetailsPanel : MonoBehaviour
 
     private void Refresh()
     {
-        float dmgRatio = _prog.DamageLevel / (float)_cfg.MaxDamageLevel;
-        float rngRatio = _prog.RangeLevel / (float)_cfg.MaxRangeLevel;
+        float dmgRatio = _weaponProgress.DamageLevel / (float)_cfg.MaxDamageLevel;
+        float rngRatio = _weaponProgress.RangeLevel / (float)_cfg.MaxRangeLevel;
 
-        _damageLvl.text = $"{_prog.DamageLevel}/{_cfg.MaxDamageLevel}";
-        _rangeLvl.text = $"{_prog.RangeLevel}/{_cfg.MaxRangeLevel}";
+        _damageLvl.text = $"{_weaponProgress.DamageLevel}/{_cfg.MaxDamageLevel}";
+        _rangeLvl.text = $"{_weaponProgress.RangeLevel}/{_cfg.MaxRangeLevel}";
 
         _damageSlider.value = dmgRatio;
         _rangeSlider.value = rngRatio;
 
-        _rangeDistance.text = _cfg.GetStat(StatType.Range, _prog.RangeLevel).ToString("F1");
-        _damageAmount.text = _cfg.GetStat(StatType.Damage, _prog.DamageLevel).ToString("F1");
+        _rangeDistance.text = _cfg.GetStat(StatType.Range, _weaponProgress.RangeLevel).ToString("F1");
+        _damageAmount.text = _cfg.GetStat(StatType.Damage, _weaponProgress.DamageLevel).ToString("F1");
 
-        _damageCost.text = _cfg.GetCost(StatType.Damage, _prog.DamageLevel).ToString();
-        _rangeCost.text = _cfg.GetCost(StatType.Range, _prog.RangeLevel).ToString();
+        _damageCost.text = _cfg.GetCost(StatType.Damage, _weaponProgress.DamageLevel).ToString();
+        _rangeCost.text = _cfg.GetCost(StatType.Range, _weaponProgress.RangeLevel).ToString();
+
+        _weaponLevelText.text = $"{_weaponProgress.DamageLevel + _weaponProgress.RangeLevel} level";
     }
 
     private void FadeIn()

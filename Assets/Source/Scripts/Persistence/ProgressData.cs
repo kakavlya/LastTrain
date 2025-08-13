@@ -12,6 +12,7 @@ public class ProgressData
     public int PlayerInventorySlotsCount;
     public List<string> InventorySlots = new List<string>();
     public List<string> PlayerInventorySlots = new List<string>();
+    public List<LevelAvailability> LevelsAvailability = new List<LevelAvailability>();
 
     public ProgressData()
     {

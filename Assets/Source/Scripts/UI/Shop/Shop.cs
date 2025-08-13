@@ -12,7 +12,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private WeaponUpgradeConfig[] _weaponConfigs;
 
     [Header("General shop UI")]
-    [SerializeField] private TMP_Text _coinsText;
     [SerializeField] private Image _blocker;              
     [SerializeField] private WeaponDetailsPanel _detailsPrefab;
     [SerializeField] private Transform _detailsParent;        // spawn position
@@ -26,7 +25,6 @@ public class Shop : MonoBehaviour
         _blocker.gameObject.SetActive(false);
         _data = SaveManager.Instance.Data;
         BuildShop();
-        RefreshCoins();
     }
 
     private void BuildShop()
@@ -68,12 +66,6 @@ public class Shop : MonoBehaviour
     private void OnDetailsClosed()
     {
         _blocker.gameObject.SetActive(false);
-        RefreshCoins();
         BuildShop();
-    }
-
-    private void RefreshCoins()
-    {
-        _coinsText.text = $"Coins: {SaveManager.Instance.Data.Coins}";
     }
 }
