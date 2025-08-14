@@ -12,6 +12,8 @@ public class WeaponUpgradeConfig : ScriptableObject
     public string WeaponName =>
         string.IsNullOrWhiteSpace(_weaponName) ? _weaponName : _weaponName;
 
+    public Weapon WeaponPrefab;
+
     public AnimationCurve DamageCurve; // 0 - 1
     public AnimationCurve RangeCurve;  // 0 - 1 
 
@@ -24,8 +26,7 @@ public class WeaponUpgradeConfig : ScriptableObject
     public float DamageMin, DamageMax;
     public float RangeMin, RangeMax;
 
-    public Sprite IconAwailable;
-    public Sprite IconUnawailable;
+    public Sprite Icon;
 
     public int UnblockingCost;
 

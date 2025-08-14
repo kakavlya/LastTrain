@@ -24,11 +24,11 @@ public class ProgressData
 
         // Unlocking 1 level on start
         UnlockedLevels.Add(1);
-        Coins = 0;
+        Coins = 100000;
         EffectsVolume = 0.5f;
         MusicVolume = 0.5f;
-        InventorySlotsCount = 5;
-        PlayerInventorySlotsCount = 3;
+        InventorySlotsCount = 0;
+        PlayerInventorySlotsCount = 1;
 
         for (int i = 0; i < InventorySlotsCount; i++)
             InventorySlots.Add("");

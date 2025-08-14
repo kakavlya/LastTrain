@@ -16,6 +16,9 @@ public class Shop : MonoBehaviour
     [SerializeField] private WeaponDetailsPanel _detailsPrefab;
     [SerializeField] private Transform _detailsParent;        // spawn position
 
+    [Header("Inventory items")]
+    [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
+
     // Кэш, чтобы не пересоздавать окно каждый раз
     private WeaponDetailsPanel _detailsPanel;
     ProgressData _data;
@@ -34,10 +37,10 @@ public class Shop : MonoBehaviour
 
         var data = SaveManager.Instance.Data;
 
-        foreach (var cfg in _weaponConfigs)
+        foreach (var upgradeConfig in _weaponConfigs)
         {
 
-            string id = cfg.WeaponId;                           
+            string id = upgradeConfig.WeaponId;                           
             var progress = _data.Weapons.Find(w => w.WeaponId == id);
             if (progress == null)
             {
@@ -45,8 +48,9 @@ public class Shop : MonoBehaviour
                 data.Weapons.Add(progress);
             }
 
-            var ui = Instantiate(_shopItemPrefab, _contentParent);
-            ui.Init(cfg, progress, OnItemSelected);
+            var itemUi = Instantiate(_shopItemPrefab, _contentParent);
+            itemUi.Init(upgradeConfig, progress, OnItemSelected);
+            itemUi.Unlocked += InitialNewInventoryWeapon;
         }
 
         SaveManager.Instance.Save();
@@ -67,5 +71,10 @@ public class Shop : MonoBehaviour
     {
         _blocker.gameObject.SetActive(false);
         BuildShop();
+    }
+
+    private void InitialNewInventoryWeapon()
+    {
+
     }
 }

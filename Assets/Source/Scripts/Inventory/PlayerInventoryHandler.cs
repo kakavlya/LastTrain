@@ -35,27 +35,27 @@ public class PlayerInventoryHandler : InventoryHandler
         }
     }
 
-    protected override void SaveLocationInInventory()
-    {
-        while (InventorySlots.Count < ActiveSlotUIs.Count)
-        {
-            InventorySlots.Add("");
-        }
+    //protected override void SaveLocationInInventory()
+    //{
+    //    while (InventorySlots.Count < ActiveSlotUIs.Count)
+    //    {
+    //        InventorySlots.Add("");
+    //    }
 
-        for (int i = 1; i < ActiveSlotUIs.Count; i++)
-        {
-            var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
+    //    for (int i = 1; i < ActiveSlotUIs.Count; i++)
+    //    {
+    //        var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
-            if (inventoryWeapon != null && inventoryWeapon.WeaponInfo != null)
-            {
-                InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
-            }
-            else
-            {
-                InventorySlots[i] = "";
-            }
-        }
+    //        if (inventoryWeapon != null && inventoryWeapon.WeaponInfo != null)
+    //        {
+    //            InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
+    //        }
+    //        else
+    //        {
+    //            InventorySlots[i] = "";
+    //        }
+    //    }
 
-        SaveManager.Instance.Save();
-    }
+    //    SaveManager.Instance.Save();
+    //}
 }

@@ -24,19 +24,28 @@ public class InventoryHandler : MonoBehaviour
 
     private void GetActiveSlots()
     {
-        foreach (var slot in _slots)
+        for (int i = 0; i < InventorySlots.Count; i++)
         {
-            slot.SetActive(false);
-
-            if (slot.TryGetComponent(out WeaponSlotUI weaponSlotUI) && weaponSlotUI.IsActive)
-            {
-                slot.SetActive(true);
-                ActiveSlotUIs.Add(weaponSlotUI);
-                weaponSlotUI.Filled += SaveLocationInInventory;
-            }
+            var weaponSlotUI = _slots[i].GetComponent<WeaponSlotUI>();
+            _slots[i].SetActive(true);
+            ActiveSlotUIs.Add(weaponSlotUI);
+            weaponSlotUI.Filled += SaveLocationInInventory;
         }
 
-        LoadLocationInInventory();
+
+        //foreach (var slot in _slots)
+        //{
+        //    slot.SetActive(false);
+
+        //    if (slot.TryGetComponent(out WeaponSlotUI weaponSlotUI) && weaponSlotUI.IsActive)
+        //    {
+        //        slot.SetActive(true);
+        //        ActiveSlotUIs.Add(weaponSlotUI);
+        //        weaponSlotUI.Filled += SaveLocationInInventory;
+        //    }
+        //}
+
+        LoadWeaponsLocationInInventory();
     }
 
     protected virtual void SaveLocationInInventory()
@@ -63,7 +72,7 @@ public class InventoryHandler : MonoBehaviour
         SaveManager.Instance.Save();
     }
 
-    private void LoadLocationInInventory()
+    private void LoadWeaponsLocationInInventory()
     {
         List<string> weaponsNames = InventorySlots;
 

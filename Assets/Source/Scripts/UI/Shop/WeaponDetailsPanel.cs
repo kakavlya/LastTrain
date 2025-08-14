@@ -37,7 +37,7 @@ public class WeaponDetailsPanel : MonoBehaviour
         _cfg = cfg;
         _weaponProgress = prog;
         _onClose = onClose;
-        _weaponIcon.sprite = _cfg.IconAwailable;
+        _weaponIcon.sprite = _cfg.Icon;
 
         _closeBtn.onClick.RemoveAllListeners();
         _damageUpgrade.onClick.RemoveAllListeners();

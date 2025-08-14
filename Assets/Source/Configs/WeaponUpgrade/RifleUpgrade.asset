@@ -71,3 +71,4 @@ MonoBehaviour:
   RangeMin: 10
   RangeMax: 15
   Icon: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}
+  UnblockingCost: 0
