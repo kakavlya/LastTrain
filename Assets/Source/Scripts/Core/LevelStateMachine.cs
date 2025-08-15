@@ -70,7 +70,6 @@ public class LevelStateMachine : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }

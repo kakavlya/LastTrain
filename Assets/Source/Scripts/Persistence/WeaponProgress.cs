@@ -8,7 +8,7 @@ public class WeaponProgress
     public int RangeLevel;
     public bool IsAvailable;
 
-    public WeaponProgress(string weaponId, int defaultStatLevel = 1)
+    public WeaponProgress(string weaponId, int defaultStatLevel = 0)
     {
         WeaponId = weaponId;
         DamageLevel = defaultStatLevel;

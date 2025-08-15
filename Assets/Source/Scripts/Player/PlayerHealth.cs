@@ -22,7 +22,7 @@ public class PlayerHealth : HealthBase
         _healthSlider.value = MaxHealth;
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
         _healthText.text = CurrentHealth.ToString();

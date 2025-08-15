@@ -12,7 +12,7 @@ public class EnemyHealth : HealthBase
         _deathHandler = GetComponent<EnemyDeathHandler>();
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
     }

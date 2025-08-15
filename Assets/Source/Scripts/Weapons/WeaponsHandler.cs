@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Assets.Source.Scripts.Weapons;
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponsHandler : MonoBehaviour
@@ -136,11 +137,26 @@ public class WeaponsHandler : MonoBehaviour
     private void CreateWeapons()
     {
         _weapons = new Weapon[_sharedData.WeaponConfigs.Count];
+        var data = SaveManager.Instance.Data;
 
         for (int i = 0; i < _sharedData.WeaponConfigs.Count; i++)
         {
+            var weaponConfigs = _sharedData.WeaponConfigs[i];
+            WeaponProgress weaponProgress = data.Weapons.Find(weapon => weapon.WeaponId == weaponConfigs.WeaponId);
+
+            if (weaponProgress == null)
+            {
+                weaponProgress = new WeaponProgress(weaponConfigs.WeaponId, 1);
+                data.Weapons.Add(weaponProgress);
+            }
+
+            float damage = _sharedData.WeaponConfigs[i].GetStat(StatType.Damage, weaponProgress.DamageLevel);
+            float range = _sharedData.WeaponConfigs[i].GetStat(StatType.Range, weaponProgress.RangeLevel);
+
             Weapon weaponInstance = Instantiate(_sharedData.WeaponConfigs[i].WeaponPrefab, transform);
+            weaponInstance.Init(damage, range);
             weaponInstance.SetPrefabReference(_sharedData.WeaponConfigs[i].WeaponPrefab);
+
             weaponInstance.gameObject.SetActive(false);
             _weapons[i] = weaponInstance;
         }

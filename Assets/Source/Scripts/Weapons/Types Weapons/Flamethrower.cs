@@ -14,7 +14,7 @@ public class Flamethrower : Weapon
     {
         var mainSetting = _flameParticle.main;
         mainSetting.startSpeed = ProjectileSpeed;
-        mainSetting.startLifetime = MaxAttackDistance / ProjectileSpeed;
+        mainSetting.startLifetime = Range / ProjectileSpeed;
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class Flamethrower : Weapon
     {
         int hitsCount = Physics.OverlapSphereNonAlloc(
             transform.position,
-            MaxAttackDistance,
+            Range,
             _hits
             );
 

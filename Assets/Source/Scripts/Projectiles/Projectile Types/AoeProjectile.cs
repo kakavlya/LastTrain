@@ -32,7 +32,7 @@ public class AoeProjectile : Projectile
         Quaternion rotation,
         GameObject owner,
         float speed,
-        int damage,
+        float damage,
         float maxAttackDistance,
         bool usePooling,
         int aoeDamage = 0,

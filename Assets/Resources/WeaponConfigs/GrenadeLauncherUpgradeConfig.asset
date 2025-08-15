@@ -67,9 +67,9 @@ MonoBehaviour:
   MaxRangeLevel: 5
   DamageCosts: fa000000f4010000e8030000dc050000c4090000
   RangeCosts: 9001000020030000140500006c070000c4090000
-  DamageMin: 15
-  DamageMax: 40
-  RangeMin: 9
-  RangeMax: 20
+  DamageMin: 80
+  DamageMax: 200
+  RangeMin: 150
+  RangeMax: 450
   Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
   UnblockingCost: 20000

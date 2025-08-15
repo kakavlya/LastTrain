@@ -28,7 +28,7 @@ public class LevelsHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(CreateLevelButtonsAndResetScroll());
+        StartCoroutine(ResizeScrollOnTop());
     }
 
     private void LoadLevels()
@@ -51,7 +51,7 @@ public class LevelsHandler : MonoBehaviour
             {
                 if (setting.LevelName == level.Name)
                 {
-                    setting.IsAvailable = level.Available;
+                    setting.IsAvailable = level.IsAvailable;
                 }
             }
         }
@@ -68,7 +68,12 @@ public class LevelsHandler : MonoBehaviour
             buttonText.text = _levelSettings[i].LevelName;
             Button button = objectButton.GetComponent<Button>();
 
-            if (!_levelSettings[i].IsAvailable)
+            LevelAvailability levelAvail = SaveManager.Instance.Data.LevelsAvailability.Find(
+                level => level.Name == _levelSettings[i].LevelName);
+
+            bool isAvailable = levelAvail != null && levelAvail.IsAvailable;
+
+            if (!isAvailable)
             {
                 button.enabled = false;
                 var buttonIcon = objectButton.GetComponent<Image>();
@@ -80,7 +85,7 @@ public class LevelsHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator CreateLevelButtonsAndResetScroll()
+    private IEnumerator ResizeScrollOnTop()
     {
         yield return null;
         ResizeContentForGrid();

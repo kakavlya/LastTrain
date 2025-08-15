@@ -3,11 +3,11 @@
 public class LevelAvailability
 {
     public string Name;
-    public bool Available;
+    public bool IsAvailable;
 
-    public LevelAvailability(string name, bool available)
+    public LevelAvailability(string name, bool isAvailable)
     {
         Name = name;
-        Available = available;
+        IsAvailable = isAvailable;
     }
 }

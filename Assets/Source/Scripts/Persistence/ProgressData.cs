@@ -17,10 +17,10 @@ public class ProgressData
     public ProgressData()
     {
         // All weapons start at level 1
-        Weapons.Add(new WeaponProgress("Rifle", 1));
-        Weapons.Add(new WeaponProgress("MachineGun", 1));
-        Weapons.Add(new WeaponProgress("GrenadeLauncher", 1));
-        Weapons.Add(new WeaponProgress("Flamethrower", 1));
+        Weapons.Add(new WeaponProgress("Rifle", 0));
+        Weapons.Add(new WeaponProgress("MachineGun", 0));
+        Weapons.Add(new WeaponProgress("GrenadeLauncher", 0));
+        Weapons.Add(new WeaponProgress("Flamethrower", 0));
 
         // Unlocking 1 level on start
         UnlockedLevels.Add(1);

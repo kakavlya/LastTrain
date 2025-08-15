@@ -55,6 +55,7 @@ public class WeaponDetailsPanel : MonoBehaviour
     {
         int level = _weaponProgress.GetLevel(stat);
         int maxLevel = _cfg.GetMaxLevel(stat);
+
         if (level >= maxLevel) return;
 
         var coins = CoinsHandler.Instance.CoinsCount;
@@ -95,7 +96,7 @@ public class WeaponDetailsPanel : MonoBehaviour
         _rangeCost.text = canUpgradeRange ? (_cfg.GetCost(StatType.Range, _weaponProgress.RangeLevel).ToString()) : "-";
         _rangeUpgrade.interactable = canUpgradeRange;
 
-        _weaponLevelText.text = $"{_weaponProgress.DamageLevel + _weaponProgress.RangeLevel - 1} level";
+        _weaponLevelText.text = $"{_weaponProgress.DamageLevel + _weaponProgress.RangeLevel} level";
     }
 
     private void FadeIn()

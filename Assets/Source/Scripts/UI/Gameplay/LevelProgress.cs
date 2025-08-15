@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelProgress : MonoBehaviour
@@ -9,10 +10,12 @@ public class LevelProgress : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _countdownText;
     [SerializeField] private Slider _progressSlider;
     [SerializeField] private int _startDelaySeconds;
+    [SerializeField] private Button _nextLevelButton;
     [SerializeField] private SharedData _sharedData;
 
     private int _levelDurationSeconds;
     private int _progressValue = 1;
+    private LevelSetting _nextLevel;
 
     public event Action CountdownFinished;
     public event Action LevelComplited;
@@ -58,11 +61,11 @@ public class LevelProgress : MonoBehaviour
         }
 
         LevelComplited?.Invoke();
-        OpenNextLevel();
+        UnlockNextLevel();
         CoinsHandler.Instance.AddCoins(_sharedData.LevelSetting.LevelReward);
     }
 
-    private void OpenNextLevel()
+    private void UnlockNextLevel()
     {
         var currentLevel = _sharedData.LevelSetting;
         var levelsArray = _sharedData.AllLevels;
@@ -75,15 +78,24 @@ public class LevelProgress : MonoBehaviour
                 nextLevel.IsAvailable = true;
 
                 var savedLevel = SaveManager.Instance.Data.LevelsAvailability.Find(level => level.Name == nextLevel.LevelName);
-                
+
                 if (savedLevel != null)
                 {
-                    savedLevel.Available = true;
+                    savedLevel.IsAvailable = true;
+                    _nextLevel = nextLevel;
+                    _nextLevelButton.onClick.AddListener(StartNextLevel);
                 }
 
                 SaveManager.Instance.Save();
                 return;
             }
         }
+    }
+
+    private void StartNextLevel()
+    {
+        _sharedData.LevelSetting = _nextLevel;
+        Scene current = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(current.name);
     }
 }

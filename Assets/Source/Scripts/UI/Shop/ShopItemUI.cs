@@ -4,7 +4,7 @@ using TMPro;
 using System;
 using UnityEngine.EventSystems;
 
-public class ShopItemUI : MonoBehaviour, IPointerClickHandler
+public class ShopItemUI : MonoBehaviour
 {
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _weaponName;
@@ -14,6 +14,7 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _unlockCostText;
     [SerializeField] private Button _unlockButton;
     [SerializeField] private GameObject _lockPanel;
+    [SerializeField] private Button _upgradeButton;
 
     private int _unlockingCost;
     private WeaponUpgradeConfig _upgradeConfig;
@@ -36,23 +37,27 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
         _icon.sprite = cfg.Icon;
         _isAvailable = progress.IsAvailable;
 
+        _upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
+
         if (!_isAvailable)
         {
             _unlockButton.gameObject.SetActive(true);
             _unlockButton.onClick.AddListener(BuyItem);
             _lockPanel.SetActive(true);
+            _upgradeButton.gameObject.SetActive(false);
             
         }
         else
         {
             _unlockButton.gameObject.SetActive(false);
             _lockPanel.SetActive(false);
+            _upgradeButton.gameObject.SetActive(true);
         }
 
         Refresh();
     }
 
-    public void OnPointerClick(PointerEventData _)
+    private void OnUpgradeButtonClick()
     {
         if (_lockPanel.activeSelf)
         {
@@ -69,12 +74,12 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
 
     private void UpdateTextLabels()
     {
-        int sumLevel = _progress.DamageLevel + _progress.RangeLevel - 1;
+        int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
 
         _rangeText.text = _upgradeConfig.GetStat(StatType.Range, _progress.RangeLevel).ToString("F1");
         _dmgText.text = _upgradeConfig.GetStat(StatType.Damage, _progress.DamageLevel).ToString("F1");
 
-        _levelText.text = $"Lvl {sumLevel}";
+        _levelText.text = sumLevel.ToString();
         _weaponName.text = _upgradeConfig.WeaponName;
     }
 
@@ -82,9 +87,11 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
     {
         if (CoinsHandler.Instance.CoinsCount >= _unlockingCost)
         {
+            _unlockButton.onClick.RemoveListener(BuyItem);
             CoinsHandler.Instance.RemoveCoins(_unlockingCost);
             _unlockButton.gameObject.SetActive(false);
             _lockPanel.SetActive(false);
+            _upgradeButton.gameObject.SetActive(true);
             Unlocked?.Invoke(_progress,_upgradeConfig);
         }
     }
