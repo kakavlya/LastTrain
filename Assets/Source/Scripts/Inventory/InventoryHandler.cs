@@ -6,15 +6,21 @@ public class InventoryHandler : MonoBehaviour
     [SerializeField] private GameObject[] _slots;
     [SerializeField] private InventoryWeapon _weaponUIPrefab;
 
-    private string _weaponInfosFolder = "WeaponInfos";
+    private string _weaponConfigsFolder = "WeaponConfigs";
 
     protected List<string> InventorySlots = new List<string>();
     protected List<WeaponSlotUI> ActiveSlotUIs = new List<WeaponSlotUI>();
 
+    public WeaponSlotUI GetLastActiveSlotUIs()
+    {
+        if (ActiveSlotUIs.Count > 0)
+            return ActiveSlotUIs[ActiveSlotUIs.Count - 1];
+        return null;
+    }
+
     protected virtual void Awake()
     {
-        InventorySlots = GetAllSlotsFromSave();
-        GetActiveSlots();
+        SubmitActiveSlots();
     }
 
     protected virtual List<string> GetAllSlotsFromSave()
@@ -22,8 +28,11 @@ public class InventoryHandler : MonoBehaviour
         return SaveManager.Instance.Data.InventorySlots;
     }
 
-    private void GetActiveSlots()
+    public void SubmitActiveSlots()
     {
+        ActiveSlotUIs.Clear();
+        InventorySlots = GetAllSlotsFromSave();
+
         for (int i = 0; i < InventorySlots.Count; i++)
         {
             var weaponSlotUI = _slots[i].GetComponent<WeaponSlotUI>();
@@ -32,20 +41,8 @@ public class InventoryHandler : MonoBehaviour
             weaponSlotUI.Filled += SaveLocationInInventory;
         }
 
-
-        //foreach (var slot in _slots)
-        //{
-        //    slot.SetActive(false);
-
-        //    if (slot.TryGetComponent(out WeaponSlotUI weaponSlotUI) && weaponSlotUI.IsActive)
-        //    {
-        //        slot.SetActive(true);
-        //        ActiveSlotUIs.Add(weaponSlotUI);
-        //        weaponSlotUI.Filled += SaveLocationInInventory;
-        //    }
-        //}
-
         LoadWeaponsLocationInInventory();
+        SaveLocationInInventory();
     }
 
     protected virtual void SaveLocationInInventory()
@@ -59,9 +56,9 @@ public class InventoryHandler : MonoBehaviour
         {
             var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
-            if (inventoryWeapon != null && inventoryWeapon.WeaponInfo != null)
+            if (inventoryWeapon != null && inventoryWeapon.WeaponConfig != null)
             {
-                InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
+                InventorySlots[i] = inventoryWeapon.WeaponConfig.WeaponName;
             }
             else
             {
@@ -76,28 +73,30 @@ public class InventoryHandler : MonoBehaviour
     {
         List<string> weaponsNames = InventorySlots;
 
-        for (int i = 0; i < ActiveSlotUIs.Count && i < weaponsNames.Count; i++)
+        for (int i = 0; i < _slots.Length && i < weaponsNames.Count; i++)
         {
             string name = weaponsNames[i];
 
             if (!string.IsNullOrEmpty(name))
             {
-                WeaponInfo weaponInfo = GetWeaponInfoByName(name);
+                WeaponUpgradeConfig weaponConfig = GetWeaponConfigByName(name);
 
-                if (weaponInfo != null)
+                if (weaponConfig != null)
                 {
-                    InventoryWeapon inventoryWeapon = Instantiate(_weaponUIPrefab, _slots[i].transform);
-                    inventoryWeapon.Init(weaponInfo);
+                    InventoryWeapon inventoryWeapon = Instantiate(_weaponUIPrefab, ActiveSlotUIs[i].transform);
+                    inventoryWeapon.Init(weaponConfig);
                 }
             }
         }
+
+        SaveManager.Instance.Save();
     }
 
-    private WeaponInfo GetWeaponInfoByName(string weaponName)
+    private WeaponUpgradeConfig GetWeaponConfigByName(string weaponName)
     {
-        WeaponInfo[] weaponInfos = Resources.LoadAll<WeaponInfo>(_weaponInfosFolder);
+        WeaponUpgradeConfig[] weaponConfigs = Resources.LoadAll<WeaponUpgradeConfig>(_weaponConfigsFolder);
 
-        foreach (var weaponInfo in weaponInfos)
+        foreach (var weaponInfo in weaponConfigs)
         {
             if (weaponInfo.WeaponName == weaponName)
                 return weaponInfo;

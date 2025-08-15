@@ -8,7 +8,7 @@ public class SharedData : ScriptableObject
     private LevelSetting[] _allLevels;
 
     public LevelSetting LevelSetting;
-    public List<WeaponInfo> WeaponInfos;
+    public List<WeaponUpgradeConfig> WeaponConfigs = new List<WeaponUpgradeConfig>();
 
     public LevelSetting[] AllLevels => _allLevels;
 

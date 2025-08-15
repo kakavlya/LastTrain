@@ -57,16 +57,16 @@ public class WeaponDetailsPanel : MonoBehaviour
         int maxLevel = _cfg.GetMaxLevel(stat);
         if (level >= maxLevel) return;
 
-        var save = SaveManager.Instance.Data;
+        var coins = CoinsHandler.Instance.CoinsCount;
         int cost = _cfg.GetCost(stat, level);
 
-        if(save.Coins < cost)
+        if(coins < cost)
         {
-            Debug.LogWarning($"Not enough coins to upgrade {stat}. Required: {cost}, Available: {save.Coins}");
+            Debug.LogWarning($"Not enough coins to upgrade {stat}. Required: {cost}, Available: {coins}");
             return;
         }
 
-        save.Coins -= cost;
+        CoinsHandler.Instance.RemoveCoins(cost);
         _weaponProgress.Increment(stat);
 
         SaveManager.Instance.Save();
@@ -87,10 +87,15 @@ public class WeaponDetailsPanel : MonoBehaviour
         _rangeDistance.text = _cfg.GetStat(StatType.Range, _weaponProgress.RangeLevel).ToString("F1");
         _damageAmount.text = _cfg.GetStat(StatType.Damage, _weaponProgress.DamageLevel).ToString("F1");
 
-        _damageCost.text = _cfg.GetCost(StatType.Damage, _weaponProgress.DamageLevel).ToString();
-        _rangeCost.text = _cfg.GetCost(StatType.Range, _weaponProgress.RangeLevel).ToString();
+        bool canUpgradeDamage = _weaponProgress.DamageLevel < _cfg.MaxDamageLevel;
+        _damageCost.text = canUpgradeDamage ? (_cfg.GetCost(StatType.Damage, _weaponProgress.DamageLevel).ToString()) : "-";
+        _damageUpgrade.interactable = canUpgradeDamage;
 
-        _weaponLevelText.text = $"{_weaponProgress.DamageLevel + _weaponProgress.RangeLevel} level";
+        bool canUpgradeRange = _weaponProgress.RangeLevel < _cfg.MaxRangeLevel;
+        _rangeCost.text = canUpgradeRange ? (_cfg.GetCost(StatType.Range, _weaponProgress.RangeLevel).ToString()) : "-";
+        _rangeUpgrade.interactable = canUpgradeRange;
+
+        _weaponLevelText.text = $"{_weaponProgress.DamageLevel + _weaponProgress.RangeLevel - 1} level";
     }
 
     private void FadeIn()

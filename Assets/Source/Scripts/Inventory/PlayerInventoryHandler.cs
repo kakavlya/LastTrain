@@ -24,38 +24,14 @@ public class PlayerInventoryHandler : InventoryHandler
 
     private void GiveInventoryWeaponFromSlots()
     {
-        _sharedData.WeaponInfos.Clear();
+        _sharedData.WeaponConfigs.Clear();
 
         foreach (var slot in ActiveSlotUIs)
         {
             if (slot.GetComponentInChildren<InventoryWeapon>() != null)
             {
-                _sharedData.WeaponInfos.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponInfo);
+                _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
             }
         }
     }
-
-    //protected override void SaveLocationInInventory()
-    //{
-    //    while (InventorySlots.Count < ActiveSlotUIs.Count)
-    //    {
-    //        InventorySlots.Add("");
-    //    }
-
-    //    for (int i = 1; i < ActiveSlotUIs.Count; i++)
-    //    {
-    //        var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
-
-    //        if (inventoryWeapon != null && inventoryWeapon.WeaponInfo != null)
-    //        {
-    //            InventorySlots[i] = inventoryWeapon.WeaponInfo.WeaponName;
-    //        }
-    //        else
-    //        {
-    //            InventorySlots[i] = "";
-    //        }
-    //    }
-
-    //    SaveManager.Instance.Save();
-    //}
 }

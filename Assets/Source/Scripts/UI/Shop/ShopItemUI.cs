@@ -16,18 +16,18 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject _lockPanel;
 
     private int _unlockingCost;
-    private WeaponUpgradeConfig _cfg;
+    private WeaponUpgradeConfig _upgradeConfig;
     private WeaponProgress _progress;
     private Action<WeaponUpgradeConfig, WeaponProgress> _onSelected;
     private bool _isAvailable;
 
-    public event Action Unlocked;
+    public event Action<WeaponProgress, WeaponUpgradeConfig> Unlocked;
 
     public void Init(WeaponUpgradeConfig cfg,
                      WeaponProgress progress,
                      Action<WeaponUpgradeConfig, WeaponProgress> onSelected)
     {
-        _cfg = cfg;
+        _upgradeConfig = cfg;
         _progress = progress;
         _onSelected = onSelected;
         _unlockingCost = cfg.UnblockingCost;
@@ -59,7 +59,7 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        _onSelected?.Invoke(_cfg, _progress);
+        _onSelected?.Invoke(_upgradeConfig, _progress);
     }
 
     public void Refresh()
@@ -69,26 +69,23 @@ public class ShopItemUI : MonoBehaviour, IPointerClickHandler
 
     private void UpdateTextLabels()
     {
-        int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
+        int sumLevel = _progress.DamageLevel + _progress.RangeLevel - 1;
 
-        _rangeText.text = _cfg.GetStat(StatType.Range, _progress.RangeLevel).ToString("F1");
-        _dmgText.text = _cfg.GetStat(StatType.Damage, _progress.DamageLevel).ToString("F1");
+        _rangeText.text = _upgradeConfig.GetStat(StatType.Range, _progress.RangeLevel).ToString("F1");
+        _dmgText.text = _upgradeConfig.GetStat(StatType.Damage, _progress.DamageLevel).ToString("F1");
 
         _levelText.text = $"Lvl {sumLevel}";
-        _weaponName.text = _cfg.WeaponName;
+        _weaponName.text = _upgradeConfig.WeaponName;
     }
 
     private void BuyItem()
     {
-        var playerCoins = SaveManager.Instance.Data.Coins;
-
-        if (playerCoins >= _unlockingCost)
+        if (CoinsHandler.Instance.CoinsCount >= _unlockingCost)
         {
-            playerCoins -= _unlockingCost;
+            CoinsHandler.Instance.RemoveCoins(_unlockingCost);
             _unlockButton.gameObject.SetActive(false);
             _lockPanel.SetActive(false);
-            _progress.IsAvailable = true;
-            Unlocked?.Invoke();
+            Unlocked?.Invoke(_progress,_upgradeConfig);
         }
     }
 }

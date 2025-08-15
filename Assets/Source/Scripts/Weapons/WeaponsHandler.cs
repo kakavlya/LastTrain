@@ -135,12 +135,12 @@ public class WeaponsHandler : MonoBehaviour
 
     private void CreateWeapons()
     {
-        _weapons = new Weapon[_sharedData.WeaponInfos.Count];
+        _weapons = new Weapon[_sharedData.WeaponConfigs.Count];
 
-        for (int i = 0; i < _sharedData.WeaponInfos.Count; i++)
+        for (int i = 0; i < _sharedData.WeaponConfigs.Count; i++)
         {
-            Weapon weaponInstance = Instantiate(_sharedData.WeaponInfos[i].WeaponPrefab, transform);
-            weaponInstance.SetPrefabReference(_sharedData.WeaponInfos[i].WeaponPrefab);
+            Weapon weaponInstance = Instantiate(_sharedData.WeaponConfigs[i].WeaponPrefab, transform);
+            weaponInstance.SetPrefabReference(_sharedData.WeaponConfigs[i].WeaponPrefab);
             weaponInstance.gameObject.SetActive(false);
             _weapons[i] = weaponInstance;
         }

@@ -9,6 +9,7 @@ public class CoinsHandler : MonoBehaviour
 
     public event Action<int> CoinsChanged;
     public event Action<int> Added;
+    public event Action<int> Removed;
 
     public int CoinsCount
     {
@@ -42,5 +43,11 @@ public class CoinsHandler : MonoBehaviour
         CoinsCount += addedCoins;
         SaveManager.Instance.Data.Coins += addedCoins;
         Added?.Invoke(addedCoins);
+    }
+
+    public void RemoveCoins(int removedCoins)
+    {
+        CoinsCount -= removedCoins;
+        SaveManager.Instance.Data.Coins -= removedCoins;
     }
 }

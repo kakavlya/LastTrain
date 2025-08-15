@@ -23,7 +23,7 @@ public class PickableAmmunitionSpawner : MonoBehaviour
 
     private void SelectAmmunition()
     {
-        var selectedWeapons = _sharedData.WeaponInfos;
+        var selectedWeapons = _sharedData.WeaponConfigs;
 
         for (int i = 0; i < _pickableAmmunitionPrefabs.Length; i++)
         {

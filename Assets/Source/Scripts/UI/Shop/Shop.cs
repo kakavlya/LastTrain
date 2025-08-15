@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class Shop : MonoBehaviour
 
     [Header("Inventory items")]
     [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
+    [SerializeField] private InventoryHandler _inventoryHandler;
 
     // Кэш, чтобы не пересоздавать окно каждый раз
     private WeaponDetailsPanel _detailsPanel;
@@ -73,8 +75,13 @@ public class Shop : MonoBehaviour
         BuildShop();
     }
 
-    private void InitialNewInventoryWeapon()
+    private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
     {
-
+        progress.IsAvailable = true;
+        SaveManager.Instance.Data.InventorySlots.Add(weaponConfig.WeaponName);
+        _inventoryHandler.SubmitActiveSlots();
+        InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, _inventoryHandler.GetLastActiveSlotUIs().transform);
+        inventoryWeapon.Init(weaponConfig);
+        SaveManager.Instance.Save();
     }
 }
