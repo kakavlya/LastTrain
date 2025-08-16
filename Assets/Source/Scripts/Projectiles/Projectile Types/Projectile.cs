@@ -57,6 +57,9 @@ public class Projectile : MonoBehaviour
         if (Owner != null && collider.transform.IsChildOf(Owner.transform))
             return;
 
+        if(IsFriendlyFire(collider))
+            return;
+
         if (collider.TryGetComponent<IDamageable>(out var dmg))
         {
             dmg.TakeDamage(Damage);
@@ -66,6 +69,16 @@ public class Projectile : MonoBehaviour
             ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
         Despawn();
+    }
+
+    private bool IsFriendlyFire(Collider other)
+    {
+        if (Owner == null) return false;
+
+        bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
+        bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
+
+        return ownerIsEnemy && targetIsEnemy;
     }
 
     public virtual void Initial(

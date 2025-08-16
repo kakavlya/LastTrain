@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyMovement))]
-public class EnemyRamController : MonoBehaviour
+public class EnemyRamController : EnemyController
 {
     public enum State { Hold, Charge, Impact }
 

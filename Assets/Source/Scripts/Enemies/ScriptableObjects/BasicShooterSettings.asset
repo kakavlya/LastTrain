@@ -16,10 +16,15 @@ MonoBehaviour:
   moveSpeed: 55
   turnSpeed: 120
   attackSpeedFactorMin: 0.7
-  attackSpeedFactorMax: 1.1
+  attackSpeedFactorMax: 1
   speedChange: 8
-  shootingDistance: 50
+  minDistanceFromSurface: 12
+  maxDistanceFromSurface: 32
+  orbitSpeedDegrees: 2
+  checkRadius: 15
+  changeDirectionEvery: {x: 4, y: 7}
+  shootingDistance: 55
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
   fireInterval: 2
-  projectileSpeed: 50
-  projectileDamage: 25
+  projectileSpeed: 100
+  projectileDamage: 20

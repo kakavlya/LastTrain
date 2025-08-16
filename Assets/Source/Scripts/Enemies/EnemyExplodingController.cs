@@ -2,7 +2,7 @@
 
 namespace Assets.Source.Scripts.Enemies
 {
-    public class EnemyExplodingController : MonoBehaviour
+    public class EnemyExplodingController : EnemyController
     {
 
         [SerializeField] private Collider _playerCollider;

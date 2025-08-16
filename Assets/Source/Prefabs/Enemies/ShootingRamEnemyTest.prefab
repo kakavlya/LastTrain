@@ -701,14 +701,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7888480713367806526}
-  - component: {fileID: 6928691274203070879}
   - component: {fileID: 3205060566572032313}
   - component: {fileID: 8618117122417586505}
   - component: {fileID: 5451089375779463683}
   - component: {fileID: 4647971876647877547}
-  - component: {fileID: 4828383747889648310}
   - component: {fileID: 1419257632058573301}
   - component: {fileID: 1298204711765028295}
+  - component: {fileID: -4629150032632883478}
+  - component: {fileID: 3432597265437497995}
   m_Layer: 0
   m_Name: ShootingRamEnemyTest
   m_TagString: Untagged
@@ -733,18 +733,6 @@ Transform:
   - {fileID: 2026353489567958849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6928691274203070879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9087697433412347612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3808528bbdcb0d24287464485ae5ee4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3205060566572032313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,9 +781,9 @@ MonoBehaviour:
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
   _renderersToFlash:
-  - {fileID: 2165826585781177145}
+  - {fileID: 2165826585781179773}
   _flashColor: {r: 0, g: 0, b: 0, a: 0}
-  _flashDuration: 0.1
+  _flashDuration: 0.2
 --- !u!114 &4647971876647877547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,27 +800,6 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &4828383747889648310
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9087697433412347612}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.1547642, y: 7.7730346, z: 7.487975}
-  m_Center: {x: -0.013474464, y: 3.3865173, z: -0.21312682}
 --- !u!114 &1419257632058573301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,3 +825,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c817347d0c51c43a45b7a9fc76caef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-4629150032632883478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087697433412347612}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.3652835, y: 7.3561316, z: 7.783637}
+  m_Center: {x: 0.008657774, y: 3.9153056, z: 0.0727857}
+--- !u!65 &3432597265437497995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9087697433412347612}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.3652835, y: 3.0788436, z: 7.783637}
+  m_Center: {x: 0.008657774, y: 1.7766622, z: 0.07278554}

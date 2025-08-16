@@ -164,7 +164,7 @@ MonoBehaviour:
   _renderersToFlash:
   - {fileID: 2652764040309809835}
   _flashColor: {r: 0, g: 0, b: 0, a: 0}
-  _flashDuration: 0
+  _flashDuration: 0.2
 --- !u!114 &4018487660860795687
 MonoBehaviour:
   m_ObjectHideFlags: 0
