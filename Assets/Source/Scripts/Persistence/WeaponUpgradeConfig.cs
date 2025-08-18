@@ -14,8 +14,8 @@ public class WeaponUpgradeConfig : ScriptableObject
 
     public Weapon WeaponPrefab;
 
-    public AnimationCurve DamageCurve; // 0 - 1
-    public AnimationCurve RangeCurve;  // 0 - 1 
+    public AnimationCurve DamageCurve;
+    public AnimationCurve RangeCurve;
 
     public int MaxDamageLevel = 10;
     public int MaxRangeLevel = 10;

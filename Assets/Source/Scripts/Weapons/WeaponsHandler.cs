@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Assets.Source.Scripts.Weapons;
-using UnityEditor;
 using UnityEngine;
 
 public class WeaponsHandler : MonoBehaviour
@@ -136,29 +135,43 @@ public class WeaponsHandler : MonoBehaviour
 
     private void CreateWeapons()
     {
-        _weapons = new Weapon[_sharedData.WeaponConfigs.Count];
-        var data = SaveManager.Instance.Data;
+        List<WeaponProgress> weaponProgresses = GetWeaponProgressType();
 
-        for (int i = 0; i < _sharedData.WeaponConfigs.Count; i++)
+        var weaponConfigs = _sharedData.WeaponConfigs;
+        _weapons = new Weapon[weaponConfigs.Count];
+
+        for (int i = 0; i < weaponConfigs.Count; i++)
         {
-            var weaponConfigs = _sharedData.WeaponConfigs[i];
-            WeaponProgress weaponProgress = data.Weapons.Find(weapon => weapon.WeaponId == weaponConfigs.WeaponId);
+            var config = weaponConfigs[i];
+            WeaponProgress weaponProgress = weaponProgresses.Find(weapon => weapon.WeaponId == config.WeaponId);
 
             if (weaponProgress == null)
             {
-                weaponProgress = new WeaponProgress(weaponConfigs.WeaponId, 1);
-                data.Weapons.Add(weaponProgress);
+                weaponProgress = new WeaponProgress(config.WeaponId, 0);
+                weaponProgresses.Add(weaponProgress);
             }
 
-            float damage = _sharedData.WeaponConfigs[i].GetStat(StatType.Damage, weaponProgress.DamageLevel);
-            float range = _sharedData.WeaponConfigs[i].GetStat(StatType.Range, weaponProgress.RangeLevel);
+            float damage = weaponConfigs[i].GetStat(StatType.Damage, weaponProgress.DamageLevel);
+            float range = weaponConfigs[i].GetStat(StatType.Range, weaponProgress.RangeLevel);
 
-            Weapon weaponInstance = Instantiate(_sharedData.WeaponConfigs[i].WeaponPrefab, transform);
+            Weapon weaponInstance = Instantiate(weaponConfigs[i].WeaponPrefab, transform);
             weaponInstance.Init(damage, range);
-            weaponInstance.SetPrefabReference(_sharedData.WeaponConfigs[i].WeaponPrefab);
+            weaponInstance.SetPrefabReference(weaponConfigs[i].WeaponPrefab);
 
             weaponInstance.gameObject.SetActive(false);
             _weapons[i] = weaponInstance;
+        }
+    }
+
+    private List<WeaponProgress> GetWeaponProgressType()
+    {
+        if (SaveManager.Instance.Data.IsDoneGameplayTraining)
+        {
+            return SaveManager.Instance.Data.WeaponsProgress;
+        }
+        else
+        {
+            return SaveManager.Instance.Data.TrainingWeaponsProgress;
         }
     }
 

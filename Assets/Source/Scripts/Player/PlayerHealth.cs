@@ -31,12 +31,7 @@ public class PlayerHealth : HealthBase
 
     private void OnPlayerDeath()
     {
-        Debug.Log("[PlayerHealth] Player died");
         Died?.Invoke();
-    }
-
-    private IEnumerator RespawnRoutine()
-    {
-        yield return new WaitForSeconds(_respawnDelay);
+        TrainingHandler.Instance.TryEndGameplayTrainingAndLoadMenu();
     }
 }

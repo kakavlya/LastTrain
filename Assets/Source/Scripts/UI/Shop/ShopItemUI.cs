@@ -9,8 +9,6 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private TMP_Text _weaponName;
     [SerializeField] private TMP_Text _levelText;
-    [SerializeField] private TMP_Text _dmgText;
-    [SerializeField] private TMP_Text _rangeText;
     [SerializeField] private TMP_Text _unlockCostText;
     [SerializeField] private Button _unlockButton;
     [SerializeField] private GameObject _lockPanel;
@@ -75,9 +73,6 @@ public class ShopItemUI : MonoBehaviour
     private void UpdateTextLabels()
     {
         int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
-
-        _rangeText.text = _upgradeConfig.GetStat(StatType.Range, _progress.RangeLevel).ToString("F1");
-        _dmgText.text = _upgradeConfig.GetStat(StatType.Damage, _progress.DamageLevel).ToString("F1");
 
         _levelText.text = sumLevel.ToString();
         _weaponName.text = _upgradeConfig.WeaponName;

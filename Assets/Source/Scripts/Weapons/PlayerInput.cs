@@ -20,7 +20,7 @@ namespace Assets.Source.Scripts.Weapons
         private void Awake()
         {
             if (PlatformDetector.Instance != null &&
-                PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+                PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile)
             {
                 _isMobilePlatform = true;
             }

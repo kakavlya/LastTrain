@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +13,6 @@ public class LevelsHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textCurrentLevel;
     [SerializeField] private Sprite _unavailableIcon;
     [SerializeField] private SharedData _sharedData;
-
-    public event Action LevelChosed;
 
     public bool IsChosed { get; private set; }
 
@@ -113,7 +110,6 @@ public class LevelsHandler : MonoBehaviour
         _sharedData.LevelSetting = levelSetting;
         ShowCurrentLevel(levelSetting);
         IsChosed = true;
-        LevelChosed?.Invoke();
     }
 
     private void ShowCurrentLevel(LevelSetting levelSetting)

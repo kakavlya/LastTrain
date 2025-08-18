@@ -9,6 +9,7 @@ public class CompositionRoot : MonoBehaviour
 {
     [SerializeField] private UIStateMachine _uIStateMachine;
     [SerializeField] private LevelStateMachine _levelStateMachine;
+    [SerializeField] private GameplayTraining _gameplayTraining;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private Transform _player;
     [SerializeField] private PlayerHealth _playerHealth;
@@ -29,7 +30,6 @@ public class CompositionRoot : MonoBehaviour
 
     private void Awake()
     {
-        //_enemyPool.Init();
         _enemySpawner.Init();
         _aimingTargetProvider.Init();
         _uiCursorFollower.Init();
@@ -45,18 +45,19 @@ public class CompositionRoot : MonoBehaviour
         _levelProgress.Init();
 
 
-        _levelStateMachine.Construct(_enemySpawner, _player, _playerHealth, _trainMovement, _levelGenerator, _levelProgress);
-        _uIStateMachine.Construct(_levelStateMachine);
+        _levelStateMachine.Construct(_enemySpawner, _player, _playerHealth, _trainMovement, _levelProgress);
 
         _uIStateMachine.StartClicked += _levelStateMachine.StartLevel;
         _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;
         _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
         _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
         _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
+        _uIStateMachine.SwitchState(UIState.LevelStart);
 
         _levelStateMachine.PlayerDied += () => _uIStateMachine.SwitchState(UIState.GameOver);
         _levelStateMachine.LevelCompleted += () => _uIStateMachine.SwitchState(UIState.EndLevel);
 
-        _uIStateMachine.SwitchState(UIState.LevelStart);
+        _gameplayTraining.ScreenShowed += _levelStateMachine.StopGameplay;
+        _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeGameplay;
     }
 }

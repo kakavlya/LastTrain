@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartingScene : MonoBehaviour
+[Serializable]
+public class TrainProgress
 {
-  
+    
 }

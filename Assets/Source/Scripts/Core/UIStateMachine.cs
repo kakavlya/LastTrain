@@ -43,7 +43,6 @@ public class UIStateMachine : MonoBehaviour
     public event Action MenuClicked;
 
     private UIState _currentState = UIState.None;
-    private LevelStateMachine _levelStateMachine;
 
     private void Awake()
     {
@@ -62,7 +61,7 @@ public class UIStateMachine : MonoBehaviour
 
         _settingsButton.onClick.AddListener(OnSettingsButton);
 
-        if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Joystick)
+        if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile)
         {
             _joustick.SetActive(true);
         }
@@ -70,11 +69,6 @@ public class UIStateMachine : MonoBehaviour
         {
             _joustick.SetActive(false);
         }
-    }
-
-    public void Construct(LevelStateMachine levelStateMachine)
-    {
-        _levelStateMachine = levelStateMachine;
     }
 
     public void SwitchState(UIState state)

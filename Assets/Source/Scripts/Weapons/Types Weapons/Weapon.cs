@@ -1,5 +1,4 @@
 using System;
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour

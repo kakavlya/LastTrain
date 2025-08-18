@@ -52,11 +52,11 @@ public class Shop : MonoBehaviour
         foreach (var upgradeConfig in _weaponConfigs)
         {
             string id = upgradeConfig.WeaponId;
-            var progress = _data.Weapons.Find(w => w.WeaponId == id);
+            var progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
             if (progress == null)
             {
                 progress = new WeaponProgress(id);
-                data.Weapons.Add(progress);
+                data.WeaponsProgress.Add(progress);
             }
 
             var itemUi = Instantiate(_shopItemPrefab, _contentParent);

@@ -5,18 +5,6 @@ using UnityEngine;
 public class PlayerInventoryHandler : InventoryHandler
 {
     [SerializeField] private SharedData _sharedData;
-    //[SerializeField] protected PlayHandler _playHandler;
-
-    //protected override void Awake()
-    //{
-    //    base.Awake();
-    //    _playHandler.GameStarted += TryGiveInventoryWeaponFromSlots;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _playHandler.GameStarted -= TryGiveInventoryWeaponFromSlots;
-    //}
 
     protected override List<string> GetAllSlotsFromSave()
     {
@@ -26,17 +14,17 @@ public class PlayerInventoryHandler : InventoryHandler
     public bool TryGiveInventoryWeaponFromSlots()
     {
         _sharedData.WeaponConfigs.Clear();
-        int gaveCount = 0;
+        int gaveWeaponsCount = 0;
 
         foreach (var slot in ActiveSlotUIs)
         {
             if (slot.GetComponentInChildren<InventoryWeapon>() != null)
             {
                 _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
-                gaveCount++;
+                gaveWeaponsCount++;
             }
         }
 
-        return gaveCount > 0;
+        return gaveWeaponsCount > 0;
     }
 }
