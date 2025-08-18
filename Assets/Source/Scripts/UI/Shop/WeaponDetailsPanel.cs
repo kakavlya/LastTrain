@@ -76,11 +76,11 @@ public class WeaponDetailsPanel : MonoBehaviour
 
     private void Refresh()
     {
-        float dmgRatio = _weaponProgress.DamageLevel / (float)_cfg.MaxDamageLevel;
-        float rngRatio = _weaponProgress.RangeLevel / (float)_cfg.MaxRangeLevel;
+        float dmgRatio = _weaponProgress.DamageLevel / (float)_cfg.FindStat(StatType.Damage).MaxLevel;
+        float rngRatio = _weaponProgress.RangeLevel / (float)_cfg.FindStat(StatType.Range).MaxLevel;
 
-        _damageLvl.text = $"{_weaponProgress.DamageLevel}/{_cfg.MaxDamageLevel}";
-        _rangeLvl.text = $"{_weaponProgress.RangeLevel}/{_cfg.MaxRangeLevel}";
+        _damageLvl.text = $"{_weaponProgress.DamageLevel}/{_cfg.FindStat(StatType.Damage).MaxValue}";
+        _rangeLvl.text = $"{_weaponProgress.RangeLevel}/{_cfg.FindStat(StatType.Range).MaxValue}";
 
         _damageSlider.value = dmgRatio;
         _rangeSlider.value = rngRatio;
@@ -88,11 +88,11 @@ public class WeaponDetailsPanel : MonoBehaviour
         _rangeDistance.text = _cfg.GetStat(StatType.Range, _weaponProgress.RangeLevel).ToString("F1");
         _damageAmount.text = _cfg.GetStat(StatType.Damage, _weaponProgress.DamageLevel).ToString("F1");
 
-        bool canUpgradeDamage = _weaponProgress.DamageLevel < _cfg.MaxDamageLevel;
+        bool canUpgradeDamage = _weaponProgress.DamageLevel < _cfg.FindStat(StatType.Damage).MaxLevel;
         _damageCost.text = canUpgradeDamage ? (_cfg.GetCost(StatType.Damage, _weaponProgress.DamageLevel).ToString()) : "-";
         _damageUpgrade.interactable = canUpgradeDamage;
 
-        bool canUpgradeRange = _weaponProgress.RangeLevel < _cfg.MaxRangeLevel;
+        bool canUpgradeRange = _weaponProgress.RangeLevel < _cfg.FindStat(StatType.Range).MaxLevel;
         _rangeCost.text = canUpgradeRange ? (_cfg.GetCost(StatType.Range, _weaponProgress.RangeLevel).ToString()) : "-";
         _rangeUpgrade.interactable = canUpgradeRange;
 
