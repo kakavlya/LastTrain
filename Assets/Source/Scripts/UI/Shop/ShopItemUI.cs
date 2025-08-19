@@ -75,7 +75,7 @@ public class ShopItemUI : MonoBehaviour
         int sumLevel = _progress.DamageLevel + _progress.RangeLevel;
 
         _levelText.text = sumLevel.ToString();
-        _weaponName.text = _upgradeConfig.WeaponName;
+        _weaponName.text = _upgradeConfig.Name;
     }
 
     private void BuyItem()

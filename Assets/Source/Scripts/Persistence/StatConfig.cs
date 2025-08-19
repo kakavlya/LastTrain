@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 [System.Serializable]
 public class StatConfig
@@ -8,6 +10,7 @@ public class StatConfig
     public StatType StatType;
     public AnimationCurve Curve;
     public int MaxLevel;
+
     public int[] Costs;
 
     public float MinValue;

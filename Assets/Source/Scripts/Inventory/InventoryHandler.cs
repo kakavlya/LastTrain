@@ -58,7 +58,7 @@ public class InventoryHandler : MonoBehaviour
 
             if (inventoryWeapon != null && inventoryWeapon.WeaponConfig != null)
             {
-                InventorySlots[i] = inventoryWeapon.WeaponConfig.WeaponName;
+                InventorySlots[i] = inventoryWeapon.WeaponConfig.Name;
             }
             else
             {
@@ -98,7 +98,7 @@ public class InventoryHandler : MonoBehaviour
 
         foreach (var weaponInfo in weaponConfigs)
         {
-            if (weaponInfo.WeaponName == weaponName)
+            if (weaponInfo.Name == weaponName)
                 return weaponInfo;
         }
 

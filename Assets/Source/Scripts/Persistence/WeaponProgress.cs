@@ -1,7 +1,7 @@
 using System;
 
 [Serializable]
-public class WeaponProgress
+public class WeaponProgress : BaseProgress
 {
     public string WeaponId;
     public int DamageLevel;
@@ -15,10 +15,10 @@ public class WeaponProgress
         RangeLevel = defaultStatLevel;
     }
 
-    public int GetLevel(StatType stat) =>
+    public override int GetLevel(StatType stat) =>
         stat == StatType.Damage ? DamageLevel : RangeLevel;
 
-    public void Increment(StatType stat)
+    public override void Increment(StatType stat)
     {
         if (stat == StatType.Damage) DamageLevel++;
         else RangeLevel++;
