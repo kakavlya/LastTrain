@@ -12,13 +12,19 @@ public class PlayerHealth : HealthBase
     [SerializeField] private float _respawnDelay = 3f;
     [SerializeField] private SharedData _sharedData;
 
+    private float _maxHealth;
+
     public event Action Died;
+
+    public float MaxHealth => _maxHealth;
 
     protected override void Awake()
     {
         base.Awake();
         OnDeath.AddListener(OnPlayerDeath);
-        _healthText.text = MaxHealth.ToString();
+        _maxHealth = GetMaxHealthValue();
+        CurrentHealth = _maxHealth;
+        _healthText.text = MaxHealth.ToString("F0");
         _healthSlider.maxValue = MaxHealth;
         _healthSlider.value = MaxHealth;
     }
@@ -26,7 +32,7 @@ public class PlayerHealth : HealthBase
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
-        _healthText.text = GetCurrentHealth.ToString();
+        _healthText.text = GetCurrentHealth.ToString("F0");
         _healthSlider.value = GetCurrentHealth;
     }
 

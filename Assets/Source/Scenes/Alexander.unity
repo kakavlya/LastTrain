@@ -12981,6 +12981,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 175129621}
     - target: {fileID: 3218667037637819201, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+      propertyPath: _sharedData
+      value: 
+      objectReference: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
+    - target: {fileID: 3218667037637819201, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _healthSlider
       value: 
       objectReference: {fileID: 106592264}

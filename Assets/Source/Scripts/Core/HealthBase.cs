@@ -5,8 +5,8 @@ namespace Assets.Source.Scripts.Core
 {
     public class HealthBase : MonoBehaviour, IDamageable
     {
-        [Header("Health Settings")]
-        [SerializeField] private int _maxHealth = 100;
+        //[Header("Health Settings")]
+        //[SerializeField] private int _maxHealth = 100;
         
         private ModelEffects _view;
 
@@ -18,8 +18,6 @@ namespace Assets.Source.Scripts.Core
 
         public float GetCurrentHealth => CurrentHealth;
 
-        public int MaxHealth => _maxHealth;
-
         protected virtual void Awake()
         {
             _view = GetComponent<ModelEffects>();
@@ -27,7 +25,6 @@ namespace Assets.Source.Scripts.Core
 
         protected virtual void OnEnable()
         {
-            CurrentHealth = _maxHealth;
             IsDead = false;
         }
 

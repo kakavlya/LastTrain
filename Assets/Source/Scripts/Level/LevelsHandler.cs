@@ -34,9 +34,14 @@ public class LevelsHandler : MonoBehaviour
 
         if (levelsAvailability.Count == 0)
         {
-            foreach (var setting in _levelSettings)
+            for (int i = 0; i < _levelSettings.Length; i++)
             {
-                levelsAvailability.Add(new LevelAvailability(setting.LevelName, setting.IsAvailable));
+                levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelName, false));
+
+                if (i == 0)
+                {
+                    levelsAvailability[0].IsAvailable = true;
+                }
             }
 
             SaveManager.Instance.Save();
