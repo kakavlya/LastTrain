@@ -25,6 +25,11 @@ public class TrainProgress : BaseProgress
         return 0;
     }
 
+    public override int GetSumLevels()
+    {
+        return HealthLevel + SlotsLevel;
+    }
+
     public override void Increment(StatType stat)
     {
         switch (stat)

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
-  m_Name: MachineGunUpgradeConfig
+  m_Name: GrenadeLauncherUpgradeConfig
   m_EditorClassIdentifier: 
-  _weaponId: MachineGun
-  _weaponName: Machine Gun
+  _name: Grenade Launcher
   _statConfigs:
   - StatType: 0
     Curve:
@@ -41,9 +40,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: c800000090010000200300004006000060090000100e0000c01200005014000000190000401f0000
+    Costs: fa000000f4010000e8030000dc050000c4090000a00f0000701700003421000010270000983a0000
     MinValue: 10
-    MaxValue: 80
+    MaxValue: 50
   - StatType: 1
     Curve:
       serializedVersion: 2
@@ -70,9 +69,10 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: c800000090010000200300004006000060090000100e0000c01200005014000000190000401f0000
-    MinValue: 100
-    MaxValue: 250
-  WeaponPrefab: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
-  Icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
-  UnblockingCost: 5000
+    Costs: c8000000900100002003000014050000d0070000b80b0000941100006419000028230000e02e0000
+    MinValue: 150
+    MaxValue: 450
+  Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
+  _weaponId: GrenadeLauncher
+  WeaponPrefab: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
+  UnblockingCost: 20000

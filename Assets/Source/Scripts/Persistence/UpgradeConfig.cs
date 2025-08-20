@@ -10,7 +10,9 @@ public abstract class UpgradeConfig : ScriptableObject
     public Sprite Icon;
 
     public string Name =>
-    string.IsNullOrWhiteSpace(_name) ? _name : _name;
+    string.IsNullOrWhiteSpace(_name) ? name : _name;
+
+    public StatConfig[] StatConfigs => _statConfigs;
 
     public float GetStat(StatType stat, int level)
     {

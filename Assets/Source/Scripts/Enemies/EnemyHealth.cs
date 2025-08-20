@@ -12,11 +12,6 @@ public class EnemyHealth : HealthBase
         _deathHandler = GetComponent<EnemyDeathHandler>();
     }
 
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-    }
-
     public void SetRewardForKill(int reward)
     {
         _rewardForKill = reward;

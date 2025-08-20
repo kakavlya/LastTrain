@@ -1,22 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
+
 
 public class Shop : MonoBehaviour
 {
     [Header("Weapons List")]
     [SerializeField] private Transform _contentParent;
     [SerializeField] private ShopItemUI _shopItemPrefab;
-    [SerializeField] private WeaponUpgradeConfig[] _weaponConfigs;
+    [SerializeField] private UpgradeConfig[] _intemConfigs;
 
     [Header("General shop UI")]
-    [SerializeField] private Image _blocker;              
-    [SerializeField] private WeaponDetailsPanel _detailsPrefab;
+    [SerializeField] private Image _blocker;
+    [SerializeField] private DetailsPanel _detailsPrefab;
     [SerializeField] private Transform _detailsParent;
     [SerializeField] private ScrollRect _scrollRect;
 
@@ -24,9 +22,11 @@ public class Shop : MonoBehaviour
     [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
     [SerializeField] private InventoryHandler _inventoryHandler;
 
-    private WeaponDetailsPanel _detailsPanel;
+    private DetailsPanel _detailsPanel;
     private ProgressData _data;
     private List<ShopItemUI> _uiItems = new List<ShopItemUI>();
+
+    public event Action SlotIncremented;
 
     private void Start()
     {
@@ -39,7 +39,7 @@ public class Shop : MonoBehaviour
     {
         foreach (var item in _uiItems)
         {
-            item.Unlocked -= InitialNewInventoryWeapon;
+            item.WeaponUnlocked -= InitialNewInventoryWeapon;
         }
 
         _uiItems.Clear();
@@ -49,59 +49,88 @@ public class Shop : MonoBehaviour
 
         var data = SaveManager.Instance.Data;
 
-        foreach (var upgradeConfig in _weaponConfigs)
+        foreach (var upgradeConfig in _intemConfigs)
         {
-            string id = upgradeConfig.WeaponId;
-            var progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
-            if (progress == null)
+            BaseProgress progress = null;
+
+            if (upgradeConfig is WeaponUpgradeConfig weaponUprgadeCfg)
             {
-                progress = new WeaponProgress(id);
-                data.WeaponsProgress.Add(progress);
+                string id = weaponUprgadeCfg.WeaponId;
+                progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
+
+                if (progress == null)
+                {
+                    progress = new WeaponProgress(id);
+                    data.WeaponsProgress.Add((WeaponProgress)progress);
+                }
             }
+            else if (upgradeConfig is TrainUpgradeConfig trainUpgradeConfig)
+            {
+                progress = _data.TrainProgress;
+            }
+
 
             var itemUi = Instantiate(_shopItemPrefab, _contentParent);
             _uiItems.Add(itemUi);
             itemUi.Init(upgradeConfig, progress, OnItemSelected);
-            itemUi.Unlocked += InitialNewInventoryWeapon;
+            itemUi.WeaponUnlocked += InitialNewInventoryWeapon;
         }
 
         SaveManager.Instance.Save();
-
         StartCoroutine(ResizeAndScrollToTop());
     }
 
     private void OnDisable()
     {
-        foreach(var item in _uiItems)
+        foreach (var item in _uiItems)
         {
-            item.Unlocked -= InitialNewInventoryWeapon;
+            item.WeaponUnlocked -= InitialNewInventoryWeapon;
         }
     }
 
 
-    private void OnItemSelected(WeaponUpgradeConfig cfg, WeaponProgress prog)
+    private void OnItemSelected(UpgradeConfig cfg, BaseProgress prog)
     {
         if (_detailsPanel == null)
+        {
             _detailsPanel = Instantiate(_detailsPrefab, _detailsParent);
+            _detailsPanel.Incremented += OnStatIncremented;
+        }
 
-        _blocker.gameObject.SetActive(true);       
-
+        _blocker.gameObject.SetActive(true);
         _detailsPanel.Show(cfg, prog, OnDetailsClosed);
     }
 
     private void OnDetailsClosed()
     {
+        _detailsPanel.Incremented -= OnStatIncremented;
         _blocker.gameObject.SetActive(false);
         BuildShop();
+    }
+
+    private void OnStatIncremented(StatType stat)
+    {
+        if (stat == StatType.Slots)
+        {
+            SlotIncremented?.Invoke();
+        }
     }
 
     private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
     {
         progress.IsAvailable = true;
-        SaveManager.Instance.Data.InventorySlots.Add("");
+        SaveManager.Instance.Data.InventorySlots.Add(weaponConfig.WeaponId);
         _inventoryHandler.SubmitActiveSlots();
-        InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, _inventoryHandler.GetLastActiveSlotUIs().transform);
-        inventoryWeapon.Init(weaponConfig);
+
+        WeaponSlotUI lastSlot = _inventoryHandler.GetLastActiveSlotUIs();
+
+        if (lastSlot != null && lastSlot.GetComponentInChildren<InventoryWeapon>() == null)
+        {
+            InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, lastSlot.transform);
+            inventoryWeapon.Init(weaponConfig);
+            lastSlot.SetSlotFilled();
+        }
+
         SaveManager.Instance.Save();
     }
 

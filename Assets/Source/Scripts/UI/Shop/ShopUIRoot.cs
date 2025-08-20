@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class ShopUIRoot : MonoBehaviour
 {
-    [SerializeField] private WeaponDetailsPanel _detailsPrefab;
+    [SerializeField] private DetailsPanel _detailsPrefab;
     [SerializeField] private Transform _detailsParent;
     [SerializeField] private Image _blocker;       
 
-    private WeaponDetailsPanel _details;
+    private DetailsPanel _details;
 
     private void Awake()
     {

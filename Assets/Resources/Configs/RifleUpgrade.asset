@@ -9,67 +9,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6b8132c7d16924baa7b8b9495a0014, type: 3}
-  m_Name: TrainUpgradeConfig
+  m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
+  m_Name: RifleUpgrade
   m_EditorClassIdentifier: 
-  _name: Train Update
+  _name: Rifle
   _statConfigs:
-  - StatType: 2
+  - StatType: 0
     Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 15
-    Costs: c80000002c010000f401000084030000dc050000c4090000d80e000088130000581b000010270000c832000050460000f05500009065000030750000
-    MinValue: 300
-    MaxValue: 1000
-  - StatType: 3
+    MaxLevel: 10
+    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000b0040000
+    MinValue: 10
+    MaxValue: 50
+  - StatType: 1
     Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 2
-    Costs: e803000010270000
-    MinValue: 1
-    MaxValue: 3
-  Icon: {fileID: 21300000, guid: 877c8830214cce145a1d37664f16425e, type: 3}
+    MaxLevel: 10
+    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+    MinValue: 100
+    MaxValue: 250
+  Icon: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}
+  _weaponId: Rifle
+  WeaponPrefab: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
+  UnblockingCost: 0

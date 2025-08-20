@@ -38,7 +38,7 @@ public class StatRow : MonoBehaviour
         _slider.value = ratio;
 
         _level.text = $"{currentLevel}/{maxLevel}";
-        _amount.text = _upgradeConfig.GetStat(_statType, currentLevel).ToString("F1");
+        _amount.text = _upgradeConfig.GetStat(_statType, currentLevel).ToString("F0");
 
         bool canUpgrade = currentLevel < maxLevel;
         _cost.text = canUpgrade ? _upgradeConfig.GetCost(_statType, currentLevel).ToString() : "-";

@@ -57,6 +57,7 @@ public class TrainingHandler : MonoBehaviour
     {
         if (_isDoneGameplayTraining == false)
         {
+            Time.timeScale = 1f;
             SaveManager.Instance.Data.IsDoneGameplayTraining = true;
             SceneManager.LoadScene(_menuSceneName);
         }

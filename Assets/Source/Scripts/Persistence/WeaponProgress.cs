@@ -18,6 +18,11 @@ public class WeaponProgress : BaseProgress
     public override int GetLevel(StatType stat) =>
         stat == StatType.Damage ? DamageLevel : RangeLevel;
 
+    public override int GetSumLevels()
+    {
+        return DamageLevel + RangeLevel;
+    }
+
     public override void Increment(StatType stat)
     {
         if (stat == StatType.Damage) DamageLevel++;

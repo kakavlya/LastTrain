@@ -8,14 +8,15 @@ namespace Assets.Source.Scripts.Core
         [Header("Health Settings")]
         [SerializeField] private int _maxHealth = 100;
         
-        private float _currentHealth;
         private ModelEffects _view;
+
+        protected float CurrentHealth;
 
         public UnityEvent OnDeath;
 
         public bool IsDead { get; private set; }
 
-        public float CurrentHealth => _currentHealth;
+        public float GetCurrentHealth => CurrentHealth;
 
         public int MaxHealth => _maxHealth;
 
@@ -26,7 +27,7 @@ namespace Assets.Source.Scripts.Core
 
         protected virtual void OnEnable()
         {
-            _currentHealth = _maxHealth;
+            CurrentHealth = _maxHealth;
             IsDead = false;
         }
 
@@ -35,14 +36,15 @@ namespace Assets.Source.Scripts.Core
             if (IsDead)
                 return;
 
-            _currentHealth -= damage;
+            CurrentHealth -= damage;
             _view?.PlayHitFX();
 
-            if (_currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
         }
+
         protected virtual void Die()
         {
             _view?.PlayDeathFX();

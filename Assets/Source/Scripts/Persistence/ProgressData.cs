@@ -5,7 +5,7 @@ public class ProgressData
 {
     public List<WeaponProgress> WeaponsProgress = new List<WeaponProgress>(); 
     public List<WeaponProgress> TrainingWeaponsProgress = new List<WeaponProgress>();
-    public List<TrainProgress> HealthProgress = new List<TrainProgress>();
+    public TrainProgress TrainProgress = new TrainProgress(0);
     public int Coins;
     public float EffectsVolume;
     public float MusicVolume;
@@ -29,8 +29,6 @@ public class ProgressData
         TrainingWeaponsProgress.Add(new WeaponProgress("Rifle", 5));
         TrainingWeaponsProgress.Add(new WeaponProgress("MachineGun", 5));
         TrainingWeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 5));
-
-        HealthProgress.Add(new TrainProgress(0));
 
         Coins = 100000;
         EffectsVolume = 0.5f;

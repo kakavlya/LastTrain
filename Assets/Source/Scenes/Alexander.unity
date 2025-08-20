@@ -12932,10 +12932,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 113229159542288987, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 116067038430510563, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.4
@@ -12980,18 +12976,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
-    - target: {fileID: 858798262385907555, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
-    - target: {fileID: 1833429383772676086, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
-    - target: {fileID: 3218667037637819201, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _maxHealth
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 3218667037637819201, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _healthText
       value: 
@@ -13001,29 +12985,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 106592264}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _sharedData
-      value: 
-      objectReference: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _weaponInput
       value: 
       objectReference: {fileID: 1538978594}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _uiCells.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: cells.Array.data[0]
-      value: 
-      objectReference: {fileID: 1364141600}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: cells.Array.data[1]
-      value: 
-      objectReference: {fileID: 279672678}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: cells.Array.data[2]
-      value: 
-      objectReference: {fileID: 1822635292}
     - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _uiCells.Array.data[0]
       value: 
@@ -13036,70 +13000,6 @@ PrefabInstance:
       propertyPath: _uiCells.Array.data[2]
       value: 
       objectReference: {fileID: 1822635292}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weapons.Array.data[1]
-      value: 
-      objectReference: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weapons.Array.data[2]
-      value: 
-      objectReference: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponPrefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.data[0]
-      value: 
-      objectReference: {fileID: 3975156055253393682, guid: b5af77243cd1ab44da70d18bc8a58fe8, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.data[1]
-      value: 
-      objectReference: {fileID: 8267124619524331302, guid: b9a547d4b69ce3444910832733d0c02e, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.data[2]
-      value: 
-      objectReference: {fileID: 897002773674845630, guid: b4b3bede4a973d144b02748ec5dcedbf, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.data[3]
-      value: 
-      objectReference: {fileID: 6768203590417603494, guid: 20487ba8eb6ed1d4ab477bf162b52671, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _ammunitions.Array.data[4]
-      value: 
-      objectReference: {fileID: 4122278453931483580, guid: 9e7a06c8366095f418870ab6346a5279, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
-    - target: {fileID: 4064344279607870458, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}
-    - target: {fileID: 5671528450328693545, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
-    - target: {fileID: 5879944412009858589, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
-    - target: {fileID: 5977224216744695479, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
     - target: {fileID: 6094426346783559762, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
       propertyPath: _joystick
       value: 
@@ -13112,19 +13012,8 @@ PrefabInstance:
       propertyPath: _levelGenerator
       value: 
       objectReference: {fileID: 817780961}
-    - target: {fileID: 7138497894523935682, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-      propertyPath: _weaponInput
-      value: 
-      objectReference: {fileID: 1538978594}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5208643179574674601, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 3896452337621282124, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 5754498958611198728, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 617960143595758895, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 4769702154567626482, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 6313094116875273636, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
-    - {fileID: 113229159542288987, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af0ab4ba31189ea49846745abafc17e2, type: 3}

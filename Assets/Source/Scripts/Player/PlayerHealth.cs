@@ -10,6 +10,7 @@ public class PlayerHealth : HealthBase
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private float _respawnDelay = 3f;
+    [SerializeField] private SharedData _sharedData;
 
     public event Action Died;
 
@@ -25,13 +26,30 @@ public class PlayerHealth : HealthBase
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
-        _healthText.text = CurrentHealth.ToString();
-        _healthSlider.value = CurrentHealth;
+        _healthText.text = GetCurrentHealth.ToString();
+        _healthSlider.value = GetCurrentHealth;
     }
 
     private void OnPlayerDeath()
     {
         Died?.Invoke();
         TrainingHandler.Instance.TryEndGameplayTrainingAndLoadMenu();
+    }
+
+    private float GetMaxHealthValue()
+    {
+        var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
+        var healthLevel = SaveManager.Instance.Data.TrainProgress.HealthLevel;
+        StatConfig healthConfig = null;
+
+        foreach (var config in trainConfigs)
+        {
+            if (config.StatType == StatType.Health)
+            {
+                healthConfig = config;
+            }
+        }
+
+        return healthConfig.GetValue(healthLevel);
     }
 }

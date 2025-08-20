@@ -6,7 +6,7 @@ public class InventoryHandler : MonoBehaviour
     [SerializeField] private GameObject[] _slots;
     [SerializeField] private InventoryWeapon _weaponUIPrefab;
 
-    private string _weaponConfigsFolder = "WeaponConfigs";
+    private string _ñonfigsFolder = "Configs";
 
     protected List<string> InventorySlots = new List<string>();
     protected List<WeaponSlotUI> ActiveSlotUIs = new List<WeaponSlotUI>();
@@ -16,16 +16,6 @@ public class InventoryHandler : MonoBehaviour
         if (ActiveSlotUIs.Count > 0)
             return ActiveSlotUIs[ActiveSlotUIs.Count - 1];
         return null;
-    }
-
-    protected virtual void Awake()
-    {
-        SubmitActiveSlots();
-    }
-
-    protected virtual List<string> GetAllSlotsFromSave()
-    {
-        return SaveManager.Instance.Data.InventorySlots;
     }
 
     public void SubmitActiveSlots()
@@ -43,6 +33,16 @@ public class InventoryHandler : MonoBehaviour
 
         LoadWeaponsLocationInInventory();
         SaveLocationInInventory();
+    }
+
+    protected virtual void Start()
+    {
+        SubmitActiveSlots();
+    }
+
+    protected virtual List<string> GetAllSlotsFromSave()
+    {
+        return SaveManager.Instance.Data.InventorySlots;
     }
 
     protected virtual void SaveLocationInInventory()
@@ -79,6 +79,19 @@ public class InventoryHandler : MonoBehaviour
 
             if (!string.IsNullOrEmpty(name))
             {
+                var existingWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
+                if (existingWeapon != null)
+                {
+                    if (existingWeapon.WeaponConfig.Name != name)
+                    {
+                        Destroy(existingWeapon.gameObject);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
                 WeaponUpgradeConfig weaponConfig = GetWeaponConfigByName(name);
 
                 if (weaponConfig != null)
@@ -94,7 +107,7 @@ public class InventoryHandler : MonoBehaviour
 
     private WeaponUpgradeConfig GetWeaponConfigByName(string weaponName)
     {
-        WeaponUpgradeConfig[] weaponConfigs = Resources.LoadAll<WeaponUpgradeConfig>(_weaponConfigsFolder);
+        WeaponUpgradeConfig[] weaponConfigs = Resources.LoadAll<WeaponUpgradeConfig>(_ñonfigsFolder);
 
         foreach (var weaponInfo in weaponConfigs)
         {

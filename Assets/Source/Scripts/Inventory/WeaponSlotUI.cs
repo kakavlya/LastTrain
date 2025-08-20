@@ -24,6 +24,12 @@ public class WeaponSlotUI : MonoBehaviour, IDropHandler
         Filled?.Invoke();
     }
 
+    public void SetSlotFilled()
+    {
+        _isFilled = true;
+        Filled?.Invoke();
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         if (_isFilled)

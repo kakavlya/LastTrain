@@ -754,7 +754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!1 &332842312
 GameObject:
@@ -1132,7 +1131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!114 &485527614 stripped
 MonoBehaviour:
@@ -1592,7 +1590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!114 &656473203
 MonoBehaviour:
@@ -2082,7 +2079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!1 &920404888
 GameObject:
@@ -2351,7 +2347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &942260379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3119,7 +3115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!224 &1139208410 stripped
 RectTransform:
@@ -3297,7 +3292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!114 &1158413471
 MonoBehaviour:
@@ -3930,7 +3924,7 @@ RectTransform:
   m_Father: {fileID: 1019745816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4479,7 +4473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _contentParent: {fileID: 2132442503}
   _shopItemPrefab: {fileID: 7857574078203270619, guid: e236634b68bcb4e49ad40d66c31f0537, type: 3}
-  _weaponConfigs:
+  _intemConfigs:
+  - {fileID: 11400000, guid: 4210ec7823bfcd544bdd168b0fb3c54b, type: 2}
   - {fileID: 11400000, guid: 848b642870b7c8b4c8d4a765128c831f, type: 2}
   - {fileID: 11400000, guid: 3a5a1ba429cc3e34eb43c97cf8c28541, type: 2}
   - {fileID: 11400000, guid: c5a78fa57872c724f8eee2f7a6332897, type: 2}
@@ -5077,7 +5072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!114 &1677157581
 MonoBehaviour:
@@ -5475,6 +5469,7 @@ MonoBehaviour:
   - {fileID: 1677157578}
   - {fileID: 656473200}
   _weaponUIPrefab: {fileID: 8432987711075814104, guid: a8d7c1a323d32b744b1476954d27fa90, type: 3}
+  _shop: {fileID: 1541567180}
   _sharedData: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
 --- !u!4 &1874329933
 Transform:
@@ -6115,7 +6110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isActive: 1
   _isFilled: 0
 --- !u!1 &2093808917
 GameObject:
@@ -6384,7 +6378,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 13, y: -0.000061035156}
-  m_SizeDelta: {x: -184, y: 0}
+  m_SizeDelta: {x: -184, y: -762.875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132442504
 MonoBehaviour:
