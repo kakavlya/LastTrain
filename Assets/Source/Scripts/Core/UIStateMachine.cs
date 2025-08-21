@@ -44,7 +44,7 @@ public class UIStateMachine : MonoBehaviour
 
     private UIState _currentState = UIState.None;
 
-    private void Awake()
+    private void Start()
     {
         _startButton.onClick.AddListener(OnStartButton);
 
@@ -69,6 +69,8 @@ public class UIStateMachine : MonoBehaviour
         {
             _joustick.SetActive(false);
         }
+
+        DisableMenuButtonsIfTraining();
     }
 
     public void SwitchState(UIState state)
@@ -131,6 +133,17 @@ public class UIStateMachine : MonoBehaviour
         _gameEndScreen.SetActive(false);
         _gamePauseScreen.SetActive(false);
         _settingsScreen.SetActive(false);
+    }
+
+    private void DisableMenuButtonsIfTraining()
+    {
+        if (TrainingHandler.Instance.IsDoneGameplayTraining == false)
+        {
+            foreach (var menu in _menuButtons)
+            {
+                menu.interactable = false;
+            }
+        }
     }
 
     private void OnDestroy()

@@ -10,7 +10,7 @@ public class Shop : MonoBehaviour
     [Header("Weapons List")]
     [SerializeField] private Transform _contentParent;
     [SerializeField] private ShopItemUI _shopItemPrefab;
-    [SerializeField] private UpgradeConfig[] _intemConfigs;
+    [SerializeField] private UpgradeConfig[] _itemConfigs;
 
     [Header("General shop UI")]
     [SerializeField] private Image _blocker;
@@ -49,7 +49,7 @@ public class Shop : MonoBehaviour
 
         var data = SaveManager.Instance.Data;
 
-        foreach (var upgradeConfig in _intemConfigs)
+        foreach (var upgradeConfig in _itemConfigs)
         {
             BaseProgress progress = null;
 
@@ -88,6 +88,12 @@ public class Shop : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (_detailsPanel != null)
+            _detailsPanel.Incremented -= OnStatIncremented;
+    }
+
 
     private void OnItemSelected(UpgradeConfig cfg, BaseProgress prog)
     {
@@ -103,7 +109,6 @@ public class Shop : MonoBehaviour
 
     private void OnDetailsClosed()
     {
-        _detailsPanel.Incremented -= OnStatIncremented;
         _blocker.gameObject.SetActive(false);
         BuildShop();
     }

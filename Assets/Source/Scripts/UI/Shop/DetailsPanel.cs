@@ -70,6 +70,7 @@ public class DetailsPanel : MonoBehaviour
         CoinsHandler.Instance.RemoveCoins(cost);
         _progress.Increment(stat);
         Incremented?.Invoke(stat);
+        ProgressHandler.Instance.RefreshSumLevels();
 
         SaveManager.Instance.Save();
         Refresh();

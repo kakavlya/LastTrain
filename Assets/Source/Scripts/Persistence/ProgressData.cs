@@ -14,8 +14,9 @@ public class ProgressData
     public List<string> InventorySlots = new List<string>();
     public List<string> PlayerInventorySlots = new List<string>();
     public List<LevelAvailability> LevelsAvailability = new List<LevelAvailability>();
-    public bool IsDoneGameplayTraining = true;
+    public bool IsDoneGameplayTraining;
     public bool IsDoneMenuTraining;
+    public MenuTrainingState TrainingState = MenuTrainingState.Start;
 
     public ProgressData()
     {
@@ -30,7 +31,7 @@ public class ProgressData
         TrainingWeaponsProgress.Add(new WeaponProgress("MachineGun", 5));
         TrainingWeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 5));
 
-        Coins = 100000;
+        Coins = 0;
         EffectsVolume = 0.5f;
         MusicVolume = 0.5f;
         InventorySlotsCount = 0;

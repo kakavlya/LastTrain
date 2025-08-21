@@ -33,6 +33,7 @@ public class TrainingHandler : MonoBehaviour
 
         GetTrainingProgress();
         TryPlayTrainingGameplay();
+        TryPlayTrainingMenu();
     }
 
     private void GetTrainingProgress()
@@ -52,6 +53,13 @@ public class TrainingHandler : MonoBehaviour
         }
     }
 
+    private void TryPlayTrainingMenu()
+    {
+        if (SceneManager.GetActiveScene().name == _menuSceneName && _isDoneGameplayTraining && !_isDoneMenuTraining)
+        {
+
+        }
+    }
 
     public void TryEndGameplayTrainingAndLoadMenu()
     {
@@ -59,6 +67,8 @@ public class TrainingHandler : MonoBehaviour
         {
             Time.timeScale = 1f;
             SaveManager.Instance.Data.IsDoneGameplayTraining = true;
+            GetTrainingProgress();
+            CoinsHandler.Instance.SetTrainingStatus(false);
             SceneManager.LoadScene(_menuSceneName);
         }
     }

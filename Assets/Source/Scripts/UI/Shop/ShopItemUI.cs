@@ -108,6 +108,7 @@ public class ShopItemUI : MonoBehaviour
             _lockPanel.SetActive(false);
             _upgradeButton.gameObject.SetActive(true);
             WeaponUnlocked?.Invoke(progress, _weaponUpgrade);
+            ProgressHandler.Instance.RefreshSumLevels();
         }
     }
 }
