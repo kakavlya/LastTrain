@@ -10,33 +10,52 @@ public class PlayerHealth : HealthBase
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private float _respawnDelay = 3f;
+    [SerializeField] private SharedData _sharedData;
+
+    private float _maxHealth;
 
     public event Action Died;
+
+    public float MaxHealth => _maxHealth;
 
     protected override void Awake()
     {
         base.Awake();
         OnDeath.AddListener(OnPlayerDeath);
-        _healthText.text = MaxHealth.ToString();
+        _maxHealth = GetMaxHealthValue();
+        CurrentHealth = _maxHealth;
+        _healthText.text = MaxHealth.ToString("F0");
         _healthSlider.maxValue = MaxHealth;
         _healthSlider.value = MaxHealth;
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
-        _healthText.text = CurrentHealth.ToString();
-        _healthSlider.value = CurrentHealth;
+        _healthText.text = GetCurrentHealth.ToString("F0");
+        _healthSlider.value = GetCurrentHealth;
     }
 
     private void OnPlayerDeath()
     {
-        Debug.Log("[PlayerHealth] Player died");
         Died?.Invoke();
+        TrainingHandler.Instance.TryEndGameplayTrainingAndLoadMenu();
     }
 
-    private IEnumerator RespawnRoutine()
+    private float GetMaxHealthValue()
     {
-        yield return new WaitForSeconds(_respawnDelay);
+        var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
+        var healthLevel = SaveManager.Instance.Data.TrainProgress.HealthLevel;
+        StatConfig healthConfig = null;
+
+        foreach (var config in trainConfigs)
+        {
+            if (config.StatType == StatType.Health)
+            {
+                healthConfig = config;
+            }
+        }
+
+        return healthConfig.GetValue(healthLevel);
     }
 }

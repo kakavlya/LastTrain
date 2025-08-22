@@ -4,6 +4,7 @@ using UnityEngine;
 public class CoinsHandler : MonoBehaviour
 {
     private int _coinsCount;
+    private bool _isTraining;
 
     public static CoinsHandler Instance { get; private set; }
 
@@ -40,6 +41,9 @@ public class CoinsHandler : MonoBehaviour
 
     public void AddCoins(int addedCoins)
     {
+        if (_isTraining)
+            return;
+
         CoinsCount += addedCoins;
         SaveManager.Instance.Data.Coins += addedCoins;
         Added?.Invoke(addedCoins);
@@ -49,5 +53,10 @@ public class CoinsHandler : MonoBehaviour
     {
         CoinsCount -= removedCoins;
         SaveManager.Instance.Data.Coins -= removedCoins;
+    }
+
+    public void SetTrainingStatus(bool isActive)
+    {
+        _isTraining = isActive;
     }
 }

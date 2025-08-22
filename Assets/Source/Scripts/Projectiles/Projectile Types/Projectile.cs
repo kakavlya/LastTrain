@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     public event Action<Projectile> OnReturnToPool;
 
     public float Speed { get; private set; } = 100f;
-    public int Damage { get; private set; } = 50;
+    public float Damage { get; private set; } = 50;
     public float MaxAttackDistance { get; private set; } = 100;
 
     public GameObject Owner { get; private set; }
@@ -86,7 +86,7 @@ public class Projectile : MonoBehaviour
         Quaternion rotation,
         GameObject owner,
         float speed,
-        int damage,
+        float damage,
         float maxAttackDistance,
         bool usePooling,
         int aoeDamage = 0,

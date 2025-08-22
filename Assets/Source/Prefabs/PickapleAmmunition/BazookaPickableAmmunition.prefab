@@ -85,6 +85,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickupAmmo
       objectReference: {fileID: 0}
+    - target: {fileID: 1289803115217724, guid: e2c40f781ea42fb45b1a2a4d36542415, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1297103672879800, guid: e2c40f781ea42fb45b1a2a4d36542415, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -5,19 +5,18 @@ namespace Assets.Source.Scripts.Core
 {
     public class HealthBase : MonoBehaviour, IDamageable
     {
-        [Header("Health Settings")]
-        [SerializeField] private int _maxHealth = 100;
+        //[Header("Health Settings")]
+        //[SerializeField] private int _maxHealth = 100;
         
-        private int _currentHealth;
         private ModelEffects _view;
+
+        protected float CurrentHealth;
 
         public UnityEvent OnDeath;
 
         public bool IsDead { get; private set; }
 
-        public int CurrentHealth => _currentHealth;
-
-        public int MaxHealth => _maxHealth;
+        public float GetCurrentHealth => CurrentHealth;
 
         protected virtual void Awake()
         {
@@ -26,23 +25,23 @@ namespace Assets.Source.Scripts.Core
 
         protected virtual void OnEnable()
         {
-            _currentHealth = _maxHealth;
             IsDead = false;
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(float damage)
         {
             if (IsDead)
                 return;
 
-            _currentHealth -= damage;
+            CurrentHealth -= damage;
             _view?.PlayHitFX();
 
-            if (_currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
         }
+
         protected virtual void Die()
         {
             _view?.PlayDeathFX();

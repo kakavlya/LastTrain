@@ -1,29 +1,32 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class Shop : MonoBehaviour
 {
     [Header("Weapons List")]
     [SerializeField] private Transform _contentParent;
     [SerializeField] private ShopItemUI _shopItemPrefab;
-    [SerializeField] private WeaponUpgradeConfig[] _weaponConfigs;
+    [SerializeField] private UpgradeConfig[] _itemConfigs;
 
     [Header("General shop UI")]
-    [SerializeField] private Image _blocker;              
-    [SerializeField] private WeaponDetailsPanel _detailsPrefab;
-    [SerializeField] private Transform _detailsParent;        // spawn position
+    [SerializeField] private Image _blocker;
+    [SerializeField] private DetailsPanel _detailsPrefab;
+    [SerializeField] private Transform _detailsParent;
+    [SerializeField] private ScrollRect _scrollRect;
 
     [Header("Inventory items")]
     [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
     [SerializeField] private InventoryHandler _inventoryHandler;
 
-    // Кэш, чтобы не пересоздавать окно каждый раз
-    private WeaponDetailsPanel _detailsPanel;
-    ProgressData _data;
+    private DetailsPanel _detailsPanel;
+    private ProgressData _data;
+    private List<ShopItemUI> _uiItems = new List<ShopItemUI>();
+
+    public event Action SlotIncremented;
 
     private void Start()
     {
@@ -34,38 +37,73 @@ public class Shop : MonoBehaviour
 
     private void BuildShop()
     {
+        foreach (var item in _uiItems)
+        {
+            item.WeaponUnlocked -= InitialNewInventoryWeapon;
+        }
+
+        _uiItems.Clear();
+
         foreach (Transform child in _contentParent)
             Destroy(child.gameObject);
 
         var data = SaveManager.Instance.Data;
 
-        foreach (var upgradeConfig in _weaponConfigs)
+        foreach (var upgradeConfig in _itemConfigs)
         {
+            BaseProgress progress = null;
 
-            string id = upgradeConfig.WeaponId;                           
-            var progress = _data.Weapons.Find(w => w.WeaponId == id);
-            if (progress == null)
+            if (upgradeConfig is WeaponUpgradeConfig weaponUprgadeCfg)
             {
-                progress = new WeaponProgress(id);
-                data.Weapons.Add(progress);
+                string id = weaponUprgadeCfg.WeaponId;
+                progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
+
+                if (progress == null)
+                {
+                    progress = new WeaponProgress(id);
+                    data.WeaponsProgress.Add((WeaponProgress)progress);
+                }
+            }
+            else if (upgradeConfig is TrainUpgradeConfig trainUpgradeConfig)
+            {
+                progress = _data.TrainProgress;
             }
 
+
             var itemUi = Instantiate(_shopItemPrefab, _contentParent);
+            _uiItems.Add(itemUi);
             itemUi.Init(upgradeConfig, progress, OnItemSelected);
-            itemUi.Unlocked += InitialNewInventoryWeapon;
+            itemUi.WeaponUnlocked += InitialNewInventoryWeapon;
         }
 
         SaveManager.Instance.Save();
+        StartCoroutine(ResizeAndScrollToTop());
+    }
+
+    private void OnDisable()
+    {
+        foreach (var item in _uiItems)
+        {
+            item.WeaponUnlocked -= InitialNewInventoryWeapon;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_detailsPanel != null)
+            _detailsPanel.Incremented -= OnStatIncremented;
     }
 
 
-    private void OnItemSelected(WeaponUpgradeConfig cfg, WeaponProgress prog)
+    private void OnItemSelected(UpgradeConfig cfg, BaseProgress prog)
     {
         if (_detailsPanel == null)
+        {
             _detailsPanel = Instantiate(_detailsPrefab, _detailsParent);
+            _detailsPanel.Incremented += OnStatIncremented;
+        }
 
-        _blocker.gameObject.SetActive(true);       
-
+        _blocker.gameObject.SetActive(true);
         _detailsPanel.Show(cfg, prog, OnDetailsClosed);
     }
 
@@ -75,13 +113,52 @@ public class Shop : MonoBehaviour
         BuildShop();
     }
 
+    private void OnStatIncremented(StatType stat)
+    {
+        if (stat == StatType.Slots)
+        {
+            SlotIncremented?.Invoke();
+        }
+    }
+
     private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
     {
         progress.IsAvailable = true;
-        SaveManager.Instance.Data.InventorySlots.Add(weaponConfig.WeaponName);
+        SaveManager.Instance.Data.InventorySlots.Add(weaponConfig.WeaponId);
         _inventoryHandler.SubmitActiveSlots();
-        InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, _inventoryHandler.GetLastActiveSlotUIs().transform);
-        inventoryWeapon.Init(weaponConfig);
+
+        WeaponSlotUI lastSlot = _inventoryHandler.GetLastActiveSlotUIs();
+
+        if (lastSlot != null && lastSlot.GetComponentInChildren<InventoryWeapon>() == null)
+        {
+            InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, lastSlot.transform);
+            inventoryWeapon.Init(weaponConfig);
+            lastSlot.SetSlotFilled();
+        }
+
         SaveManager.Instance.Save();
+    }
+
+    private void ResizeContentForGrid()
+    {
+        var layout = _contentParent.GetComponent<GridLayoutGroup>();
+        var contentRect = _contentParent.GetComponent<RectTransform>();
+
+        int totalItems = _contentParent.childCount;
+        int columns = Mathf.Max(1, Mathf.FloorToInt((contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
+
+        int rows = Mathf.CeilToInt((float)totalItems / columns);
+
+        float height = rows * layout.cellSize.y + layout.spacing.y * (rows - 1) + layout.padding.top + layout.padding.bottom;
+
+        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+    }
+
+    private IEnumerator ResizeAndScrollToTop()
+    {
+        yield return null;
+        ResizeContentForGrid();
+        yield return null;
+        _scrollRect.verticalNormalizedPosition = 1f;
     }
 }
