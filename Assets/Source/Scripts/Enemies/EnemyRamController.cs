@@ -1,34 +1,39 @@
 ﻿using Assets.Source.Scripts.Enemies;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(EnemyMovement), typeof(BoxCollider))]
+[DisallowMultipleComponent]
 public class EnemyRamController : EnemyController
 {
     public enum State { Hold, Charge, Impact }
 
-    [SerializeField] private BoxCollider _enemyCollider;
-    [SerializeField] private float checkRadius = 10f;
-
     private Transform _player;
-    private BoxCollider _playerCollider; 
+    private BoxCollider _playerCollider;
+    private BoxCollider _enemyCollider;
     private EnemyMovement _movement;
+
     private float _safeOffset;
-
     private float _holdDistance;
-
     private float _holdSpeed;
     private float _chargeSpeed;
-
     private float _impactPause;
     private float _holdPauseMin;
     private float _holdPauseMax;
-
     private int _damage;
+
+    private float _maxAccel = 30f;
+    private float _maxDecel = 40f;
+    private float _speedSmoothTime = 0.12f;
+    private float _checkRadius = 10f;
+    private AnimationCurve _impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    private float _checkRadiusSqr;
+
 
     private State _state;
     private float _stateTimer;
-    private Vector3 _retreatTarget;
-    private float _checkRadiusSqr;
+    private float _currentSpeed;
+    private float _targetSpeed;
+    private float _speedVel;
 
     public void Init(
         Transform player,
@@ -44,27 +49,52 @@ public class EnemyRamController : EnemyController
     {
         _player = player;
         _playerCollider = playerCollider;
-        _movement = GetComponent<EnemyMovement>();
-        _safeOffset = impactOffset;
-        _holdDistance = holdDistance;        
 
+        _movement = GetComponent<EnemyMovement>();
+        _enemyCollider = GetComponent<BoxCollider>();
+
+        _safeOffset = impactOffset;
+        _holdDistance = holdDistance;
         _holdSpeed = holdSpeed;
         _chargeSpeed = chargeSpeed;
-
         _impactPause = impactPause;
         _holdPauseMin = holdPauseRange.x;
         _holdPauseMax = holdPauseRange.y;
         _damage = damage;
 
-        _checkRadiusSqr = checkRadius * checkRadius;
+        _checkRadiusSqr = _checkRadius * _checkRadius;
 
         EnterHold();
     }
 
+    /// <summary>
+    /// Опциональный шаг: передать тюнинг динамики из SO (ускорение/торможение/сглаживание/радиус/кривая).
+    /// Если не вызывать — будут дефолты выше.
+    /// </summary>
+    public void ConfigureDynamics(
+        float maxAccel,
+        float maxDecel,
+        float speedSmoothTime,
+        float checkRadius,
+        AnimationCurve impactRecover
+    )
+    {
+        _maxAccel = maxAccel;
+        _maxDecel = maxDecel;
+        _speedSmoothTime = speedSmoothTime;
+        _checkRadius = Mathf.Max(0.01f, checkRadius);
+        _impactRecover = impactRecover ?? AnimationCurve.Linear(0, 0, 1, 1);
+        _checkRadiusSqr = _checkRadius * _checkRadius;
+    }
+
+    public void SetTurnSpeed(float turnSpeed)
+    {
+        _movement?.SetTurnSpeed(turnSpeed);
+    }
+
     private void Update()
     {
-        if (_player == null)
-            return; 
+        if (_player == null) return;
 
         _stateTimer -= Time.deltaTime;
 
@@ -75,23 +105,25 @@ public class EnemyRamController : EnemyController
             case State.Impact: UpdateImpact(); break;
         }
 
+        // smoothing speed
         _currentSpeed = SmoothSpeed(_currentSpeed, _targetSpeed, Time.deltaTime);
         _movement.SetSpeed(_currentSpeed);
     }
 
+    // -------- HOLD --------
     private void EnterHold()
     {
         _state = State.Hold;
         _stateTimer = Random.Range(_holdPauseMin, _holdPauseMax);
-        _movement.SetSpeed(_holdSpeed);
+        _targetSpeed = _holdSpeed;
     }
 
     private void UpdateHold()
     {
-        _stateTimer -= Time.deltaTime;
-
-        Vector3 dir = (transform.position - _player.position).WithY(0f).normalized;
-        Vector3 targetPos = _player.position + dir * _holdDistance;
+        Vector3 toSelf = transform.position - _player.position;
+        toSelf.y = 0f;
+        Vector3 dirFromPlayer = toSelf.sqrMagnitude > 0.0001f ? toSelf.normalized : -transform.forward;
+        Vector3 targetPos = _player.position + dirFromPlayer * _holdDistance;
 
         _movement.MoveForwardTo(targetPos);
 
@@ -102,7 +134,7 @@ public class EnemyRamController : EnemyController
     private void EnterCharge()
     {
         _state = State.Charge;
-        _movement.SetSpeed(_chargeSpeed);
+        _targetSpeed = _chargeSpeed;
     }
 
     private void UpdateCharge()
@@ -114,15 +146,33 @@ public class EnemyRamController : EnemyController
             return;
 
         bool overlapped;
-        Vector3 dir;
-        float dist = ColliderUtils.Distance(_enemyCollider, _playerCollider, out dir, out overlapped);
+        Vector3 sepDir;
+        float gap = ColliderUtils.Distance(_enemyCollider, _playerCollider, out sepDir, out overlapped);
+        float distToSafe = overlapped ? 0f : Mathf.Max(0f, gap - _safeOffset);
 
-        if (overlapped || dist <= _safeOffset)
+        // Предторможение по s = v^2/(2a) + буфер
+        float v = Mathf.Max(0.01f, _currentSpeed);
+        float brakingDist = (v * v) / (2f * Mathf.Max(0.01f, _maxDecel)) + 0.1f;
+
+        if (distToSafe <= brakingDist)
         {
-            float maxBack = _chargeSpeed * Time.deltaTime;      
-            float correction = _safeOffset - dist;
+            float k = Mathf.Clamp01(distToSafe / Mathf.Max(0.01f, brakingDist));
+            float desired = Mathf.Lerp(0f, _chargeSpeed, k);
+            _targetSpeed = Mathf.Min(_targetSpeed, desired);
+        }
+        else
+        {
+            _targetSpeed = Mathf.Max(_targetSpeed, _chargeSpeed * 0.9f);
+        }
 
-            transform.position += dir * Mathf.Clamp(correction, 0f, maxBack);
+        if (overlapped || distToSafe <= 0.02f)
+        {
+            float maxBack = _currentSpeed * Time.deltaTime;
+            float correction = overlapped ? _safeOffset : (_safeOffset - gap);
+            if (correction > 0f)
+                transform.position += sepDir * Mathf.Min(correction, maxBack);
+
+            _player.GetComponent<IDamageable>()?.TakeDamage(_damage);
             EnterImpact();
         }
     }
@@ -131,21 +181,25 @@ public class EnemyRamController : EnemyController
     {
         _state = State.Impact;
         _stateTimer = _impactPause;
-
-        _movement.SetSpeed(0f);
-        _player.GetComponent<IDamageable>()?.TakeDamage(20);
+        _targetSpeed = 0f; // for smoothing
     }
 
     private void UpdateImpact()
     {
-        _stateTimer -= Time.deltaTime;
-
-        float t = 1f - (_stateTimer / _impactPause);         // 0 → 1
-        float speedNow = Mathf.Lerp(0f, _chargeSpeed, t);
-        _movement.SetSpeed(speedNow);
+        float t = 1f - Mathf.Clamp01(_stateTimer / Mathf.Max(0.0001f, _impactPause)); // 0 1
+        float curve = (_impactRecover != null && _impactRecover.length > 0) ? _impactRecover.Evaluate(t) : t;
+        _targetSpeed = Mathf.Lerp(0f, _chargeSpeed, curve);
 
         if (_stateTimer <= 0f)
             EnterCharge();
     }
 
+    private float SmoothSpeed(float current, float target, float dt)
+    {        
+        float delta = target - current;
+        float maxDelta = (target > current ? _maxAccel : _maxDecel) * dt;
+        float clampedTarget = current + Mathf.Clamp(delta, -maxDelta, maxDelta);
+
+        return Mathf.SmoothDamp(current, clampedTarget, ref _speedVel, _speedSmoothTime, Mathf.Infinity, dt);
+    }
 }
