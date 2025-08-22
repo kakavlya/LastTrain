@@ -13,7 +13,7 @@ public class ProjectilePool : MonoBehaviour
     }
 
     public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
-        GameObject owner, float speed, int damage, float maxDistance, int aoeDamage = 0, float aoeRange = 0)
+        GameObject owner, float speed, float damage, float maxDistance, int aoeDamage = 0, float aoeRange = 0)
     {
         if (!_pools.TryGetValue(projectilePrefab, out var pool))
         {

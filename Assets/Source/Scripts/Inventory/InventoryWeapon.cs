@@ -27,7 +27,7 @@ public class InventoryWeapon : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _currentIcon.sprite = _weaponConfig.Icon;
         _currentText = GetComponentInChildren<TextMeshProUGUI>();
         _currentText.enabled = true;
-        _currentText.text = _weaponConfig.WeaponName;
+        _currentText.text = _weaponConfig.Name;
         _currentText.enabled = false;
     }
 

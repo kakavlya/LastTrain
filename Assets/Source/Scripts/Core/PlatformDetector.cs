@@ -9,8 +9,8 @@ public class PlatformDetector : MonoBehaviour
 
     public enum ControlScheme
     {
-        Mouse,
-        Joystick
+        Computer,
+        Mobile
     }
 
     public ControlScheme CurrentControlScheme { get; private set; }
@@ -46,11 +46,11 @@ public class PlatformDetector : MonoBehaviour
 
         if (isWebGL && isMobile)
         {
-            CurrentControlScheme = ControlScheme.Joystick;
+            CurrentControlScheme = ControlScheme.Mobile;
         }
         else
         {
-            CurrentControlScheme = ControlScheme.Mouse;
+            CurrentControlScheme = ControlScheme.Computer;
         }
     }
 }

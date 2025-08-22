@@ -1,8 +1,12 @@
 ﻿using Assets.Source.Scripts.Core;
 using Assets.Source.Scripts.Enemies;
+using UnityEngine;
 
 public class EnemyHealth : HealthBase
 {
+    [Header("Health Settings")]
+    [SerializeField] private float _maxHealth = 100;
+
     private EnemyDeathHandler _deathHandler;
     private int _rewardForKill;
 
@@ -12,9 +16,10 @@ public class EnemyHealth : HealthBase
         _deathHandler = GetComponent<EnemyDeathHandler>();
     }
 
-    public override void TakeDamage(int amount)
+    protected override void OnEnable()
     {
-        base.TakeDamage(amount);
+        base.OnEnable();
+        CurrentHealth = _maxHealth;
     }
 
     public void SetRewardForKill(int reward)

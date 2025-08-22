@@ -3,18 +3,13 @@ using UnityEngine;
 
 public class PlayerInventoryHandler : InventoryHandler
 {
+    [SerializeField] private Shop _shop;
     [SerializeField] private SharedData _sharedData;
-    [SerializeField] protected PlayHandler _playHandler;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
-        _playHandler.GameStarted += GiveInventoryWeaponFromSlots;
-    }
-
-    private void OnDisable()
-    {
-        _playHandler.GameStarted -= GiveInventoryWeaponFromSlots;
+        base.Start();
+        _shop.SlotIncremented += AddNewSlot;
     }
 
     protected override List<string> GetAllSlotsFromSave()
@@ -22,16 +17,27 @@ public class PlayerInventoryHandler : InventoryHandler
         return SaveManager.Instance.Data.PlayerInventorySlots;
     }
 
-    private void GiveInventoryWeaponFromSlots()
+    public bool TryGiveInventoryWeaponFromSlots()
     {
         _sharedData.WeaponConfigs.Clear();
+        int gaveWeaponsCount = 0;
 
         foreach (var slot in ActiveSlotUIs)
         {
             if (slot.GetComponentInChildren<InventoryWeapon>() != null)
             {
                 _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
+                gaveWeaponsCount++;
             }
         }
+
+        return gaveWeaponsCount > 0;
+    }
+
+    private void AddNewSlot()
+    {
+        SaveManager.Instance.Data.PlayerInventorySlots.Add("");
+        SubmitActiveSlots();
+        SaveManager.Instance.Save();
     }
 }

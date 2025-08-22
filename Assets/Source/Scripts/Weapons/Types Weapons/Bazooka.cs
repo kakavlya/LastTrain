@@ -19,7 +19,7 @@ public class Bazooka : Weapon
             rotation,
             Owner,
             ProjectileSpeed, Damage,
-            MaxAttackDistance,
+            Range,
             _aoeDamage,
             _aoeRange
             )

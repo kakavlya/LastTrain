@@ -1,12 +1,10 @@
 using System;
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    //[SerializeField] private Ammunition _ammunition = null;
     [SerializeField] private Sprite _uiSpriteActive;
     [SerializeField] private Sprite _uiSpriteDeactive;
 
@@ -17,25 +15,30 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float FireDelay = 0.1f;
     [SerializeField] protected bool UsePooling = true;
     [SerializeField] protected float ProjectileSpeed = 100;
-    [SerializeField] protected int Damage = 50;
-    [SerializeField] protected float MaxAttackDistance = 100;
 
-    protected GameObject Owner;
+
     private float _lastFireTime;
 
-    protected Vector3 Direction => FirePoint.forward;
+    protected GameObject Owner;
+    protected float Damage;
+    protected float Range;
 
     public event Action OnFired;
     public event Action OnStopFired;
 
+    protected Vector3 Direction => FirePoint.forward;
+
     public Weapon PrefabReference { get; private set; }
     public Sprite UISpriteActive => _uiSpriteActive;
     public Sprite UISpriteDeactive => _uiSpriteDeactive;
-    //public Ammunition Ammunition => _ammunition;
 
-    private void OnEnable()
+    public void Init(float damage, float range)
     {
         Owner = gameObject;
+        Damage = damage;
+        Range = range;
+
+        Debug.Log(Damage);
     }
 
     public virtual bool GetIsLoopedFireSound() => false;
@@ -64,7 +67,7 @@ public class Weapon : MonoBehaviour
                 Owner,
                 ProjectileSpeed,
                 Damage,
-                MaxAttackDistance)
+                Range)
                     : Instantiate(
                         ProjectilePrefab,
                         FirePoint.position,

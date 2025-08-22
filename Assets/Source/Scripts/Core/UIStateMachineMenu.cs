@@ -38,7 +38,7 @@ public class UIStateMachineMenu : MonoBehaviour
         _shopButton.onClick.AddListener(OnShopButton);
     }
 
-    public void SwitchState(UIState state)
+    private void SwitchState(UIState state)
     {
         DisableAll();
 

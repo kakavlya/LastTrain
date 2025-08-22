@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +14,6 @@ public class LevelsHandler : MonoBehaviour
     [SerializeField] private Sprite _unavailableIcon;
     [SerializeField] private SharedData _sharedData;
 
-    public event Action LevelChosed;
-
     public bool IsChosed { get; private set; }
 
     private void Start()
@@ -28,7 +25,7 @@ public class LevelsHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(CreateLevelButtonsAndResetScroll());
+        StartCoroutine(ResizeScrollOnTop());
     }
 
     private void LoadLevels()
@@ -37,9 +34,14 @@ public class LevelsHandler : MonoBehaviour
 
         if (levelsAvailability.Count == 0)
         {
-            foreach (var setting in _levelSettings)
+            for (int i = 0; i < _levelSettings.Length; i++)
             {
-                levelsAvailability.Add(new LevelAvailability(setting.LevelName, setting.IsAvailable));
+                levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelName, false));
+
+                if (i == 0)
+                {
+                    levelsAvailability[0].IsAvailable = true;
+                }
             }
 
             SaveManager.Instance.Save();
@@ -51,7 +53,7 @@ public class LevelsHandler : MonoBehaviour
             {
                 if (setting.LevelName == level.Name)
                 {
-                    setting.IsAvailable = level.Available;
+                    setting.IsAvailable = level.IsAvailable;
                 }
             }
         }
@@ -68,7 +70,12 @@ public class LevelsHandler : MonoBehaviour
             buttonText.text = _levelSettings[i].LevelName;
             Button button = objectButton.GetComponent<Button>();
 
-            if (!_levelSettings[i].IsAvailable)
+            LevelAvailability levelAvail = SaveManager.Instance.Data.LevelsAvailability.Find(
+                level => level.Name == _levelSettings[i].LevelName);
+
+            bool isAvailable = levelAvail != null && levelAvail.IsAvailable;
+
+            if (!isAvailable)
             {
                 button.enabled = false;
                 var buttonIcon = objectButton.GetComponent<Image>();
@@ -80,7 +87,7 @@ public class LevelsHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator CreateLevelButtonsAndResetScroll()
+    private IEnumerator ResizeScrollOnTop()
     {
         yield return null;
         ResizeContentForGrid();
@@ -108,7 +115,6 @@ public class LevelsHandler : MonoBehaviour
         _sharedData.LevelSetting = levelSetting;
         ShowCurrentLevel(levelSetting);
         IsChosed = true;
-        LevelChosed?.Invoke();
     }
 
     private void ShowCurrentLevel(LevelSetting levelSetting)

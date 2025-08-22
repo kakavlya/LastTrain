@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class PlayHandler : MonoBehaviour
 {
     [SerializeField] private LevelsHandler _levelsHandler;
+    [SerializeField] private PlayerInventoryHandler _playerInventoryHandler;
     [SerializeField] private string _gameplayScene;
     [SerializeField] private Button _playButton;
-
-    public event Action GameStarted;
 
     private void Awake()
     {
@@ -19,9 +18,8 @@ public class PlayHandler : MonoBehaviour
 
     private void StartPlay()
     {
-        if (_levelsHandler.IsChosed)
+        if (_levelsHandler.IsChosed && _playerInventoryHandler.TryGiveInventoryWeaponFromSlots())
         {
-            GameStarted?.Invoke();
             SceneManager.LoadScene(_gameplayScene);
         }
     }
