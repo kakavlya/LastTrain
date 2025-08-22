@@ -120,16 +120,18 @@ public class EnemyRamController : EnemyController
 
     private void UpdateHold()
     {
-        Vector3 toSelf = transform.position - _player.position;
-        toSelf.y = 0f;
-        Vector3 dirFromPlayer = toSelf.sqrMagnitude > 0.0001f ? toSelf.normalized : -transform.forward;
-        Vector3 targetPos = _player.position + dirFromPlayer * _holdDistance;
+        Vector3 anchor = _playerCollider.ClosestPoint(transform.position); // поверхность игрока
+        Vector3 fromAnchor = transform.position - anchor;
+        fromAnchor.y = 0f;
+        Vector3 dir = fromAnchor.sqrMagnitude > 0.0001f ? fromAnchor.normalized : -transform.forward;
 
+        Vector3 targetPos = anchor + dir * _holdDistance;
         _movement.MoveForwardTo(targetPos);
 
         if (_stateTimer <= 0f)
             EnterCharge();
     }
+
 
     private void EnterCharge()
     {
@@ -139,18 +141,13 @@ public class EnemyRamController : EnemyController
 
     private void UpdateCharge()
     {
-        _movement.MoveForwardTo(_player.position);
-
-        float sqr = (_player.position - transform.position).sqrMagnitude;
-        if (sqr > _checkRadiusSqr)
-            return;
+        _movement.MoveForwardTo(GetChargeTargetPoint());
 
         bool overlapped;
         Vector3 sepDir;
         float gap = ColliderUtils.Distance(_enemyCollider, _playerCollider, out sepDir, out overlapped);
         float distToSafe = overlapped ? 0f : Mathf.Max(0f, gap - _safeOffset);
 
-        // Предторможение по s = v^2/(2a) + буфер
         float v = Mathf.Max(0.01f, _currentSpeed);
         float brakingDist = (v * v) / (2f * Mathf.Max(0.01f, _maxDecel)) + 0.1f;
 
@@ -177,6 +174,7 @@ public class EnemyRamController : EnemyController
         }
     }
 
+
     private void EnterImpact()
     {
         _state = State.Impact;
@@ -201,5 +199,19 @@ public class EnemyRamController : EnemyController
         float clampedTarget = current + Mathf.Clamp(delta, -maxDelta, maxDelta);
 
         return Mathf.SmoothDamp(current, clampedTarget, ref _speedVel, _speedSmoothTime, Mathf.Infinity, dt);
+    }
+
+    private Vector3 GetChargeTargetPoint()
+    {
+        Vector3 closest = _playerCollider.ClosestPoint(transform.position);
+        Vector3 toClosest = closest - transform.position;
+        toClosest.y = 0f;
+
+        float dist = toClosest.magnitude;
+        if (dist < 0.0001f)
+            return transform.position;
+
+        Vector3 dir = toClosest / dist;
+        return closest - dir * _safeOffset;
     }
 }

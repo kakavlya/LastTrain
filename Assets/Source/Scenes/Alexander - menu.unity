@@ -5985,10 +5985,10 @@ MonoBehaviour:
   _contentParent: {fileID: 2132442503}
   _shopItemPrefab: {fileID: 7857574078203270619, guid: e236634b68bcb4e49ad40d66c31f0537, type: 3}
   _itemConfigs:
-  - {fileID: 11400000, guid: 4210ec7823bfcd544bdd168b0fb3c54b, type: 2}
   - {fileID: 11400000, guid: 848b642870b7c8b4c8d4a765128c831f, type: 2}
-  - {fileID: 11400000, guid: 3a5a1ba429cc3e34eb43c97cf8c28541, type: 2}
   - {fileID: 11400000, guid: c5a78fa57872c724f8eee2f7a6332897, type: 2}
+  - {fileID: 11400000, guid: 3a5a1ba429cc3e34eb43c97cf8c28541, type: 2}
+  - {fileID: 11400000, guid: 4210ec7823bfcd544bdd168b0fb3c54b, type: 2}
   _blocker: {fileID: 1736618641}
   _detailsPrefab: {fileID: 7626233022446259456, guid: bf09858a83467514987ea51af14cad55, type: 3}
   _detailsParent: {fileID: 920404892}
