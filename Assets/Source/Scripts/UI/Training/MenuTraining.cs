@@ -60,11 +60,11 @@ public class MenuTraining : MonoBehaviour
     private void SwitchTrainingWindows(MenuTrainingState state)
     {
         DisableAllTrainingScreens();
+        _startLevelButton.interactable = false;
 
         switch (state)
         {
             case MenuTrainingState.Start:
-                _startLevelButton.interactable = false;
                 _inventoryButton.interactable = false;
                 _choseLevelButton.interactable = false;
                 _shopButton.interactable = false;

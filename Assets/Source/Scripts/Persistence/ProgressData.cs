@@ -14,7 +14,7 @@ public class ProgressData
     public List<string> InventorySlots = new List<string>();
     public List<string> PlayerInventorySlots = new List<string>();
     public List<LevelAvailability> LevelsAvailability = new List<LevelAvailability>();
-    public bool IsDoneGameplayTraining;
+    public bool IsDoneGameplayTraining = true;
     public bool IsDoneMenuTraining;
     public MenuTrainingState TrainingState = MenuTrainingState.Start;
 
