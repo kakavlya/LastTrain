@@ -74,6 +74,9 @@ public class EnemyRamController : EnemyController
             case State.Charge: UpdateCharge(); break;
             case State.Impact: UpdateImpact(); break;
         }
+
+        _currentSpeed = SmoothSpeed(_currentSpeed, _targetSpeed, Time.deltaTime);
+        _movement.SetSpeed(_currentSpeed);
     }
 
     private void EnterHold()
