@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static GameplayTraining;
-using static UnityEditor.Progress;
 
 public class MenuTraining : MonoBehaviour
 {
@@ -29,6 +27,7 @@ public class MenuTraining : MonoBehaviour
     [SerializeField] private Button _backFromShopButton;
     [SerializeField] private Button _backFromInventoryButton;
     [SerializeField] private Button _backFromChoseLevelButton;
+    [SerializeField] private Button _rewardButton;
 
     [Header("Training Buttons")]
     [SerializeField] private Button _startTrainingOkButton;
@@ -45,7 +44,6 @@ public class MenuTraining : MonoBehaviour
 
     private ShopItemUI[] _shopItems;
     private WeaponSlotUI[] _weaponSlots;
-    private MenuTrainingState _trainingState;
 
     private void Start()
     {
@@ -68,6 +66,7 @@ public class MenuTraining : MonoBehaviour
                 _inventoryButton.interactable = false;
                 _choseLevelButton.interactable = false;
                 _shopButton.interactable = false;
+                _rewardButton.interactable = false;
                 _startTrainingScreen.SetActive(true);
                 break;
 
@@ -145,6 +144,7 @@ public class MenuTraining : MonoBehaviour
                 _inventoryButton.interactable = true;
                 _shopButton.interactable = true;
                 _startLevelButton.interactable = true;
+                _rewardButton.interactable = true;
                 _choseLevelCloseButton.onClick.RemoveListener(OnChoseLevelClose);
                 SaveManager.Instance.Data.IsDoneMenuTraining = true;
                 break;

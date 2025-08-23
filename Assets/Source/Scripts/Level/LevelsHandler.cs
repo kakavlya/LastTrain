@@ -3,6 +3,8 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
+using YG.LanguageLegacy;
 
 public class LevelsHandler : MonoBehaviour
 {

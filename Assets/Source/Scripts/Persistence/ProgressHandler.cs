@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using TMPro;
@@ -9,6 +10,10 @@ public class ProgressHandler : MonoBehaviour
 
     private int _sumLevels;
     public static ProgressHandler Instance { get; private set; }
+
+    public int Level => _sumLevels;
+
+    public event Action LevelChanged;
 
     private void Awake()
     {
@@ -45,6 +50,7 @@ public class ProgressHandler : MonoBehaviour
         }
 
         _sumLevels += trainProgress.GetSumLevels();
+        LevelChanged?.Invoke();
         _sumLevelsText.text = $"Level: {_sumLevels.ToString()}";
     }
 }
