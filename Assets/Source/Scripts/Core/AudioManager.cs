@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class AudioManager : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        _effectsAudioSource.volume = SaveManager.Instance.Data.EffectsVolume;
-        _musicAudioSource.volume = SaveManager.Instance.Data.MusicVolume;
+        _effectsAudioSource.volume = YG2.saves.EffectsVolume;
+        _musicAudioSource.volume = YG2.saves.MusicVolume;
     }
 
     public void PlayWeaponSound(AudioClip clip, bool loop)
@@ -62,12 +63,12 @@ public class AudioManager : MonoBehaviour
     public void ChangeEffectsVolume(float value)
     {
         _effectsAudioSource.volume = value;
-        SaveManager.Instance.Data.EffectsVolume = value;
+        YG2.saves.EffectsVolume = value;
     }
 
     public void ChangeMusicVolume(float value)
     {
         _musicAudioSource.volume = value;
-        SaveManager.Instance.Data.MusicVolume = value;
+        YG2.saves.MusicVolume = value;
     }
 }

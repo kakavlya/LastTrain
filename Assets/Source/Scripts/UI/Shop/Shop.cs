@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 
 public class Shop : MonoBehaviour
@@ -23,7 +24,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private InventoryHandler _inventoryHandler;
 
     private DetailsPanel _detailsPanel;
-    private ProgressData _data;
+    private SavesYG _data;
     private List<ShopItemUI> _uiItems = new List<ShopItemUI>();
 
     public event Action SlotIncremented;
@@ -31,7 +32,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         _blocker.gameObject.SetActive(false);
-        _data = SaveManager.Instance.Data;
+        _data = YG2.saves;
         BuildShop();
     }
 
@@ -47,7 +48,7 @@ public class Shop : MonoBehaviour
         foreach (Transform child in _contentParent)
             Destroy(child.gameObject);
 
-        var data = SaveManager.Instance.Data;
+        var data = YG2.saves;
 
         foreach (var upgradeConfig in _itemConfigs)
         {
@@ -76,7 +77,7 @@ public class Shop : MonoBehaviour
             itemUi.WeaponUnlocked += InitialNewInventoryWeapon;
         }
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
         StartCoroutine(ResizeAndScrollToTop());
     }
 
@@ -124,7 +125,7 @@ public class Shop : MonoBehaviour
     private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
     {
         progress.IsAvailable = true;
-        SaveManager.Instance.Data.InventorySlots.Add(weaponConfig.WeaponId);
+        YG2.saves.InventorySlots.Add(weaponConfig.WeaponId);
         _inventoryHandler.SubmitActiveSlots();
 
         WeaponSlotUI lastSlot = _inventoryHandler.GetLastActiveSlotUIs();
@@ -136,7 +137,7 @@ public class Shop : MonoBehaviour
             lastSlot.SetSlotFilled();
         }
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
     }
 
     private void ResizeContentForGrid()

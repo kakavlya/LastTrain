@@ -32,7 +32,7 @@ public class LevelsHandler : MonoBehaviour
 
     private void LoadLevels()
     {
-        var levelsAvailability = SaveManager.Instance.Data.LevelsAvailability;
+        var levelsAvailability = YG2.saves.LevelsAvailability;
 
         if (levelsAvailability.Count == 0)
         {
@@ -46,7 +46,7 @@ public class LevelsHandler : MonoBehaviour
                 }
             }
 
-            SaveManager.Instance.Save();
+            YG2.SaveProgress();
         }
 
         foreach (var setting in _levelSettings)
@@ -72,7 +72,7 @@ public class LevelsHandler : MonoBehaviour
             buttonText.text = _levelSettings[i].LevelName;
             Button button = objectButton.GetComponent<Button>();
 
-            LevelAvailability levelAvail = SaveManager.Instance.Data.LevelsAvailability.Find(
+            LevelAvailability levelAvail = YG2.saves.LevelsAvailability.Find(
                 level => level.Name == _levelSettings[i].LevelName);
 
             bool isAvailable = levelAvail != null && levelAvail.IsAvailable;

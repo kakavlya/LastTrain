@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class MenuTraining : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class MenuTraining : MonoBehaviour
     {
         if (TrainingHandler.Instance.IsDoneGameplayTraining == true && TrainingHandler.Instance.IsDoneMenuTraining == false)
         {
-            SwitchTrainingWindows(SaveManager.Instance.Data.TrainingState);
+            SwitchTrainingWindows(YG2.saves.TrainingState);
             _startTrainingOkButton.onClick.AddListener(OnStartTrainingButton);
             _shopInfoTrainingOkButton.onClick.AddListener(OnShopInfoTrainingButton);
         }
@@ -146,12 +147,12 @@ public class MenuTraining : MonoBehaviour
                 _startLevelButton.interactable = true;
                 _rewardButton.interactable = true;
                 _choseLevelCloseButton.onClick.RemoveListener(OnChoseLevelClose);
-                SaveManager.Instance.Data.IsDoneMenuTraining = true;
+                YG2.saves.IsDoneMenuTraining = true;
                 break;
         }
 
-        SaveManager.Instance.Data.TrainingState = state;
-        SaveManager.Instance.Save();
+        YG2.saves.TrainingState = state;
+        YG2.SaveProgress();
     }
 
     private void OnStartTrainingButton()

@@ -1,5 +1,6 @@
 using UnityEngine;
-using TMPro;        
+using TMPro;
+using YG;
 
 public class DebugCoinsButton : MonoBehaviour
 {
@@ -8,11 +9,11 @@ public class DebugCoinsButton : MonoBehaviour
 
     public void AddCoins()
     {
-        var data = SaveManager.Instance.Data;
-        data.Coins += amount;
-        SaveManager.Instance.Save();
+        var coins = YG2.saves.Coins;
+        coins += amount;
+        YG2.SaveProgress();
 
         if (coinsText != null)
-            coinsText.text = $"Coins: {data.Coins}";
+            coinsText.text = $"Coins: {coins}";
     }
 }

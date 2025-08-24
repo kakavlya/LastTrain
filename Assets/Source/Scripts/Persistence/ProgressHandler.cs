@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class ProgressHandler : MonoBehaviour
 {
@@ -35,9 +36,9 @@ public class ProgressHandler : MonoBehaviour
     public void RefreshSumLevels()
     {
         _sumLevels = 0;
-        var data = SaveManager.Instance.Data;
-        List<WeaponProgress> weaponProgress = data.WeaponsProgress;
-        TrainProgress trainProgress = data.TrainProgress;
+
+        List<WeaponProgress> weaponProgress = YG2.saves.WeaponsProgress;
+        TrainProgress trainProgress = YG2.saves.TrainProgress;
 
         foreach (WeaponProgress progress in weaponProgress)
         {

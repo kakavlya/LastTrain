@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class DetailsPanel : MonoBehaviour
 {
@@ -72,7 +73,7 @@ public class DetailsPanel : MonoBehaviour
         Incremented?.Invoke(stat);
         ProgressHandler.Instance.RefreshSumLevels();
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
         Refresh();
     }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using YG;
 
 public class CoinsHandler : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class CoinsHandler : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        CoinsCount = SaveManager.Instance.Data.Coins;
+        CoinsCount = YG2.saves.Coins;
     }
 
     public void AddCoins(int addedCoins)
@@ -45,14 +46,16 @@ public class CoinsHandler : MonoBehaviour
             return;
 
         CoinsCount += addedCoins;
-        SaveManager.Instance.Data.Coins += addedCoins;
+        YG2.saves.Coins += addedCoins;
         Added?.Invoke(addedCoins);
+        YG2.SaveProgress();
     }
 
     public void RemoveCoins(int removedCoins)
     {
         CoinsCount -= removedCoins;
-        SaveManager.Instance.Data.Coins -= removedCoins;
+        YG2.saves.Coins -= removedCoins;
+        YG2.SaveProgress();
     }
 
     public void SetTrainingStatus(bool isActive)

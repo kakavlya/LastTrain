@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class InventoryHandler : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class InventoryHandler : MonoBehaviour
 
     protected virtual List<string> GetAllSlotsFromSave()
     {
-        return SaveManager.Instance.Data.InventorySlots;
+        return YG2.saves.InventorySlots;
     }
 
     protected virtual void SaveLocationInInventory()
@@ -66,7 +67,7 @@ public class InventoryHandler : MonoBehaviour
             }
         }
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
     }
 
     private void LoadWeaponsLocationInInventory()
@@ -102,7 +103,7 @@ public class InventoryHandler : MonoBehaviour
             }
         }
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
     }
 
     private WeaponUpgradeConfig GetWeaponConfigByName(string weaponName)

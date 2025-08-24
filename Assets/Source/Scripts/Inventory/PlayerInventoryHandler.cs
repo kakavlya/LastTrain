@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class PlayerInventoryHandler : InventoryHandler
 {
@@ -14,7 +15,7 @@ public class PlayerInventoryHandler : InventoryHandler
 
     protected override List<string> GetAllSlotsFromSave()
     {
-        return SaveManager.Instance.Data.PlayerInventorySlots;
+        return YG2.saves.PlayerInventorySlots;
     }
 
     public bool TryGiveInventoryWeaponFromSlots()
@@ -36,8 +37,8 @@ public class PlayerInventoryHandler : InventoryHandler
 
     private void AddNewSlot()
     {
-        SaveManager.Instance.Data.PlayerInventorySlots.Add("");
+        YG2.saves.PlayerInventorySlots.Add("");
         SubmitActiveSlots();
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
     }
 }

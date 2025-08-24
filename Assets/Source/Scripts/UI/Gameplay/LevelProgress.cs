@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 public class LevelProgress : MonoBehaviour
 {
@@ -77,7 +78,7 @@ public class LevelProgress : MonoBehaviour
                 var nextLevel = levelsArray[i + 1];
                 nextLevel.IsAvailable = true;
 
-                var savedLevel = SaveManager.Instance.Data.LevelsAvailability.Find(level => level.Name == nextLevel.LevelName);
+                var savedLevel = YG2.saves.LevelsAvailability.Find(level => level.Name == nextLevel.LevelName);
 
                 if (savedLevel != null)
                 {
@@ -86,7 +87,7 @@ public class LevelProgress : MonoBehaviour
                     _nextLevelButton.onClick.AddListener(StartNextLevel);
                 }
 
-                SaveManager.Instance.Save();
+                YG2.SaveProgress();
                 return;
             }
         }
