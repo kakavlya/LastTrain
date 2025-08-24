@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicExplodingEnemy
   m_EditorClassIdentifier: 
   Reward: 10
+  Health: 50
   moveSpeed: 45
   explosionRadius: 4
   damage: 100

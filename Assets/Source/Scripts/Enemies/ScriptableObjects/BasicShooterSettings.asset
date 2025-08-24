@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicShooterSettings
   m_EditorClassIdentifier: 
   Reward: 20
+  Health: 60
   moveSpeed: 55
   turnSpeed: 120
   attackSpeedFactorMin: 0.7

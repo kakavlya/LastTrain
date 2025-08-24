@@ -107,6 +107,7 @@ namespace Assets.Source.Scripts.Enemies
             var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
 
             enemy.GetComponent<EnemyHealth>().SetRewardForKill(spawnEntry.behaviorSettings.Reward);
+            enemy.GetComponent<EnemyHealth>().SetCurrentHealth(spawnEntry.behaviorSettings.Health);
             spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
         }
 

@@ -27,6 +27,11 @@ public class EnemyHealth : HealthBase
         _rewardForKill = reward;
     }
 
+    public void SetCurrentHealth(float health)
+    {
+        CurrentHealth = health;
+    }
+
     protected override void Die()
     {
         base.Die();

@@ -6,25 +6,39 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float _turnSpeed = 120f; // градусы в секунду
     private float _moveSpeed;
 
-    public void SetSpeed(float speed) => _moveSpeed = speed;
+    public void SetSpeed(float speed)
+    {
+        if (float.IsNaN(speed) || float.IsInfinity(speed))
+        {
+            _moveSpeed = 0f;
+            return;
+        }
+        _moveSpeed = speed;
+    }
     public void MoveForwardTo(Vector3 target)
     {
-        //Debug.Log("Moving to target: " + target);
-        //Debug.Log("Current position: " + transform.position);
-        //Debug.Log("Current forward: " + transform.forward);
-        //Debug.Log("Current speed: " + _moveSpeed);
-        Vector3 dir = (target - transform.position).WithY(0f).normalized;
-        if (dir.sqrMagnitude > 0.001f)
+        float dt = Time.deltaTime;
+        if (dt <= 0f) return;
+
+        Vector3 to = (target - transform.position).WithY(0f);
+        float sqr = to.sqrMagnitude;
+        if (sqr > 1e-6f)
         {
-            Quaternion desired = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                desired,
-                _turnSpeed * Time.deltaTime
-            );
+            Vector3 dir = to / Mathf.Sqrt(sqr);
+            var desired = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desired, _turnSpeed * dt);
         }
 
-        transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
+        Vector3 fwd = transform.forward;
+        if (float.IsNaN(fwd.x) || float.IsNaN(fwd.y) || float.IsNaN(fwd.z) ||
+            float.IsInfinity(fwd.x) || float.IsInfinity(fwd.y) || float.IsInfinity(fwd.z))
+        {
+            transform.rotation = Quaternion.identity;
+            fwd = Vector3.forward;
+        }
+        if (float.IsNaN(_moveSpeed) || float.IsInfinity(_moveSpeed)) _moveSpeed = 0f;
+
+        transform.position += fwd * (_moveSpeed * dt);
     }
 
     public void MoveForward()
