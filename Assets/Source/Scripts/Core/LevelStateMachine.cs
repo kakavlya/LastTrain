@@ -75,7 +75,6 @@ public class LevelStateMachine : MonoBehaviour
         _trainMovement.StopMovement();
         _spawner.Pause();
         Time.timeScale = 0f;
-        _playerHealth.Died -= OnPlayerDied;
     }
 
     public void ResumeGameplay()
@@ -84,7 +83,6 @@ public class LevelStateMachine : MonoBehaviour
         _trainMovement.StartMovement();
         _spawner.Resume();
         Time.timeScale = 1f;
-        _playerHealth.Died += OnPlayerDied;
     }
 
     public void ReturnToMenu()

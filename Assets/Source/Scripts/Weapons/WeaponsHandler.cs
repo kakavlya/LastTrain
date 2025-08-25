@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
+using YG;
 
 public class WeaponsHandler : MonoBehaviour
 {
@@ -165,13 +166,13 @@ public class WeaponsHandler : MonoBehaviour
 
     private List<WeaponProgress> GetWeaponProgressType()
     {
-        if (SaveManager.Instance.Data.IsDoneGameplayTraining)
+        if (YG2.saves.IsDoneGameplayTraining)
         {
-            return SaveManager.Instance.Data.WeaponsProgress;
+            return YG2.saves.WeaponsProgress;
         }
         else
         {
-            return SaveManager.Instance.Data.TrainingWeaponsProgress;
+            return YG2.saves.TrainingWeaponsProgress;
         }
     }
 

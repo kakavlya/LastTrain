@@ -2,12 +2,12 @@
 [System.Serializable]
 public class LevelAvailability
 {
-    public string Name;
+    public int LevelNumber;
     public bool IsAvailable;
 
-    public LevelAvailability(string name, bool isAvailable)
+    public LevelAvailability(int number, bool isAvailable)
     {
-        Name = name;
+        LevelNumber = number;
         IsAvailable = isAvailable;
     }
 }

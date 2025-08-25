@@ -13,26 +13,28 @@ MonoBehaviour:
   m_Name: GrenadeLauncherUpgradeConfig
   m_EditorClassIdentifier: 
   _name: Grenade Launcher
+  _localizationKey: UpgradeName.GrenadeLauncher
   _statConfigs:
-  - StatType: 0
+  - LocalizationKey: Characteristic.Damage
+    StatType: 0
     Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -41,27 +43,28 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxLevel: 10
     Costs: fa000000f4010000e8030000dc050000c4090000a00f0000701700003421000010270000983a0000
-    MinValue: 10
-    MaxValue: 50
-  - StatType: 1
+    MinValue: 80
+    MaxValue: 200
+  - LocalizationKey: Characteristic.Range
+    StatType: 1
     Curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -70,8 +73,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxLevel: 10
     Costs: c8000000900100002003000014050000d0070000b80b0000941100006419000028230000e02e0000
-    MinValue: 150
-    MaxValue: 450
+    MinValue: 120
+    MaxValue: 300
   Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
   _weaponId: GrenadeLauncher
   WeaponPrefab: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}

@@ -1,4 +1,5 @@
 using System;
+using Assets.SimpleLocalization.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,14 +17,15 @@ public class StatRow : MonoBehaviour
     private UpgradeConfig _upgradeConfig;
     private BaseProgress _progress;
 
-    public void Init(StatType statType, UpgradeConfig upgradeConfig, BaseProgress progress, Action<StatType> onUpgrade)
+    public void Init(StatConfig statConfig, UpgradeConfig upgradeConfig, BaseProgress progress, Action<StatType> onUpgrade)
     {
-        _statType = statType;
+        _statType = statConfig.StatType;
         _upgradeConfig = upgradeConfig;
         _progress = progress;
 
-        _statName.text = statType.ToString();
-        _upgradeButton.onClick.AddListener(() => onUpgrade?.Invoke(statType));
+        _statName.text = statConfig.Name;
+        
+        _upgradeButton.onClick.AddListener(() => onUpgrade?.Invoke(statConfig.StatType));
 
         Refresh();
     }

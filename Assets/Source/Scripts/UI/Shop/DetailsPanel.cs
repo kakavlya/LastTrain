@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class DetailsPanel : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class DetailsPanel : MonoBehaviour
     [SerializeField] private Button _closeBtn;
     [SerializeField] private CanvasGroup _cg;
     [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _levelText;
+    [SerializeField] private TextMeshProUGUI _leveNumberlText;
+    [SerializeField] private TextMeshProUGUI _itemName;
 
     [Header("Stats")]
     [SerializeField] private Transform _statsContainer;
@@ -31,6 +33,7 @@ public class DetailsPanel : MonoBehaviour
         _progress = prog;
         _onClose = onClose;
         _icon.sprite = _upgradeConfig.Icon;
+        _itemName.text = cfg.Name;
 
         _closeBtn.onClick.RemoveAllListeners();
         _closeBtn.onClick.AddListener(Close);
@@ -43,7 +46,7 @@ public class DetailsPanel : MonoBehaviour
         foreach (var stat in _upgradeConfig.StatConfigs)
         {
             var row = Instantiate(_statRowPrefab, _statsContainer);
-            row.Init(stat.StatType, _upgradeConfig, _progress, Upgrade);
+            row.Init(stat, _upgradeConfig, _progress, Upgrade);
             _statRows.Add(row);
         }
 
@@ -72,7 +75,7 @@ public class DetailsPanel : MonoBehaviour
         Incremented?.Invoke(stat);
         ProgressHandler.Instance.RefreshSumLevels();
 
-        SaveManager.Instance.Save();
+        YG2.SaveProgress();
         Refresh();
     }
 
@@ -86,7 +89,7 @@ public class DetailsPanel : MonoBehaviour
         foreach (var stat in _upgradeConfig.StatConfigs)
             totalLevel += _progress.GetLevel(stat.StatType);
 
-        _levelText.text = $"{totalLevel} level";
+        _leveNumberlText.text = totalLevel.ToString();
     }
 
     private void FadeIn()

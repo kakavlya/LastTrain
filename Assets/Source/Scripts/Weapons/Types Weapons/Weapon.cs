@@ -37,8 +37,6 @@ public class Weapon : MonoBehaviour
         Owner = gameObject;
         Damage = damage;
         Range = range;
-
-        Debug.Log(Damage);
     }
 
     public virtual bool GetIsLoopedFireSound() => false;

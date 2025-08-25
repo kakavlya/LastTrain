@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YG;
 
 public class TrainingHandler : MonoBehaviour
 {
@@ -38,8 +39,8 @@ public class TrainingHandler : MonoBehaviour
 
     private void GetTrainingProgress()
     {
-        _isDoneGameplayTraining = SaveManager.Instance.Data.IsDoneGameplayTraining;
-        _isDoneMenuTraining = SaveManager.Instance.Data.IsDoneMenuTraining;
+        _isDoneGameplayTraining = YG2.saves.IsDoneGameplayTraining;
+        _isDoneMenuTraining = YG2.saves.IsDoneMenuTraining;
     }
 
     private void TryPlayTrainingGameplay()
@@ -66,7 +67,7 @@ public class TrainingHandler : MonoBehaviour
         if (_isDoneGameplayTraining == false)
         {
             Time.timeScale = 1f;
-            SaveManager.Instance.Data.IsDoneGameplayTraining = true;
+            YG2.saves.IsDoneGameplayTraining = true;
             GetTrainingProgress();
             CoinsHandler.Instance.SetTrainingStatus(false);
             SceneManager.LoadScene(_menuSceneName);

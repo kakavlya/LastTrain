@@ -1,0 +1,97 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 165,
+    "WeaponsProgress": [
+        {
+            "WeaponId": "SubmachineGun",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": true
+        },
+        {
+            "WeaponId": "MachineGun",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "GrenadeLauncher",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "Flamethrower",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "Crossbow",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "Shotgun",
+            "DamageLevel": 0,
+            "RangeLevel": 0,
+            "IsAvailable": false
+        }
+    ],
+    "TrainingWeaponsProgress": [
+        {
+            "WeaponId": "SubmachineGun",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "MachineGun",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "GrenadeLauncher",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        }
+    ],
+    "TrainProgress": {
+        "HealthLevel": 0,
+        "SlotsLevel": 0
+    },
+    "Coins": 1000,
+    "EffectsVolume": 0.5,
+    "MusicVolume": 0.5,
+    "InventorySlotsCount": 0,
+    "PlayerInventorySlotsCount": 1,
+    "InventorySlots": [
+        ""
+    ],
+    "PlayerInventorySlots": [
+        "Пистолет-пулемет"
+    ],
+    "LevelsAvailability": [
+        {
+            "LevelNumber": 1,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 2,
+            "IsAvailable": false
+        }
+    ],
+    "IsDoneGameplayTraining": true,
+    "IsDoneMenuTraining": true,
+    "TrainingState": 10
+}

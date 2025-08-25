@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class PlayerHealth : HealthBase
 {
@@ -45,7 +46,7 @@ public class PlayerHealth : HealthBase
     private float GetMaxHealthValue()
     {
         var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
-        var healthLevel = SaveManager.Instance.Data.TrainProgress.HealthLevel;
+        var healthLevel = YG2.saves.TrainProgress.HealthLevel;
         StatConfig healthConfig = null;
 
         foreach (var config in trainConfigs)

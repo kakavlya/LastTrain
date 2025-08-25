@@ -18,8 +18,8 @@ MonoBehaviour:
     randRangeXZ: {x: 10, y: 10}
     behaviorSettings: {fileID: 11400000, guid: acf12740dd9215c4aabf438851170167, type: 2}
     overrideSpawnPoints: []
-  - prefab: {fileID: 4899597090557373887, guid: 089a610054aa0a641874cb77263d6dfd, type: 3}
+  - prefab: {fileID: 6965205965109951990, guid: dca6b9b3394e5c94c938bd8b5f7f3c8c, type: 3}
     spawnInterval: 3
     randRangeXZ: {x: 10, y: 10}
-    behaviorSettings: {fileID: 11400000, guid: ddcf9ef515707c3448b4e3bae816ce75, type: 2}
+    behaviorSettings: {fileID: 11400000, guid: e55f167b35d729745bbca70a866b6d9e, type: 2}
     overrideSpawnPoints: []
