@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
-  m_Name: SubmachineGunUpgradeConfig
+  m_Name: CrossbowUpgradeConfig
   m_EditorClassIdentifier: 
-  _name: Submachine Gun
-  _localizationKey: UpgradeName.SubmachineGun
+  _name: Crossbow
+  _localizationKey: UprgadeName.Crossbow
   _statConfigs:
   - LocalizationKey: Characteristic.Damage
     StatType: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000b0040000
-    MinValue: 10
-    MaxValue: 50
+    Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
+    MinValue: 25
+    MaxValue: 100
   - LocalizationKey: Characteristic.Range
     StatType: 1
     Curve:
@@ -72,10 +72,10 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
-    MinValue: 80
-    MaxValue: 250
-  Icon: {fileID: 21300000, guid: 56935beba2aeda645b598ef6cbc9c8ce, type: 3}
-  _weaponId: SubmachineGun
-  WeaponPrefab: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
-  UnblockingCost: 0
+    Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
+    MinValue: 150
+    MaxValue: 450
+  Icon: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
+  _weaponId: Crossbow
+  WeaponPrefab: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
+  UnblockingCost: 3000

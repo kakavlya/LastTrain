@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.SimpleLocalization.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 [System.Serializable]
 public class StatConfig
 {
+    public string LocalizationKey;
     public StatType StatType;
     public AnimationCurve Curve;
     public int MaxLevel;
@@ -15,6 +17,19 @@ public class StatConfig
 
     public float MinValue;
     public float MaxValue;
+
+    public string Name
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(LocalizationKey) && LocalizationManager.HasKey(LocalizationKey))
+            {
+                return LocalizationManager.Localize(LocalizationKey);
+            }
+
+            return StatType.ToString();
+        }
+    }
 
     public float GetValue(int level)
     {

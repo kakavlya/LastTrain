@@ -15008,7 +15008,7 @@ GameObject:
   - component: {fileID: 4716221909597274126}
   - component: {fileID: 2508176021536842434}
   m_Layer: 7
-  m_Name: Bazooka
+  m_Name: GrenadeLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15104,10 +15104,8 @@ MonoBehaviour:
   FireDelay: 1
   UsePooling: 1
   ProjectileSpeed: 100
-  Damage: 150
-  MaxAttackDistance: 200
   _aoeDamage: 150
-  _aoeRange: 15
+  _aoeRange: 20
 --- !u!82 &4716221909597274126
 AudioSource:
   m_ObjectHideFlags: 0

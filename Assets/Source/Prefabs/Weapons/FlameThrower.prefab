@@ -5029,11 +5029,9 @@ MonoBehaviour:
   _uiSpriteDeactive: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   FirePoint: {fileID: 3476638899428692577}
   ProjectilePrefab: {fileID: 0}
-  FireDelay: 0.05
+  FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 100
-  Damage: 30
-  MaxAttackDistance: 50
   _horisontalAngle: 30
   _verticalAngle: 90
   _flameParticle: {fileID: 7865432686051139408}

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Levels/Level Setting")]
 public class LevelSetting : ScriptableObject
 {
-    public string LevelName;
+    public int LevelNumber;
     public bool IsAvailable;
     public LevelElement[] LevelElements;
     public int LevelDurationSec;

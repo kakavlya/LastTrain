@@ -38,7 +38,7 @@ public class LevelsHandler : MonoBehaviour
         {
             for (int i = 0; i < _levelSettings.Length; i++)
             {
-                levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelName, false));
+                levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelNumber, false));
 
                 if (i == 0)
                 {
@@ -53,7 +53,7 @@ public class LevelsHandler : MonoBehaviour
         {
             foreach (var level in levelsAvailability)
             {
-                if (setting.LevelName == level.Name)
+                if (setting.LevelNumber == level.LevelNumber)
                 {
                     setting.IsAvailable = level.IsAvailable;
                 }
@@ -69,11 +69,11 @@ public class LevelsHandler : MonoBehaviour
         {
             GameObject objectButton = Instantiate(_buttonPrefab, _contentButtonsTransform);
             TextMeshProUGUI buttonText = objectButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = _levelSettings[i].LevelName;
+            buttonText.text = _levelSettings[i].LevelNumber.ToString();
             Button button = objectButton.GetComponent<Button>();
 
             LevelAvailability levelAvail = YG2.saves.LevelsAvailability.Find(
-                level => level.Name == _levelSettings[i].LevelName);
+                level => level.LevelNumber == _levelSettings[i].LevelNumber);
 
             bool isAvailable = levelAvail != null && levelAvail.IsAvailable;
 
@@ -121,6 +121,6 @@ public class LevelsHandler : MonoBehaviour
 
     private void ShowCurrentLevel(LevelSetting levelSetting)
     {
-        _textCurrentLevel.text = levelSetting.LevelName;
+        _textCurrentLevel.text = levelSetting.LevelNumber.ToString();
     }
 }

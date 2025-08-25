@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4255f7018f2ed47802c6527e39f4e1, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  LevelName: Level 2
-  IsAvailable: 1
+  LevelNumber: 2
+  IsAvailable: 0
   LevelElements:
   - {fileID: 4060652997760026388, guid: 1b4642b2bde56ae48bd6060f240db4a2, type: 3}
   - {fileID: 6321519914991541713, guid: b08fa6432741d5043aaacbdc9edd64bd, type: 3}

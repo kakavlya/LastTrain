@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 117,
+    "idSave": 165,
     "WeaponsProgress": [
         {
             "WeaponId": "SubmachineGun",
@@ -70,7 +70,7 @@
         "HealthLevel": 0,
         "SlotsLevel": 0
     },
-    "Coins": 1010,
+    "Coins": 1000,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
@@ -79,15 +79,15 @@
         ""
     ],
     "PlayerInventorySlots": [
-        ""
+        "Пистолет-пулемет"
     ],
     "LevelsAvailability": [
         {
-            "Name": "Level 1",
+            "LevelNumber": 1,
             "IsAvailable": true
         },
         {
-            "Name": "Level 2",
+            "LevelNumber": 2,
             "IsAvailable": false
         }
     ],

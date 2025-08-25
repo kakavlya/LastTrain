@@ -52,6 +52,6 @@ public class ProgressHandler : MonoBehaviour
 
         _sumLevels += trainProgress.GetSumLevels();
         LevelChanged?.Invoke();
-        _sumLevelsText.text = $"Level: {_sumLevels.ToString()}";
+        _sumLevelsText.text = _sumLevels.ToString();
     }
 }

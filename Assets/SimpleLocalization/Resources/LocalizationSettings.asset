@@ -17,7 +17,7 @@ MonoBehaviour:
   - Name: UpgradeNames
     Id: 0
     TextAsset: {fileID: 4900000, guid: 281bad9c3eb449c428e9c94099adc1a0, type: 3}
-  - Name: "\u041B\u0438\u0441\u04422"
-    Id: 1847964206
-    TextAsset: {fileID: 0}
+  - Name: Characteristics
+    Id: 1574858259
+    TextAsset: {fileID: 4900000, guid: 622be1498b070d7489b8e02f1a9ee54d, type: 3}
   SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

@@ -46,7 +46,7 @@ public class DetailsPanel : MonoBehaviour
         foreach (var stat in _upgradeConfig.StatConfigs)
         {
             var row = Instantiate(_statRowPrefab, _statsContainer);
-            row.Init(stat.StatType, _upgradeConfig, _progress, Upgrade);
+            row.Init(stat, _upgradeConfig, _progress, Upgrade);
             _statRows.Add(row);
         }
 

@@ -78,7 +78,7 @@ public class LevelProgress : MonoBehaviour
                 var nextLevel = levelsArray[i + 1];
                 nextLevel.IsAvailable = true;
 
-                var savedLevel = YG2.saves.LevelsAvailability.Find(level => level.Name == nextLevel.LevelName);
+                var savedLevel = YG2.saves.LevelsAvailability.Find(level => level.LevelNumber == nextLevel.LevelNumber);
 
                 if (savedLevel != null)
                 {
