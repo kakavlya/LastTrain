@@ -9,7 +9,8 @@ public class UIStateMachineMenu : MonoBehaviour
         Settings,
         Level,
         Weapon,
-        Shop
+        Shop,
+        Leaderboard
     }
 
     [SerializeField] private PlayHandler _playHandler;
@@ -19,12 +20,14 @@ public class UIStateMachineMenu : MonoBehaviour
     [SerializeField] private GameObject _choseLevelScreen;
     [SerializeField] private GameObject _choseWeaponScreen;
     [SerializeField] private GameObject _shopScreen;
+    [SerializeField] private GameObject _leadeboardScreen;
 
     [Header("Buttons")]
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _choseLevelButton;
     [SerializeField] private Button _choseWeaponButton;
     [SerializeField] private Button _shopButton;
+    [SerializeField] private Button _leaderBoardButton;
     [SerializeField] private Button[] _returnOnMainButtons;
 
     private void Awake()
@@ -36,6 +39,7 @@ public class UIStateMachineMenu : MonoBehaviour
         _choseLevelButton.onClick.AddListener(OnLevelChoseButton);
         _choseWeaponButton.onClick.AddListener(OnWeaponChoseButton);
         _shopButton.onClick.AddListener(OnShopButton);
+        _leaderBoardButton.onClick.AddListener(OnLeaderboardButton);
     }
 
     private void SwitchState(UIState state)
@@ -55,8 +59,13 @@ public class UIStateMachineMenu : MonoBehaviour
             case UIState.Weapon:
                 _choseWeaponScreen.SetActive(true);
                 break;
+
             case UIState.Shop:
                 _shopScreen.SetActive(true);
+                break;
+
+            case UIState.Leaderboard:
+                _leadeboardScreen.SetActive(true);
                 break;
         }
     }
@@ -81,12 +90,18 @@ public class UIStateMachineMenu : MonoBehaviour
         SwitchState(UIState.Shop);
     }
 
+    private void OnLeaderboardButton()
+    {
+        SwitchState(UIState.Leaderboard);
+    }
+
     private void OnReturnButton()
     {
         _settingsScreen.SetActive(false);
         _choseLevelScreen.SetActive(false);
         _choseWeaponScreen.SetActive(false);
         _shopScreen.SetActive(false);
+        _leadeboardScreen.SetActive(false);
         _settingsButton.gameObject.SetActive(true);
         _choseLevelButton.gameObject.SetActive(true);
         _choseWeaponButton.gameObject.SetActive(true);
@@ -104,5 +119,6 @@ public class UIStateMachineMenu : MonoBehaviour
         _choseLevelButton.gameObject.SetActive(false);
         _choseWeaponButton.gameObject.SetActive(false);
         _shopButton.gameObject.SetActive(false);
+        _leadeboardScreen.SetActive(false);
     }
 }

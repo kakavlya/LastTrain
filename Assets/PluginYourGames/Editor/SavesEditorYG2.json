@@ -7,13 +7,13 @@
         false,
         false
     ],
-    "idSave": 57,
+    "idSave": 86,
     "WeaponsProgress": [
         {
             "WeaponId": "Rifle",
             "DamageLevel": 0,
             "RangeLevel": 0,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "WeaponId": "MachineGun",
@@ -71,13 +71,15 @@
         "SlotsLevel": 0
     },
     "Coins": 0,
-    "EffectsVolume": 0.47516903281211855,
-    "MusicVolume": 0.0,
+    "EffectsVolume": 0.5,
+    "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
-    "InventorySlots": [],
-    "PlayerInventorySlots": [
+    "InventorySlots": [
         ""
+    ],
+    "PlayerInventorySlots": [
+        "Rifle"
     ],
     "LevelsAvailability": [
         {
@@ -86,10 +88,10 @@
         },
         {
             "Name": "Level 2",
-            "IsAvailable": false
+            "IsAvailable": true
         }
     ],
     "IsDoneGameplayTraining": true,
-    "IsDoneMenuTraining": false,
-    "TrainingState": 1
+    "IsDoneMenuTraining": true,
+    "TrainingState": 10
 }
