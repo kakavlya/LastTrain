@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63817d93022759543b57e795c78efe11, type: 3}
+  m_Name: LocalizationSettings
+  m_EditorClassIdentifier: 
+  TableId: 11_N-7NMoFFkM-QGBzo37Me4cEeqAt7qO9D1ao1KJm_k
+  Sheets:
+  - Name: UpgradeNames
+    Id: 0
+    TextAsset: {fileID: 4900000, guid: 281bad9c3eb449c428e9c94099adc1a0, type: 3}
+  - Name: "\u041B\u0438\u0441\u04422"
+    Id: 1847964206
+    TextAsset: {fileID: 0}
+  SaveFolder: {fileID: 102900000, guid: c392831e85f928548b8494fefd912562, type: 3}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GrenadeLauncherUpgradeConfig
   m_EditorClassIdentifier: 
   _name: Grenade Launcher
+  _localizationKey: UpgradeName.GrenadeLauncher
   _statConfigs:
   - StatType: 0
     Curve:

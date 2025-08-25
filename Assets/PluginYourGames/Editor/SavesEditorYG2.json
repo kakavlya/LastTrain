@@ -7,10 +7,10 @@
         false,
         false
     ],
-    "idSave": 86,
+    "idSave": 117,
     "WeaponsProgress": [
         {
-            "WeaponId": "Rifle",
+            "WeaponId": "SubmachineGun",
             "DamageLevel": 0,
             "RangeLevel": 0,
             "IsAvailable": true
@@ -48,7 +48,7 @@
     ],
     "TrainingWeaponsProgress": [
         {
-            "WeaponId": "Rifle",
+            "WeaponId": "SubmachineGun",
             "DamageLevel": 5,
             "RangeLevel": 5,
             "IsAvailable": false
@@ -70,7 +70,7 @@
         "HealthLevel": 0,
         "SlotsLevel": 0
     },
-    "Coins": 0,
+    "Coins": 1010,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
@@ -79,7 +79,7 @@
         ""
     ],
     "PlayerInventorySlots": [
-        "Rifle"
+        ""
     ],
     "LevelsAvailability": [
         {
@@ -88,7 +88,7 @@
         },
         {
             "Name": "Level 2",
-            "IsAvailable": true
+            "IsAvailable": false
         }
     ],
     "IsDoneGameplayTraining": true,

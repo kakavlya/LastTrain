@@ -1,16 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.SimpleLocalization.Scripts;
 using UnityEngine;
 
 public abstract class UpgradeConfig : ScriptableObject
 {
     [SerializeField] private string _name;
+    [SerializeField] private string _localizationKey;
     [SerializeField] private StatConfig[] _statConfigs;
 
     public Sprite Icon;
 
-    public string Name =>
-    string.IsNullOrWhiteSpace(_name) ? name : _name;
+    public string Name
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(_localizationKey) && LocalizationManager.HasKey(_localizationKey))
+            {
+                return LocalizationManager.Localize(_localizationKey);
+            }
+
+            return string.IsNullOrWhiteSpace(_name) ? name : _name;
+        }
+    }
 
     public StatConfig[] StatConfigs => _statConfigs;
 

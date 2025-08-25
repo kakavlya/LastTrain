@@ -21,14 +21,14 @@ namespace YG
 
         public SavesYG()
         {
-            WeaponsProgress.Add(new WeaponProgress("Rifle", 0));
+            WeaponsProgress.Add(new WeaponProgress("SubmachineGun", 0));
             WeaponsProgress.Add(new WeaponProgress("MachineGun", 0));
             WeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 0));
             WeaponsProgress.Add(new WeaponProgress("Flamethrower", 0));
             WeaponsProgress.Add(new WeaponProgress("Crossbow", 0));
             WeaponsProgress.Add(new WeaponProgress("Shotgun", 0));
 
-            TrainingWeaponsProgress.Add(new WeaponProgress("Rifle", 5));
+            TrainingWeaponsProgress.Add(new WeaponProgress("SubmachineGun", 5));
             TrainingWeaponsProgress.Add(new WeaponProgress("MachineGun", 5));
             TrainingWeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 5));
 

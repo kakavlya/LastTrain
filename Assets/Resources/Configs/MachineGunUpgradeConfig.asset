@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MachineGunUpgradeConfig
   m_EditorClassIdentifier: 
   _name: Machine Gun
+  _localizationKey: UpgradeName.MachineGun
   _statConfigs:
   - StatType: 0
     Curve:

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75b350ef2f796c14292e3bff75040d7e, type: 3}
-  m_Name: RifleUpgrade
+  m_Name: SubmachineGunUpgradeConfig
   m_EditorClassIdentifier: 
-  _name: Rifle
+  _name: Submachine Gun
+  _localizationKey: UpgradeName.SubmachineGun
   _statConfigs:
   - StatType: 0
     Curve:
@@ -72,7 +73,7 @@ MonoBehaviour:
     Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
     MinValue: 100
     MaxValue: 250
-  Icon: {fileID: 21300000, guid: 15e1b7e738007d940a100442c97d5ebd, type: 3}
-  _weaponId: Rifle
+  Icon: {fileID: 21300000, guid: 56935beba2aeda645b598ef6cbc9c8ce, type: 3}
+  _weaponId: SubmachineGun
   WeaponPrefab: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}
   UnblockingCost: 0
