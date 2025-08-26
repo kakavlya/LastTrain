@@ -7,12 +7,12 @@
         false,
         false
     ],
-    "idSave": 165,
+    "idSave": 375,
     "WeaponsProgress": [
         {
             "WeaponId": "SubmachineGun",
-            "DamageLevel": 0,
-            "RangeLevel": 0,
+            "DamageLevel": 6,
+            "RangeLevel": 3,
             "IsAvailable": true
         },
         {
@@ -67,19 +67,20 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 0,
-        "SlotsLevel": 0
+        "HealthLevel": 2,
+        "SlotsLevel": 1
     },
-    "Coins": 1000,
-    "EffectsVolume": 0.5,
-    "MusicVolume": 0.5,
+    "Coins": 1170,
+    "EffectsVolume": 0.05071082338690758,
+    "MusicVolume": 0.05630352348089218,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет"
+        "Пистолет-пулемет",
+        ""
     ],
     "LevelsAvailability": [
         {
@@ -88,7 +89,7 @@
         },
         {
             "LevelNumber": 2,
-            "IsAvailable": false
+            "IsAvailable": true
         }
     ],
     "IsDoneGameplayTraining": true,

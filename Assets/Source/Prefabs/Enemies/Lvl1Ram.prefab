@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975596389ebec644cb925a7f905fc815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visualRoot: {fileID: 0}
+  _visualRoot: {fileID: 6264318018855306405}
   _massFactor: 1
   _swayAmount: 0.2
   _swaySpeed: 1.5
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: -3354779207204422643}
   - component: {fileID: -3917126084312668231}
   m_Layer: 3
-  m_Name: RamEnemy
+  m_Name: Lvl1Ram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,10 +177,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253c9c908ab8abf4d8c8867dadddeaec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 150
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  _maxHealth: 150
 --- !u!65 &7358646837193593047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -214,8 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24995e0fc73b6b244aaf7cc7aea2d737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCollider: {fileID: 7358646837193593047}
-  checkRadius: 20
+  _accel: 25
+  _decel: 45
+  _impactSlowFactor: 0.25
 --- !u!65 &-3354779207204422643
 BoxCollider:
   m_ObjectHideFlags: 0

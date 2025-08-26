@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
+  m_Name: Lvl3Shooter
+  m_EditorClassIdentifier: 
+  Reward: 30
+  Health: 100
+  moveSpeed: 58
+  turnSpeed: 110
+  attackSpeedFactorMin: 0.65
+  attackSpeedFactorMax: 0.95
+  speedChange: 8
+  minDistanceFromSurface: 13
+  maxDistanceFromSurface: 35
+  orbitSpeedDegrees: 2
+  checkRadius: 16
+  changeDirectionEvery: {x: 4, y: 7}
+  shootingDistance: 60
+  projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
+  fireInterval: 1.8
+  projectileSpeed: 110
+  projectileDamage: 20
