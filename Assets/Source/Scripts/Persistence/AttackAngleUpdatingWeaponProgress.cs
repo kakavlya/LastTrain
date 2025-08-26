@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public class AttackAngleUpdatingWeaponProgress : WeaponProgress
 {
     public int AttackAngleLevel;

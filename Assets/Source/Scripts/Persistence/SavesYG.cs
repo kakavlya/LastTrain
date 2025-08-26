@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace YG
 {
     public partial class SavesYG
     {
+        [SerializeReference]
         public List<WeaponProgress> WeaponsProgress = new List<WeaponProgress>();
+
         public List<WeaponProgress> TrainingWeaponsProgress = new List<WeaponProgress>();
         public TrainProgress TrainProgress = new TrainProgress(0);
         public int Coins;

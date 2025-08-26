@@ -1,8 +1,8 @@
 Key,English,Turkish,Russian
 Characteristic.Damage,Damage,Zarar,Урон
-Characteristic.Range,Range,Menzil,Радиус
+Characteristic.Range,Range,Aralık,Дальность
 Characteristic.Health,Health,Sağlık,Здоровье
 Characteristic.WeaponSlots,Weapon slots,Silah yuvaları,Слоты оружия
 Characteristic.AttackSpeed,Angle speed,Saldırı hızı,Скорость атаки
-Characteristic.AttackAngle,Degree of attack,Saldırı derecesi,Градус атаки
-Characteristic.AoeDamage,Explosion damage,Patlama hasarı,Урон от взрыва
+Characteristic.AttackAngle,Attack radius,Saldırı yarıçapı,Радиус атаки
+Characteristic.AoeDamage,Area damage,Alana göre hasar,Урон по площади

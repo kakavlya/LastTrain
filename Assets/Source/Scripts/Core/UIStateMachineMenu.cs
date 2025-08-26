@@ -106,6 +106,7 @@ public class UIStateMachineMenu : MonoBehaviour
         _choseLevelButton.gameObject.SetActive(true);
         _choseWeaponButton.gameObject.SetActive(true);
         _shopButton.gameObject.SetActive(true);
+        _leaderBoardButton.gameObject.SetActive(true);
 
     }
 
@@ -115,10 +116,11 @@ public class UIStateMachineMenu : MonoBehaviour
         _choseLevelScreen.SetActive(false);
         _choseWeaponScreen.SetActive(false);
         _shopScreen.SetActive(false) ;
+        _leadeboardScreen.SetActive(false);
         _settingsButton.gameObject.SetActive(false);
         _choseLevelButton.gameObject.SetActive(false);
         _choseWeaponButton.gameObject.SetActive(false);
         _shopButton.gameObject.SetActive(false);
-        _leadeboardScreen.SetActive(false);
+        _leaderBoardButton.gameObject.SetActive(false);
     }
 }

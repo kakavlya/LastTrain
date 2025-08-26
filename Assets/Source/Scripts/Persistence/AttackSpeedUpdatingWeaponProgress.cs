@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public class AttackSpeedUpdatingWeaponProgress : WeaponProgress
 {
     public int AttackSpeedLevel;

@@ -1,3 +1,6 @@
+using System;
+
+[Serializable]
 public class AoeDamageUpdatingWeaponProgress : WeaponProgress
 {
     public int AoeDamageLevel;
