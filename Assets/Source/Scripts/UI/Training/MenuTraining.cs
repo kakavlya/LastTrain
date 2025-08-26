@@ -89,7 +89,7 @@ public class MenuTraining : MonoBehaviour
                 _shopScreen.SetActive(true);
                 _shopLockerScreen.SetActive(false);
                 _shopUnlockTrainingScreen.SetActive(true);
-                SignUpShopItemsUI();
+                SignUpShopItemsUILock();
                 break;
 
             case MenuTrainingState.ShopClose:
@@ -147,6 +147,7 @@ public class MenuTraining : MonoBehaviour
                 _startLevelButton.interactable = true;
                 _rewardButton.interactable = true;
                 _choseLevelCloseButton.onClick.RemoveListener(OnChoseLevelClose);
+                UnlockAllUpgradeButtons();
                 YG2.saves.IsDoneMenuTraining = true;
                 break;
         }
@@ -230,7 +231,7 @@ public class MenuTraining : MonoBehaviour
         _choseLevelCloseScreen.SetActive(false);
     }
 
-    private void SignUpShopItemsUI()
+    private void SignUpShopItemsUILock()
     {
         _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>();
 
@@ -242,6 +243,19 @@ public class MenuTraining : MonoBehaviour
 
             if (upgradeButton != null)
                 upgradeButton.interactable = false;
+        }
+    }
+
+    private void UnlockAllUpgradeButtons()
+    {
+        _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>();
+
+        foreach (var shopItem in _shopItems)
+        {
+            var upgradeButton = shopItem.GetComponentInChildren<Button>(true);
+
+            if (upgradeButton != null)
+                upgradeButton.interactable = true;
         }
     }
 

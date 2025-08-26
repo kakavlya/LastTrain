@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 204,
+    "idSave": 119,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -50,21 +50,18 @@
     ],
     "TrainProgress": {
         "HealthLevel": 0,
-        "SlotsLevel": 1
+        "SlotsLevel": 0
     },
-    "Coins": 380,
+    "Coins": 10,
     "EffectsVolume": 0.5,
-    "MusicVolume": 0.2572370767593384,
+    "MusicVolume": 0.16945049166679383,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
-        "Пистолет-пулемет",
-        "",
         ""
     ],
     "PlayerInventorySlots": [
-        "Огнемёт",
-        "Гранатомет"
+        "Пистолет-пулемет"
     ],
     "LevelsAvailability": [
         {
@@ -73,7 +70,7 @@
         },
         {
             "LevelNumber": 2,
-            "IsAvailable": true
+            "IsAvailable": false
         }
     ],
     "IsDoneGameplayTraining": true,
@@ -94,7 +91,7 @@
                     "DamageLevel": 0,
                     "RangeLevel": 0,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 5
+                    "AttackSpeedLevel": 0
                 }
             },
             {
@@ -123,7 +120,7 @@
                     "WeaponId": "GrenadeLauncher",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": true,
+                    "IsAvailable": false,
                     "AoeDamageLevel": 0
                 }
             },
@@ -138,8 +135,8 @@
                     "WeaponId": "Flamethrower",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": true,
-                    "AttackAngleLevel": 1
+                    "IsAvailable": false,
+                    "AttackAngleLevel": 0
                 }
             },
             {
