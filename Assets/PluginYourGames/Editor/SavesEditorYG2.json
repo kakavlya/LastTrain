@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 165,
+    "idSave": 187,
     "WeaponsProgress": [
         {
             "WeaponId": "SubmachineGun",
@@ -25,13 +25,13 @@
             "WeaponId": "GrenadeLauncher",
             "DamageLevel": 0,
             "RangeLevel": 0,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "WeaponId": "Flamethrower",
             "DamageLevel": 0,
             "RangeLevel": 0,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "WeaponId": "Crossbow",
@@ -43,7 +43,7 @@
             "WeaponId": "Shotgun",
             "DamageLevel": 0,
             "RangeLevel": 0,
-            "IsAvailable": false
+            "IsAvailable": true
         }
     ],
     "TrainingWeaponsProgress": [
@@ -70,16 +70,19 @@
         "HealthLevel": 0,
         "SlotsLevel": 0
     },
-    "Coins": 1000,
+    "Coins": 560,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
+        "Пистолет-пулемет",
+        "Огнемёт",
+        "Дробовик",
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет"
+        "Гранатомет"
     ],
     "LevelsAvailability": [
         {

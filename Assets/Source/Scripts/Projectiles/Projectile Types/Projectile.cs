@@ -89,7 +89,7 @@ public class Projectile : MonoBehaviour
         float damage,
         float maxAttackDistance,
         bool usePooling,
-        int aoeDamage = 0,
+        float aoeDamage = 0,
         float aoeRange = 0)
     {
         transform.position = position;

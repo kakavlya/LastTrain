@@ -6,6 +6,15 @@ public class Shotgun : Weapon
     [SerializeField] private int _bulletsInShot = 5;
     [SerializeField] private float _spreadAngle = 30;
 
+    private float _currentSpreadAngle;
+
+    public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
+    {
+        base.Init(damage, range, fireDelay, fireAngle, aoeDamage);
+
+        _currentSpreadAngle = fireAngle ?? _spreadAngle;
+    }
+
     protected override void OnWeaponFire()
     {
         for (int i = 0; i < _bulletsInShot; i++)
@@ -19,7 +28,7 @@ public class Shotgun : Weapon
 
     private Vector3 GetRandomSpread()
     {
-        float horizontalSpread = Random.Range(-_spreadAngle / 2, _spreadAngle / 2);
+        float horizontalSpread = Random.Range(-_currentSpreadAngle / 2, _currentSpreadAngle / 2);
         Quaternion spreadRotation = Quaternion.Euler(0, horizontalSpread, 0);
         return spreadRotation * Direction;
     }

@@ -146,17 +146,34 @@ public class WeaponsHandler : MonoBehaviour
             var config = weaponConfigs[i];
             WeaponProgress weaponProgress = weaponProgresses.Find(weapon => weapon.WeaponId == config.WeaponId);
 
-            if (weaponProgress == null)
-            {
-                weaponProgress = new WeaponProgress(config.WeaponId, 0);
-                weaponProgresses.Add(weaponProgress);
-            }
-
             float damage = weaponConfigs[i].GetStat(StatType.Damage, weaponProgress.DamageLevel);
             float range = weaponConfigs[i].GetStat(StatType.Range, weaponProgress.RangeLevel);
 
+            float? fireDelay = null;
+            float? fireAngle = null;
+            float? aoeDamage = null;
+
+            if (weaponProgress is AttackSpeedUpdatingWeaponProgress attackSpeedProgress &&
+                config.TryFindStat(StatType.AttackSpeed))
+            {
+                fireDelay = 1f / weaponConfigs[i].GetStat(StatType.AttackSpeed, attackSpeedProgress.AttackSpeedLevel);
+            }
+
+            if (weaponProgress is AttackAngleUpdatingWeaponProgress attackAngleProgress &&
+                config.TryFindStat(StatType.AttackAngle))
+            {
+                fireAngle = weaponConfigs[i].GetStat(StatType.AttackAngle, attackAngleProgress.AttackAngleLevel);
+            }
+
+            if (weaponProgress is AoeDamageUpdatingWeaponProgress aeoDamageProgress &&
+                config.TryFindStat(StatType.AoeDamage))
+            {
+                aoeDamage = weaponConfigs[i].GetStat(StatType.AoeDamage, aeoDamageProgress.AoeDamageLevel);
+            }
+
             Weapon weaponInstance = Instantiate(weaponConfigs[i].WeaponPrefab, transform);
-            weaponInstance.Init(damage, range);
+
+            weaponInstance.Init(damage, range, fireDelay, fireAngle, aoeDamage);
             weaponInstance.SetPrefabReference(weaponConfigs[i].WeaponPrefab);
 
             weaponInstance.gameObject.SetActive(false);

@@ -4,7 +4,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 public class AoeProjectile : Projectile
 {
     private float _aoeRange;
-    private int _aoeDamage;
+    private float _aoeDamage;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -35,7 +35,7 @@ public class AoeProjectile : Projectile
         float damage,
         float maxAttackDistance,
         bool usePooling,
-        int aoeDamage = 0,
+        float aoeDamage = 0,
         float aoeRange = 0)
     {
         base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);

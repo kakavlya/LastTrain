@@ -45,6 +45,7 @@ MonoBehaviour:
     Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000b0040000
     MinValue: 10
     MaxValue: 50
+    IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
     Curve:
@@ -75,6 +76,38 @@ MonoBehaviour:
     Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
     MinValue: 80
     MaxValue: 250
+    IsShowFractionalValue: 0
+  - LocalizationKey: Characteristic.AttackSpeed
+    StatType: 2
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MaxLevel: 10
+    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+    MinValue: 1.4
+    MaxValue: 5
+    IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: 56935beba2aeda645b598ef6cbc9c8ce, type: 3}
   _weaponId: SubmachineGun
   WeaponPrefab: {fileID: 8265597460732089849, guid: 218ceb3e6683ae5409fc5a873e21d0d0, type: 3}

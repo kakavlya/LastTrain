@@ -17,6 +17,7 @@ public class StatConfig
 
     public float MinValue;
     public float MaxValue;
+    public bool IsShowFractionalValue;
 
     public string Name
     {

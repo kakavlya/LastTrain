@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.SimpleLocalization.Scripts;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public abstract class UpgradeConfig : ScriptableObject
@@ -82,12 +84,20 @@ public abstract class UpgradeConfig : ScriptableObject
 
         return null;
     }
+
+    public bool TryFindStat(StatType statType)
+    {
+        return Array.Exists(_statConfigs, s => s.StatType == statType);
+    }
 }
 
 public enum StatType
 {
     Damage,
     Range,
+    AttackSpeed,
+    AttackAngle,
+    AoeDamage,
     Health,
     Slots
 }

@@ -16,9 +16,11 @@ public class StatRow : MonoBehaviour
     private StatType _statType;
     private UpgradeConfig _upgradeConfig;
     private BaseProgress _progress;
+    private bool _isShowFractionalValue;
 
     public void Init(StatConfig statConfig, UpgradeConfig upgradeConfig, BaseProgress progress, Action<StatType> onUpgrade)
     {
+        _isShowFractionalValue = statConfig.IsShowFractionalValue;
         _statType = statConfig.StatType;
         _upgradeConfig = upgradeConfig;
         _progress = progress;
@@ -40,7 +42,17 @@ public class StatRow : MonoBehaviour
         _slider.value = ratio;
 
         _level.text = $"{currentLevel}/{maxLevel}";
-        _amount.text = _upgradeConfig.GetStat(_statType, currentLevel).ToString("F0");
+
+        var statValue = _upgradeConfig.GetStat(_statType, currentLevel);
+        
+        if (_isShowFractionalValue)
+        {
+            _amount.text = statValue.ToString("F1");
+        }
+        else
+        {
+            _amount.text = statValue.ToString("F0");
+        }
 
         bool canUpgrade = currentLevel < maxLevel;
         _cost.text = canUpgrade ? _upgradeConfig.GetCost(_statType, currentLevel).ToString() : "-";

@@ -21,16 +21,16 @@ namespace YG
 
         public SavesYG()
         {
-            WeaponsProgress.Add(new WeaponProgress("SubmachineGun", 0));
-            WeaponsProgress.Add(new WeaponProgress("MachineGun", 0));
-            WeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 0));
-            WeaponsProgress.Add(new WeaponProgress("Flamethrower", 0));
-            WeaponsProgress.Add(new WeaponProgress("Crossbow", 0));
-            WeaponsProgress.Add(new WeaponProgress("Shotgun", 0));
+            WeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("SubmachineGun", 0));
+            WeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("MachineGun", 0));
+            WeaponsProgress.Add(new AoeDamageUpdatingWeaponProgress("GrenadeLauncher", 0));
+            WeaponsProgress.Add(new AttackAngleUpdatingWeaponProgress("Flamethrower", 0));
+            WeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("Crossbow", 0));
+            WeaponsProgress.Add(new AttackAngleUpdatingWeaponProgress("Shotgun", 0));
 
-            TrainingWeaponsProgress.Add(new WeaponProgress("SubmachineGun", 5));
-            TrainingWeaponsProgress.Add(new WeaponProgress("MachineGun", 5));
-            TrainingWeaponsProgress.Add(new WeaponProgress("GrenadeLauncher", 5));
+            TrainingWeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("SubmachineGun", 5));
+            TrainingWeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("MachineGun", 5));
+            TrainingWeaponsProgress.Add(new AoeDamageUpdatingWeaponProgress("GrenadeLauncher", 5));
 
             Coins = 0;
             EffectsVolume = 0.5f;
