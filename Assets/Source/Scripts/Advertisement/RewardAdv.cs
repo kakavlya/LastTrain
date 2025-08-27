@@ -30,7 +30,11 @@ public class RewardAdv : MonoBehaviour
         YG2.RewardedAdvShow(_rewardID, () =>
         {
             if (_rewardID == "1")
+            {
                 CoinsHandler.Instance.AddCoins(_rewardCount);
+                _rewardButton.interactable = false;
+            }
+
         });
     }
 

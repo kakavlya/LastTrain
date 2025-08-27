@@ -15,8 +15,20 @@ public class WeaponProgress : BaseProgress
         RangeLevel = defaultStatLevel;
     }
 
-    public override int GetLevel(StatType stat) =>
-        stat == StatType.Damage ? DamageLevel : RangeLevel;
+    public override int GetLevel(StatType stat)
+    {
+        if (stat == StatType.Damage)
+        {
+            return DamageLevel;
+        }
+        else if
+            (stat == StatType.Range)
+        {
+            return RangeLevel;
+        }
+
+        return 0;
+    }
 
     public override int GetSumLevels()
     {
@@ -25,7 +37,13 @@ public class WeaponProgress : BaseProgress
 
     public override void Increment(StatType stat)
     {
-        if (stat == StatType.Damage) DamageLevel++;
-        else RangeLevel++;
+        if (stat == StatType.Damage)
+        {
+            DamageLevel++;
+        }
+        else if (stat == StatType.Range)
+        {
+            RangeLevel++;
+        }
     }
 }

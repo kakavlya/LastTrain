@@ -45,6 +45,7 @@ MonoBehaviour:
     Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
     MinValue: 25
     MaxValue: 100
+    IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
     Curve:
@@ -75,6 +76,38 @@ MonoBehaviour:
     Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
     MinValue: 150
     MaxValue: 450
+    IsShowFractionalValue: 1
+  - LocalizationKey: Characteristic.AttackSpeed
+    StatType: 2
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MaxLevel: 10
+    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+    MinValue: 1.4
+    MaxValue: 5
+    IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
   _weaponId: Crossbow
   WeaponPrefab: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}

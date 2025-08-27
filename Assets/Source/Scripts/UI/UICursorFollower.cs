@@ -9,11 +9,18 @@ public class UICursorFollower : MonoBehaviour
     public void Init()
     {
         _rectTransform = GetComponent<RectTransform>();
+        Cursor.visible = false;
     }
 
     private void Update()
     {
         Vector2 mousePosition = Input.mousePosition;
         _rectTransform.position = mousePosition;
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

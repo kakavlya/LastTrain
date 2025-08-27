@@ -12771,6 +12771,18 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 874883534740274514, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 874883534740274514, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 874883534740274514, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 874883534740274514, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -12818,6 +12830,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9066092495799479122, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bc7aa09b981539e478d6310dfb5b990b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13114,7 +13130,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1781950844}
-  - {fileID: 888596580}
   - {fileID: 764338702}
   - {fileID: 1954948722}
   - {fileID: 1733305029}
@@ -13129,6 +13144,7 @@ RectTransform:
   - {fileID: 153204064}
   - {fileID: 1626175456}
   - {fileID: 636900846}
+  - {fileID: 888596580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

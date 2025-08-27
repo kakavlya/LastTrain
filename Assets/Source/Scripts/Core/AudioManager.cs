@@ -64,11 +64,13 @@ public class AudioManager : MonoBehaviour
     {
         _effectsAudioSource.volume = value;
         YG2.saves.EffectsVolume = value;
+        YG2.SaveProgress();
     }
 
     public void ChangeMusicVolume(float value)
     {
         _musicAudioSource.volume = value;
         YG2.saves.MusicVolume = value;
+        YG2.SaveProgress();
     }
 }

@@ -16,8 +16,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected bool UsePooling = true;
     [SerializeField] protected float ProjectileSpeed = 100;
 
-
     private float _lastFireTime;
+    private float _currentFireDelay;
 
     protected GameObject Owner;
     protected float Damage;
@@ -32,11 +32,13 @@ public class Weapon : MonoBehaviour
     public Sprite UISpriteActive => _uiSpriteActive;
     public Sprite UISpriteDeactive => _uiSpriteDeactive;
 
-    public void Init(float damage, float range)
+    public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
     {
         Owner = gameObject;
         Damage = damage;
         Range = range;
+
+        _currentFireDelay = fireDelay ?? FireDelay;
     }
 
     public virtual bool GetIsLoopedFireSound() => false;
@@ -48,7 +50,7 @@ public class Weapon : MonoBehaviour
 
     private bool FirePossibleCalculate()
     {
-        if (Time.time - _lastFireTime < FireDelay)
+        if (Time.time - _lastFireTime < _currentFireDelay)
             return false;
 
         _lastFireTime = Time.time;
