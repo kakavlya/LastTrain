@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.Core;
 
 public class GameplayTraining : MonoBehaviour
 {

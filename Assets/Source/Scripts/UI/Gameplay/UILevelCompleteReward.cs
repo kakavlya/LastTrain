@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using LastTrain.Coins;
+using LastTrain.Data;
 
 public class UILevelCompleteReward : MonoBehaviour
 {

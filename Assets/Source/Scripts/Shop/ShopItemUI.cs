@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using LastTrain.Coins;
 
 public class ShopItemUI : MonoBehaviour
 {

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using LastTrain.Coins;
 
 public class UIReward : MonoBehaviour
 {

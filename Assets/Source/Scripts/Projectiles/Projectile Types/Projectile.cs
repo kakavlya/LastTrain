@@ -1,7 +1,5 @@
 using System;
-using Assets.Source.Scripts.Core;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Projectile : MonoBehaviour
 {

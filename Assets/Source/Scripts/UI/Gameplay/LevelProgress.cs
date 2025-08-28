@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
+using LastTrain.Coins;
+using LastTrain.Data;
 
 public class LevelProgress : MonoBehaviour
 {

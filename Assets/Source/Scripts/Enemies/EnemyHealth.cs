@@ -1,6 +1,7 @@
-﻿using Assets.Source.Scripts.Core;
-using Assets.Source.Scripts.Enemies;
+﻿using Assets.Source.Scripts.Enemies;
 using UnityEngine;
+using LastTrain.Coins;
+using LastTrain.Core;
 
 public class EnemyHealth : HealthBase
 {

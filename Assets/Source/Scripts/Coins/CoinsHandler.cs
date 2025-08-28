@@ -2,64 +2,65 @@ using System;
 using UnityEngine;
 using YG;
 
-public class CoinsHandler : MonoBehaviour
+namespace LastTrain.Coins
 {
-    private int _coinsCount;
-    private bool _isTraining;
-
-    public static CoinsHandler Instance { get; private set; }
-
-    public event Action<int> CoinsChanged;
-    public event Action<int> Added;
-    public event Action<int> Removed;
-
-    public int CoinsCount
+    public class CoinsHandler : MonoBehaviour
     {
-        get => _coinsCount;
-        private set
+        public static CoinsHandler Instance { get; private set; }
+
+        private int _coinsCount;
+        private bool _isTraining;
+
+        public event Action<int> CoinsChanged;
+        public event Action<int> Added;
+
+        public int CoinsCount
         {
-            if (_coinsCount != value)
+            get => _coinsCount;
+            private set
             {
-                _coinsCount = value;
-                CoinsChanged?.Invoke(_coinsCount);
+                if (_coinsCount != value)
+                {
+                    _coinsCount = value;
+                    CoinsChanged?.Invoke(_coinsCount);
+                }
             }
         }
-    }
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            CoinsCount = YG2.saves.Coins;
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        public void AddCoins(int addedCoins)
+        {
+            if (_isTraining)
+                return;
 
-        CoinsCount = YG2.saves.Coins;
-    }
+            CoinsCount += addedCoins;
+            YG2.saves.Coins += addedCoins;
+            Added?.Invoke(addedCoins);
+            YG2.SaveProgress();
+        }
 
-    public void AddCoins(int addedCoins)
-    {
-        if (_isTraining)
-            return;
+        public void RemoveCoins(int removedCoins)
+        {
+            CoinsCount -= removedCoins;
+            YG2.saves.Coins -= removedCoins;
+            YG2.SaveProgress();
+        }
 
-        CoinsCount += addedCoins;
-        YG2.saves.Coins += addedCoins;
-        Added?.Invoke(addedCoins);
-        YG2.SaveProgress();
-    }
-
-    public void RemoveCoins(int removedCoins)
-    {
-        CoinsCount -= removedCoins;
-        YG2.saves.Coins -= removedCoins;
-        YG2.SaveProgress();
-    }
-
-    public void SetTrainingStatus(bool isActive)
-    {
-        _isTraining = isActive;
+        public void SetTrainingStatus(bool isActive)
+        {
+            _isTraining = isActive;
+        }
     }
 }

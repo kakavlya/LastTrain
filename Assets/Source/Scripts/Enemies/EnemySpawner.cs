@@ -3,6 +3,7 @@ using System;
 using Level;
 using Player;
 using System.Collections.Generic;
+using LastTrain.Data;
 
 namespace Assets.Source.Scripts.Enemies
 {

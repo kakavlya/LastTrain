@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
+using LastTrain.Coins;
+using LastTrain.Data;
 
 public class TrainingHandler : MonoBehaviour
 {

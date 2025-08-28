@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 using YG;
 using LastTrain.Ammunition;
+using LastTrain.Data;
 
 public class WeaponsHandler : MonoBehaviour
 {

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using YG.LanguageLegacy;
+using LastTrain.Data;
 
 public class LevelsHandler : MonoBehaviour
 {

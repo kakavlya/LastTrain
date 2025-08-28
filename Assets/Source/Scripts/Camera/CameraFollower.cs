@@ -1,55 +1,51 @@
-using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 
-public class CameraFollower : MonoBehaviour
+namespace LastTrain.Camera
 {
-    [Header("Input Reference")]
-    [SerializeField] private PlayerInput _playerInput;
-
-    [Header("Target Settings")]
-    [SerializeField] private Transform _target;
-    [SerializeField] private Vector3 _targetOffset = new Vector3(0, 70f, -100f);
-
-    [Header("Camera Settings")]
-    [SerializeField] private float _distance = 100f;
-    [SerializeField] private float _rotationSpeed = 90f;
-    [SerializeField] private float _fixedPitch = 20f;
-
-    [Header("Smoothing")]
-    [SerializeField] private float _rotationSmoothing = 10f;
-
-    private float _rotationAngle;
-
-    private void Awake()
+    public class CameraFollower : MonoBehaviour
     {
-        _playerInput.Rotated += UpdateCameraPositionAndRotate;
-        InitializeCameraPosition();
-    }
+        [Header("Input Reference")]
+        [SerializeField] private PlayerInput _playerInput;
 
-    private void UpdateCameraPositionAndRotate(float rotateValue)
-    {
-        _rotationAngle += rotateValue * _rotationSpeed * Time.deltaTime;
+        [Header("Target Settings")]
+        [SerializeField] private Transform _target;
+        [SerializeField] private Vector3 _targetOffset = new Vector3(0, 70f, -100f);
 
-        Quaternion targetRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
-        Quaternion smoothRotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSmoothing * Time.deltaTime);
+        [Header("Camera Settings")]
+        [SerializeField] private float _distance = 100f;
+        [SerializeField] private float _rotationSpeed = 90f;
+        [SerializeField] private float _fixedPitch = 20f;
 
-        Vector3 offset = new Vector3(0, 0, -_distance);
-        Vector3 targetPosition = targetRotation * offset + _target.position + _targetOffset;
+        [Header("Smoothing")]
+        [SerializeField] private float _rotationSmoothing = 10f;
 
-        transform.rotation = smoothRotation;
-        transform.position = targetPosition;
-    }
+        private float _rotationAngle;
 
-    private void InitializeCameraPosition()
-    {
-        _rotationAngle = 0f;
+        private void Awake()
+        {
+            _playerInput.Rotated += UpdateCameraPositionAndRotate;
+            InitializeCameraPosition();
+        }
 
-        Quaternion initialRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
+        private void UpdateCameraPositionAndRotate(float rotateValue)
+        {
+            _rotationAngle += rotateValue * _rotationSpeed * Time.deltaTime;
+            Quaternion targetRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
+            Quaternion smoothRotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSmoothing * Time.deltaTime);
+            Vector3 offset = new Vector3(0, 0, -_distance);
+            Vector3 targetPosition = targetRotation * offset + _target.position + _targetOffset;
+            transform.rotation = smoothRotation;
+            transform.position = targetPosition;
+        }
 
-        Vector3 initialOffset = new Vector3(0, 0, -_distance);
-        Vector3 initialPosition = initialRotation * initialOffset + _target.position + _targetOffset;
-
-        transform.rotation = initialRotation;
-        transform.position = initialPosition;
+        private void InitializeCameraPosition()
+        {
+            _rotationAngle = 0f;
+            Quaternion initialRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
+            Vector3 initialOffset = new Vector3(0, 0, -_distance);
+            Vector3 initialPosition = initialRotation * initialOffset + _target.position + _targetOffset;
+            transform.rotation = initialRotation;
+            transform.position = initialPosition;
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Level;
 using UnityEngine;
 using YG;
+using LastTrain.Data;
 
 namespace LastTrain.Ammunition
 {

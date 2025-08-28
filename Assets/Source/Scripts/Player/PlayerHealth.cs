@@ -1,10 +1,10 @@
-﻿using Assets.Source.Scripts.Core;
-using System;
-using System.Collections;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using LastTrain.Core;
+using LastTrain.Data;
 
 public class PlayerHealth : HealthBase
 {

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using LastTrain.Coins;
 
 public class DetailsPanel : MonoBehaviour
 {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
+using LastTrain.Data;
 
 public class PlayerInventoryHandler : InventoryHandler
 {

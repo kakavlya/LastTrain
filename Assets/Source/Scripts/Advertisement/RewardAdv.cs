@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using LastTrain.Coins;
 
 namespace LastTrain.Advertisement
 {

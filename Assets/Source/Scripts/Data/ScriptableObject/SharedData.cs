@@ -1,20 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Shared Data")]
-public class SharedData : ScriptableObject
+namespace LastTrain.Data
 {
-    private LevelSetting[] _allLevels;
-
-    public LevelSetting LevelSetting;
-    public List<WeaponUpgradeConfig> WeaponConfigs = new List<WeaponUpgradeConfig>();
-    public TrainUpgradeConfig TrainUpgradeConfig;
-
-    public LevelSetting[] AllLevels => _allLevels;
-
-    public void SetAllLevels(LevelSetting[] levelSettings)
+    [CreateAssetMenu(menuName = "Data/Shared Data")]
+    public class SharedData : ScriptableObject
     {
-        _allLevels = levelSettings;
+        private LevelSetting[] _allLevels;
+
+        public LevelSetting LevelSetting;
+        public List<WeaponUpgradeConfig> WeaponConfigs = new List<WeaponUpgradeConfig>();
+        public TrainUpgradeConfig TrainUpgradeConfig;
+
+        public LevelSetting[] AllLevels => _allLevels;
+
+        public void SetAllLevels(LevelSetting[] levelSettings)
+        {
+            _allLevels = levelSettings;
+        }
     }
 }

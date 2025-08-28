@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
-using LastTrain.Ammunition;
+using LastTrain.Data;
 
 namespace Level
 {
