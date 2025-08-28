@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.Training;
 
 namespace LastTrain.Core
 {

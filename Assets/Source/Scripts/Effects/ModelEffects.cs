@@ -22,11 +22,6 @@ namespace LastTrain.Effects
         private Color[] _originalColors;
         private Material[] _materials;
 
-        public ModelEffects(GameObject hitVFX)
-        {
-            _hitVFX = hitVFX;
-        }
-
         private void Awake()
         {
             if (_renderersToFlash == null || _renderersToFlash.Length == 0)
@@ -56,7 +51,6 @@ namespace LastTrain.Effects
 
         public void PlayDeathFX()
         {
-            // TODO implement pooling
             var selectedVFX = GetRandomVFX(_deathVFXOptions);
             if (selectedVFX != null)
             {
@@ -71,13 +65,11 @@ namespace LastTrain.Effects
 
         private IEnumerator FlashEffect()
         {
-            // Включить вспышку
             for (int i = 0; i < _materials.Length; i++)
                 _materials[i].color = _flashColor;
 
             yield return new WaitForSeconds(_flashDuration);
 
-            // Вернуть цвет
             for (int i = 0; i < _materials.Length; i++)
                 _materials[i].color = _originalColors[i];
         }

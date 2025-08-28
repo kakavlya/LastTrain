@@ -1,39 +1,42 @@
 using System;
 
-[Serializable]
-public class AttackSpeedUpdatingWeaponProgress : WeaponProgress
+namespace LastTrain.Persistence
 {
-    public int AttackSpeedLevel;
-
-    public AttackSpeedUpdatingWeaponProgress(string weaponId, int defaultStatLevel = 0) : base(weaponId, defaultStatLevel)
+    [Serializable]
+    public class AttackSpeedUpdatingWeaponProgress : WeaponProgress
     {
-        AttackSpeedLevel = defaultStatLevel;
-    }
+        public int AttackSpeedLevel;
 
-    public override int GetLevel(StatType stat)
-    {
-        if (stat == StatType.AttackSpeed)
+        public AttackSpeedUpdatingWeaponProgress(string weaponId, int defaultStatLevel = 0) : base(weaponId, defaultStatLevel)
         {
-            return AttackSpeedLevel;
+            AttackSpeedLevel = defaultStatLevel;
         }
 
-        return base.GetLevel(stat);
-    }
-        
-    public override int GetSumLevels()
-    {
-        return base.GetSumLevels() + AttackSpeedLevel;
-    }
+        public override int GetLevel(StatType stat)
+        {
+            if (stat == StatType.AttackSpeed)
+            {
+                return AttackSpeedLevel;
+            }
 
-    public override void Increment(StatType stat)
-    {
-        if (stat == StatType.AttackSpeed)
-        {
-            AttackSpeedLevel++;
+            return base.GetLevel(stat);
         }
-        else
+
+        public override int GetSumLevels()
         {
-            base.Increment(stat);
+            return base.GetSumLevels() + AttackSpeedLevel;
+        }
+
+        public override void Increment(StatType stat)
+        {
+            if (stat == StatType.AttackSpeed)
+            {
+                AttackSpeedLevel++;
+            }
+            else
+            {
+                base.Increment(stat);
+            }
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public class ColliderUtils
     {
-        public static float Distance(
-       Collider a, Collider b,
+        public static float Distance(Collider a, Collider b,
        out Vector3 direction, out bool isOverlapped)
         {
             isOverlapped = Physics.ComputePenetration(
@@ -15,11 +14,9 @@ namespace Assets.Source.Scripts.Enemies
 
             if (isOverlapped)
             {
-                // Уже перекрылись → расстояние = 0, direction уже нормализован PhysX-ом
                 return 0f;
             }
 
-            // Пока не соприкасаются → рассчитываем ближайшие точки
             Vector3 pointA = a.ClosestPoint(b.transform.position);
             Vector3 pointB = b.ClosestPoint(pointA);
 
@@ -27,11 +24,11 @@ namespace Assets.Source.Scripts.Enemies
             float dist = delta.magnitude;
 
             if (dist > 1e-5f)
-                direction = delta / dist;      // нормализуем вручную
+                direction = delta / dist;
             else
-                direction = Vector3.up;        // fallback – любое ненулевое
+                direction = Vector3.up;
 
-            return dist;                       // всегда ≥ safeGap
+            return dist;
         }
     }
 }

@@ -1,13 +1,15 @@
-
-[System.Serializable]
-public class LevelAvailability
+namespace LastTrain.Level
 {
-    public int LevelNumber;
-    public bool IsAvailable;
-
-    public LevelAvailability(int number, bool isAvailable)
+    [System.Serializable]
+    public class LevelAvailability
     {
-        LevelNumber = number;
-        IsAvailable = isAvailable;
+        public int LevelNumber;
+        public bool IsAvailable;
+
+        public LevelAvailability(int number, bool isAvailable)
+        {
+            LevelNumber = number;
+            IsAvailable = isAvailable;
+        }
     }
 }

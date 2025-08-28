@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.UI.MainMenu;
 
 namespace LastTrain.Core
 {

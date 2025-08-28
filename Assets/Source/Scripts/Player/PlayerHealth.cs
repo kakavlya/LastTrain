@@ -5,58 +5,62 @@ using UnityEngine.UI;
 using YG;
 using LastTrain.Core;
 using LastTrain.Data;
+using LastTrain.Persistence;
+using LastTrain.Training;
 
-public class PlayerHealth : HealthBase
+namespace LastTrain.Player
 {
-    [SerializeField] private Slider _healthSlider;
-    [SerializeField] private TextMeshProUGUI _healthText;
-    [SerializeField] private float _respawnDelay = 3f;
-    [SerializeField] private SharedData _sharedData;
-
-    private float _maxHealth;
-
-    public event Action Died;
-
-    public float MaxHealth => _maxHealth;
-
-    protected override void Awake()
+    public class PlayerHealth : HealthBase
     {
-        base.Awake();
-        OnDeath.AddListener(OnPlayerDeath);
-        _maxHealth = GetMaxHealthValue();
-        CurrentHealth = _maxHealth;
-        _healthText.text = MaxHealth.ToString("F0");
-        _healthSlider.maxValue = MaxHealth;
-        _healthSlider.value = MaxHealth;
-    }
+        [SerializeField] private Slider _healthSlider;
+        [SerializeField] private TextMeshProUGUI _healthText;
+        [SerializeField] private SharedData _sharedData;
 
-    public override void TakeDamage(float amount)
-    {
-        base.TakeDamage(amount);
-        _healthText.text = GetCurrentHealth.ToString("F0");
-        _healthSlider.value = GetCurrentHealth;
-    }
+        private float _maxHealth;
 
-    private void OnPlayerDeath()
-    {
-        Died?.Invoke();
-        TrainingHandler.Instance.TryEndGameplayTrainingAndLoadMenu();
-    }
+        public event Action Died;
 
-    private float GetMaxHealthValue()
-    {
-        var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
-        var healthLevel = YG2.saves.TrainProgress.HealthLevel;
-        StatConfig healthConfig = null;
+        public float MaxHealth => _maxHealth;
 
-        foreach (var config in trainConfigs)
+        protected override void Awake()
         {
-            if (config.StatType == StatType.Health)
-            {
-                healthConfig = config;
-            }
+            base.Awake();
+            OnDeath.AddListener(OnPlayerDeath);
+            _maxHealth = GetMaxHealthValue();
+            CurrentHealth = _maxHealth;
+            _healthText.text = MaxHealth.ToString("F0");
+            _healthSlider.maxValue = MaxHealth;
+            _healthSlider.value = MaxHealth;
         }
 
-        return healthConfig.GetValue(healthLevel);
+        public override void TakeDamage(float amount)
+        {
+            base.TakeDamage(amount);
+            _healthText.text = GetCurrentHealth.ToString("F0");
+            _healthSlider.value = GetCurrentHealth;
+        }
+
+        private void OnPlayerDeath()
+        {
+            Died?.Invoke();
+            TrainingHandler.Instance.TryEndGameplayTrainingAndLoadMenu();
+        }
+
+        private float GetMaxHealthValue()
+        {
+            var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
+            var healthLevel = YG2.saves.TrainProgress.HealthLevel;
+            StatConfig healthConfig = null;
+
+            foreach (var config in trainConfigs)
+            {
+                if (config.StatType == StatType.Health)
+                {
+                    healthConfig = config;
+                }
+            }
+
+            return healthConfig.GetValue(healthLevel);
+        }
     }
 }

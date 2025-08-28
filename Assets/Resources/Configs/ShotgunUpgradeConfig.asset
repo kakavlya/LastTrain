@@ -78,7 +78,7 @@ MonoBehaviour:
     MaxValue: 100
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.AttackAngle
-    StatType: 3
+    StatType: 4
     Curve:
       serializedVersion: 2
       m_Curve:

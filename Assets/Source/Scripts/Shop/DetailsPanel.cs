@@ -6,107 +6,102 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 using LastTrain.Coins;
+using LastTrain.Persistence;
 
-public class DetailsPanel : MonoBehaviour
+namespace LastTrain.ShopSystem
 {
-    [Header("Common")]
-    [SerializeField] private Button _closeBtn;
-    [SerializeField] private CanvasGroup _cg;
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextMeshProUGUI _leveNumberlText;
-    [SerializeField] private TextMeshProUGUI _itemName;
-
-    [Header("Stats")]
-    [SerializeField] private Transform _statsContainer;
-    [SerializeField] private StatRow _statRowPrefab;
-
-    private UpgradeConfig _upgradeConfig;
-    private BaseProgress _progress;
-    private List<StatRow> _statRows = new List<StatRow>();
-
-    private Action _onClose;
-
-    public event Action<StatType> Incremented;
-
-    public void Show(UpgradeConfig cfg, BaseProgress prog, Action onClose)
+    public class DetailsPanel : MonoBehaviour
     {
-        _upgradeConfig = cfg;
-        _progress = prog;
-        _onClose = onClose;
-        _icon.sprite = _upgradeConfig.Icon;
-        _itemName.text = cfg.Name;
+        [Header("Common")]
+        [SerializeField] private Button _closeBtn;
+        [SerializeField] private CanvasGroup _cg;
+        [SerializeField] private Image _icon;
+        [SerializeField] private TextMeshProUGUI _leveNumberlText;
+        [SerializeField] private TextMeshProUGUI _itemName;
 
-        _closeBtn.onClick.RemoveAllListeners();
-        _closeBtn.onClick.AddListener(Close);
+        [Header("Stats")]
+        [SerializeField] private Transform _statsContainer;
+        [SerializeField] private StatRow _statRowPrefab;
 
-        foreach (var raw in _statRows)
-            Destroy(raw.gameObject);
+        private UpgradeConfig _upgradeConfig;
+        private BaseProgress _progress;
+        private List<StatRow> _statRows = new List<StatRow>();
 
-        _statRows.Clear();
+        private Action _onClose;
 
-        foreach (var stat in _upgradeConfig.StatConfigs)
+        public event Action<StatType> Incremented;
+
+        public void Show(UpgradeConfig cfg, BaseProgress prog, Action onClose)
         {
-            var row = Instantiate(_statRowPrefab, _statsContainer);
-            row.Init(stat, _upgradeConfig, _progress, Upgrade);
-            _statRows.Add(row);
+            _upgradeConfig = cfg;
+            _progress = prog;
+            _onClose = onClose;
+            _icon.sprite = _upgradeConfig.Icon;
+            _itemName.text = cfg.Name;
+            _closeBtn.onClick.RemoveAllListeners();
+            _closeBtn.onClick.AddListener(Close);
+
+            foreach (var raw in _statRows)
+                Destroy(raw.gameObject);
+
+            _statRows.Clear();
+
+            foreach (var stat in _upgradeConfig.StatConfigs)
+            {
+                var row = Instantiate(_statRowPrefab, _statsContainer);
+                row.Init(stat, _upgradeConfig, _progress, Upgrade);
+                _statRows.Add(row);
+            }
+
+            Refresh();
+            FadeIn();
         }
 
-        Refresh();
-        FadeIn();
-    }
-
-    private void Upgrade(StatType stat)
-    {
-        int level = _progress.GetLevel(stat);
-        int maxLevel = _upgradeConfig.GetMaxLevel(stat);
-
-        if (level >= maxLevel) return;
-
-        var coins = CoinsHandler.Instance.CoinsCount;
-        int cost = _upgradeConfig.GetCost(stat, level);
-
-        if (coins < cost)
+        private void Upgrade(StatType stat)
         {
-            Debug.LogWarning($"Not enough coins to upgrade {stat}. Required: {cost}, Available: {coins}");
-            return;
+            int level = _progress.GetLevel(stat);
+            int maxLevel = _upgradeConfig.GetMaxLevel(stat);
+
+            if (level >= maxLevel) return;
+
+            var coins = CoinsHandler.Instance.CoinsCount;
+            int cost = _upgradeConfig.GetCost(stat, level);
+            CoinsHandler.Instance.RemoveCoins(cost);
+            _progress.Increment(stat);
+            Incremented?.Invoke(stat);
+            ProgressHandler.Instance.RefreshSumLevels();
+            YG2.SaveProgress();
+            Refresh();
         }
 
-        CoinsHandler.Instance.RemoveCoins(cost);
-        _progress.Increment(stat);
-        Incremented?.Invoke(stat);
-        ProgressHandler.Instance.RefreshSumLevels();
+        private void Refresh()
+        {
+            foreach (var row in _statRows)
+                row.Refresh();
 
-        YG2.SaveProgress();
-        Refresh();
-    }
+            int totalLevel = 0;
 
-    private void Refresh()
-    {
-        foreach (var row in _statRows)
-            row.Refresh();
+            foreach (var stat in _upgradeConfig.StatConfigs)
+                totalLevel += _progress.GetLevel(stat.StatType);
 
-        int totalLevel = 0;
+            _leveNumberlText.text = totalLevel.ToString();
+        }
 
-        foreach (var stat in _upgradeConfig.StatConfigs)
-            totalLevel += _progress.GetLevel(stat.StatType);
+        private void FadeIn()
+        {
+            _cg.alpha = 0;
+            gameObject.SetActive(true);
+            DOTween.To(v => _cg.alpha = v, 0, 1, .25f).SetEase(Ease.OutQuad);
+        }
 
-        _leveNumberlText.text = totalLevel.ToString();
-    }
-
-    private void FadeIn()
-    {
-        _cg.alpha = 0;
-        gameObject.SetActive(true);
-        DOTween.To(v => _cg.alpha = v, 0, 1, .25f).SetEase(Ease.OutQuad);
-    }
-
-    private void Close()
-    {
-        DOTween.To(v => _cg.alpha = v, 1, 0, .2f)
-               .OnComplete(() =>
-               {
-                   gameObject.SetActive(false);
-                   _onClose?.Invoke();
-               });
+        private void Close()
+        {
+            DOTween.To(v => _cg.alpha = v, 1, 0, .2f)
+                   .OnComplete(() =>
+                   {
+                       gameObject.SetActive(false);
+                       _onClose?.Invoke();
+                   });
+        }
     }
 }

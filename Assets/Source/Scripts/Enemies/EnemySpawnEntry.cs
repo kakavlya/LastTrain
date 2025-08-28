@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     [Serializable]
     public struct EnemySpawnEntry

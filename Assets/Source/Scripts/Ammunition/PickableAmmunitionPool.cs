@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace LastTrain.Ammunition
+namespace LastTrain.AmmunitionSystem
 {
     public class PickableAmmunitionPool : MonoBehaviour
     {

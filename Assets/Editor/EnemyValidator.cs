@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
-using Assets.Source.Scripts.Enemies;
 using UnityEditor;
 using UnityEngine;
+using LastTrain.Enemies;
 
 public class EnemyValidator : EditorWindow
 {
@@ -52,7 +52,7 @@ public class EnemyValidator : EditorWindow
 
         Check<EnemyHealth>("Урон и смерть");
         Check<EnemyDeathHandler>("Отключение поведения и despawn");
-        Check<ModelEffects>("VFX, звук, мерцание");
+        //Check<ModelEffects>("VFX, звук, мерцание");
         Check<EnemyMovement>("Движение");
         Check<EnemyController>("Логика и инициализация");
         Check<Collider>("Физика/столкновения");

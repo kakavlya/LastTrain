@@ -1,7 +1,7 @@
 using UnityEngine;
 using LastTrain.Data;
 
-namespace Level
+namespace LastTrain.Level
 {
     public class LevelElementsCreator : MonoBehaviour
     {

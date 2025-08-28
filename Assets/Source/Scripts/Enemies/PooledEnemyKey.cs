@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PooledEnemyKey : MonoBehaviour
+namespace LastTrain.Enemies
 {
-    public GameObject PrefabKey { get; private set; }
-
-    public void SetKey(GameObject prefabKey)
+    public class PooledEnemyKey : MonoBehaviour
     {
-        PrefabKey = prefabKey;
+        public GameObject PrefabKey { get; private set; }
+
+        public void SetKey(GameObject prefabKey)
+        {
+            PrefabKey = prefabKey;
+        }
     }
 }

@@ -4,162 +4,161 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
+using LastTrain.Inventory;
+using LastTrain.Persistence;
 
-
-public class Shop : MonoBehaviour
+namespace LastTrain.ShopSystem
 {
-    [Header("Weapons List")]
-    [SerializeField] private Transform _contentParent;
-    [SerializeField] private ShopItemUI _shopItemPrefab;
-    [SerializeField] private UpgradeConfig[] _itemConfigs;
-
-    [Header("General shop UI")]
-    [SerializeField] private Image _blocker;
-    [SerializeField] private DetailsPanel _detailsPrefab;
-    [SerializeField] private Transform _detailsParent;
-    [SerializeField] private ScrollRect _scrollRect;
-
-    [Header("Inventory items")]
-    [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
-    [SerializeField] private InventoryHandler _inventoryHandler;
-
-    private DetailsPanel _detailsPanel;
-    private SavesYG _data;
-    private List<ShopItemUI> _uiItems = new List<ShopItemUI>();
-
-    public event Action SlotIncremented;
-
-    private void Start()
+    public class Shop : MonoBehaviour
     {
-        _blocker.gameObject.SetActive(false);
-        _data = YG2.saves;
-        BuildShop();
-    }
+        [Header("Weapons List")]
+        [SerializeField] private Transform _contentParent;
+        [SerializeField] private ShopItemUI _shopItemPrefab;
+        [SerializeField] private UpgradeConfig[] _itemConfigs;
 
-    private void BuildShop()
-    {
-        foreach (var item in _uiItems)
+        [Header("General shop UI")]
+        [SerializeField] private Image _blocker;
+        [SerializeField] private DetailsPanel _detailsPrefab;
+        [SerializeField] private Transform _detailsParent;
+        [SerializeField] private ScrollRect _scrollRect;
+
+        [Header("Inventory items")]
+        [SerializeField] private InventoryWeapon _inventoryWeaponPrefab;
+        [SerializeField] private InventoryHandler _inventoryHandler;
+
+        private DetailsPanel _detailsPanel;
+        private SavesYG _data;
+        private List<ShopItemUI> _uiItems = new List<ShopItemUI>();
+
+        public event Action SlotIncremented;
+
+        private void Start()
         {
-            item.WeaponUnlocked -= InitialNewInventoryWeapon;
+            _blocker.gameObject.SetActive(false);
+            _data = YG2.saves;
+            BuildShop();
         }
 
-        _uiItems.Clear();
-
-        foreach (Transform child in _contentParent)
-            Destroy(child.gameObject);
-
-        var data = YG2.saves;
-
-        foreach (var upgradeConfig in _itemConfigs)
+        private void OnDisable()
         {
-            BaseProgress progress = null;
-
-            if (upgradeConfig is WeaponUpgradeConfig weaponUprgadeCfg)
+            foreach (var item in _uiItems)
             {
-                string id = weaponUprgadeCfg.WeaponId;
-                progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
+                item.WeaponUnlocked -= InitialNewInventoryWeapon;
+            }
+        }
 
-                if (progress == null)
+        private void OnDestroy()
+        {
+            if (_detailsPanel != null)
+                _detailsPanel.Incremented -= OnStatIncremented;
+        }
+
+        private void BuildShop()
+        {
+            foreach (var item in _uiItems)
+            {
+                item.WeaponUnlocked -= InitialNewInventoryWeapon;
+            }
+
+            _uiItems.Clear();
+
+            foreach (Transform child in _contentParent)
+                Destroy(child.gameObject);
+
+            var data = YG2.saves;
+
+            foreach (var upgradeConfig in _itemConfigs)
+            {
+                BaseProgress progress = null;
+
+                if (upgradeConfig is WeaponUpgradeConfig weaponUprgadeCfg)
                 {
-                    progress = new WeaponProgress(id);
-                    data.WeaponsProgress.Add((WeaponProgress)progress);
+                    string id = weaponUprgadeCfg.WeaponId;
+                    progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
+
+                    if (progress == null)
+                    {
+                        progress = new WeaponProgress(id);
+                        data.WeaponsProgress.Add((WeaponProgress)progress);
+                    }
                 }
+                else if (upgradeConfig is TrainUpgradeConfig trainUpgradeConfig)
+                {
+                    progress = _data.TrainProgress;
+                }
+
+
+                var itemUi = Instantiate(_shopItemPrefab, _contentParent);
+                _uiItems.Add(itemUi);
+                itemUi.Init(upgradeConfig, progress, OnItemSelected);
+                itemUi.WeaponUnlocked += InitialNewInventoryWeapon;
             }
-            else if (upgradeConfig is TrainUpgradeConfig trainUpgradeConfig)
+
+            YG2.SaveProgress();
+            StartCoroutine(ResizeAndScrollToTop());
+        }
+
+        private void OnItemSelected(UpgradeConfig cfg, BaseProgress prog)
+        {
+            if (_detailsPanel == null)
             {
-                progress = _data.TrainProgress;
+                _detailsPanel = Instantiate(_detailsPrefab, _detailsParent);
+                _detailsPanel.Incremented += OnStatIncremented;
             }
 
-
-            var itemUi = Instantiate(_shopItemPrefab, _contentParent);
-            _uiItems.Add(itemUi);
-            itemUi.Init(upgradeConfig, progress, OnItemSelected);
-            itemUi.WeaponUnlocked += InitialNewInventoryWeapon;
+            _blocker.gameObject.SetActive(true);
+            _detailsPanel.Show(cfg, prog, OnDetailsClosed);
         }
 
-        YG2.SaveProgress();
-        StartCoroutine(ResizeAndScrollToTop());
-    }
-
-    private void OnDisable()
-    {
-        foreach (var item in _uiItems)
+        private void OnDetailsClosed()
         {
-            item.WeaponUnlocked -= InitialNewInventoryWeapon;
+            _blocker.gameObject.SetActive(false);
+            BuildShop();
         }
-    }
 
-    private void OnDestroy()
-    {
-        if (_detailsPanel != null)
-            _detailsPanel.Incremented -= OnStatIncremented;
-    }
-
-
-    private void OnItemSelected(UpgradeConfig cfg, BaseProgress prog)
-    {
-        if (_detailsPanel == null)
+        private void OnStatIncremented(StatType stat)
         {
-            _detailsPanel = Instantiate(_detailsPrefab, _detailsParent);
-            _detailsPanel.Incremented += OnStatIncremented;
+            if (stat == StatType.Slots)
+            {
+                SlotIncremented?.Invoke();
+            }
         }
 
-        _blocker.gameObject.SetActive(true);
-        _detailsPanel.Show(cfg, prog, OnDetailsClosed);
-    }
-
-    private void OnDetailsClosed()
-    {
-        _blocker.gameObject.SetActive(false);
-        BuildShop();
-    }
-
-    private void OnStatIncremented(StatType stat)
-    {
-        if (stat == StatType.Slots)
+        private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
         {
-            SlotIncremented?.Invoke();
+            progress.IsAvailable = true;
+            YG2.saves.InventorySlots.Add(weaponConfig.WeaponId);
+            _inventoryHandler.SubmitActiveSlots();
+
+            WeaponSlotUI lastSlot = _inventoryHandler.GetLastActiveSlotUIs();
+
+            if (lastSlot != null && lastSlot.GetComponentInChildren<InventoryWeapon>() == null)
+            {
+                InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, lastSlot.transform);
+                inventoryWeapon.Init(weaponConfig);
+                lastSlot.SetSlotFilled();
+            }
+
+            YG2.SaveProgress();
         }
-    }
 
-    private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
-    {
-        progress.IsAvailable = true;
-        YG2.saves.InventorySlots.Add(weaponConfig.WeaponId);
-        _inventoryHandler.SubmitActiveSlots();
-
-        WeaponSlotUI lastSlot = _inventoryHandler.GetLastActiveSlotUIs();
-
-        if (lastSlot != null && lastSlot.GetComponentInChildren<InventoryWeapon>() == null)
+        private void ResizeContentForGrid()
         {
-            InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, lastSlot.transform);
-            inventoryWeapon.Init(weaponConfig);
-            lastSlot.SetSlotFilled();
+            var layout = _contentParent.GetComponent<GridLayoutGroup>();
+            var contentRect = _contentParent.GetComponent<RectTransform>();
+            int totalItems = _contentParent.childCount;
+            int columns = Mathf.Max(1, Mathf.FloorToInt((contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
+            int rows = Mathf.CeilToInt((float)totalItems / columns);
+            float height = rows * layout.cellSize.y + layout.spacing.y * (rows - 1) + layout.padding.top + layout.padding.bottom;
+            contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         }
 
-        YG2.SaveProgress();
-    }
-
-    private void ResizeContentForGrid()
-    {
-        var layout = _contentParent.GetComponent<GridLayoutGroup>();
-        var contentRect = _contentParent.GetComponent<RectTransform>();
-
-        int totalItems = _contentParent.childCount;
-        int columns = Mathf.Max(1, Mathf.FloorToInt((contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
-
-        int rows = Mathf.CeilToInt((float)totalItems / columns);
-
-        float height = rows * layout.cellSize.y + layout.spacing.y * (rows - 1) + layout.padding.top + layout.padding.bottom;
-
-        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-    }
-
-    private IEnumerator ResizeAndScrollToTop()
-    {
-        yield return null;
-        ResizeContentForGrid();
-        yield return null;
-        _scrollRect.verticalNormalizedPosition = 1f;
+        private IEnumerator ResizeAndScrollToTop()
+        {
+            yield return null;
+            ResizeContentForGrid();
+            yield return null;
+            _scrollRect.verticalNormalizedPosition = 1f;
+        }
     }
 }

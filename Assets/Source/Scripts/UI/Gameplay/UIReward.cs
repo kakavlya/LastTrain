@@ -2,23 +2,26 @@ using TMPro;
 using UnityEngine;
 using LastTrain.Coins;
 
-public class UIReward : MonoBehaviour
+namespace LastTrain.UI.Gameplay
 {
-    [SerializeField] private TextMeshProUGUI _textAllCount;
-
-    private void Start()
+    public class UIReward : MonoBehaviour
     {
-        CoinsHandler.Instance.CoinsChanged += UpdateCoinsUI;
-        UpdateCoinsUI(CoinsHandler.Instance.CoinsCount);
-    }
+        [SerializeField] private TextMeshProUGUI _textAllCount;
 
-    private void OnDisable()
-    {
-        CoinsHandler.Instance.CoinsChanged -= UpdateCoinsUI;
-    }
+        private void Start()
+        {
+            CoinsHandler.Instance.CoinsChanged += UpdateCoinsUI;
+            UpdateCoinsUI(CoinsHandler.Instance.CoinsCount);
+        }
 
-    private void UpdateCoinsUI(int newRewardCount)
-    {
-        _textAllCount.text = newRewardCount.ToString();
+        private void OnDisable()
+        {
+            CoinsHandler.Instance.CoinsChanged -= UpdateCoinsUI;
+        }
+
+        private void UpdateCoinsUI(int newRewardCount)
+        {
+            _textAllCount.text = newRewardCount.ToString();
+        }
     }
 }

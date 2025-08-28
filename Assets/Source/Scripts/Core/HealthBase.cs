@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using LastTrain.Effects;
+using LastTrain.Enemies;
 
 namespace LastTrain.Core
 {

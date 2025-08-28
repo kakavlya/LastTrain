@@ -1,26 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UICursorFollower : MonoBehaviour
+namespace LastTrain.UI.Gameplay
 {
-    private RectTransform _rectTransform;
-
-    public void Init()
+    public class UICursorFollower : MonoBehaviour
     {
-        _rectTransform = GetComponent<RectTransform>();
-        Cursor.visible = false;
-    }
+        private RectTransform _rectTransform;
 
-    private void Update()
-    {
-        Vector2 mousePosition = Input.mousePosition;
-        _rectTransform.position = mousePosition;
-    }
+        private void Update()
+        {
+            Vector2 mousePosition = Input.mousePosition;
+            _rectTransform.position = mousePosition;
+        }
 
-    private void OnDestroy()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        private void OnDestroy()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        public void Init()
+        {
+            _rectTransform = GetComponent<RectTransform>();
+            Cursor.visible = false;
+        }
     }
 }

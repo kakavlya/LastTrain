@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using LastTrain.Level;
+using LastTrain.Persistence;
+using LastTrain.Training;
 
 namespace YG
 {
@@ -7,7 +10,6 @@ namespace YG
     {
         [SerializeReference]
         public List<WeaponProgress> WeaponsProgress = new List<WeaponProgress>();
-
         public List<WeaponProgress> TrainingWeaponsProgress = new List<WeaponProgress>();
         public TrainProgress TrainProgress = new TrainProgress(0);
         public int Coins;
@@ -30,11 +32,9 @@ namespace YG
             WeaponsProgress.Add(new AttackAngleUpdatingWeaponProgress("Flamethrower", 0));
             WeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("Crossbow", 0));
             WeaponsProgress.Add(new AttackAngleUpdatingWeaponProgress("Shotgun", 0));
-
             TrainingWeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("SubmachineGun", 5));
             TrainingWeaponsProgress.Add(new AttackSpeedUpdatingWeaponProgress("MachineGun", 5));
             TrainingWeaponsProgress.Add(new AoeDamageUpdatingWeaponProgress("GrenadeLauncher", 5));
-
             Coins = 0;
             EffectsVolume = 0.5f;
             MusicVolume = 0.5f;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
+using LastTrain.Enemies;
 
 public class AoeProjectile : Projectile
 {

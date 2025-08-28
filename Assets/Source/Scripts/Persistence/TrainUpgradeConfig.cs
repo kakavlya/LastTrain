@@ -1,6 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Config/Train Upgrade")]
-public class TrainUpgradeConfig : UpgradeConfig
-{ 
+namespace LastTrain.Persistence
+{
+    [CreateAssetMenu(menuName = "Config/Train Upgrade")]
+    public class TrainUpgradeConfig : UpgradeConfig
+    {
+    }
 }

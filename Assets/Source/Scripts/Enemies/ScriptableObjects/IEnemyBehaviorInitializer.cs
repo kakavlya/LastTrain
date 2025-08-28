@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public interface IEnemyBehaviorInitializer
     {

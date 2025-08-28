@@ -78,7 +78,7 @@ MonoBehaviour:
     MaxValue: 450
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.AttackSpeed
-    StatType: 2
+    StatType: 3
     Curve:
       serializedVersion: 2
       m_Curve:

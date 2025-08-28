@@ -1,10 +1,14 @@
-using Assets.Source.Scripts.Enemies;
-using Assets.Source.Scripts.Weapons;
-using Level;
-using Player;
 using UnityEngine;
-using LastTrain.Ammunition;
-using LastTrain.Camera;
+using LastTrain.AmmunitionSystem;
+using LastTrain.CameraSystem;
+using LastTrain.Enemies;
+using LastTrain.Level;
+using LastTrain.Particles;
+using LastTrain.Player;
+using LastTrain.Projectiles;
+using LastTrain.UI.Gameplay;
+using LastTrain.Training;
+using LastTrain.Weapons.System;
 using static LastTrain.Core.UIStateMachine;
 
 namespace LastTrain.Core

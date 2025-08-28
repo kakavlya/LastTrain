@@ -1,55 +1,57 @@
-
-[System.Serializable]
-public class TrainProgress : BaseProgress
+namespace LastTrain.Persistence
 {
-    public int HealthLevel;
-    public int SlotsLevel;
-    public int AmmoLevel;
-
-    public TrainProgress(int defaultStatLevel = 0)
+    [System.Serializable]
+    public class TrainProgress : BaseProgress
     {
-        HealthLevel = defaultStatLevel;
-        SlotsLevel = defaultStatLevel;
-        AmmoLevel = defaultStatLevel;
-    }
+        public int HealthLevel;
+        public int SlotsLevel;
+        public int AmmoLevel;
 
-    public override int GetLevel(StatType stat)
-    {
-        switch (stat)
+        public TrainProgress(int defaultStatLevel = 0)
         {
-            case StatType.Health:
-                return HealthLevel;
-
-            case StatType.Slots:
-                return SlotsLevel;
-
-            case StatType.Ammo:
-                return AmmoLevel;
+            HealthLevel = defaultStatLevel;
+            SlotsLevel = defaultStatLevel;
+            AmmoLevel = defaultStatLevel;
         }
 
-        return 0;
-    }
-
-    public override int GetSumLevels()
-    {
-        return HealthLevel + SlotsLevel + AmmoLevel;
-    }
-
-    public override void Increment(StatType stat)
-    {
-        switch (stat)
+        public override int GetLevel(StatType stat)
         {
-            case StatType.Health:
-                HealthLevel++;
-                break;
+            switch (stat)
+            {
+                case StatType.Health:
+                    return HealthLevel;
 
-            case StatType.Slots:
-                SlotsLevel++;
-                break;
+                case StatType.Slots:
+                    return SlotsLevel;
 
-            case StatType.Ammo:
-                AmmoLevel++;
-                break;
+                case StatType.Ammo:
+                    return AmmoLevel;
+            }
+
+            return 0;
+        }
+
+        public override int GetSumLevels()
+        {
+            return HealthLevel + SlotsLevel + AmmoLevel;
+        }
+
+        public override void Increment(StatType stat)
+        {
+            switch (stat)
+            {
+                case StatType.Health:
+                    HealthLevel++;
+                    break;
+
+                case StatType.Slots:
+                    SlotsLevel++;
+                    break;
+
+                case StatType.Ammo:
+                    AmmoLevel++;
+                    break;
+            }
         }
     }
 }

@@ -3,82 +3,88 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using LastTrain.Ammunition;
+using LastTrain.AmmunitionSystem;
+using LastTrain.Weapons.Types;
 
-[RequireComponent(typeof(Image))]
-public class WeaponUI : MonoBehaviour
+namespace LastTrain.UI.Gameplay
 {
-    [SerializeField] private int _cellNumber;
-    [SerializeField] private TextMeshProUGUI _ammoCountText;
-    [SerializeField] private TextMeshProUGUI _addedCountText;
-
-    private int _showTime = 2;
-    private Image _image;
-    private Ammunition _currentAmmunition;
-
-    public event Action<int> UconClicked;
-
-    public int CellNumber => _cellNumber;
-
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class WeaponUI : MonoBehaviour
     {
-        _image = GetComponent<Image>();
-    }
+        [SerializeField] private int _cellNumber;
+        [SerializeField] private TextMeshProUGUI _ammoCountText;
+        [SerializeField] private TextMeshProUGUI _addedCountText;
 
-    private void OnDisable()
-    {
-        if (_currentAmmunition != null)
+        private int _showTime = 2;
+        private Image _image;
+        private Ammunition _currentAmmunition;
+        private string _infinitySymbol = "∞";
+        private string _plusSymblos = "+ ";
+
+        public event Action<int> UconClicked;
+
+        public int CellNumber => _cellNumber;
+
+        private void Awake()
         {
-            _currentAmmunition.Updated -= UpdateAmmoText;
-            _currentAmmunition.AmmoAdded -= LaunchAddedAmmo;
+            _image = GetComponent<Image>();
         }
-    }
 
-    public void ActivateWeapon(Weapon currentWeapon, Ammunition ammunition)
-    {
-        if (currentWeapon != null)
+        private void OnDisable()
         {
-            _currentAmmunition = ammunition;
-
             if (_currentAmmunition != null)
             {
-                _currentAmmunition.Updated += UpdateAmmoText;
-                _currentAmmunition.AmmoAdded += LaunchAddedAmmo;
-                UpdateAmmoText(_currentAmmunition.CurrentAmmo);
+                _currentAmmunition.Updated -= UpdateAmmoText;
+                _currentAmmunition.AmmoAdded -= LaunchAddedAmmo;
             }
-            else
-            {
-                _ammoCountText.text = "∞";
-            }
-
-            _image.sprite = currentWeapon.UISpriteActive;
         }
-    }
 
-    public void DeactivateWeapon(Weapon weapon)
-    {
-        _image.sprite = weapon.UISpriteDeactive;
-    }
+        public void ActivateWeapon(Weapon currentWeapon, Ammunition ammunition)
+        {
+            if (currentWeapon != null)
+            {
+                _currentAmmunition = ammunition;
 
-    public void OnClickHandle()
-    {
-        UconClicked?.Invoke(_cellNumber);
-    }
+                if (_currentAmmunition != null)
+                {
+                    _currentAmmunition.Updated += UpdateAmmoText;
+                    _currentAmmunition.AmmoAdded += LaunchAddedAmmo;
+                    UpdateAmmoText(_currentAmmunition.CurrentAmmo);
+                }
+                else
+                {
+                    _ammoCountText.text = _infinitySymbol;
+                }
 
-    private void UpdateAmmoText(int num)
-    {
-        _ammoCountText.text = num.ToString();
-    }
+                _image.sprite = currentWeapon.UISpriteActive;
+            }
+        }
 
-    private void LaunchAddedAmmo(int addedAmmo)
-    {
-        StartCoroutine(ShowAddedAmmo(addedAmmo));
-    }
+        public void DeactivateWeapon(Weapon weapon)
+        {
+            _image.sprite = weapon.UISpriteDeactive;
+        }
 
-    private IEnumerator ShowAddedAmmo(int addedAmmo)
-    {
-        _addedCountText.text = "+ " + addedAmmo.ToString();
-        yield return new WaitForSeconds(_showTime);
-        _addedCountText.text = null;
+        public void OnClickHandle()
+        {
+            UconClicked?.Invoke(_cellNumber);
+        }
+
+        private void UpdateAmmoText(int num)
+        {
+            _ammoCountText.text = num.ToString();
+        }
+
+        private void LaunchAddedAmmo(int addedAmmo)
+        {
+            StartCoroutine(ShowAddedAmmo(addedAmmo));
+        }
+
+        private IEnumerator ShowAddedAmmo(int addedAmmo)
+        {
+            _addedCountText.text = _plusSymblos + addedAmmo.ToString();
+            yield return new WaitForSeconds(_showTime);
+            _addedCountText.text = null;
+        }
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using SplineMesh;
 using UnityEngine;
-using Level;
+using LastTrain.Level;
 
-namespace Player
+namespace LastTrain.Player
 {
     public class TrainMovement : MonoBehaviour
     {
@@ -24,18 +24,6 @@ namespace Player
         private float _transitionProgress;
 
         public event Action<LevelElement> SplineIsOvered;
-
-        public void Init()
-        {
-            _levelGenerator.StartedElementDefined += SetCurrentSpline;
-            _levelGenerator.ElementChanged += SetCurrentSpline;
-        }
-
-        private void OnDisable()
-        {
-            _levelGenerator.StartedElementDefined -= SetCurrentSpline;
-            _levelGenerator.ElementChanged -= SetCurrentSpline;
-        }
 
         private void Update()
         {
@@ -67,6 +55,18 @@ namespace Player
             Vector3 globalPosition = _currentSplineTransform.TransformPoint(sample.location);
             transform.position = globalPosition;
             transform.rotation = sample.Rotation * _rottationCorrection;
+        }
+
+        private void OnDisable()
+        {
+            _levelGenerator.StartedElementDefined -= SetCurrentSpline;
+            _levelGenerator.ElementChanged -= SetCurrentSpline;
+        }
+
+        public void Init()
+        {
+            _levelGenerator.StartedElementDefined += SetCurrentSpline;
+            _levelGenerator.ElementChanged += SetCurrentSpline;
         }
 
         public void StartMovement() => _isRunning = true;
@@ -101,13 +101,10 @@ namespace Player
         private void Transition()
         {
             _transitionProgress += Time.deltaTime * _speed;
-
             var currentEndSample = _currentSpline.GetSampleAtDistance(_currentSpline.Length - _endOffset);
             var nextStartSample = _nextSpline.GetSampleAtDistance(0);
-
             Vector3 startPoint = _currentSplineTransform.TransformPoint(currentEndSample.location);
             Vector3 endPoint = _nextSplineTransform.TransformPoint(nextStartSample.location);
-
             transform.position = Vector3.Lerp(startPoint, endPoint, _transitionProgress);
             transform.rotation = Quaternion.Slerp(
                 currentEndSample.Rotation * _rottationCorrection,
@@ -118,11 +115,9 @@ namespace Player
             if (_transitionProgress >= 1f)
             {
                 _isTransitionAvailable = false;
-
                 _currentSpline = _nextSpline;
                 _currentSplineTransform = _nextSplineTransform;
                 _distance = 0;
-
                 CurveSample startSample = _currentSpline.GetSampleAtDistance(0);
                 Vector3 startPos = _currentSplineTransform.TransformPoint(startSample.location);
                 transform.position = startPos;

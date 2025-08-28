@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
-using LastTrain.Ammunition;
 
-namespace Level
+namespace LastTrain.Level
 {
     public class LevelElement : MonoBehaviour
     {

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Weapons
+namespace LastTrain.Weapons.System
 {
     public class AimingTargetProvider : MonoBehaviour
     {
@@ -9,13 +8,10 @@ namespace Assets.Source.Scripts.Weapons
 
         private Camera _mainCamera;
         private float _maxDistance = 90000f;
-        public Vector3 AimDirection { get; private set; } = Vector3.forward;
-        public Vector3? AimPointWorld { get; private set; }
 
-        public void Init()
-        {
-            _mainCamera = Camera.main;
-        }
+        public Vector3 AimDirection { get; private set; } = Vector3.forward;
+
+        public Vector3? AimPointWorld { get; private set; }
 
         private void Update()
         {
@@ -31,6 +27,11 @@ namespace Assets.Source.Scripts.Weapons
             {
                 AimPointWorld = null;
             }
+        }
+
+        public void Init()
+        {
+            _mainCamera = Camera.main;
         }
     }
 }

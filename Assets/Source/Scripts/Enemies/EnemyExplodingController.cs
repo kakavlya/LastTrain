@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public class EnemyExplodingController : EnemyController
     {
-
         [SerializeField] private Collider _playerCollider;
         [SerializeField] private float _checkRadius = 10f;
 
@@ -22,13 +21,10 @@ namespace Assets.Source.Scripts.Enemies
             _playerCollider = playerCollider;
             _movement = GetComponent<EnemyMovement>();
             _movement.SetSpeed(speed);
-
             _health = GetComponent<EnemyHealth>();
-
             _explosionRadius = explosionRadius;
             _damage = damage;
             _hasExploded = false;
-
             _checkRadiusSqr = _checkRadius * _checkRadius;
         }
 
@@ -58,7 +54,6 @@ namespace Assets.Source.Scripts.Enemies
             _hasExploded = true;
             _player.GetComponent<IDamageable>()?.TakeDamage(_damage);
             _health?.HandleDie();
-            //Destroy(gameObject);
         }
 
         private void OnDrawGizmosSelected()

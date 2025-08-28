@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using LastTrain.Weapons.Types;
 
-namespace Assets.Source.Scripts.Weapons
+namespace LastTrain.Weapons.System
 {
     public class WeaponRotator : MonoBehaviour
     {
@@ -15,9 +16,9 @@ namespace Assets.Source.Scripts.Weapons
 
         public event Action<Vector3> Rotated;
 
-        public void Init()
+        private void Update()
         {
-            _weaponHandler.OnWeaponChange += SetWeaponPivot;
+            Rotate();
         }
 
         private void OnDisable()
@@ -25,14 +26,14 @@ namespace Assets.Source.Scripts.Weapons
             _weaponHandler.OnWeaponChange -= SetWeaponPivot;
         }
 
+        public void Init()
+        {
+            _weaponHandler.OnWeaponChange += SetWeaponPivot;
+        }
+
         private void SetWeaponPivot(Weapon weapon)
         {
             _weaponPivot = weapon.transform;
-        }
-
-        private void Update()
-        {
-            Rotate();
         }
 
         private void Rotate()
@@ -46,10 +47,8 @@ namespace Assets.Source.Scripts.Weapons
             }
 
             Vector3 aimPoint = _targetProvider.AimPointWorld.Value;
-
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;
-
             RotateTowardsDirection(direction);
         }
 
@@ -57,7 +56,6 @@ namespace Assets.Source.Scripts.Weapons
         {
             if (direction.sqrMagnitude > 0.01f)
             {
-
                 direction.Normalize();
                 Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
                 _weaponPivot.rotation = Quaternion.RotateTowards(

@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 184,
+    "idSave": 102,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,22 +49,18 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 3,
+        "HealthLevel": 0,
         "SlotsLevel": 0,
-        "AmmoLevel": 1
+        "AmmoLevel": 0
     },
-    "Coins": 600,
+    "Coins": 0,
     "EffectsVolume": 0.5,
-    "MusicVolume": 0.5,
+    "MusicVolume": 0.0,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
-    "InventorySlots": [
-        "Пистолет-пулемет",
-        "Огнемёт",
-        ""
-    ],
+    "InventorySlots": [],
     "PlayerInventorySlots": [
-        "Гранатомет"
+        ""
     ],
     "LevelsAvailability": [
         {
@@ -76,9 +72,9 @@
             "IsAvailable": false
         }
     ],
-    "IsDoneGameplayTraining": true,
-    "IsDoneMenuTraining": true,
-    "TrainingState": 10,
+    "IsDoneGameplayTraining": false,
+    "IsDoneMenuTraining": false,
+    "TrainingState": 0,
     "references": {
         "version": 2,
         "RefIds": [
@@ -86,14 +82,14 @@
                 "rid": 1000,
                 "type": {
                     "class": "AttackSpeedUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": true,
+                    "IsAvailable": false,
                     "AttackSpeedLevel": 0
                 }
             },
@@ -101,7 +97,7 @@
                 "rid": 1001,
                 "type": {
                     "class": "AttackSpeedUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
@@ -116,14 +112,14 @@
                 "rid": 1002,
                 "type": {
                     "class": "AoeDamageUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
                     "WeaponId": "GrenadeLauncher",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": true,
+                    "IsAvailable": false,
                     "AoeDamageLevel": 0
                 }
             },
@@ -131,14 +127,14 @@
                 "rid": 1003,
                 "type": {
                     "class": "AttackAngleUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
                     "WeaponId": "Flamethrower",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": true,
+                    "IsAvailable": false,
                     "AttackAngleLevel": 0
                 }
             },
@@ -146,7 +142,7 @@
                 "rid": 1004,
                 "type": {
                     "class": "AttackSpeedUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
@@ -161,7 +157,7 @@
                 "rid": 1005,
                 "type": {
                     "class": "AttackAngleUpdatingWeaponProgress",
-                    "ns": "",
+                    "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {

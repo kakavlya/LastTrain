@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     [CreateAssetMenu(menuName = "Enemies/Behavior/Explode", fileName = "NewExplodeSettings")]
-
     public class EnemyExplodingSettings : EnemyBehaviorSettings
     {
         [Header("Movement")]
@@ -13,8 +11,10 @@ namespace Assets.Source.Scripts.Enemies
 
         [Header("Explosion")]
         public float explosionRadius = 3f;
+
         [Tooltip("Damage in radius")]
         public int damage = 100;
+
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var exploder = enemy.GetComponent<EnemyExplodingController>();

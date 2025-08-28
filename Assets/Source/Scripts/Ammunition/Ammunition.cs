@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using LastTrain.Weapons.Types;
 
-namespace LastTrain.Ammunition
+namespace LastTrain.AmmunitionSystem
 {
     public class Ammunition : MonoBehaviour
     {

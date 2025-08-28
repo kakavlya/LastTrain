@@ -1,8 +1,9 @@
-using Assets.Source.Scripts.Enemies;
-using Player;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using LastTrain.Enemies;
+using LastTrain.Player;
+using LastTrain.UI.Gameplay;
 
 namespace LastTrain.Core
 {
@@ -88,7 +89,7 @@ namespace LastTrain.Core
             _spawner = spawner;
             _playerHealth = playerHealth;
             _trainMovement = trainMovement;
-            _spawner.Init(player);
+            _spawner.SetTarget(player);
             _levelProgress = levelProgress;
         }
 

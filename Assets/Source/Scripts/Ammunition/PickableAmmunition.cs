@@ -1,8 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using LastTrain.Weapons.Types;
 
-namespace LastTrain.Ammunition
+namespace LastTrain.AmmunitionSystem
 {
     public class PickableAmmunition : MonoBehaviour
     {

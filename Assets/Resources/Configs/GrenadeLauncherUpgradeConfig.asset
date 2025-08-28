@@ -78,7 +78,7 @@ MonoBehaviour:
     MaxValue: 300
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.AoeDamage
-    StatType: 4
+    StatType: 5
     Curve:
       serializedVersion: 2
       m_Curve:

@@ -1,6 +1,7 @@
 using UnityEngine;
+using LastTrain.Player;
 
-namespace LastTrain.Camera
+namespace LastTrain.CameraSystem
 {
     public class CameraFollower : MonoBehaviour
     {

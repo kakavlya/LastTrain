@@ -1,26 +1,29 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using LastTrain.Inventory;
+using LastTrain.Level;
 
-public class PlayHandler : MonoBehaviour
+namespace LastTrain.UI.MainMenu
 {
-    [SerializeField] private LevelsHandler _levelsHandler;
-    [SerializeField] private PlayerInventoryHandler _playerInventoryHandler;
-    [SerializeField] private string _gameplayScene;
-    [SerializeField] private Button _playButton;
-
-    private void Awake()
+    public class PlayHandler : MonoBehaviour
     {
-        _playButton.onClick.AddListener(StartPlay);
-    }
+        [SerializeField] private LevelsHandler _levelsHandler;
+        [SerializeField] private PlayerInventoryHandler _playerInventoryHandler;
+        [SerializeField] private string _gameplayScene;
+        [SerializeField] private Button _playButton;
 
-    private void StartPlay()
-    {
-        if (_levelsHandler.IsChosed && _playerInventoryHandler.TryGiveInventoryWeaponFromSlots())
+        private void Awake()
         {
-            SceneManager.LoadScene(_gameplayScene);
+            _playButton.onClick.AddListener(StartPlay);
+        }
+
+        private void StartPlay()
+        {
+            if (_levelsHandler.IsChosed && _playerInventoryHandler.TryGiveInventoryWeaponFromSlots())
+            {
+                SceneManager.LoadScene(_gameplayScene);
+            }
         }
     }
 }
