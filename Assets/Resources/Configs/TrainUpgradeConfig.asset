@@ -16,7 +16,7 @@ MonoBehaviour:
   _localizationKey: UpgradeName.TrainEquipment
   _statConfigs:
   - LocalizationKey: Characteristic.Health
-    StatType: 5
+    StatType: 6
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -47,7 +47,7 @@ MonoBehaviour:
     MaxValue: 1000
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.WeaponSlots
-    StatType: 6
+    StatType: 7
     Curve:
       serializedVersion: 2
       m_Curve:
@@ -76,5 +76,36 @@ MonoBehaviour:
     Costs: e803000010270000
     MinValue: 1
     MaxValue: 3
+    IsShowFractionalValue: 0
+  - LocalizationKey: Characteristic.Ammo
+    StatType: 2
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MaxLevel: 10
+    Costs: 2c01000090010000f401000058020000bc0200002003000084030000e8030000b004000078050000
+    MinValue: 100
+    MaxValue: 250
     IsShowFractionalValue: 0
   Icon: {fileID: 21300000, guid: 8fea869ff7f6ec74f8e6953b63f7d199, type: 3}

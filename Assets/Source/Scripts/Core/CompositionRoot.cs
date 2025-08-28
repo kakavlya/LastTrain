@@ -3,6 +3,7 @@ using Assets.Source.Scripts.Weapons;
 using Level;
 using Player;
 using UnityEngine;
+using LastTrain.Ammunition;
 using static UIStateMachine;
 
 public class CompositionRoot : MonoBehaviour

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-namespace Advertisement
+namespace LastTrain.Advertisement
 {
     public class InterstitialAdv : MonoBehaviour
     {

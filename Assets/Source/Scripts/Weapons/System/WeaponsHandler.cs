@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Source.Scripts.Weapons;
 using UnityEngine;
 using YG;
+using LastTrain.Ammunition;
 
 public class WeaponsHandler : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class WeaponsHandler : MonoBehaviour
     private Weapon _currentWeapon;
     private int _currentNumberWeapon;
     private Dictionary<Weapon, Ammunition> _weaponAmmoDictonary;
+    private float _ammoPercent;
 
     public event Action<Weapon> OnWeaponChange;
 
     public void Init()
     {
+        _ammoPercent = GetAmmoPercent();
         CreateWeapons();
         FillAmmoDictonary();
 
@@ -64,7 +67,6 @@ public class WeaponsHandler : MonoBehaviour
         _weaponInput.WeaponChanged += ChangeWeapon;
         _weaponInput.Fired += HandleFire;
         _weaponInput.StopFired += HandleStopFire;
-
     }
 
     private void OnDisable()
@@ -204,10 +206,28 @@ public class WeaponsHandler : MonoBehaviour
                 if (ammoPrefab.WeaponPrefab == weapon.PrefabReference)
                 {
                     var ammoInstance = Instantiate(ammoPrefab, transform);
+                    ammoInstance.Init(_ammoPercent);
                     _weaponAmmoDictonary[weapon] = ammoInstance;
                     break;
                 }
             }
         }
+    }
+
+    private float GetAmmoPercent()
+    {
+        var trainConfig = _sharedData.TrainUpgradeConfig.StatConfigs;
+        var ammoLevel = YG2.saves.TrainProgress.AmmoLevel;
+        StatConfig ammoConfig = null;
+
+        foreach (var config in trainConfig)
+        {
+            if (config.StatType == StatType.Ammo)
+            {
+                ammoConfig = config;
+            }
+        }
+
+        return ammoConfig.GetValue(ammoLevel);
     }
 }

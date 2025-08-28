@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using LastTrain.Ammunition;
 
 namespace Level
 {
@@ -9,24 +10,15 @@ namespace Level
         [SerializeField] private SharedData _sharedData;
 
         private LevelElement[] _levelElementsPrefabs;
-        private float _pickableAmmoPersent;
-        private PickableAmmunition[] _pickableAmmunitionsPrefabs;
 
         public void Init()
         {
             _levelElementsPrefabs = _sharedData.LevelSetting.LevelElements;
         }
 
-        public void SetPickableAmmoParameters(PickableAmmunition[] pickableAmmunitions,float pickableAmmoPersent)
-        {
-            _pickableAmmunitionsPrefabs = pickableAmmunitions;
-            _pickableAmmoPersent = pickableAmmoPersent;
-        }
-
         public LevelElement CreateElement(Vector3 position)
         {
             LevelElement element = Instantiate(_levelElementsPrefabs[GetRandomElementNumber()], _parentTransformForElements);
-            element.RandomSetPickableAmmunitions(_pickableAmmunitionsPrefabs, _pickableAmmoPersent);
             element.transform.position = position;
             return element;
         }

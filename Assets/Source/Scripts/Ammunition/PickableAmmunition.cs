@@ -1,48 +1,61 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 
-public class PickableAmmunition : MonoBehaviour
+namespace LastTrain.Ammunition
 {
-    [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
-    [field: SerializeField] public int CountProjectiles { get; private set; }
-
-    private PickableAmmunition _ammoPrefabKey;
-    private float _distanceCatch = 30f;
-    private float _durationMovement = 1f;
-
-    private void OnTriggerEnter(Collider other)
+    public class PickableAmmunition : MonoBehaviour
     {
-        if (other.TryGetComponent(out Projectile projectile))
+        [SerializeField] private int _countProjectiles;
+        [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
+
+        private PickableAmmunition _ammoPrefabKey;
+        private float _distanceCatch = 30f;
+        private float _durationMovement = 1f;
+        private int _currentProjectilesCount;
+
+        public int CountProjectiles { get; private set; }
+
+        private void OnTriggerEnter(Collider other)
         {
-            var ammunitionType = PrefabTypeOfWeapon.GetType();
-
-            Ammunition[] ammunitions = projectile.Owner.transform.parent.GetComponentsInChildren<Ammunition>();
-            Debug.Log(projectile.Owner.name);
-
-            foreach (Ammunition ammunition in ammunitions)
+            if (other.TryGetComponent(out Projectile projectile))
             {
-                if (ammunition.WeaponPrefab.GetType() == ammunitionType)
+                var ammunitionType = PrefabTypeOfWeapon.GetType();
+                Ammunition[] ammunitions = projectile.Owner.transform.parent.GetComponentsInChildren<Ammunition>();
+
+                foreach (Ammunition ammunition in ammunitions)
                 {
-                    ammunition.IncreaseProjectilesCount(CountProjectiles);
+                    if (ammunition.WeaponPrefab.GetType() == ammunitionType)
+                    {
+                        ammunition.IncreaseProjectilesCount(CountProjectiles);
+                    }
                 }
+
+                StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
+            }
+        }
+
+        public void Init(PickableAmmunition pickableAmmunition, float ammoPercent)
+        {
+            _currentProjectilesCount = (int)(_countProjectiles * ammoPercent / 100f);
+            CountProjectiles = _currentProjectilesCount;
+            SetPrefabKey(pickableAmmunition);
+        }
+
+        private void SetPrefabKey(PickableAmmunition pickableAmmunition)
+        {
+            _ammoPrefabKey = pickableAmmunition;
+        }
+
+        private IEnumerator DoPickableAnimation(Transform owner)
+        {
+            while (Vector3.Distance(transform.position, owner.position) > _distanceCatch)
+            {
+                transform.DOMove(owner.position, _durationMovement);
+                yield return null;
             }
 
-            StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
+            PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
         }
-    }
-
-    public void SetPrefabKey(PickableAmmunition pickableAmmunition) => _ammoPrefabKey = pickableAmmunition;
-
-    private IEnumerator DoPickableAnimation(Transform owner)
-    {
-        while (Vector3.Distance(transform.position, owner.position) > _distanceCatch)
-        {
-            transform.DOMove(owner.position, _durationMovement);
-            yield return null;
-        }
-
-        PickableAmmunitionPool.Instance.RealeseAmmunition(this, _ammoPrefabKey);
     }
 }

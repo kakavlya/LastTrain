@@ -6,3 +6,4 @@ Characteristic.WeaponSlots,Weapon slots,Silah yuvaları,Слоты оружия
 Characteristic.AttackSpeed,Angle speed,Saldırı hızı,Скорость атаки
 Characteristic.AttackAngle,Attack radius,Saldırı yarıçapı,Радиус атаки
 Characteristic.AoeDamage,Area damage,Alana göre hasar,Урон по площади
+Characteristic.Ammo,Ammunition (in percent),Mühimmat (yüzde olarak),Боезапас (в процентах)

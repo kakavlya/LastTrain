@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using LastTrain.Ammunition;
 
 public class Weapon : MonoBehaviour
 {

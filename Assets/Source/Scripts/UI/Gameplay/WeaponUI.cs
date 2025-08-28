@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.Ammunition;
 
 [RequireComponent(typeof(Image))]
 public class WeaponUI : MonoBehaviour

@@ -4,11 +4,13 @@ public class TrainProgress : BaseProgress
 {
     public int HealthLevel;
     public int SlotsLevel;
+    public int AmmoLevel;
 
     public TrainProgress(int defaultStatLevel = 0)
     {
         HealthLevel = defaultStatLevel;
         SlotsLevel = defaultStatLevel;
+        AmmoLevel = defaultStatLevel;
     }
 
     public override int GetLevel(StatType stat)
@@ -20,6 +22,9 @@ public class TrainProgress : BaseProgress
 
             case StatType.Slots:
                 return SlotsLevel;
+
+            case StatType.Ammo:
+                return AmmoLevel;
         }
 
         return 0;
@@ -27,7 +32,7 @@ public class TrainProgress : BaseProgress
 
     public override int GetSumLevels()
     {
-        return HealthLevel + SlotsLevel;
+        return HealthLevel + SlotsLevel + AmmoLevel;
     }
 
     public override void Increment(StatType stat)
@@ -40,6 +45,10 @@ public class TrainProgress : BaseProgress
 
             case StatType.Slots:
                 SlotsLevel++;
+                break;
+
+            case StatType.Ammo:
+                AmmoLevel++;
                 break;
         }
     }

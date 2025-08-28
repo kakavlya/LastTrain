@@ -95,6 +95,7 @@ public enum StatType
 {
     Damage,
     Range,
+    Ammo,
     AttackSpeed,
     AttackAngle,
     AoeDamage,
