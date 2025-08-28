@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsHandler: {fileID: 2124672939}
   _playerInventoryHandler: {fileID: 1874329932}
-  _gameplayScene: Alexander
+  _gameplayScene: Gameplay
   _playButton: {fileID: 4431932631631688371}
 --- !u!4 &9278145
 Transform:
@@ -8188,8 +8188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce65b812e4205d74b93ac56fd73cf089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuSceneName: Alexander - menu
-  _gameplaySceneName: Alexander
+  _menuSceneName: MainMenu
+  _gameplaySceneName: Gameplay
   _trainingSetting: {fileID: 11400000, guid: 15cc7603ef520434e83db578a63b76a7, type: 2}
   _trainingsWeapons:
   - {fileID: 11400000, guid: 848b642870b7c8b4c8d4a765128c831f, type: 2}

@@ -112,6 +112,9 @@ namespace LastTrain.Player
 
         private bool IsPointerOverUIWithJoystick()
         {
+            if (EventSystem.current == null)
+                return false;
+
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = Input.mousePosition;
             var results = new List<RaycastResult>();
@@ -130,6 +133,9 @@ namespace LastTrain.Player
 
         private bool IsPointerOverAnyUI()
         {
+            if (EventSystem.current == null)
+                return false;
+
             PointerEventData eventData = new PointerEventData(EventSystem.current)
             {
                 position = Input.mousePosition
