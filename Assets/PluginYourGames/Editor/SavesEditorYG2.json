@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 102,
+    "idSave": 250,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,18 +49,21 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 0,
+        "HealthLevel": 2,
         "SlotsLevel": 0,
-        "AmmoLevel": 0
+        "AmmoLevel": 1
     },
-    "Coins": 0,
+    "Coins": 240,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.0,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
-    "InventorySlots": [],
+    "InventorySlots": [
+        "",
+        "Гранатомет"
+    ],
     "PlayerInventorySlots": [
-        ""
+        "Пистолет-пулемет"
     ],
     "LevelsAvailability": [
         {
@@ -72,9 +75,9 @@
             "IsAvailable": false
         }
     ],
-    "IsDoneGameplayTraining": false,
-    "IsDoneMenuTraining": false,
-    "TrainingState": 0,
+    "IsDoneGameplayTraining": true,
+    "IsDoneMenuTraining": true,
+    "TrainingState": 10,
     "references": {
         "version": 2,
         "RefIds": [
@@ -87,10 +90,10 @@
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
-                    "DamageLevel": 0,
+                    "DamageLevel": 1,
                     "RangeLevel": 0,
-                    "IsAvailable": false,
-                    "AttackSpeedLevel": 0
+                    "IsAvailable": true,
+                    "AttackSpeedLevel": 5
                 }
             },
             {
@@ -119,7 +122,7 @@
                     "WeaponId": "GrenadeLauncher",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "IsAvailable": true,
                     "AoeDamageLevel": 0
                 }
             },

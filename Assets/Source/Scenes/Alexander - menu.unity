@@ -2940,8 +2940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74478b8d0906e1d4fac2c35a7f1a0072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideControl: 0
-  overrideScheme: 1
+  _overrideControl: 0
+  _overrideScheme: 0
 --- !u!4 &525227042
 Transform:
   m_ObjectHideFlags: 0

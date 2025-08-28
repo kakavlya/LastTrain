@@ -66,6 +66,10 @@ namespace LastTrain.ShopSystem
 
             var coins = CoinsHandler.Instance.CoinsCount;
             int cost = _upgradeConfig.GetCost(stat, level);
+
+            if (coins < cost)
+                return;
+
             CoinsHandler.Instance.RemoveCoins(cost);
             _progress.Increment(stat);
             Incremented?.Invoke(stat);

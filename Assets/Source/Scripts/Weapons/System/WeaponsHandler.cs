@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using YG;
 using LastTrain.AmmunitionSystem;
-using LastTrain.Data;
-using LastTrain.Persistence;
 using LastTrain.Player;
 using LastTrain.UI.Gameplay;
 using LastTrain.Weapons.Types;
@@ -16,13 +13,12 @@ namespace LastTrain.Weapons.System
         [SerializeField] private WeaponUI[] _uiCells;
         [SerializeField] private Ammunition[] _ammunitions;
         [SerializeField] private PlayerInput _weaponInput;
-        [SerializeField] private SharedData _sharedData;
+        [SerializeField] private WeaponCreator _weaponCreator;
 
         private Weapon[] _weapons;
         private Weapon _currentWeapon;
         private int _currentNumberWeapon;
         private Dictionary<Weapon, Ammunition> _weaponAmmoDictonary;
-        private float _ammoPercent;
 
         public event Action<Weapon> OnWeaponChange;
 
@@ -40,10 +36,26 @@ namespace LastTrain.Weapons.System
 
         public void Init()
         {
-            _ammoPercent = GetAmmoPercent();
-            CreateWeapons();
-            FillAmmoDictonary();
+            _weaponCreator.Init();
+            _weapons = _weaponCreator.CreateWeapons();
+            _weaponAmmoDictonary = _weaponCreator.CreateAmmunitionDictionary(_weapons, _ammunitions);
 
+            SetupUI();
+
+            _currentNumberWeapon = 0;
+            _currentWeapon = _weapons[0];
+            _weapons[0].gameObject.SetActive(true);
+
+            ActivateCurrentWeaponUI();
+
+            OnWeaponChange?.Invoke(_currentWeapon);
+            _weaponInput.WeaponChanged += ChangeWeapon;
+            _weaponInput.Fired += HandleFire;
+            _weaponInput.StopFired += HandleStopFire;
+        }
+
+        private void SetupUI()
+        {
             foreach (var cell in _uiCells)
             {
                 cell.gameObject.SetActive(false);
@@ -66,24 +78,6 @@ namespace LastTrain.Weapons.System
 
                 _uiCells[i].DeactivateWeapon(_weapons[i]);
             }
-
-            _currentNumberWeapon = 0;
-            _currentWeapon = _weapons[0];
-            _weapons[0].gameObject.SetActive(true);
-
-            if (_weaponAmmoDictonary.TryGetValue(_currentWeapon, out Ammunition ammo))
-            {
-                _uiCells[0].ActivateWeapon(_currentWeapon, ammo);
-            }
-            else
-            {
-                _uiCells[0].ActivateWeapon(_currentWeapon, null);
-            }
-
-            OnWeaponChange?.Invoke(_currentWeapon);
-            _weaponInput.WeaponChanged += ChangeWeapon;
-            _weaponInput.Fired += HandleFire;
-            _weaponInput.StopFired += HandleStopFire;
         }
 
         private void ChangeWeapon(int weaponNumber)
@@ -101,16 +95,21 @@ namespace LastTrain.Weapons.System
                 _currentWeapon = _weapons[_currentNumberWeapon];
                 _currentWeapon.gameObject.SetActive(true);
 
-                if (_weaponAmmoDictonary.TryGetValue(_currentWeapon, out Ammunition ammo))
-                {
-                    _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, ammo);
-                }
-                else
-                {
-                    _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, null);
-                }
+                ActivateCurrentWeaponUI();
 
                 OnWeaponChange?.Invoke(_currentWeapon);
+            }
+        }
+
+        private void ActivateCurrentWeaponUI()
+        {
+            if (_weaponAmmoDictonary.TryGetValue(_currentWeapon, out Ammunition ammo))
+            {
+                _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, ammo);
+            }
+            else
+            {
+                _uiCells[_currentNumberWeapon].ActivateWeapon(_currentWeapon, null);
             }
         }
 
@@ -139,97 +138,6 @@ namespace LastTrain.Weapons.System
         private void HandleStopFire()
         {
             _currentWeapon?.StopFire();
-        }
-
-        private void CreateWeapons()
-        {
-            List<WeaponProgress> weaponProgresses = GetWeaponProgressType();
-
-            var weaponConfigs = _sharedData.WeaponConfigs;
-            _weapons = new Weapon[weaponConfigs.Count];
-
-            for (int i = 0; i < weaponConfigs.Count; i++)
-            {
-                var config = weaponConfigs[i];
-                WeaponProgress weaponProgress = weaponProgresses.Find(weapon => weapon.WeaponId == config.WeaponId);
-                float damage = weaponConfigs[i].GetStat(StatType.Damage, weaponProgress.DamageLevel);
-                float range = weaponConfigs[i].GetStat(StatType.Range, weaponProgress.RangeLevel);
-                float? fireDelay = null;
-                float? fireAngle = null;
-                float? aoeDamage = null;
-
-                if (weaponProgress is AttackSpeedUpdatingWeaponProgress attackSpeedProgress &&
-                    config.TryFindStat(StatType.AttackSpeed))
-                {
-                    fireDelay = 1f / weaponConfigs[i].GetStat(StatType.AttackSpeed, attackSpeedProgress.AttackSpeedLevel);
-                }
-
-                if (weaponProgress is AttackAngleUpdatingWeaponProgress attackAngleProgress &&
-                    config.TryFindStat(StatType.AttackAngle))
-                {
-                    fireAngle = weaponConfigs[i].GetStat(StatType.AttackAngle, attackAngleProgress.AttackAngleLevel);
-                }
-
-                if (weaponProgress is AoeDamageUpdatingWeaponProgress aeoDamageProgress &&
-                    config.TryFindStat(StatType.AoeDamage))
-                {
-                    aoeDamage = weaponConfigs[i].GetStat(StatType.AoeDamage, aeoDamageProgress.AoeDamageLevel);
-                }
-
-                Weapon weaponInstance = Instantiate(weaponConfigs[i].WeaponPrefab, transform);
-                weaponInstance.Init(damage, range, fireDelay, fireAngle, aoeDamage);
-                weaponInstance.SetPrefabReference(weaponConfigs[i].WeaponPrefab);
-                weaponInstance.gameObject.SetActive(false);
-                _weapons[i] = weaponInstance;
-            }
-        }
-
-        private List<WeaponProgress> GetWeaponProgressType()
-        {
-            if (YG2.saves.IsDoneGameplayTraining)
-            {
-                return YG2.saves.WeaponsProgress;
-            }
-            else
-            {
-                return YG2.saves.TrainingWeaponsProgress;
-            }
-        }
-
-        private void FillAmmoDictonary()
-        {
-            _weaponAmmoDictonary = new Dictionary<Weapon, Ammunition>();
-
-            foreach (var weapon in _weapons)
-            {
-                foreach (var ammoPrefab in _ammunitions)
-                {
-                    if (ammoPrefab.WeaponPrefab == weapon.PrefabReference)
-                    {
-                        var ammoInstance = Instantiate(ammoPrefab, transform);
-                        ammoInstance.Init(_ammoPercent);
-                        _weaponAmmoDictonary[weapon] = ammoInstance;
-                        break;
-                    }
-                }
-            }
-        }
-
-        private float GetAmmoPercent()
-        {
-            var trainConfig = _sharedData.TrainUpgradeConfig.StatConfigs;
-            var ammoLevel = YG2.saves.TrainProgress.AmmoLevel;
-            StatConfig ammoConfig = null;
-
-            foreach (var config in trainConfig)
-            {
-                if (config.StatType == StatType.Ammo)
-                {
-                    ammoConfig = config;
-                }
-            }
-
-            return ammoConfig.GetValue(ammoLevel);
         }
     }
 }

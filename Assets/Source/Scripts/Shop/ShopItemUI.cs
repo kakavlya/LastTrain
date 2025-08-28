@@ -50,10 +50,6 @@ namespace LastTrain.ShopSystem
                 _upgradeButton.gameObject.SetActive(true);
             }
 
-            Refresh();
-        }
-        public void Refresh()
-        {
             UpdateTextLabels();
         }
 
