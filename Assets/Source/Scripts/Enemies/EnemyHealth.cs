@@ -1,46 +1,49 @@
-﻿using Assets.Source.Scripts.Core;
-using Assets.Source.Scripts.Enemies;
-using UnityEngine;
+﻿using UnityEngine;
+using LastTrain.Coins;
+using LastTrain.Core;
 
-public class EnemyHealth : HealthBase
+namespace LastTrain.Enemies
 {
-    [Header("Health Settings")]
-    [SerializeField] private float _maxHealth = 100;
-
-    private EnemyDeathHandler _deathHandler;
-    private int _rewardForKill;
-
-    protected override void Awake()
+    public class EnemyHealth : HealthBase
     {
-        base.Awake();
-        _deathHandler = GetComponent<EnemyDeathHandler>();
-    }
+        [Header("Health Settings")]
+        [SerializeField] private float _maxHealth = 100;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        CurrentHealth = _maxHealth;
-    }
+        private EnemyDeathHandler _deathHandler;
+        private int _rewardForKill;
 
-    public void SetRewardForKill(int reward)
-    {
-        _rewardForKill = reward;
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+            _deathHandler = GetComponent<EnemyDeathHandler>();
+        }
 
-    public void SetCurrentHealth(float health)
-    {
-        CurrentHealth = health;
-    }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            CurrentHealth = _maxHealth;
+        }
 
-    protected override void Die()
-    {
-        base.Die();
-        _deathHandler?.HandleDeath();
-        CoinsHandler.Instance.AddCoins(_rewardForKill);
-    }
+        public void SetRewardForKill(int reward)
+        {
+            _rewardForKill = reward;
+        }
 
-    public void HandleDie()
-    {
-        Die();
+        public void SetCurrentHealth(float health)
+        {
+            CurrentHealth = health;
+        }
+
+        public void HandleDie()
+        {
+            Die();
+        }
+
+        protected override void Die()
+        {
+            base.Die();
+            _deathHandler?.HandleDeath();
+            CoinsHandler.Instance.AddCoins(_rewardForKill);
+        }
     }
 }

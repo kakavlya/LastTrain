@@ -1,56 +1,59 @@
 using UnityEngine;
 
-public class PlatformDetector : MonoBehaviour
+namespace LastTrain.Core
 {
-    [SerializeField] bool overrideControl = false;
-    [SerializeField] ControlScheme overrideScheme;
-
-    public static PlatformDetector Instance { get; private set; }
-
-    public enum ControlScheme
+    public class PlatformDetector : MonoBehaviour
     {
-        Computer,
-        Mobile
-    }
+        public static PlatformDetector Instance { get; private set; }
 
-    public ControlScheme CurrentControlScheme { get; private set; }
+        [SerializeField] bool _overrideControl = false;
+        [SerializeField] ControlScheme _overrideScheme;
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
+        public enum ControlScheme
         {
-            Destroy(gameObject);
-            return;
+            Computer,
+            Mobile
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        public ControlScheme CurrentControlScheme { get; private set; }
 
-    private void Start()
-    {
-        if (overrideControl)
+        private void Awake()
         {
-            CurrentControlScheme = overrideScheme;
-        }
-        else
-        {
-            DetectPlatform();
-        }
-    }
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
-    private void DetectPlatform()
-    {
-        bool isWebGL = Application.platform == RuntimePlatform.WebGLPlayer;
-        bool isMobile = Application.isMobilePlatform;
-
-        if (isWebGL && isMobile)
-        {
-            CurrentControlScheme = ControlScheme.Mobile;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
+
+        private void Start()
         {
-            CurrentControlScheme = ControlScheme.Computer;
+            if (_overrideControl)
+            {
+                CurrentControlScheme = _overrideScheme;
+            }
+            else
+            {
+                DetectPlatform();
+            }
+        }
+
+        private void DetectPlatform()
+        {
+            bool isWebGL = Application.platform == RuntimePlatform.WebGLPlayer;
+            bool isMobile = Application.isMobilePlatform;
+
+            if (isWebGL && isMobile)
+            {
+                CurrentControlScheme = ControlScheme.Mobile;
+            }
+            else
+            {
+                CurrentControlScheme = ControlScheme.Computer;
+            }
         }
     }
 }

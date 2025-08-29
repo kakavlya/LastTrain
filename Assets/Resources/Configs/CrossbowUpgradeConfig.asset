@@ -76,9 +76,9 @@ MonoBehaviour:
     Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
     MinValue: 150
     MaxValue: 450
-    IsShowFractionalValue: 1
+    IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackSpeed
-    StatType: 2
+    StatType: 3
     Curve:
       serializedVersion: 2
       m_Curve:

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using LastTrain.Effects;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public class EnemyDeathHandler : MonoBehaviour
     {
@@ -22,11 +23,12 @@ namespace Assets.Source.Scripts.Enemies
             _collidersToDisable = GetComponentsInChildren<Collider>();
         }
 
-
         public void HandleDeath()
         {
             if (_movement != null) _movement.enabled = false;
+
             if (_controller != null) _controller.enabled = false;
+
             if (_wobble != null) _wobble.enabled = false;
 
             foreach (var col in _collidersToDisable)
@@ -41,7 +43,9 @@ namespace Assets.Source.Scripts.Enemies
         public void ResetState()
         {
             if (_movement != null) _movement.enabled = true;
+
             if (_controller != null) _controller.enabled = true;
+
             if (_wobble != null) _wobble.enabled = true;
 
             foreach (var col in _collidersToDisable)

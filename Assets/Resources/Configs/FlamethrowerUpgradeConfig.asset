@@ -76,9 +76,9 @@ MonoBehaviour:
     Costs: 2c01000058020000e8030000d00700008813000028230000b0360000204e00003075000050c30000
     MinValue: 50
     MaxValue: 100
-    IsShowFractionalValue: 1
+    IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
-    StatType: 3
+    StatType: 4
     Curve:
       serializedVersion: 2
       m_Curve:

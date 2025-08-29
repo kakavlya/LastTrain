@@ -1,7 +1,6 @@
-using Assets.Source.Scripts.Enemies;
 using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     [CreateAssetMenu(menuName = "Enemies/Behavior/Ram")]
     public class EnemyRamSettings : EnemyBehaviorSettings
@@ -27,7 +26,7 @@ namespace Assets.Source.Scripts.Enemies
         public float maxDecel = 40f;
         public float speedSmoothTime = 0.12f;
         public float checkRadius = 10f;
-        public AnimationCurve impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1); // can be null for fallback
+        public AnimationCurve impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {

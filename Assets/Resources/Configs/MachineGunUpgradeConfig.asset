@@ -76,6 +76,37 @@ MonoBehaviour:
     Costs: c800000090010000200300004006000060090000100e0000c01200005014000000190000401f0000
     MinValue: 100
     MaxValue: 250
+    IsShowFractionalValue: 0
+  - LocalizationKey: Characteristic.AttackSpeed
+    StatType: 3
+    Curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    MaxLevel: 10
+    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+    MinValue: 1.4
+    MaxValue: 5
     IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
   _weaponId: MachineGun

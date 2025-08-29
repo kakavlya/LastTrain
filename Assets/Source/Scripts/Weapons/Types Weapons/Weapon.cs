@@ -1,113 +1,119 @@
 using System;
 using UnityEngine;
+using LastTrain.AmmunitionSystem;
+using LastTrain.Particles;
+using LastTrain.Projectiles;
 
-public class Weapon : MonoBehaviour
+namespace LastTrain.Weapons.Types
 {
-    [Header("References")]
-    [SerializeField] private ParticleSystem _muzzleEffectPrefab;
-    [SerializeField] private Sprite _uiSpriteActive;
-    [SerializeField] private Sprite _uiSpriteDeactive;
-
-    [SerializeField] protected Transform FirePoint;
-    [SerializeField] protected Projectile ProjectilePrefab;
-
-    [Header("Shoot Settings")]
-    [SerializeField] protected float FireDelay = 0.1f;
-    [SerializeField] protected bool UsePooling = true;
-    [SerializeField] protected float ProjectileSpeed = 100;
-
-    private float _lastFireTime;
-    private float _currentFireDelay;
-
-    protected GameObject Owner;
-    protected float Damage;
-    protected float Range;
-
-    public event Action OnFired;
-    public event Action OnStopFired;
-
-    protected Vector3 Direction => FirePoint.forward;
-
-    public Weapon PrefabReference { get; private set; }
-    public Sprite UISpriteActive => _uiSpriteActive;
-    public Sprite UISpriteDeactive => _uiSpriteDeactive;
-
-    public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
+    public class Weapon : MonoBehaviour
     {
-        Owner = gameObject;
-        Damage = damage;
-        Range = range;
+        [Header("References")]
+        [SerializeField] private ParticleSystem _muzzleEffectPrefab;
+        [SerializeField] private Sprite _uiSpriteActive;
+        [SerializeField] private Sprite _uiSpriteDeactive;
+        [SerializeField] protected Transform FirePoint;
+        [SerializeField] protected Projectile ProjectilePrefab;
 
-        _currentFireDelay = fireDelay ?? FireDelay;
-    }
+        [Header("Shoot Settings")]
+        [SerializeField] protected float FireDelay = 0.1f;
+        [SerializeField] protected bool UsePooling = true;
+        [SerializeField] protected float ProjectileSpeed = 100;
 
-    public virtual bool GetIsLoopedFireSound() => false;
+        private float _lastFireTime;
+        private float _currentFireDelay;
 
-    public virtual void StopFire()
-    {
-        OnStopFired?.Invoke();
-    }
+        protected GameObject Owner;
+        protected float Damage;
+        protected float Range;
 
-    private bool FirePossibleCalculate()
-    {
-        if (Time.time - _lastFireTime < _currentFireDelay)
-            return false;
+        public event Action OnFired;
+        public event Action OnStopFired;
 
-        _lastFireTime = Time.time;
-        return true;
-    }
+        protected Vector3 Direction => FirePoint.forward;
 
-    protected virtual void OnWeaponFire()
-    {
-        var proj = UsePooling
-            ? ProjectilePool.Instance.Spawn(
-                ProjectilePrefab,
-                FirePoint.position,
-                Quaternion.LookRotation(Direction),
-                Owner,
-                ProjectileSpeed,
-                Damage,
-                Range)
-                    : Instantiate(
-                        ProjectilePrefab,
-                        FirePoint.position,
-                        Quaternion.LookRotation(Direction));
-    }
+        public Weapon PrefabReference { get; private set; }
 
-    public void Fire(Ammunition ammo)
-    {
-        if (FirePossibleCalculate() == true)
+        public Sprite UISpriteActive => _uiSpriteActive;
+
+        public Sprite UISpriteDeactive => _uiSpriteDeactive;
+
+        public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
-            if (ammo != null && !ammo.HasAmmo)
+            Owner = gameObject;
+            Damage = damage;
+            Range = range;
+            _currentFireDelay = fireDelay ?? FireDelay;
+        }
+
+        public void Fire(Ammunition ammo)
+        {
+            if (FirePossibleCalculate() == true)
             {
-                StopFire();
-                return;
+                if (ammo != null && !ammo.HasAmmo)
+                {
+                    StopFire();
+                    return;
+                }
+
+                OnFired?.Invoke();
+                OnWeaponFire();
+
+                if (_muzzleEffectPrefab != null)
+                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+
+                ammo?.DecreaseProjectilesCount();
             }
-
-            OnFired?.Invoke();
-            OnWeaponFire();
-
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
-
-            ammo?.DecreaseProjectilesCount();
         }
-    }
 
-    public void Fire()
-    {
-        if (FirePossibleCalculate() == true)
+        public void Fire()
         {
-            OnFired?.Invoke();
-            OnWeaponFire();
+            if (FirePossibleCalculate() == true)
+            {
+                OnFired?.Invoke();
+                OnWeaponFire();
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+                if (_muzzleEffectPrefab != null)
+                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+            }
         }
-    }
 
-    public void SetPrefabReference(Weapon prefab)
-    {
-        PrefabReference = prefab;
+        public void SetPrefabReference(Weapon prefab)
+        {
+            PrefabReference = prefab;
+        }
+
+        public virtual bool GetIsLoopedFireSound() => false;
+
+        public virtual void StopFire()
+        {
+            OnStopFired?.Invoke();
+        }
+
+        protected virtual void OnWeaponFire()
+        {
+            var proj = UsePooling
+                ? ProjectilePool.Instance.Spawn(
+                    ProjectilePrefab,
+                    FirePoint.position,
+                    Quaternion.LookRotation(Direction),
+                    Owner,
+                    ProjectileSpeed,
+                    Damage,
+                    Range)
+                        : Instantiate(
+                            ProjectilePrefab,
+                            FirePoint.position,
+                            Quaternion.LookRotation(Direction));
+        }
+
+        private bool FirePossibleCalculate()
+        {
+            if (Time.time - _lastFireTime < _currentFireDelay)
+                return false;
+
+            _lastFireTime = Time.time;
+            return true;
+        }
     }
 }

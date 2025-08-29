@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-public class InterstitialAdv : MonoBehaviour
+namespace LastTrain.Advertisement
 {
-    [SerializeField] private Button _nextLevelButton;
-    [SerializeField] private Button _returnMenuAfterWinButton;
-
-    private void Awake()
+    public class InterstitialAdv : MonoBehaviour
     {
-        _nextLevelButton.onClick.AddListener(() => {YG2.InterstitialAdvShow();});
-        _returnMenuAfterWinButton.onClick.AddListener(() => { YG2.InterstitialAdvShow(); });
+        [SerializeField] private Button _nextLevelButton;
+        [SerializeField] private Button _returnMenuAfterWinButton;
+
+        private void Awake()
+        {
+            _nextLevelButton.onClick.AddListener(() => { YG2.InterstitialAdvShow(); });
+            _returnMenuAfterWinButton.onClick.AddListener(() => { YG2.InterstitialAdvShow(); });
+        }
     }
 }

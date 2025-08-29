@@ -1,39 +1,42 @@
 using System;
 
-[Serializable]
-public class AttackAngleUpdatingWeaponProgress : WeaponProgress
+namespace LastTrain.Persistence
 {
-    public int AttackAngleLevel;
-
-    public AttackAngleUpdatingWeaponProgress(string weaponId, int defaultStatLevel = 0) : base(weaponId, defaultStatLevel)
+    [Serializable]
+    public class AttackAngleUpdatingWeaponProgress : WeaponProgress
     {
-        AttackAngleLevel = defaultStatLevel;
-    }
+        public int AttackAngleLevel;
 
-    public override int GetLevel(StatType stat)
-    {
-        if (stat == StatType.AttackAngle)
+        public AttackAngleUpdatingWeaponProgress(string weaponId, int defaultStatLevel = 0) : base(weaponId, defaultStatLevel)
         {
-            return AttackAngleLevel;
+            AttackAngleLevel = defaultStatLevel;
         }
 
-        return base.GetLevel(stat);
-    }
-
-    public override int GetSumLevels()
-    {
-        return base.GetSumLevels() + AttackAngleLevel;
-    }
-
-    public override void Increment(StatType stat)
-    {
-        if (stat == StatType.AttackAngle)
+        public override int GetLevel(StatType stat)
         {
-            AttackAngleLevel++;
+            if (stat == StatType.AttackAngle)
+            {
+                return AttackAngleLevel;
+            }
+
+            return base.GetLevel(stat);
         }
-        else
+
+        public override int GetSumLevels()
         {
-            base.Increment(stat);
+            return base.GetSumLevels() + AttackAngleLevel;
+        }
+
+        public override void Increment(StatType stat)
+        {
+            if (stat == StatType.AttackAngle)
+            {
+                AttackAngleLevel++;
+            }
+            else
+            {
+                base.Increment(stat);
+            }
         }
     }
 }

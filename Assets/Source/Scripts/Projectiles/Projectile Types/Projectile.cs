@@ -1,7 +1,7 @@
 using System;
-using Assets.Source.Scripts.Core;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
+using LastTrain.Enemies;
+using LastTrain.Particles;
 
 public class Projectile : MonoBehaviour
 {

@@ -1,39 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using LastTrain.Projectiles;
 
-public class Bazooka : Weapon
+namespace LastTrain.Weapons.Types
 {
-    [Header("Explode Settings")]
-    [SerializeField] private float _aoeDamage;
-    [SerializeField] private float _aoeRange;
-
-    private float _currentAoeDamage;
-
-    public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
+    public class Bazooka : Weapon
     {
-        base.Init(damage, range, fireDelay, fireAngle, aoeDamage);
+        [Header("Explode Settings")]
+        [SerializeField] private float _aoeDamage;
+        [SerializeField] private float _aoeRange;
 
-        _currentAoeDamage = aoeDamage ?? _aoeDamage;
-    }
+        private float _currentAoeDamage;
 
-    protected override void OnWeaponFire()
-    {
-        Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.forward);
+        public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
+        {
+            base.Init(damage, range, fireDelay, fireAngle, aoeDamage);
+            _currentAoeDamage = aoeDamage ?? _aoeDamage;
+        }
 
-        var proj = UsePooling
-        ? ProjectilePool.Instance.Spawn(
-            ProjectilePrefab,
-            FirePoint.position,
-            rotation,
-            Owner,
-            ProjectileSpeed, Damage,
-            Range,
-            _currentAoeDamage,
-            _aoeRange
-            )
-        : Instantiate(ProjectilePrefab, FirePoint.position, rotation);
+        protected override void OnWeaponFire()
+        {
+            Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.forward);
+            var proj = UsePooling
+            ? ProjectilePool.Instance.Spawn(
+                ProjectilePrefab,
+                FirePoint.position,
+                rotation,
+                Owner,
+                ProjectileSpeed, Damage,
+                Range,
+                _currentAoeDamage,
+                _aoeRange
+                )
+            : Instantiate(ProjectilePrefab, FirePoint.position, rotation);
 
-        proj.SetVelocity();
+            proj.SetVelocity();
+        }
     }
 }

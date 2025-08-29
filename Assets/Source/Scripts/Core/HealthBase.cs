@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using LastTrain.Effects;
+using LastTrain.Enemies;
 
-namespace Assets.Source.Scripts.Core
+namespace LastTrain.Core
 {
     public class HealthBase : MonoBehaviour, IDamageable
-    {
-        //[Header("Health Settings")]
-        //[SerializeField] private int _maxHealth = 100;
-        
+    {      
         private ModelEffects _view;
 
         protected float CurrentHealth;

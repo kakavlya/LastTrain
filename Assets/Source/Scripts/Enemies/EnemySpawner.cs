@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System;
-using Level;
-using Player;
 using System.Collections.Generic;
+using LastTrain.Data;
+using LastTrain.Level;
+using LastTrain.Player;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public class EnemySpawner : MonoBehaviour
     {
@@ -22,43 +22,8 @@ namespace Assets.Source.Scripts.Enemies
         private EnemySpawnEntry[] _entries;
         private Transform _playerTarget;
         private float[] _timers;
-
         private bool _paused;
         private bool _stopped;
-
-        public void Init()
-        {
-            _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
-            _entries = _spawnerConfig.entries;
-            _levelGenerator.StartedElementDefined += SetSpawnPoint;
-            _levelGenerator.ElementChanged += SetSpawnPoint;
-        }
-
-        private void OnDisable()
-        {
-            _levelGenerator.StartedElementDefined -= SetSpawnPoint;
-            _levelGenerator.ElementChanged -= SetSpawnPoint;
-        }
-
-        public void Init(Transform playerTarget)
-        {
-            _playerTarget = playerTarget;
-        }
-
-        public void Begin()
-        {
-            _stopped = false;
-            _paused = false;
-            InitTimers();
-        }
-
-        private void InitTimers()
-        {
-            _timers = new float[_entries.Length];
-
-            for (int i = 0; i < _entries.Length; i++)
-                _timers[i] = _entries[i].spawnInterval;
-        }
 
         private void Update()
         {
@@ -77,9 +42,52 @@ namespace Assets.Source.Scripts.Enemies
             }
         }
 
+        private void OnDisable()
+        {
+            _levelGenerator.StartedElementDefined -= SetSpawnPoint;
+            _levelGenerator.ElementChanged -= SetSpawnPoint;
+        }
+
+        public void Init()
+        {
+            _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
+            _entries = _spawnerConfig.entries;
+            _levelGenerator.StartedElementDefined += SetSpawnPoint;
+            _levelGenerator.ElementChanged += SetSpawnPoint;
+        }
+
+        public void SetTarget(Transform playerTarget)
+        {
+            _playerTarget = playerTarget;
+        }
+
+        public void Begin()
+        {
+            _stopped = false;
+            _paused = false;
+            InitTimers();
+        }
+
+        public void Pause() => _paused = true;
+        public void Resume() => _paused = false;
+
+        public void Stop()
+        {
+            _stopped = true;
+            _paused = false;
+        }
+
         public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)
         {
             _spawnPoints = currentElement.EnemySpawnPoints;
+        }
+
+        private void InitTimers()
+        {
+            _timers = new float[_entries.Length];
+
+            for (int i = 0; i < _entries.Length; i++)
+                _timers[i] = _entries[i].spawnInterval;
         }
 
         private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)
@@ -100,24 +108,12 @@ namespace Assets.Source.Scripts.Enemies
 
             var sp = spawnPointsList[UnityEngine.Random.Range(0, spawnPointsList.Count)];
             Vector3 pos = sp.position;
-
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
-
             var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
-
             enemy.GetComponent<EnemyHealth>().SetRewardForKill(spawnEntry.behaviorSettings.Reward);
             enemy.GetComponent<EnemyHealth>().SetCurrentHealth(spawnEntry.behaviorSettings.Health);
             spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
-        }
-
-        public void Pause() => _paused = true;
-        public void Resume() => _paused = false;
-
-        public void Stop()
-        {
-            _stopped = true;
-            _paused = false;
         }
     }
 }

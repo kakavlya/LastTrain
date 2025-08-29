@@ -76,9 +76,9 @@ MonoBehaviour:
     Costs: c8000000900100002003000014050000d0070000b80b0000941100006419000028230000e02e0000
     MinValue: 120
     MaxValue: 300
-    IsShowFractionalValue: 1
+    IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AoeDamage
-    StatType: 4
+    StatType: 5
     Curve:
       serializedVersion: 2
       m_Curve:

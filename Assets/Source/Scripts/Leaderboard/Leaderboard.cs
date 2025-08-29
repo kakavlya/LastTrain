@@ -1,42 +1,46 @@
 using UnityEngine;
 using YG;
 using YG.Utils.LB;
+using LastTrain.Persistence;
 
-public class Leaderboard : MonoBehaviour
+namespace LastTrain.Leaderboard
 {
-    [SerializeField] private ProgressHandler _progressHandler;
-    [SerializeField] private string _techniñalName;
-
-    private void OnEnable()
+    public class Leaderboard : MonoBehaviour
     {
-        _progressHandler.LevelChanged += GetLeaderboard;
-        YG2.onGetLeaderboard += CompareScores;
-    }
+        [SerializeField] private ProgressHandler _progressHandler;
+        [SerializeField] private string _techniñalName;
 
-    private void OnDisable()
-    {
-        _progressHandler.LevelChanged -= GetLeaderboard;
-        YG2.onGetLeaderboard -= CompareScores;
-    }
-
-    public void GetLeaderboard()
-    {
-        YG2.GetLeaderboard(_techniñalName);
-    }
-
-    private void CompareScores(LBData lBData)
-    {
-        if (lBData.currentPlayer == null)
+        private void OnEnable()
         {
-            YG2.SetLeaderboard(_techniñalName, _progressHandler.Level);
-            return;
+            _progressHandler.LevelChanged += GetLeaderboard;
+            YG2.onGetLeaderboard += CompareScores;
         }
 
-        var bestPlayerScore = lBData.currentPlayer.score;
-
-        if (_progressHandler.Level > bestPlayerScore)
+        private void OnDisable()
         {
-            YG2.SetLeaderboard(_techniñalName, _progressHandler.Level);
+            _progressHandler.LevelChanged -= GetLeaderboard;
+            YG2.onGetLeaderboard -= CompareScores;
+        }
+
+        public void GetLeaderboard()
+        {
+            YG2.GetLeaderboard(_techniñalName);
+        }
+
+        private void CompareScores(LBData lBData)
+        {
+            if (lBData.currentPlayer == null)
+            {
+                YG2.SetLeaderboard(_techniñalName, _progressHandler.Level);
+                return;
+            }
+
+            var bestPlayerScore = lBData.currentPlayer.score;
+
+            if (_progressHandler.Level > bestPlayerScore)
+            {
+                YG2.SetLeaderboard(_techniñalName, _progressHandler.Level);
+            }
         }
     }
 }

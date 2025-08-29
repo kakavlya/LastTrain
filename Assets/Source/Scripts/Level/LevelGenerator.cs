@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Level;
-using Player;
 using UnityEngine;
+using LastTrain.Player;
 
-namespace Level
+namespace LastTrain.Level
 {
     public class LevelGenerator : MonoBehaviour
     {
@@ -18,10 +17,15 @@ namespace Level
         private int _maxCount = 5;
         private Vector3 _workingPosition;
 
-        public Vector3 StartTrainPosition { get; private set; }
-
         public event Action<LevelElement, LevelElement> StartedElementDefined;
         public event Action<LevelElement, LevelElement> ElementChanged;
+
+        public Vector3 StartTrainPosition { get; private set; }
+
+        private void OnDisable()
+        {
+            _trainMovement.SplineIsOvered -= ChangeCurrentElementAndExtendLevel;
+        }
 
         public void Init()
         {
@@ -29,11 +33,6 @@ namespace Level
             _workingPosition = _startElementPosition;
 
             InitStartedElements();
-        }
-
-        private void OnDisable()
-        {
-            _trainMovement.SplineIsOvered -= ChangeCurrentElementAndExtendLevel;
         }
 
         private void AddElementOnLevel()
@@ -61,7 +60,6 @@ namespace Level
             if (_elementsOnScene.Count == 0) return;
 
             LevelElement lastElement = _elementsOnScene[_elementsOnScene.Count - 1];
-
             float elementWidth = lastElement.GetComponent<Terrain>().terrainData.size.x;
             _workingPosition.x = lastElement.transform.position.x + elementWidth;
         }

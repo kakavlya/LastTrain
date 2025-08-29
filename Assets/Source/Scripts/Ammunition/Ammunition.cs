@@ -1,55 +1,65 @@
 using System;
 using UnityEngine;
+using LastTrain.Weapons.Types;
 
-public class Ammunition : MonoBehaviour
+namespace LastTrain.AmmunitionSystem
 {
-    [SerializeField] private Weapon _weaponPrefab;
-    [SerializeField] private int _maxAmmo;
-
-    public event Action <int> Updated;
-    public event Action<int> AmmoAdded;
-
-    public Weapon WeaponPrefab => _weaponPrefab;
-    public bool HasAmmo { get; private set; } = true;
-    public int CurrentAmmo { get; private set; }
-
-    private void Awake()
+    public class Ammunition : MonoBehaviour
     {
-        CurrentAmmo = _maxAmmo;
-        Updated?.Invoke(CurrentAmmo);
-    }
+        [SerializeField] private Weapon _weaponPrefab;
+        [SerializeField] private int _maxAmmo;
 
-    public void DecreaseProjectilesCount()
-    {
-        if (CurrentAmmo > 0)
-        {
-            CurrentAmmo--;
-        }
-        else
-        {
-            HasAmmo = false;
-        }
+        private int _currentAmmo;
 
-        Updated?.Invoke(CurrentAmmo);
-    }
+        public event Action<int> Updated;
+        public event Action<int> AmmoAdded;
 
-    public void IncreaseProjectilesCount(int addedCount)
-    {
-        if (CurrentAmmo + addedCount < _maxAmmo)
+        public Weapon WeaponPrefab => _weaponPrefab;
+
+        public bool HasAmmo { get; private set; } = true;
+
+        public int CurrentAmmo { get; private set; }
+
+
+        public void Init(float ammoPercent)
         {
-            CurrentAmmo += addedCount;
-        }
-        else
-        {
-            CurrentAmmo = _maxAmmo;
+            _currentAmmo = (int)(_maxAmmo * ammoPercent / 100f);
+            CurrentAmmo = _currentAmmo;
+            Updated?.Invoke(CurrentAmmo);
         }
 
-        if (CurrentAmmo > 0)
+        public void DecreaseProjectilesCount()
         {
-            HasAmmo = true;
+            if (CurrentAmmo > 0)
+            {
+                CurrentAmmo--;
+            }
+            else
+            {
+                HasAmmo = false;
+            }
+
+            Updated?.Invoke(CurrentAmmo);
         }
 
-        Updated?.Invoke(CurrentAmmo);
-        AmmoAdded?.Invoke(addedCount);
+        public void IncreaseProjectilesCount(int addedCount)
+        {
+            if (CurrentAmmo + addedCount < _currentAmmo)
+            {
+                CurrentAmmo += addedCount;
+            }
+            else
+            {
+                CurrentAmmo = _currentAmmo;
+            }
+
+            if (CurrentAmmo > 0)
+            {
+                HasAmmo = true;
+            }
+
+            Updated?.Invoke(CurrentAmmo);
+            AmmoAdded?.Invoke(addedCount);
+        }
     }
 }

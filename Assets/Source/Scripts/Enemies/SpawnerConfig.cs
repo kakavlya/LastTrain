@@ -1,8 +1,6 @@
-﻿using Assets.Source.Scripts.Enemies;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     [CreateAssetMenu(menuName = "Spawners/Spawner Config")]
     public class SpawnerConfig : ScriptableObject

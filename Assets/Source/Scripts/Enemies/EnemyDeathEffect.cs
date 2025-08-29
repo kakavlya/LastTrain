@@ -1,22 +1,19 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
-namespace Assets.Source.Scripts.Enemies
+namespace LastTrain.Enemies
 {
     public class EnemyDeathEffect : MonoBehaviour
     {
         [SerializeField] private Transform _visualRoot;
         [SerializeField] private float _torqueAmount = 180f;
         [SerializeField] private float _upwardForce = 3f;
-        [SerializeField] private float _duration = 2f;
-
-        private Sequence _deathSequence;
-
         [SerializeField] private float _flyDuration = 1f;
         [SerializeField] private float _rotateDuration = 2f;
         [SerializeField] private float _disappearDelay = 0.1f;
         [SerializeField] private float _deactivateTime = 1f; 
+
+        private Sequence _deathSequence;
 
         public void Play()
         {
@@ -24,14 +21,13 @@ namespace Assets.Source.Scripts.Enemies
                 _visualRoot = transform;
 
             _deathSequence?.Kill();
-
             Vector3 launchVelocity = Vector3.up * _upwardForce + Random.insideUnitSphere;
             Vector3 targetPosition = _visualRoot.position + launchVelocity;
             Vector3 rotationAxis = Random.onUnitSphere * _torqueAmount;
-
             _deathSequence = DOTween.Sequence();
             _deathSequence.Append(_visualRoot.DOMove(targetPosition, _flyDuration).SetEase(Ease.OutExpo));
-            _deathSequence.Join(_visualRoot.DORotate(rotationAxis, _rotateDuration, RotateMode.FastBeyond360).SetEase(Ease.OutExpo));
+            _deathSequence.Join(_visualRoot.DORotate(
+                rotationAxis, _rotateDuration, RotateMode.FastBeyond360).SetEase(Ease.OutExpo));
             _deathSequence.AppendInterval(_disappearDelay);
 
             _deathSequence.InsertCallback(_deactivateTime, () =>
@@ -41,7 +37,7 @@ namespace Assets.Source.Scripts.Enemies
 
             _deathSequence.OnComplete(() =>
             {
-                gameObject.SetActive(false); // fallback
+                gameObject.SetActive(false);
             });
         }
 

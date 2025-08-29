@@ -1,44 +1,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
+using LastTrain.Data;
+using LastTrain.ShopSystem;
 
-public class PlayerInventoryHandler : InventoryHandler
+namespace LastTrain.Inventory
 {
-    [SerializeField] private Shop _shop;
-    [SerializeField] private SharedData _sharedData;
-
-    protected override void Start()
+    public class PlayerInventoryHandler : InventoryHandler
     {
-        base.Start();
-        _shop.SlotIncremented += AddNewSlot;
-    }
+        [SerializeField] private Shop _shop;
+        [SerializeField] private SharedData _sharedData;
 
-    protected override List<string> GetAllSlotsFromSave()
-    {
-        return YG2.saves.PlayerInventorySlots;
-    }
-
-    public bool TryGiveInventoryWeaponFromSlots()
-    {
-        _sharedData.WeaponConfigs.Clear();
-        int gaveWeaponsCount = 0;
-
-        foreach (var slot in ActiveSlotUIs)
+        protected override void Start()
         {
-            if (slot.GetComponentInChildren<InventoryWeapon>() != null)
-            {
-                _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
-                gaveWeaponsCount++;
-            }
+            base.Start();
+            _shop.SlotIncremented += AddNewSlot;
         }
 
-        return gaveWeaponsCount > 0;
-    }
+        public bool TryGiveInventoryWeaponFromSlots()
+        {
+            _sharedData.WeaponConfigs.Clear();
+            int gaveWeaponsCount = 0;
 
-    private void AddNewSlot()
-    {
-        YG2.saves.PlayerInventorySlots.Add("");
-        SubmitActiveSlots();
-        YG2.SaveProgress();
+            foreach (var slot in ActiveSlotUIs)
+            {
+                if (slot.GetComponentInChildren<InventoryWeapon>() != null)
+                {
+                    _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
+                    gaveWeaponsCount++;
+                }
+            }
+
+            return gaveWeaponsCount > 0;
+        }
+
+        protected override List<string> GetAllSlotsFromSave()
+        {
+            return YG2.saves.PlayerInventorySlots;
+        }
+
+        private void AddNewSlot()
+        {
+            YG2.saves.PlayerInventorySlots.Add("");
+            SubmitActiveSlots();
+            YG2.SaveProgress();
+        }
     }
 }

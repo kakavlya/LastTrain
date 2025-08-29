@@ -1,67 +1,68 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PickableAmmunitionPool : MonoBehaviour
+namespace LastTrain.AmmunitionSystem
 {
-    [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
-
-    private Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>> _pools =
-        new Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>>();
-
-    public static PickableAmmunitionPool Instance { get; private set; }
-
-    public void Init()
+    public class PickableAmmunitionPool : MonoBehaviour
     {
-        Instance = this;
+        [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
 
-        InitializePools();
-    }
+        public static PickableAmmunitionPool Instance { get; private set; }
 
-    private void InitializePools()
-    {
-        foreach (var ammoPrefab in _pickableAmmunitionPrefabs)
+        private Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>> _pools =
+            new Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>>();
+
+        public void Init()
         {
-            CreatePoolForPrefab(ammoPrefab);
-        }
-    }
-
-    private void CreatePoolForPrefab(PickableAmmunition pickableAmmunitionPrefab)
-    {
-        if (!_pools.ContainsKey(pickableAmmunitionPrefab))
-        {
-            _pools[pickableAmmunitionPrefab] = new ObjectPool<PickableAmmunition>(
-                createFunc: () => Instantiate(pickableAmmunitionPrefab, transform),
-                actionOnGet: (obj) => obj.gameObject.SetActive(true),
-                actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-                actionOnDestroy: (obj) => Destroy(obj.gameObject)
-            );
-        }
-    }
-
-    public PickableAmmunition Spawn(PickableAmmunition pickableAmmunition, Vector3 position)
-    {
-        if (!_pools.ContainsKey(pickableAmmunition))
-        {
-            CreatePoolForPrefab(pickableAmmunition);
+            Instance = this;
+            InitializePools();
         }
 
-        var currentPickableAmmo = _pools[pickableAmmunition].Get();
-        currentPickableAmmo.transform.position = position;
-        currentPickableAmmo.SetPrefabKey(pickableAmmunition);
-        return currentPickableAmmo;
-    }
+        public PickableAmmunition Spawn(PickableAmmunition pickableAmmunition, Vector3 position, float ammoPercent)
+        {
+            if (!_pools.ContainsKey(pickableAmmunition))
+            {
+                CreatePoolForPrefab(pickableAmmunition);
+            }
 
-    public void RealeseAmmunition(PickableAmmunition pickableAmmunition, PickableAmmunition ammunitionKey)
-    {
-        if (_pools.ContainsKey(ammunitionKey))
-        {
-            _pools[ammunitionKey].Release(pickableAmmunition);
+            var currentPickableAmmo = _pools[pickableAmmunition].Get();
+            currentPickableAmmo.transform.position = position;
+            currentPickableAmmo.Init(pickableAmmunition, ammoPercent);
+            return currentPickableAmmo;
         }
-        else
+
+        public void RealeseAmmunition(PickableAmmunition pickableAmmunition, PickableAmmunition ammunitionKey)
         {
-            Destroy(pickableAmmunition.gameObject);
+            if (_pools.ContainsKey(ammunitionKey))
+            {
+                _pools[ammunitionKey].Release(pickableAmmunition);
+            }
+            else
+            {
+                Destroy(pickableAmmunition.gameObject);
+            }
+        }
+
+        private void InitializePools()
+        {
+            foreach (var ammoPrefab in _pickableAmmunitionPrefabs)
+            {
+                CreatePoolForPrefab(ammoPrefab);
+            }
+        }
+
+        private void CreatePoolForPrefab(PickableAmmunition pickableAmmunitionPrefab)
+        {
+            if (!_pools.ContainsKey(pickableAmmunitionPrefab))
+            {
+                _pools[pickableAmmunitionPrefab] = new ObjectPool<PickableAmmunition>(
+                    createFunc: () => Instantiate(pickableAmmunitionPrefab, transform),
+                    actionOnGet: (obj) => obj.gameObject.SetActive(true),
+                    actionOnRelease: (obj) => obj.gameObject.SetActive(false),
+                    actionOnDestroy: (obj) => Destroy(obj.gameObject)
+                );
+            }
         }
     }
 }

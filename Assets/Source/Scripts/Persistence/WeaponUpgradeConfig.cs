@@ -1,13 +1,17 @@
 using UnityEngine;
+using LastTrain.Weapons.Types;
 
-[CreateAssetMenu(menuName = "Config/WeaponUpgrade")]
-public class WeaponUpgradeConfig : UpgradeConfig
+namespace LastTrain.Persistence
 {
-    [SerializeField] private string _weaponId;
+    [CreateAssetMenu(menuName = "Config/WeaponUpgrade")]
+    public class WeaponUpgradeConfig : UpgradeConfig
+    {
+        [SerializeField] private string _weaponId;
 
-    public Weapon WeaponPrefab;
-    public int UnblockingCost;
+        public Weapon WeaponPrefab;
+        public int UnblockingCost;
 
-    public string WeaponId =>
-        string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
+        public string WeaponId =>
+            string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
+    }
 }

@@ -1,38 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VolumeSettings : MonoBehaviour
+namespace LastTrain.Audio
 {
-    [SerializeField] private Slider _effectsVolumeSlider;
-    [SerializeField] private Slider _musicVolumeSlider;
-
-    private void Awake()
+    public class VolumeSettings : MonoBehaviour
     {
-        if (AudioManager.Instance != null)
+        [SerializeField] private Slider _effectsVolumeSlider;
+        [SerializeField] private Slider _musicVolumeSlider;
+
+        private void Awake()
         {
-            _effectsVolumeSlider.value = AudioManager.Instance.EffectsAudioVolume;
-            _musicVolumeSlider.value = AudioManager.Instance.MusicAudioVolume;
+            if (AudioManager.Instance != null)
+            {
+                _effectsVolumeSlider.value = AudioManager.Instance.EffectsAudioVolume;
+                _musicVolumeSlider.value = AudioManager.Instance.MusicAudioVolume;
+            }
+
+            _effectsVolumeSlider.onValueChanged.AddListener(ChangeWeaponVolume);
+            _musicVolumeSlider.onValueChanged.AddListener(ChangeBackgroundVolume);
         }
 
-        _effectsVolumeSlider.onValueChanged.AddListener(ChangeWeaponVolume);
-        _musicVolumeSlider.onValueChanged.AddListener(ChangeBackgroundVolume);
-    }
-
-    private void ChangeWeaponVolume(float volume)
-    {
-        if (AudioManager.Instance != null)
+        private void ChangeWeaponVolume(float volume)
         {
-            AudioManager.Instance.ChangeEffectsVolume(volume);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.ChangeEffectsVolume(volume);
+            }
         }
-    }
 
-    private void ChangeBackgroundVolume(float volume)
-    {
-        if (AudioManager.Instance != null)
+        private void ChangeBackgroundVolume(float volume)
         {
-            AudioManager.Instance.ChangeMusicVolume(volume);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.ChangeMusicVolume(volume);
+            }
         }
     }
 }

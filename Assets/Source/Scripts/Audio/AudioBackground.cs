@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class AudioBackground : MonoBehaviour
+namespace LastTrain.Audio
 {
-    [SerializeField] private AudioClip[] _audioClips;
-
-    private void Start()
+    public class AudioBackground : MonoBehaviour
     {
-        PlayRandomClip();
-    }
+        [SerializeField] private AudioClip[] _audioClips;
 
-    private void PlayRandomClip()
-    {
-        if (_audioClips.Length > 0)
+        private void Start()
         {
-            var numberClip = Random.Range(0, _audioClips.Length);
-            AudioManager.Instance.PlayBackgroundMusic(_audioClips[numberClip]);
+            PlayRandomClip();
+        }
+
+        private void PlayRandomClip()
+        {
+            if (_audioClips.Length > 0)
+            {
+                var numberClip = Random.Range(0, _audioClips.Length);
+                AudioManager.Instance.PlayBackgroundMusic(_audioClips[numberClip]);
+            }
         }
     }
 }
