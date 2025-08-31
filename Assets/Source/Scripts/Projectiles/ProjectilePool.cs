@@ -14,8 +14,10 @@ namespace LastTrain.Projectiles
             Instance = this;
         }
 
-        public Projectile Spawn(Projectile projectilePrefab, Vector3 position, Quaternion rotation,
-            GameObject owner, float speed, float damage, float maxDistance, float aoeDamage = 0, float aoeRange = 0)
+        public Projectile Spawn(
+            Projectile projectilePrefab, Vector3 position, Quaternion rotation,
+            GameObject owner, float speed, float damage, float maxDistance,
+            float aoeDamage = 0, float aoeRange = 0)
         {
             if (!_pools.TryGetValue(projectilePrefab, out var pool))
             {
@@ -23,12 +25,24 @@ namespace LastTrain.Projectiles
                 _pools[projectilePrefab] = pool;
             }
 
-            Projectile proj = pool.Count > 0
-                ? pool.Dequeue()
-                : CreateNew(projectilePrefab, pool);
+            Projectile proj = null;
+
+            // достаЄм неактивный экземпл€р
+            while (pool.Count > 0 && proj == null)
+            {
+                var candidate = pool.Dequeue();
+                if (candidate && !candidate.gameObject.activeSelf)
+                    proj = candidate;
+                else if (candidate && candidate.gameObject.activeSelf)
+                    Debug.LogWarning("ProjectilePool: dequeued active projectile Ч creating a new one.");
+            }
+
+            if (proj == null)
+                proj = CreateNew(projectilePrefab); 
 
             proj.Initial(position, rotation, owner, speed, damage, maxDistance, true, aoeDamage, aoeRange);
             proj.gameObject.SetActive(true);
+
             return proj;
         }
 
@@ -41,8 +55,19 @@ namespace LastTrain.Projectiles
             return projectile;
         }
 
+        private Projectile CreateNew(Projectile projectilePrefab)
+        {
+            var projectile = Instantiate(projectilePrefab, transform);
+            projectile.gameObject.SetActive(false);
+
+            projectile.OnReturnToPool += (proj) => ReturnToPool(projectilePrefab, proj);
+            return projectile;
+        }
+
         private void ReturnToPool(Projectile projectilePrefab, Projectile proj)
         {
+            if (!proj) return;
+
             proj.gameObject.SetActive(false);
             proj.transform.SetParent(transform);
 
@@ -52,16 +77,13 @@ namespace LastTrain.Projectiles
                 rb.angularVelocity = Vector3.zero;
             }
 
-            if (_pools.TryGetValue(projectilePrefab, out var pool))
+            if (!_pools.TryGetValue(projectilePrefab, out var pool))
             {
-                pool.Enqueue(proj);
+                pool = new Queue<Projectile>();
+                _pools[projectilePrefab] = pool;
             }
-            else
-            {
-                var newPool = new Queue<Projectile>();
-                newPool.Enqueue(proj);
-                _pools[projectilePrefab] = newPool;
-            }
+
+            pool.Enqueue(proj);
         }
     }
 }

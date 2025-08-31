@@ -17,7 +17,7 @@ MonoBehaviour:
   holdDistance: 30
   impactOffset: 1
   holdSpeed: 1
-  chargeSpeed: 100
+  chargeSpeed: 70
   turnSpeed: 100
   impactPause: 2
   holdPauseRange: {x: 8, y: 15}
