@@ -33,12 +33,6 @@ namespace LastTrain.Player
 
         private void LateUpdate()
         {
-            if (!IsPointerOverAnyUI())
-            {
-                HandleShooting();
-                HandleWeaponSwitch();
-            }
-
             if (_isMobilePlatform)
             {
                 if (!IsPointerOverUIWithJoystick())
@@ -53,6 +47,12 @@ namespace LastTrain.Player
             else
             {
                 HandleRotateKeys();
+            }
+
+            if (!IsPointerOverAnyUI())
+            {
+                HandleShooting();
+                HandleWeaponSwitch();
             }
         }
 
