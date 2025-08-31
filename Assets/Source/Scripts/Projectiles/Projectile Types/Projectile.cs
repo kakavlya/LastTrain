@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem _impactPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
+    [SerializeField] private TrailHandler _trail;
 
     protected Rigidbody ProjectileRigidbody;
 
@@ -104,10 +105,14 @@ public class Projectile : MonoBehaviour
         {
             gameObject.layer = owner.layer;
         }
+
+        _trail?.Play(Speed);
     }
 
     private void Despawn()
     {
+        _trail?.BeginDetachFade();
+
         if (UsePooling)
         {
             OnReturnToPool?.Invoke(this);

@@ -360,7 +360,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1293446217902357520}
@@ -489,7 +489,6 @@ MonoBehaviour:
   _visualRoot: {fileID: 3209630958734134741}
   _torqueAmount: 200
   _upwardForce: 3.5
-  _duration: 2.2
   _flyDuration: 1
   _rotateDuration: 2
   _disappearDelay: 0.1
@@ -621,8 +620,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1400335, y: 12.663368, z: 5.198759}
-  m_Center: {x: -0.021911463, y: 6.081684, z: -0.0167346}
+  m_Size: {x: 2.7639904, y: 12.663368, z: 6.340313}
+  m_Center: {x: -0.007834753, y: 6.081684, z: -0.16770618}
 --- !u!114 &2249419107156347508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,8 +655,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.03543, y: 2.0616379, z: 5.164615}
-  m_Center: {x: -0.029013634, y: 0.7139349, z: -0.044046007}
+  m_Size: {x: 2.780051, y: 2.0616379, z: 6.609889}
+  m_Center: {x: -0.009752592, y: 0.7139349, z: -0.24726233}
 --- !u!114 &6136848301746330400
 MonoBehaviour:
   m_ObjectHideFlags: 0
