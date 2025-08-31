@@ -113,7 +113,7 @@ namespace LastTrain.Weapons.System
             }
         }
 
-        private void HandleFire()
+        private void HandleFire(Vector3 target)
         {
             if (_currentWeapon == null)
                 return;
@@ -122,7 +122,7 @@ namespace LastTrain.Weapons.System
             {
                 if (ammo.HasAmmo)
                 {
-                    _currentWeapon.Fire(ammo);
+                    _currentWeapon.Fire(ammo, target);
                 }
                 else
                 {
@@ -131,7 +131,7 @@ namespace LastTrain.Weapons.System
             }
             else
             {
-                _currentWeapon.Fire();
+                _currentWeapon.Fire(null, target);
             }
         }
 

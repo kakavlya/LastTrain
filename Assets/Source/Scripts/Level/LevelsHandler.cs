@@ -40,11 +40,7 @@ namespace LastTrain.Level
                 for (int i = 0; i < _levelSettings.Length; i++)
                 {
                     levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelNumber, false));
-
-                    if (i == 0)
-                    {
-                        levelsAvailability[0].IsAvailable = true;
-                    }
+                    levelsAvailability[0].IsAvailable = true; 
                 }
 
                 YG2.SaveProgress();

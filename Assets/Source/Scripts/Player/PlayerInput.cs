@@ -10,16 +10,21 @@ namespace LastTrain.Player
     {
         [SerializeField] private Joystick _joystick;
 
+        private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
+
         private float _rotateValue;
         private bool _isMobilePlatform;
+        private Camera _mainCamera;
 
-        public event Action Fired;
+        public event Action<Vector3> Fired;
         public event Action StopFired;
         public event Action<int> WeaponChanged;
         public event Action<float> Rotated;
 
         private void Awake()
         {
+            _mainCamera = Camera.main;
+
             if (PlatformDetector.Instance != null &&
                 PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile)
             {
@@ -60,7 +65,11 @@ namespace LastTrain.Player
         {
             if (Input.GetMouseButton(0))
             {
-                Fired?.Invoke();
+                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    Fired?.Invoke(hit.point);
+                }
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -115,12 +124,15 @@ namespace LastTrain.Player
             if (EventSystem.current == null)
                 return false;
 
-            PointerEventData eventData = new PointerEventData(EventSystem.current);
-            eventData.position = Input.mousePosition;
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
 
-            foreach (var result in results)
+            _raycastResults.Clear();
+            EventSystem.current.RaycastAll(eventData, _raycastResults);
+
+            foreach (var result in _raycastResults)
             {
                 if (result.gameObject.GetComponentInParent<Joystick>() != null)
                     continue;
@@ -141,9 +153,9 @@ namespace LastTrain.Player
                 position = Input.mousePosition
             };
 
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            return results.Count > 0;
+            _raycastResults.Clear();
+            EventSystem.current.RaycastAll(eventData, _raycastResults);
+            return _raycastResults.Count > 0;
         }
     }
 }

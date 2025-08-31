@@ -46,36 +46,48 @@ namespace LastTrain.Weapons.Types
             _currentFireDelay = fireDelay ?? FireDelay;
         }
 
-        public void Fire(Ammunition ammo)
+        public void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
         {
-            if (FirePossibleCalculate() == true)
+            if (!FirePossibleCalculate())
+                return;
+
+            if (ammo != null && !ammo.HasAmmo)
             {
-                if (ammo != null && !ammo.HasAmmo)
-                {
-                    StopFire();
-                    return;
-                }
-
-                OnFired?.Invoke();
-                OnWeaponFire();
-
-                if (_muzzleEffectPrefab != null)
-                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
-
-                ammo?.DecreaseProjectilesCount();
+                StopFire();
+                return;
             }
-        }
 
-        public void Fire()
-        {
-            if (FirePossibleCalculate() == true)
+            OnFired?.Invoke();
+
+            if (targetWorldPos.HasValue)
             {
-                OnFired?.Invoke();
-                OnWeaponFire();
+                Vector3 dir = targetWorldPos.Value - FirePoint.position;
+                dir.y = 0;
+                dir = dir.normalized;
 
-                if (_muzzleEffectPrefab != null)
-                    ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+                var proj = UsePooling
+                    ? ProjectilePool.Instance.Spawn(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(dir),
+                        Owner,
+                        ProjectileSpeed,
+                        Damage,
+                        Range)
+                    : Instantiate(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(dir));
             }
+            else
+            {
+                OnWeaponFire();
+            }
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+
+            ammo?.DecreaseProjectilesCount();
         }
 
         public void SetPrefabReference(Weapon prefab)
