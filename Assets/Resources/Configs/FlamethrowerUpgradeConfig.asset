@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 2c01000058020000e8030000d00700008813000028230000b0360000204e00003075000050c30000
-    MinValue: 8
-    MaxValue: 30
+    Costs: 82000000a0000000c8000000fa0000004001000090010000f40100006c0200000c030000ca030000
+    MinValue: 6
+    MaxValue: 10
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
@@ -54,18 +54,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 2c01000058020000e8030000d00700008813000028230000b0360000204e00003075000050c30000
-    MinValue: 50
-    MaxValue: 100
+    Costs: 6e0000008c000000aa000000d70000000e01000054010000a40100000d0200009402000034030000
+    MinValue: 30
+    MaxValue: 60
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
     StatType: 4
@@ -85,8 +85,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -104,11 +104,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 2c01000058020000e8030000d00700008813000028230000b0360000204e00003075000050c30000
-    MinValue: 10
-    MaxValue: 30
+    Costs: 7800000096000000be000000e60000002201000072010000cc0100003a020000d002000084030000
+    MinValue: 15
+    MaxValue: 35
     IsShowFractionalValue: 0
   Icon: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   _weaponId: Flamethrower
   WeaponPrefab: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}
-  UnblockingCost: 0
+  UnblockingCost: 1000

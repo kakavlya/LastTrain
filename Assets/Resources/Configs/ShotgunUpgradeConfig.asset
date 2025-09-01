@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 96000000fa000000900100005802000084030000780500006c070000c4090000a00f0000401f0000
-    MinValue: 15
-    MaxValue: 80
+    Costs: 640000007d000000a0000000c8000000fa0000002c0100007c010000e001000058020000ee020000
+    MinValue: 8
+    MaxValue: 14
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
@@ -54,18 +54,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 96000000fa000000900100005802000084030000780500006c070000c4090000a00f0000401f0000
-    MinValue: 40
-    MaxValue: 100
+    Costs: 50000000640000007d000000a0000000c8000000fa0000002c0100007c010000e001000058020000
+    MinValue: 30
+    MaxValue: 45
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
     StatType: 4
@@ -104,11 +104,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 2c01000058020000e8030000d00700008813000028230000b0360000204e00003075000050c30000
-    MinValue: 45
-    MaxValue: 20
+    Costs: 5a0000006e0000008c000000b4000000dc0000001301000054010000ae0100001c0200009e020000
+    MinValue: 40
+    MaxValue: 25
     IsShowFractionalValue: 0
   Icon: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
   _weaponId: Shotgun
   WeaponPrefab: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
-  UnblockingCost: 3000
+  UnblockingCost: 600

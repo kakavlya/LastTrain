@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000b0040000
-    MinValue: 10
-    MaxValue: 50
+    Costs: 3c0000004b0000005f0000007800000096000000b4000000e60000001d01000068010000c2010000
+    MinValue: 8
+    MaxValue: 20
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
@@ -54,18 +54,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
+    Costs: 320000004100000050000000640000007800000096000000be000000f00000002c01000072010000
     MinValue: 80
-    MaxValue: 250
+    MaxValue: 120
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackSpeed
     StatType: 3
@@ -106,7 +106,7 @@ MonoBehaviour:
     MaxLevel: 10
     Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
     MinValue: 1.4
-    MaxValue: 5
+    MaxValue: 2.4
     IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: 56935beba2aeda645b598ef6cbc9c8ce, type: 3}
   _weaponId: SubmachineGun

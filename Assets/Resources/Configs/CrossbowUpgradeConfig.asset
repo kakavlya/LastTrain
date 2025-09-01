@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
+    Costs: 7800000096000000be000000f00000002c01000072010000cc0100003a020000cb02000084030000
     MinValue: 25
-    MaxValue: 100
+    MaxValue: 50
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
@@ -54,18 +54,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 96000000c80000005e010000f40100002003000078050000d00700008813000010270000983a0000
-    MinValue: 150
-    MaxValue: 450
+    Costs: 640000007d00000096000000c8000000fa0000002c0100007c010000e001000058020000ee020000
+    MinValue: 120
+    MaxValue: 220
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackSpeed
     StatType: 3
@@ -85,8 +85,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -104,11 +104,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 640000007800000096000000c80000002c01000090010000580200002003000084030000e8030000
-    MinValue: 1.4
-    MaxValue: 5
+    Costs: 8c000000af000000dc0000000e01000054010000ae010000120200009e0200003e0300001a040000
+    MinValue: 0.8
+    MaxValue: 1.4
     IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
   _weaponId: Crossbow
   WeaponPrefab: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
-  UnblockingCost: 3000
+  UnblockingCost: 900

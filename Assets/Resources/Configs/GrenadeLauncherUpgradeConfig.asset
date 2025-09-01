@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: fa000000f4010000e8030000dc050000c4090000a00f0000701700003421000010270000983a0000
-    MinValue: 30
-    MaxValue: 120
+    Costs: 96000000be000000f00000002c01000072010000cc0100003a020000cb020000840300007e040000
+    MinValue: 50
+    MaxValue: 160
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1
@@ -54,18 +54,18 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: c8000000900100002003000014050000d0070000b80b0000941100006419000028230000e02e0000
-    MinValue: 120
-    MaxValue: 300
+    Costs: 7800000096000000a0000000e1000000180100005e010000ae010000170200009e02000052030000
+    MinValue: 100
+    MaxValue: 20
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AoeDamage
     StatType: 5
@@ -85,8 +85,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -104,11 +104,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: c8000000900100002003000014050000d0070000b80b0000941100006419000028230000e02e0000
-    MinValue: 20
-    MaxValue: 80
+    Costs: 96000000be000000f00000002c01000072010000cc0100003a020000cb020000840300007e040000
+    MinValue: 30
+    MaxValue: 100
     IsShowFractionalValue: 1
   Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
   _weaponId: GrenadeLauncher
   WeaponPrefab: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
-  UnblockingCost: 0
+  UnblockingCost: 1200

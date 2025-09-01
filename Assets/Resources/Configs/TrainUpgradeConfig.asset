@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 15
-    Costs: c80000002c010000f401000084030000dc050000c4090000d80e000088130000581b000010270000c832000050460000f05500009065000030750000
-    MinValue: 300
-    MaxValue: 1000
+    Costs: 640000007d000000a0000000c8000000f5000000360100007c010000e001000058020000ee020000
+    MinValue: 100
+    MaxValue: 300
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.WeaponSlots
     StatType: 7
@@ -73,7 +73,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 2
-    Costs: e803000010270000
+    Costs: 2c010000e8030000
     MinValue: 1
     MaxValue: 3
     IsShowFractionalValue: 0
@@ -85,8 +85,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 2c01000090010000f401000058020000bc0200002003000084030000e8030000b004000078050000
+    Costs: 7800000096000000be000000eb0000002201000072010000cc0100003a020000cb0200007e030000
     MinValue: 100
     MaxValue: 250
     IsShowFractionalValue: 0
