@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9197781d5783740448a83c4bd131c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 50
+  _speed: 45
   _levelGenerator: {fileID: 0}
 --- !u!114 &3218667037637819201
 MonoBehaviour:
@@ -65,13 +65,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33507609cec67f4db498d3775d3e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 500
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
   _healthSlider: {fileID: 0}
   _healthText: {fileID: 0}
-  _respawnDelay: 3
+  _sharedData: {fileID: 0}
 --- !u!65 &5827961806859840045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +190,7 @@ MonoBehaviour:
   - {fileID: 6768203590417603494, guid: 20487ba8eb6ed1d4ab477bf162b52671, type: 3}
   - {fileID: 4122278453931483580, guid: 9e7a06c8366095f418870ab6346a5279, type: 3}
   _weaponInput: {fileID: 0}
-  _sharedData: {fileID: 11400000, guid: 81110a75b462b3747a2164fd713eea2a, type: 2}
+  _weaponCreator: {fileID: 0}
 --- !u!114 &6094426346783559762
 MonoBehaviour:
   m_ObjectHideFlags: 0

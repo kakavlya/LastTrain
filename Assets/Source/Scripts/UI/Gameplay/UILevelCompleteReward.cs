@@ -14,8 +14,6 @@ namespace LastTrain.UI.Gameplay
 
         private int _countCoinsForKills;
         private int _countCoinsForCompleted;
-        private string _textForKillsCompleted = "Kill bonus: +";
-        private string _textForLevelCompleted = "Level bonus: +";
 
         private void Start()
         {
@@ -37,8 +35,8 @@ namespace LastTrain.UI.Gameplay
 
         private void ShowLevelResults()
         {
-            _textForKillsCount.text = _textForKillsCompleted + _countCoinsForKills.ToString();
-            _textForLevelCount.text = _textForLevelCompleted + _countCoinsForCompleted.ToString();
+            _textForKillsCount.text = _countCoinsForKills.ToString();
+            _textForLevelCount.text = _countCoinsForCompleted.ToString();
         }
     }
 }

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74277a9078a810f48adc82df6515ce04, type: 3}
   m_Name: Lvl4Ram
   m_EditorClassIdentifier: 
-  Reward: 35
-  Health: 220
+  Reward: 30
+  Health: 80
   holdDistance: 35
-  impactOffset: 2
+  impactOffset: 1
   holdSpeed: 2.5
-  chargeSpeed: 95
+  chargeSpeed: 90
   turnSpeed: 90
   impactPause: 2.5
   holdPauseRange: {x: 8, y: 15}
-  damage: 40
+  damage: 27
   maxAccel: 29
   maxDecel: 48
   speedSmoothTime: 0.12

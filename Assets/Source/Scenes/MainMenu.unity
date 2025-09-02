@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1000
+  m_text: +100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1615,15 +1615,15 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "1000 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
+  ru: "100 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
     \u0440\u0435\u043A\u043B\u0430\u043C\u044B"
-  en: '1000 coins
+  en: '100 coins
 
 
 
 
-'
-  tr: "1000 jeton\n\n\n\nReklamlar\u0131 g\xF6r\xFCnt\xFClemek i\xE7in"
+    for viewing ads'
+  tr: "100 jeton\n\n\n\nReklamlar\u0131 g\xF6r\xFCnt\xFClemek i\xE7in"
   az: 
   be: 
   he: 
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1000 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
+  m_text: "100 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
     \u0440\u0435\u043A\u043B\u0430\u043C\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -4206,7 +4206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewardButton: {fileID: 902345083}
-  _rewardCount: 1000
+  _rewardCount: 100
   _rewardScreen: {fileID: 7131581}
   _rewardScreenBackButton: {fileID: 1624750958}
 --- !u!4 &684320239
@@ -4282,12 +4282,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u0435\u0439\u0447\u0430\u0441 \u0432\u0430\u043C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430
-    \u0442\u043E\u043B\u044C\u043A\u043E \u0432\u0438\u043D\u0442\u043E\u0432\u043A\u0430.
+  m_text: "\u0421\u0435\u0439\u0447\u0430\u0441 \u0432\u0430\u043C \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D
+    \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442-\u043F\u0443\u043B\u0435\u043C\u0435\u0442.
+    \u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0441 \u0435\u0433\u043E \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438.
     \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
     \u0431\u043E\u043B\u044C\u0448\u0435, \u043D\u0443\u0436\u043D\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C
-    \u0434\u0435\u043D\u0435\u0433. \u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0441
-    \u0435\u0451 \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438."
+    \u0434\u0435\u043D\u0435\u0433."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -4504,15 +4504,17 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "\u0421\u0435\u0439\u0447\u0430\u0441 \u0432\u0430\u043C \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430
-    \u0442\u043E\u043B\u044C\u043A\u043E \u0432\u0438\u043D\u0442\u043E\u0432\u043A\u0430.
+  ru: "\u0421\u0435\u0439\u0447\u0430\u0441 \u0432\u0430\u043C \u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D
+    \u0442\u043E\u043B\u044C\u043A\u043E \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442-\u043F\u0443\u043B\u0435\u043C\u0435\u0442.
+    \u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0441 \u0435\u0433\u043E \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438.
     \u0427\u0442\u043E\u0431\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
     \u0431\u043E\u043B\u044C\u0448\u0435, \u043D\u0443\u0436\u043D\u043E \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C
-    \u0434\u0435\u043D\u0435\u0433. \u041D\u0430\u0447\u043D\u0438\u0442\u0435 \u0441
-    \u0435\u0451 \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0438."
-  en: 'Now only a rifle is available to you. '
-  tr: "\u015Eimdi sizin i\xE7in sadece bir t\xFCfek mevcut. Daha fazlas\u0131n\u0131
-    elde etmek i\xE7in para kazanman\u0131z gerekir. Kilit a\xE7mas\u0131yla ba\u015Flay\u0131n."
+    \u0434\u0435\u043D\u0435\u0433."
+  en: Right now you only have access to the submachine gun. Start by unlocking it.
+    To get more, you need to earn money.
+  tr: "\u015Eu anda yaln\u0131zca hafif makineli t\xFCfe\u011Fe eri\u015Fiminiz var.
+    Kilidini a\xE7arak ba\u015Flay\u0131n. Daha fazlas\u0131n\u0131 elde etmek i\xE7in
+    para kazanman\u0131z gerekiyor."
   az: 
   be: 
   he: 
@@ -15533,6 +15535,32 @@ MonoBehaviour:
   _levelSettings:
   - {fileID: 11400000, guid: 336ba9c52f704214ebd2ba1f30da5539, type: 2}
   - {fileID: 11400000, guid: a4fb585520731b44482bfe137c2cfcc9, type: 2}
+  - {fileID: 11400000, guid: 8eb80454b56002240b1370e8d762256f, type: 2}
+  - {fileID: 11400000, guid: 95c97bf5a353d344bbfeaa79863c3aa1, type: 2}
+  - {fileID: 11400000, guid: 857cebc00535ab44d88f13dadd9fb141, type: 2}
+  - {fileID: 11400000, guid: 16889b52222b7554f849ec493cf6f315, type: 2}
+  - {fileID: 11400000, guid: c040bb43f871d9b4a9e6a272dc46198a, type: 2}
+  - {fileID: 11400000, guid: f697bc1093dff8b47b5c21fe8ce6a059, type: 2}
+  - {fileID: 11400000, guid: b6de99b58a5bc6940a4370be9c0aa979, type: 2}
+  - {fileID: 11400000, guid: 047cc6aee8521b34aab87194d5924b26, type: 2}
+  - {fileID: 11400000, guid: 845b41f5addde7545bbc050949edd111, type: 2}
+  - {fileID: 11400000, guid: 4b0642304b459bb45844d0eef229daaf, type: 2}
+  - {fileID: 11400000, guid: 0395d79fa75a8994f914b0cfd67556a8, type: 2}
+  - {fileID: 11400000, guid: d73a2355071d6b14fa9c07790f7960c2, type: 2}
+  - {fileID: 11400000, guid: 9cf469b2c3081f3409abe7b28ff4b6ef, type: 2}
+  - {fileID: 11400000, guid: 49216b120bf0b2b4bab6e9829a12caaf, type: 2}
+  - {fileID: 11400000, guid: 619674385bc29a54cbfeae32f7adc347, type: 2}
+  - {fileID: 11400000, guid: 029c6e7bbb6087c4c9895b885f124c57, type: 2}
+  - {fileID: 11400000, guid: 2c57477a52c221c47982e4dfc9a6bccc, type: 2}
+  - {fileID: 11400000, guid: 23470fd383346c94187c296aa84222a5, type: 2}
+  - {fileID: 11400000, guid: 796ef41cb710eba48af7b5d5bdce96ae, type: 2}
+  - {fileID: 11400000, guid: f98bf6f88619b2d4791d6dd398210f40, type: 2}
+  - {fileID: 11400000, guid: 7573898c46aa64645999b08fbf3d7123, type: 2}
+  - {fileID: 11400000, guid: 95ea0b1ae80b46f4b905b47b4fbd4a8e, type: 2}
+  - {fileID: 11400000, guid: 3d3b7dbe7debf6449b48bc12a7cd8dcf, type: 2}
+  - {fileID: 11400000, guid: 8f776be2ac349424cb142fa450b8d41a, type: 2}
+  - {fileID: 11400000, guid: a1b76359d7bb222409e10e8bf8b207d6, type: 2}
+  - {fileID: 11400000, guid: 8875d3a09065b9041a5c0729c9cdf239, type: 2}
   _buttonPrefab: {fileID: 5453967792360712563, guid: 919eb5a91423c4646b40f45f2952da2d, type: 3}
   _contentButtonsTransform: {fileID: 1853077272}
   _scrollRect: {fileID: 485527614}
@@ -15897,6 +15925,10 @@ PrefabInstance:
     - target: {fileID: 4892615716348283592, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142470152840978621, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
+      propertyPath: m_StartAxis
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7644086255589260233, guid: 2ff0286e8d86c394a938681f2eec7141, type: 3}
       propertyPath: m_Value

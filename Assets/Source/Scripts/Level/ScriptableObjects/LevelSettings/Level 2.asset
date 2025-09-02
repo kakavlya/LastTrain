@@ -15,11 +15,11 @@ MonoBehaviour:
   LevelNumber: 2
   IsAvailable: 0
   LevelElements:
-  - {fileID: 4060652997760026388, guid: 1b4642b2bde56ae48bd6060f240db4a2, type: 3}
-  - {fileID: 6321519914991541713, guid: b08fa6432741d5043aaacbdc9edd64bd, type: 3}
-  - {fileID: 8299738597905014191, guid: d05b372fe08988a4abdafcc094cce379, type: 3}
-  - {fileID: 3659909114548168132, guid: 7c9ff142ca813214eb00d7bf2f57d01e, type: 3}
-  LevelDurationSec: 80
-  LevelReward: 120
-  AmmunitionGeneratePercent: 75
-  SpawnerConfig: {fileID: 11400000, guid: bcbaddb4151d19145b4ba8e3ece16ee7, type: 2}
+  - {fileID: 7352752174153647220, guid: 3fb1be141b189494f8d092c99f7c39ea, type: 3}
+  - {fileID: 9114253221733017198, guid: 4d21c1274379e484ab80f98261069118, type: 3}
+  - {fileID: 1456816861291629571, guid: a22368415c84fc44db5d24504502e709, type: 3}
+  - {fileID: 789032710577607464, guid: 313268c1ccdb06e41bee70e9d49d030d, type: 3}
+  LevelDurationSec: 66
+  LevelReward: 80
+  AmmunitionGeneratePercent: 98
+  SpawnerConfig: {fileID: 11400000, guid: 6bc13724e310e5647af494728ac732fb, type: 2}

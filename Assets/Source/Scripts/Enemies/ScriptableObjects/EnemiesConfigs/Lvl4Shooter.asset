@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: Lvl4Shooter
   m_EditorClassIdentifier: 
-  Reward: 40
-  Health: 150
-  moveSpeed: 55
+  Reward: 18
+  Health: 77
+  moveSpeed: 65
   turnSpeed: 100
   attackSpeedFactorMin: 0.65
   attackSpeedFactorMax: 0.95
@@ -27,5 +27,5 @@ MonoBehaviour:
   shootingDistance: 65
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
   fireInterval: 1.7
-  projectileSpeed: 115
-  projectileDamage: 25
+  projectileSpeed: 100
+  projectileDamage: 10

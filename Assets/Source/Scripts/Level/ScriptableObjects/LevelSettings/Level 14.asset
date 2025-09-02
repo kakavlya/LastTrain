@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4255f7018f2ed47802c6527e39f4e1, type: 3}
+  m_Name: Level 14
+  m_EditorClassIdentifier: 
+  LevelNumber: 14
+  IsAvailable: 0
+  LevelElements:
+  - {fileID: 4060652997760026388, guid: 1b4642b2bde56ae48bd6060f240db4a2, type: 3}
+  - {fileID: 6321519914991541713, guid: b08fa6432741d5043aaacbdc9edd64bd, type: 3}
+  - {fileID: 8299738597905014191, guid: d05b372fe08988a4abdafcc094cce379, type: 3}
+  - {fileID: 3659909114548168132, guid: 7c9ff142ca813214eb00d7bf2f57d01e, type: 3}
+  LevelDurationSec: 141
+  LevelReward: 300
+  AmmunitionGeneratePercent: 73
+  SpawnerConfig: {fileID: 11400000, guid: 86716aaf576a0d342a43cc32cd9a325f, type: 2}

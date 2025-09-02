@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: Lvl2Shooter
   m_EditorClassIdentifier: 
-  Reward: 25
-  Health: 70
-  moveSpeed: 60
+  Reward: 9
+  Health: 36
+  moveSpeed: 55
   turnSpeed: 110
   attackSpeedFactorMin: 0.65
   attackSpeedFactorMax: 0.95
@@ -24,8 +24,8 @@ MonoBehaviour:
   orbitSpeedDegrees: 2
   checkRadius: 16
   changeDirectionEvery: {x: 4, y: 7}
-  shootingDistance: 60
+  shootingDistance: 55
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
-  fireInterval: 1.8
-  projectileSpeed: 110
-  projectileDamage: 15
+  fireInterval: 2.5
+  projectileSpeed: 100
+  projectileDamage: 6

@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponPrefab: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
-  _maxAmmo: 30
+  _maxAmmo: 40

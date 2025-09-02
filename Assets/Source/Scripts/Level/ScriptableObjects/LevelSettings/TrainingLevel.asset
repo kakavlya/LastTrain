@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4255f7018f2ed47802c6527e39f4e1, type: 3}
   m_Name: TrainingLevel
   m_EditorClassIdentifier: 
-  LevelName: TrainingLevel
+  LevelNumber: 0
   IsAvailable: 1
   LevelElements:
   - {fileID: 4060652997760026388, guid: 1b4642b2bde56ae48bd6060f240db4a2, type: 3}
   - {fileID: 6321519914991541713, guid: b08fa6432741d5043aaacbdc9edd64bd, type: 3}
   - {fileID: 8299738597905014191, guid: d05b372fe08988a4abdafcc094cce379, type: 3}
   - {fileID: 3659909114548168132, guid: 7c9ff142ca813214eb00d7bf2f57d01e, type: 3}
-  LevelDurationSec: 10000
+  LevelDurationSec: 1000
   LevelReward: 0
   AmmunitionGeneratePercent: 100
-  SpawnerConfig: {fileID: 11400000, guid: bcbaddb4151d19145b4ba8e3ece16ee7, type: 2}
+  SpawnerConfig: {fileID: 11400000, guid: 1dc875056e841b540b2f7355c2b1ffb4, type: 2}
