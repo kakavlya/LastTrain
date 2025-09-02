@@ -13,6 +13,7 @@ namespace LastTrain.Enemies
         private Transform _player;
         private BoxCollider _playerCollider;
         private EnemyMovement _movement;
+        private EnemyHealth _health;
         private float _safeOffset;
         private float _holdDistance;
         private float _holdSpeed;
@@ -25,6 +26,8 @@ namespace LastTrain.Enemies
         private float _stateTimer;
         private float _currentSpeed;
         private float _targetSpeed;
+        private bool _isAlive;
+        private bool _canDealDamageWindow;
 
         public enum State { Hold, Charge, Impact }
 
@@ -32,6 +35,7 @@ namespace LastTrain.Enemies
 
         private void Update()
         {
+            if (!_isAlive) return;
             if (_player == null || _playerCollider == null) return;
 
             float dt = Time.deltaTime;
@@ -64,6 +68,8 @@ namespace LastTrain.Enemies
             _player = player;
             _playerCollider = playerCollider;
             _movement = GetComponent<EnemyMovement>();
+            _health = GetComponent<EnemyHealth>();
+            _health.OnDeath.AddListener(HandleDeath);
             _safeOffset = Mathf.Max(0.01f, impactOffset);
             _holdDistance = Mathf.Max(0.01f, holdDistance);
             _holdSpeed = Mathf.Max(0f, holdSpeed);
@@ -71,9 +77,15 @@ namespace LastTrain.Enemies
             _impactPause = Mathf.Max(0f, impactPause);
             _holdPauseMin = Mathf.Min(holdPauseRange.x, holdPauseRange.y);
             _holdPauseMax = Mathf.Max(holdPauseRange.x, holdPauseRange.y);
+            _isAlive = true;
             _damage = damage;
+
+            _isAlive = true;
+            _canDealDamageWindow = false;
+
             _currentSpeed = 0f;
-            _targetSpeed = _holdSpeed;
+            _targetSpeed = _holdSpeed;                
+
             EnterHold();
         }
 
@@ -101,10 +113,13 @@ namespace LastTrain.Enemies
         {
             _state = State.Charge;
             _targetSpeed = _chargeSpeed;
+            _canDealDamageWindow = true;
         }
 
         private void UpdateCharge()
         {
+            if (!_isAlive) return;
+
             Vector3 anchor = SafeAnchorOnPlane();
             Vector3 toAnchor = (anchor - transform.position);
             toAnchor.y = 0f;
@@ -118,8 +133,17 @@ namespace LastTrain.Enemies
                 if (dist - _safeOffset <= step)
                 {
                     transform.position = anchor - dir * _safeOffset;
+
+                    if (_canDealDamageWindow)
+                    {
+                        var dmg = _player.GetComponent<IDamageable>();
+                        if (dmg != null)  
+                            dmg.TakeDamage(_damage);
+
+                        _canDealDamageWindow = false; 
+                    }
+
                     EnterImpact();
-                    _player.GetComponent<IDamageable>()?.TakeDamage(_damage);
                     return;
                 }
             }
@@ -132,8 +156,10 @@ namespace LastTrain.Enemies
             _state = State.Impact;
             _stateTimer = _impactPause;
             _targetSpeed = Mathf.Max(_holdSpeed, _chargeSpeed * Mathf.Clamp01(_impactSlowFactor));
-            _currentSpeed = Mathf.Min(_currentSpeed, _targetSpeed); // моментально сбросить, чтобы было видно «удар»
+            _currentSpeed = Mathf.Min(_currentSpeed, _targetSpeed);
+            _canDealDamageWindow = false;
         }
+
 
         private void UpdateImpact()
         {
@@ -171,6 +197,17 @@ namespace LastTrain.Enemies
                 anchor = new Vector3(_player.position.x, transform.position.y, _player.position.z);
 
             return anchor;
+        }
+
+        private void HandleDeath()
+        {
+          
+            if (!_isAlive) return;
+            _isAlive = false;
+            _canDealDamageWindow = false;
+
+            _movement?.SetSpeed(0f);
+            enabled = false;
         }
 
         private Vector3 SafeOutwardsDir(Vector3 anchor)

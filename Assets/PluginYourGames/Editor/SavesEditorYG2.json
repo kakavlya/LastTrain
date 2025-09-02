@@ -1,0 +1,279 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 129,
+    "WeaponsProgress": [
+        {
+            "rid": 1000
+        },
+        {
+            "rid": 1001
+        },
+        {
+            "rid": 1002
+        },
+        {
+            "rid": 1003
+        },
+        {
+            "rid": 1004
+        },
+        {
+            "rid": 1005
+        }
+    ],
+    "TrainingWeaponsProgress": [
+        {
+            "WeaponId": "SubmachineGun",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "MachineGun",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        },
+        {
+            "WeaponId": "GrenadeLauncher",
+            "DamageLevel": 5,
+            "RangeLevel": 5,
+            "IsAvailable": false
+        }
+    ],
+    "TrainProgress": {
+        "HealthLevel": 0,
+        "SlotsLevel": 0,
+        "AmmoLevel": 0
+    },
+    "Coins": 276,
+    "EffectsVolume": 0.5,
+    "MusicVolume": 0.5,
+    "InventorySlotsCount": 0,
+    "PlayerInventorySlotsCount": 1,
+    "InventorySlots": [
+        ""
+    ],
+    "PlayerInventorySlots": [
+        "Пистолет-пулемет"
+    ],
+    "LevelsAvailability": [
+        {
+            "LevelNumber": 1,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 2,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 3,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 4,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 5,
+            "IsAvailable": true
+        },
+        {
+            "LevelNumber": 6,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 7,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 8,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 9,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 10,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 11,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 12,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 13,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 14,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 15,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 16,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 17,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 18,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 19,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 20,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 21,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 22,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 23,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 24,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 25,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 26,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 27,
+            "IsAvailable": false
+        },
+        {
+            "LevelNumber": 28,
+            "IsAvailable": false
+        }
+    ],
+    "IsDoneGameplayTraining": true,
+    "IsDoneMenuTraining": true,
+    "TrainingState": 10,
+    "references": {
+        "version": 2,
+        "RefIds": [
+            {
+                "rid": 1000,
+                "type": {
+                    "class": "AttackSpeedUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "SubmachineGun",
+                    "DamageLevel": 3,
+                    "RangeLevel": 3,
+                    "IsAvailable": true,
+                    "AttackSpeedLevel": 3
+                }
+            },
+            {
+                "rid": 1001,
+                "type": {
+                    "class": "AttackSpeedUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "MachineGun",
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AttackSpeedLevel": 0
+                }
+            },
+            {
+                "rid": 1002,
+                "type": {
+                    "class": "AoeDamageUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "GrenadeLauncher",
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AoeDamageLevel": 0
+                }
+            },
+            {
+                "rid": 1003,
+                "type": {
+                    "class": "AttackAngleUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "Flamethrower",
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AttackAngleLevel": 0
+                }
+            },
+            {
+                "rid": 1004,
+                "type": {
+                    "class": "AttackSpeedUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "Crossbow",
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AttackSpeedLevel": 0
+                }
+            },
+            {
+                "rid": 1005,
+                "type": {
+                    "class": "AttackAngleUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "WeaponId": "Shotgun",
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AttackAngleLevel": 0
+                }
+            }
+        ]
+    }
+}
