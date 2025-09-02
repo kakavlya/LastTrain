@@ -110,10 +110,18 @@ namespace LastTrain.Enemies
             Vector3 pos = sp.position;
             pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
             pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
+
             var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
-            enemy.GetComponent<EnemyHealth>().SetRewardForKill(spawnEntry.behaviorSettings.Reward);
-            enemy.GetComponent<EnemyHealth>().SetCurrentHealth(spawnEntry.behaviorSettings.Health);
+
+            enemy.SetActive(true);
+
+            var health = enemy.GetComponent<EnemyHealth>();
+            health.SetRewardForKill(spawnEntry.behaviorSettings.Reward);
+            health.SetCurrentHealth(spawnEntry.behaviorSettings.Health);
+
             spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
+
+            // activating after setup to avoid issues
         }
     }
 }

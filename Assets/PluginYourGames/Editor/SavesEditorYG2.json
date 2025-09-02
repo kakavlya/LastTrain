@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 129,
+    "idSave": 405,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -53,9 +53,9 @@
         "SlotsLevel": 0,
         "AmmoLevel": 0
     },
-    "Coins": 276,
-    "EffectsVolume": 0.5,
-    "MusicVolume": 0.5,
+    "Coins": 1403,
+    "EffectsVolume": 0.1888788789510727,
+    "MusicVolume": 0.06748950481414795,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
@@ -87,7 +87,7 @@
         },
         {
             "LevelNumber": 6,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 7,
@@ -193,8 +193,8 @@
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
-                    "DamageLevel": 3,
-                    "RangeLevel": 3,
+                    "DamageLevel": 7,
+                    "RangeLevel": 4,
                     "IsAvailable": true,
                     "AttackSpeedLevel": 3
                 }

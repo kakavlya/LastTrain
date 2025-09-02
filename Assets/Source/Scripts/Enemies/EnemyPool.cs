@@ -22,15 +22,13 @@ namespace LastTrain.Enemies
         public GameObject Spawn(GameObject enemyPrefab, Vector3 position, Quaternion rotation)
         {
             if (!_pools.ContainsKey(enemyPrefab))
-            {
                 CreatePoolForPrefab(enemyPrefab);
-            }
 
             var enemyInstance = _pools[enemyPrefab].Get();
             enemyInstance.transform.SetPositionAndRotation(position, rotation);
 
             var pooled = enemyInstance.GetComponent<PooledEnemyKey>();
-            pooled.SetKey(enemyPrefab);
+            if (pooled != null) pooled.SetKey(enemyPrefab);
 
             return enemyInstance;
         }
@@ -59,15 +57,24 @@ namespace LastTrain.Enemies
 
         private void CreatePoolForPrefab(GameObject enemyPrefab)
         {
-            if (!_pools.ContainsKey(enemyPrefab))
-            {
-                _pools[enemyPrefab] = new ObjectPool<GameObject>(
-                    createFunc: () => Instantiate(enemyPrefab, gameObject.transform),
-                    actionOnGet: (enemy) => enemy.gameObject.SetActive(true),
-                    actionOnRelease: (enemy) => enemy.gameObject.SetActive(false),
-                    actionOnDestroy: (enemy) => Destroy(enemy.gameObject)
-                );
-            }
+            if (_pools.ContainsKey(enemyPrefab)) return;
+
+            _pools[enemyPrefab] = new ObjectPool<GameObject>(
+                createFunc: () =>
+                {
+                    var go = Instantiate(enemyPrefab, transform);
+                    go.SetActive(false);
+                    return go;
+                },
+                actionOnGet: (enemy) =>
+                {},
+                actionOnRelease: (enemy) =>
+                {
+                    enemy.SetActive(false);
+                    enemy.transform.SetParent(transform, worldPositionStays: false);
+                },
+                actionOnDestroy: (enemy) => Destroy(enemy)
+            );
         }
     }
 }
