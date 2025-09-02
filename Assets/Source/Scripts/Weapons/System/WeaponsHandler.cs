@@ -126,7 +126,7 @@ namespace LastTrain.Weapons.System
                 }
                 else
                 {
-                    _currentWeapon.StopFire();
+                    _currentWeapon.InvokeStopFire();
                 }
             }
             else
@@ -137,7 +137,7 @@ namespace LastTrain.Weapons.System
 
         private void HandleStopFire()
         {
-            _currentWeapon?.StopFire();
+            _currentWeapon?.InvokeStopFire();
         }
     }
 }

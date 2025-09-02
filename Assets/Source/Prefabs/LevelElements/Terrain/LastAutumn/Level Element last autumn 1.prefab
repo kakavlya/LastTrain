@@ -946,16 +946,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawnPoints:
   - {fileID: 6822467583025413346}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4029478359778442956}
+  - {fileID: 6495163603753627828}
+  - {fileID: 296834270530143061}
+  - {fileID: 8918129513672846732}
+  - {fileID: 5639359607550564902}
+  - {fileID: 697414057239392410}
+  - {fileID: 4071864807999821330}
+  - {fileID: 8013806882253998036}
+  - {fileID: 5749241267821493362}
+  - {fileID: 712601441319875038}
   _pickableAmmunitionSpawnPoints:
   - {fileID: 5703079586723271188}
   - {fileID: 9006331157572008769}

@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 129,
+    "idSave": 1265,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,20 +49,25 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 0,
-        "SlotsLevel": 0,
+        "HealthLevel": 4,
+        "SlotsLevel": 2,
         "AmmoLevel": 0
     },
-    "Coins": 276,
+    "Coins": 1364,
     "EffectsVolume": 0.5,
-    "MusicVolume": 0.5,
+    "MusicVolume": 0.1370142251253128,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
+        "Огнемёт",
+        "",
+        "",
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет"
+        "Пистолет-пулемет",
+        "Арбалет",
+        "Дробовик"
     ],
     "LevelsAvailability": [
         {
@@ -87,55 +92,55 @@
         },
         {
             "LevelNumber": 6,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 7,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 8,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 9,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 10,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 12,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 13,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 14,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 15,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 16,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 17,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 18,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 19,
@@ -193,10 +198,10 @@
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
-                    "DamageLevel": 3,
-                    "RangeLevel": 3,
+                    "DamageLevel": 10,
+                    "RangeLevel": 5,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 3
+                    "AttackSpeedLevel": 9
                 }
             },
             {
@@ -240,7 +245,7 @@
                     "WeaponId": "Flamethrower",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "IsAvailable": true,
                     "AttackAngleLevel": 0
                 }
             },
@@ -253,9 +258,9 @@
                 },
                 "data": {
                     "WeaponId": "Crossbow",
-                    "DamageLevel": 0,
-                    "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "DamageLevel": 3,
+                    "RangeLevel": 1,
+                    "IsAvailable": true,
                     "AttackSpeedLevel": 0
                 }
             },
@@ -268,9 +273,9 @@
                 },
                 "data": {
                     "WeaponId": "Shotgun",
-                    "DamageLevel": 0,
+                    "DamageLevel": 2,
                     "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "IsAvailable": true,
                     "AttackAngleLevel": 0
                 }
             }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using LastTrain.Projectiles;
+using LastTrain.AmmunitionSystem;
+using LastTrain.Particles;
 
 namespace LastTrain.Weapons.Types
 {
@@ -15,6 +17,54 @@ namespace LastTrain.Weapons.Types
         {
             base.Init(damage, range, fireDelay, fireAngle, aoeDamage);
             _currentSpreadAngle = fireAngle ?? _spreadAngle;
+        }
+
+        public override void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
+        {
+            if (!FirePossibleCalculate())
+                return;
+
+            if (ammo != null && !ammo.HasAmmo)
+            {
+                InvokeStopFire();
+                return;
+            }
+
+            InvokeFire();
+
+            if (targetWorldPos.HasValue)
+            {
+                for (int i = 0; i < _bulletsInShot; i++)
+                {
+                    Vector3 dir = targetWorldPos.Value - FirePoint.position;
+                    dir.y = 0;
+                    dir = dir.normalized;
+                    Vector3 spreadDir = GetRandomSpread();
+
+                    var proj = UsePooling
+                        ? ProjectilePool.Instance.Spawn(
+                            ProjectilePrefab,
+                            FirePoint.position,
+                            Quaternion.LookRotation(spreadDir),
+                            Owner,
+                            ProjectileSpeed,
+                            Damage,
+                            Range)
+                        : Instantiate(
+                            ProjectilePrefab,
+                            FirePoint.position,
+                            Quaternion.LookRotation(spreadDir));
+                }
+            }
+            else
+            {
+                OnWeaponFire();
+            }
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+
+            ammo?.DecreaseProjectilesCount();
         }
 
         protected override void OnWeaponFire()
