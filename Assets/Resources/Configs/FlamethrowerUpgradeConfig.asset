@@ -42,7 +42,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 82000000a0000000c8000000fa0000004001000090010000f40100006c0200000c030000ca030000
+    Costs: 82000000a5000000d7000000220100009001000030020000160300006004000036060000d4080000
     MinValue: 6
     MaxValue: 10
     IsShowFractionalValue: 1
@@ -73,9 +73,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 6e0000008c000000aa000000d70000000e01000054010000a40100000d0200009402000034030000
-    MinValue: 30
-    MaxValue: 60
+    Costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
+    MinValue: 50
+    MaxValue: 80
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
     StatType: 4
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 7800000096000000be000000e60000002201000072010000cc0100003a020000d002000084030000
+    Costs: 780000009b000000cd000000130100007701000008020000da02000010040000c30500003e080000
     MinValue: 15
     MaxValue: 35
     IsShowFractionalValue: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 27
   holdDistance: 20
   impactOffset: 1
-  holdSpeed: 40
+  holdSpeed: 50
   chargeSpeed: 70
   turnSpeed: 100
   impactPause: 4

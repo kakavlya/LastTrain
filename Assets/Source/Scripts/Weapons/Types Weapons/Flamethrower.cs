@@ -1,5 +1,7 @@
 using UnityEngine;
 using LastTrain.Enemies;
+using LastTrain.AmmunitionSystem;
+using LastTrain.Particles;
 
 namespace LastTrain.Weapons.Types
 {
@@ -33,6 +35,26 @@ namespace LastTrain.Weapons.Types
             }
         }
 
+        public override void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
+        {
+            if (!FirePossibleCalculate())
+                return;
+
+            if (ammo != null && !ammo.HasAmmo)
+            {
+                InvokeStopFire();
+                return;
+            }
+
+            InvokeFire();
+            OnWeaponFire();
+
+            if (_muzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+
+            ammo?.DecreaseProjectilesCount();
+        }
+
         public override bool GetIsLoopedFireSound() => true;
 
         public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
@@ -47,9 +69,9 @@ namespace LastTrain.Weapons.Types
             shapeSetting.scale = new Vector3(_currentHorisontalAngle, currentScale.y, currentScale.z);
         }
 
-        public override void StopFire()
+        public override void InvokeStopFire()
         {
-            base.StopFire();
+            base.InvokeStopFire();
 
             if (_isFiring)
             {

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -129,6 +129,7 @@ MonoBehaviour:
   _impactPrefab: {fileID: 198195352207415246, guid: 20a1c9fad640e1340b22272582b59b8a, type: 3}
   <Lifetime>k__BackingField: 10
   <UsePooling>k__BackingField: 1
+  _trail: {fileID: 0}
 --- !u!136 &4737742208478537096
 CapsuleCollider:
   m_ObjectHideFlags: 0

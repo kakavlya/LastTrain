@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 121404653678594416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2596.2, y: 0, z: 1836.6}
+  m_LocalPosition: {x: 2596.2, y: 0, z: 1879.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -808,7 +808,7 @@ Transform:
   m_GameObject: {fileID: 3874789902813540837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1048, y: 0, z: 1386}
+  m_LocalPosition: {x: 1048, y: 0, z: 1348.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -946,16 +946,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySpawnPoints:
   - {fileID: 6822467583025413346}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4029478359778442956}
+  - {fileID: 6495163603753627828}
+  - {fileID: 296834270530143061}
+  - {fileID: 8918129513672846732}
+  - {fileID: 5639359607550564902}
+  - {fileID: 697414057239392410}
+  - {fileID: 4071864807999821330}
+  - {fileID: 8013806882253998036}
+  - {fileID: 5749241267821493362}
+  - {fileID: 712601441319875038}
   _pickableAmmunitionSpawnPoints:
   - {fileID: 5703079586723271188}
   - {fileID: 9006331157572008769}
@@ -1079,7 +1079,7 @@ Transform:
   m_GameObject: {fileID: 6211565667982233758}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 479.5, y: 0, z: 1679}
+  m_LocalPosition: {x: 502.3, y: 0, z: 1679}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1183,7 +1183,7 @@ Transform:
   m_GameObject: {fileID: 7311676105018189950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1894, y: 0, z: 1729}
+  m_LocalPosition: {x: 1894, y: 0, z: 1679.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

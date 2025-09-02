@@ -42,7 +42,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 5a0000006e0000008c000000b4000000dc0000001301000054010000ae0100001c0200009e020000
+    Costs: 5a000000730000009b000000d70000002c010000a40100004e0200003e0300009204000068060000
     MinValue: 10
     MaxValue: 22
     IsShowFractionalValue: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 460000005a0000006e0000008c000000aa000000dc0000000e01000054010000a40100000d020000
+    Costs: 460000005f00000082000000b4000000fa0000005e010000ea010000a8020000a2030000e2040000
     MinValue: 90
     MaxValue: 140
     IsShowFractionalValue: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 6e0000008c000000aa000000d70000000e01000054010000a40100000d0200009402000034030000
+    Costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
     MinValue: 2.5
     MaxValue: 5
     IsShowFractionalValue: 1

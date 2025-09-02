@@ -9,11 +9,11 @@ namespace LastTrain.Weapons.Types
     public class Weapon : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private ParticleSystem _muzzleEffectPrefab;
         [SerializeField] private Sprite _uiSpriteActive;
         [SerializeField] private Sprite _uiSpriteDeactive;
         [SerializeField] protected Transform FirePoint;
         [SerializeField] protected Projectile ProjectilePrefab;
+        [SerializeField] protected ParticleSystem _muzzleEffectPrefab;
 
         [Header("Shoot Settings")]
         [SerializeField] protected float FireDelay = 0.1f;
@@ -46,14 +46,14 @@ namespace LastTrain.Weapons.Types
             _currentFireDelay = fireDelay ?? FireDelay;
         }
 
-        public void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
+        public virtual void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
         {
             if (!FirePossibleCalculate())
                 return;
 
             if (ammo != null && !ammo.HasAmmo)
             {
-                StopFire();
+                InvokeStopFire();
                 return;
             }
 
@@ -97,9 +97,14 @@ namespace LastTrain.Weapons.Types
 
         public virtual bool GetIsLoopedFireSound() => false;
 
-        public virtual void StopFire()
+        public virtual void InvokeStopFire()
         {
             OnStopFired?.Invoke();
+        }
+
+        protected void InvokeFire()
+        {
+            OnFired?.Invoke();
         }
 
         protected virtual void OnWeaponFire()
@@ -119,7 +124,7 @@ namespace LastTrain.Weapons.Types
                             Quaternion.LookRotation(Direction));
         }
 
-        private bool FirePossibleCalculate()
+        protected bool FirePossibleCalculate()
         {
             if (Time.time - _lastFireTime < _currentFireDelay)
                 return false;
