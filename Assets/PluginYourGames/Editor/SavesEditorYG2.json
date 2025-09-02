@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 1265,
+    "idSave": 1857,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,11 +49,11 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 4,
+        "HealthLevel": 7,
         "SlotsLevel": 2,
-        "AmmoLevel": 0
+        "AmmoLevel": 2
     },
-    "Coins": 1364,
+    "Coins": 437,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.1370142251253128,
     "InventorySlotsCount": 0,
@@ -62,11 +62,13 @@
         "Огнемёт",
         "",
         "",
+        "Пистолет-пулемет",
+        "Арбалет",
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет",
-        "Арбалет",
+        "Пулемет",
+        "Гранатомет",
         "Дробовик"
     ],
     "LevelsAvailability": [
@@ -144,15 +146,15 @@
         },
         {
             "LevelNumber": 19,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 20,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 21,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 22,
@@ -213,10 +215,10 @@
                 },
                 "data": {
                     "WeaponId": "MachineGun",
-                    "DamageLevel": 0,
-                    "RangeLevel": 0,
-                    "IsAvailable": false,
-                    "AttackSpeedLevel": 0
+                    "DamageLevel": 5,
+                    "RangeLevel": 6,
+                    "IsAvailable": true,
+                    "AttackSpeedLevel": 3
                 }
             },
             {
@@ -230,7 +232,7 @@
                     "WeaponId": "GrenadeLauncher",
                     "DamageLevel": 0,
                     "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "IsAvailable": true,
                     "AoeDamageLevel": 0
                 }
             },
@@ -258,8 +260,8 @@
                 },
                 "data": {
                     "WeaponId": "Crossbow",
-                    "DamageLevel": 3,
-                    "RangeLevel": 1,
+                    "DamageLevel": 5,
+                    "RangeLevel": 3,
                     "IsAvailable": true,
                     "AttackSpeedLevel": 0
                 }
@@ -274,9 +276,9 @@
                 "data": {
                     "WeaponId": "Shotgun",
                     "DamageLevel": 2,
-                    "RangeLevel": 0,
+                    "RangeLevel": 5,
                     "IsAvailable": true,
-                    "AttackAngleLevel": 0
+                    "AttackAngleLevel": 2
                 }
             }
         ]

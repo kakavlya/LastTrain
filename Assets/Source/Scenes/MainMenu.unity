@@ -1110,9 +1110,9 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: +1000
-  en: +1000
-  tr: +1000
+  ru: +200
+  en: +200
+  tr: +200
   az: 
   be: 
   he: 
@@ -1165,9 +1165,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +100
+  m_text: +200
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &145953897
@@ -1615,15 +1615,15 @@ MonoBehaviour:
       de: 
       hi: 
   text: 
-  ru: "100 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
+  ru: "200 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
     \u0440\u0435\u043A\u043B\u0430\u043C\u044B"
-  en: '100 coins
+  en: '200 coins
 
 
 
 
     for viewing ads'
-  tr: "100 jeton\n\n\n\nReklamlar\u0131 g\xF6r\xFCnt\xFClemek i\xE7in"
+  tr: "200 jeton\n\n\n\nReklamlar\u0131 g\xF6r\xFCnt\xFClemek i\xE7in"
   az: 
   be: 
   he: 
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "100 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
+  m_text: "200 \u043C\u043E\u043D\u0435\u0442\n\n\n\n\u0437\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440
     \u0440\u0435\u043A\u043B\u0430\u043C\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
@@ -4206,7 +4206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewardButton: {fileID: 902345083}
-  _rewardCount: 100
+  _rewardCount: 200
   _rewardScreen: {fileID: 7131581}
   _rewardScreenBackButton: {fileID: 1624750958}
 --- !u!4 &684320239
@@ -9787,6 +9787,7 @@ MonoBehaviour:
   - {fileID: 479848210}
   - {fileID: 315810372}
   - {fileID: 912953571}
+  - {fileID: 1996111684}
   _weaponUIPrefab: {fileID: 8432987711075814104, guid: a8d7c1a323d32b744b1476954d27fa90, type: 3}
 --- !u!4 &1354663000
 Transform:
@@ -10336,6 +10337,7 @@ RectTransform:
   - {fileID: 479848211}
   - {fileID: 315810373}
   - {fileID: 912953572}
+  - {fileID: 1996111685}
   m_Father: {fileID: 2138095019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -14244,6 +14246,95 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1996111684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1996111685}
+  - component: {fileID: 1996111688}
+  - component: {fileID: 1996111687}
+  - component: {fileID: 1996111686}
+  m_Layer: 5
+  m_Name: UIWeaponSlot (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1996111685
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996111684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1431909103}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 900, y: -100}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1996111686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996111684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebe33334e11b7b4ca59dc28b561ddeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isFilled: 0
+--- !u!114 &1996111687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996111684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 962a22327778d8a47ac24ef1686f4172, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1996111688
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996111684}
+  m_CullTransparentMesh: 1
 --- !u!1 &2016229884
 GameObject:
   m_ObjectHideFlags: 0
