@@ -1107,11 +1107,9 @@ MonoBehaviour:
   _visualRoot: {fileID: 1057683180257551447}
   _torqueAmount: 90
   _upwardForce: 1
-  _duration: 1.5
   _flyDuration: 0.8
   _rotateDuration: 3
   _disappearDelay: 0.15
-  _deactivateTime: 1
 --- !u!1 &9087697433412347612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turnSpeed: 120
+  _moveSpeed: 0
 --- !u!114 &8618117122417586505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73878a91a1495a04b86bb1067a41c832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitVFX: {fileID: 9087697433412347612}
+  _hitVFX: {fileID: 0}
   _deathVFXOptions:
   - {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
   - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
