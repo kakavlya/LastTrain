@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 4899597090557373887, guid: f3c30d147691ece4eb335bfb6e00ef12, type: 3}
-    spawnInterval: 4
+    spawnInterval: 5
     randRangeXZ: {x: 50, y: 50}
     behaviorSettings: {fileID: 11400000, guid: 3f1b1ffc1dafc814e91cd429d725297d, type: 2}
     overrideSpawnPoints: []
   - prefab: {fileID: 6965205965109951990, guid: dca6b9b3394e5c94c938bd8b5f7f3c8c, type: 3}
-    spawnInterval: 6
+    spawnInterval: 8
     randRangeXZ: {x: 50, y: 50}
     behaviorSettings: {fileID: 11400000, guid: e55f167b35d729745bbca70a866b6d9e, type: 2}
     overrideSpawnPoints: []
   - prefab: {fileID: 9087697433412347612, guid: b9141b48a1159144eacc538045159ae2, type: 3}
-    spawnInterval: 8
+    spawnInterval: 9
     randRangeXZ: {x: 50, y: 50}
     behaviorSettings: {fileID: 11400000, guid: acf12740dd9215c4aabf438851170167, type: 2}
     overrideSpawnPoints: []

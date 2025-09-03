@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 40,
+    "idSave": 547,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,20 +49,22 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 0,
-        "SlotsLevel": 0,
+        "HealthLevel": 3,
+        "SlotsLevel": 1,
         "AmmoLevel": 0
     },
-    "Coins": 92,
+    "Coins": 2073,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
+        "",
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет"
+        "Пистолет-пулемет",
+        "Пулемет"
     ],
     "LevelsAvailability": [
         {
@@ -71,35 +73,35 @@
         },
         {
             "LevelNumber": 2,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 3,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 4,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 5,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 6,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 7,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 8,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 9,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 10,
@@ -193,10 +195,10 @@
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
-                    "DamageLevel": 0,
-                    "RangeLevel": 0,
+                    "DamageLevel": 3,
+                    "RangeLevel": 1,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 0
+                    "AttackSpeedLevel": 2
                 }
             },
             {
@@ -208,9 +210,9 @@
                 },
                 "data": {
                     "WeaponId": "MachineGun",
-                    "DamageLevel": 0,
-                    "RangeLevel": 0,
-                    "IsAvailable": false,
+                    "DamageLevel": 4,
+                    "RangeLevel": 2,
+                    "IsAvailable": true,
                     "AttackSpeedLevel": 0
                 }
             },

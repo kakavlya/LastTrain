@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 4899597090557373887, guid: f3c30d147691ece4eb335bfb6e00ef12, type: 3}
-    spawnInterval: 5
+    spawnInterval: 3
     randRangeXZ: {x: 50, y: 50}
     behaviorSettings: {fileID: 11400000, guid: 3f1b1ffc1dafc814e91cd429d725297d, type: 2}
     overrideSpawnPoints: []

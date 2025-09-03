@@ -29,7 +29,7 @@ MonoBehaviour:
     behaviorSettings: {fileID: 11400000, guid: acf12740dd9215c4aabf438851170167, type: 2}
     overrideSpawnPoints: []
   - prefab: {fileID: 4899597090557373887, guid: 089a610054aa0a641874cb77263d6dfd, type: 3}
-    spawnInterval: 11
+    spawnInterval: 12
     randRangeXZ: {x: 50, y: 50}
     behaviorSettings: {fileID: 11400000, guid: ddcf9ef515707c3448b4e3bae816ce75, type: 2}
     overrideSpawnPoints: []
