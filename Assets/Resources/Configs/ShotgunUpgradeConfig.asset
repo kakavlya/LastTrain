@@ -75,7 +75,7 @@ MonoBehaviour:
     MaxLevel: 10
     Costs: 50000000690000008c000000be0000000401000068010000f4010000b2020000ac030000ec040000
     MinValue: 45
-    MaxValue: 60
+    MaxValue: 80
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
     StatType: 4

@@ -75,7 +75,7 @@ MonoBehaviour:
     MaxLevel: 10
     Costs: 7800000096000000c800000018010000900100003a020000200300004c040000c80500009e070000
     MinValue: 100
-    MaxValue: 20
+    MaxValue: 180
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AoeDamage
     StatType: 5

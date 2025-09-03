@@ -44,7 +44,7 @@ MonoBehaviour:
     MaxLevel: 10
     Costs: 7800000096000000c80000000e0100005e010000cc010000580200000c030000e803000014050000
     MinValue: 25
-    MaxValue: 50
+    MaxValue: 60
     IsShowFractionalValue: 1
   - LocalizationKey: Characteristic.Range
     StatType: 1

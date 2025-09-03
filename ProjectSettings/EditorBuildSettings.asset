@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Example/Scenes/ExampleYG2.unity
     guid: e49bf7e58fdb4db4c9df51f0ddb8f327
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/Authorization/Example/Scenes/Authorization.unity
     guid: de4e0a077d630a140a5e79e3d752d10b
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/InterstitialAdv/Example/Scenes/InterstitialAdv.unity
     guid: fa3157f2450b2874a8c22b42f700dcd4
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/Leaderboards/Example/Scenes/Leaderboards.unity
     guid: 2779577180fcc424b8955a8087f136f6
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/Localization/Example/Scenes/Localization.unity
     guid: 058cfa478132af54f8ee895e24ea5a2a
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/RewardedAdv/Example/Scenes/RewardedAdv.unity
     guid: d88fa54c0efc91d4ab03d7d05e2e06d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/PluginYourGames/Modules/Storage/Example/Scenes/Storage.unity
     guid: abb058d977e9e3241a3ae83e420d91ac
   - enabled: 1
