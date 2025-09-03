@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 547,
+    "idSave": 821,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -53,7 +53,7 @@
         "SlotsLevel": 1,
         "AmmoLevel": 0
     },
-    "Coins": 2073,
+    "Coins": 1717,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
@@ -105,11 +105,11 @@
         },
         {
             "LevelNumber": 10,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 12,
@@ -213,7 +213,7 @@
                     "DamageLevel": 4,
                     "RangeLevel": 2,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 0
+                    "AttackSpeedLevel": 8
                 }
             },
             {

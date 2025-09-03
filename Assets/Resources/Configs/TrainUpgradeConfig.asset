@@ -23,8 +23,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -32,8 +32,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     MaxLevel: 10
-    Costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f050000
+    Costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f0500005307000079090000990c0000b3100000f9150000
     MinValue: 100
-    MaxValue: 300
+    MaxValue: 350
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.WeaponSlots
     StatType: 7

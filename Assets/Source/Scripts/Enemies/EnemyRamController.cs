@@ -160,8 +160,6 @@ namespace LastTrain.Enemies
 
                 if (dist - _safeOffset <= step)
                 {
-                    transform.position = anchor - dir * _safeOffset;
-
                     if (_canDealDamageWindow)
                     {
                         var dmg = _player.GetComponent<IDamageable>();
@@ -191,25 +189,6 @@ namespace LastTrain.Enemies
         private void UpdateImpact()
         {
             _stateTimer -= Time.deltaTime;
-            Vector3 anchor = SafeAnchorOnPlane();
-            Vector3 toAnchor = anchor - transform.position;
-            toAnchor.y = 0f;
-            float dist = toAnchor.magnitude;
-
-            if (dist > 1e-6f)
-            {
-                Vector3 dir = toAnchor / dist;
-                float step = _currentSpeed * Time.deltaTime;
-
-                if (dist - _safeOffset <= step)
-                {
-                    transform.position = anchor - dir * _safeOffset;
-                }
-                else
-                {
-                    _movement.MoveForwardTo(anchor);
-                }
-            }
 
             if (_stateTimer <= 0f)
                 EnterCharge();
