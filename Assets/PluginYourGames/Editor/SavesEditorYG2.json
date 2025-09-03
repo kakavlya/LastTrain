@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 821,
+    "idSave": 120,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,22 +49,20 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 3,
-        "SlotsLevel": 1,
+        "HealthLevel": 0,
+        "SlotsLevel": 0,
         "AmmoLevel": 0
     },
-    "Coins": 1717,
+    "Coins": 140,
     "EffectsVolume": 0.5,
-    "MusicVolume": 0.5,
+    "MusicVolume": 0.1681193858385086,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
-        "",
         ""
     ],
     "PlayerInventorySlots": [
-        "Пистолет-пулемет",
-        "Пулемет"
+        "SubmachineGun"
     ],
     "LevelsAvailability": [
         {
@@ -73,43 +71,43 @@
         },
         {
             "LevelNumber": 2,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 3,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 4,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 5,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 6,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 7,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 8,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 9,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 10,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 12,
@@ -195,10 +193,10 @@
                 },
                 "data": {
                     "WeaponId": "SubmachineGun",
-                    "DamageLevel": 3,
-                    "RangeLevel": 1,
+                    "DamageLevel": 1,
+                    "RangeLevel": 0,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 2
+                    "AttackSpeedLevel": 0
                 }
             },
             {
@@ -210,10 +208,10 @@
                 },
                 "data": {
                     "WeaponId": "MachineGun",
-                    "DamageLevel": 4,
-                    "RangeLevel": 2,
-                    "IsAvailable": true,
-                    "AttackSpeedLevel": 8
+                    "DamageLevel": 0,
+                    "RangeLevel": 0,
+                    "IsAvailable": false,
+                    "AttackSpeedLevel": 0
                 }
             },
             {

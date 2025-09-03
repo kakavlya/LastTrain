@@ -63,7 +63,7 @@ namespace LastTrain.Inventory
 
                 if (inventoryWeapon != null && inventoryWeapon.WeaponConfig != null)
                 {
-                    InventorySlots[i] = inventoryWeapon.WeaponConfig.Name;
+                    InventorySlots[i] = inventoryWeapon.WeaponConfig.WeaponId;
                 }
                 else
                 {
@@ -76,19 +76,19 @@ namespace LastTrain.Inventory
 
         private void LoadWeaponsLocationInInventory()
         {
-            List<string> weaponsNames = InventorySlots;
+            List<string> weaponsIdes = InventorySlots;
 
-            for (int i = 0; i < _slots.Length && i < weaponsNames.Count; i++)
+            for (int i = 0; i < _slots.Length && i < weaponsIdes.Count; i++)
             {
-                string name = weaponsNames[i];
+                string id = weaponsIdes[i];
 
-                if (!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(id))
                 {
                     var existingWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
                     if (existingWeapon != null)
                     {
-                        if (existingWeapon.WeaponConfig.Name != name)
+                        if (existingWeapon.WeaponConfig.WeaponId != id)
                         {
                             Destroy(existingWeapon.gameObject);
                         }
@@ -98,7 +98,7 @@ namespace LastTrain.Inventory
                         }
                     }
 
-                    WeaponUpgradeConfig weaponConfig = GetWeaponConfigByName(name);
+                    WeaponUpgradeConfig weaponConfig = GetWeaponConfigById(id);
 
                     if (weaponConfig != null)
                     {
@@ -111,13 +111,13 @@ namespace LastTrain.Inventory
             YG2.SaveProgress();
         }
 
-        private WeaponUpgradeConfig GetWeaponConfigByName(string weaponName)
+        private WeaponUpgradeConfig GetWeaponConfigById(string weaponId)
         {
             WeaponUpgradeConfig[] weaponConfigs = Resources.LoadAll<WeaponUpgradeConfig>(_ñonfigsFolder);
 
             foreach (var weaponInfo in weaponConfigs)
             {
-                if (weaponInfo.Name == weaponName)
+                if (weaponInfo.WeaponId == weaponId)
                     return weaponInfo;
             }
 

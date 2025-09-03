@@ -1,7 +1,0 @@
-ExampleYG2
-Authorization
-InterstitialAdv
-Leaderboards
-Localization
-RewardedAdv
-Storage
