@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc3cb5db3532364a875b61f1bde62b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootSound: {fileID: 8300000, guid: c51fc9a3181ad624a9daa2fed0d6451d, type: 3}
+  _shootSound: {fileID: 8300000, guid: 361af12b1fabdbe4fa9be660cf038eaf, type: 3}
   _weapon: {fileID: 4145541452217694962}
 --- !u!82 &7332470666651878799
 AudioSource:

@@ -34,9 +34,6 @@ namespace LastTrain.Audio
             if (_effectsAudioSource == null || clip == null)
                 return;
 
-            if (_effectsAudioSource.isPlaying && _effectsAudioSource.clip == clip && _effectsAudioSource.loop == loop)
-                return;
-
             _effectsAudioSource.loop = loop;
             _effectsAudioSource.clip = clip;
             _effectsAudioSource.Play();
