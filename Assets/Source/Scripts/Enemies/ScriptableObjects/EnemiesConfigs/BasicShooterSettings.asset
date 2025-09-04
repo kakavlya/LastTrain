@@ -27,5 +27,5 @@ MonoBehaviour:
   shootingDistance: 45
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
   fireInterval: 3
-  projectileSpeed: 100
+  projectileSpeed: 90
   projectileDamage: 5

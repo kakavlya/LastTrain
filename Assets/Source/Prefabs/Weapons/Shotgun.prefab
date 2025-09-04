@@ -14791,7 +14791,7 @@ MonoBehaviour:
   _muzzleEffectPrefab: {fileID: 198586439706424864, guid: f9f016040c11f4a45a8904688623ce0a, type: 3}
   FireDelay: 0.7
   UsePooling: 1
-  ProjectileSpeed: 100
+  ProjectileSpeed: 125
   _bulletsInShot: 10
   _spreadAngle: 45
 --- !u!82 &7834140368202916372

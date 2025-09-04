@@ -26,6 +26,6 @@ MonoBehaviour:
   changeDirectionEvery: {x: 4, y: 7}
   shootingDistance: 60
   projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
-  fireInterval: 2
-  projectileSpeed: 100
-  projectileDamage: 8
+  fireInterval: 1.5
+  projectileSpeed: 150
+  projectileDamage: 10
