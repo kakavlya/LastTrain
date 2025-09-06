@@ -3225,6 +3225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20f6ddd213c8944fac04bcb2faf5590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 1433297221}
+  _cam: {fileID: 1126611521}
   _uIStateMachine: {fileID: 344213183}
   _levelStateMachine: {fileID: 634939150}
   _gameplayTraining: {fileID: 429251134}

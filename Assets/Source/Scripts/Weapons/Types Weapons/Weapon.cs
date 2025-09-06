@@ -3,6 +3,7 @@ using UnityEngine;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
 using LastTrain.Projectiles;
+using LastTrain.Weapons.System;
 
 namespace LastTrain.Weapons.Types
 {
@@ -14,94 +15,83 @@ namespace LastTrain.Weapons.Types
         [SerializeField] protected Transform FirePoint;
         [SerializeField] protected Projectile ProjectilePrefab;
         [SerializeField] protected ParticleSystem _muzzleEffectPrefab;
+        [SerializeField] private AimingTargetProvider _aim;     
+        [SerializeField] private LayerMask _obstacleMask = ~0;  
 
         [Header("Shoot Settings")]
         [SerializeField] protected float FireDelay = 0.1f;
         [SerializeField] protected bool UsePooling = true;
         [SerializeField] protected float ProjectileSpeed = 100;
-
-        [Header("Aiming Mode")]
-        [Tooltip("≈сли true Ч летим по плоскости (Y игнорируетс€). ≈сли false Ч полностью 3D.")]
-        [SerializeField] private bool _shootPlanar = false;
+        [SerializeField] protected float Range = 2000f;
 
         private float _lastFireTime;
         private float _currentFireDelay;
 
         protected GameObject Owner;
         protected float Damage;
-        protected float Range;
+        protected AimingTargetProvider Aim => _aim;
+        protected LayerMask ObstacleMask => _obstacleMask;
 
         public event Action OnFired;
         public event Action OnStopFired;
 
-        protected Vector3 Direction => FirePoint.forward;
-
         public Weapon PrefabReference { get; private set; }
         public Transform FirepointPosition => FirePoint;
-
         public Sprite UISpriteActive => _uiSpriteActive;
-
         public Sprite UISpriteDeactive => _uiSpriteDeactive;
 
         public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
             Owner = gameObject;
             Damage = damage;
-            Range = range;
+            if (range > 0) Range = range;
             _currentFireDelay = fireDelay ?? FireDelay;
         }
 
-        public virtual void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
-        {
-            if(!FirePossibleCalculate())
-                return;
+        public void SetAimProvider(AimingTargetProvider provider) => _aim = provider;
 
-            if (ammo != null && !ammo.HasAmmo)
+        public virtual void Fire(Ammunition ammo = null)
+        {
+            if (!FirePossibleCalculate()) return;
+            if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
+            if (_aim == null || FirePoint == null) return;
+
+
+            var ad = _aim.GetAim();
+            Vector3 origin = FirePoint.position;
+            Vector3 target = ad.worldPoint;
+
+            Vector3 dir = target - origin;
+            if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;
+            else dir.Normalize();
+
+            // 3) анти-стенка: луч от дула к цели, с небольшим отступом от своего коллайдера
+            float distToTarget = Vector3.Distance(origin, target);
+            float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
+            Vector3 originNoSelf = origin + dir * 0.02f;
+
+            if (Physics.Raycast(originNoSelf, dir, out var block, maxRay, _obstacleMask, QueryTriggerInteraction.Ignore))
             {
-                InvokeStopFire();
-                return;
+                target = block.point;
+                dir = (target - origin).normalized;
             }
 
             OnFired?.Invoke();
 
-            Vector3 dir;
-
-            if (targetWorldPos.HasValue)
-            {
-                var toTarget = targetWorldPos.Value - FirePoint.position;
-
-                if (_shootPlanar)
-                    dir = Vector3.ProjectOnPlane(toTarget, Vector3.up).normalized; 
-                else
-                    dir = toTarget.normalized;                                     
-
-                if (dir.sqrMagnitude < 1e-6f)
-                    dir = FirePoint.forward; // fallback
-            }
-            else
-            {
-                dir = FirePoint.forward;
-            }
-
-            var rot = Quaternion.LookRotation(dir);
+            Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
             var proj = UsePooling
-                ? ProjectilePool.Instance.Spawn(
-                    ProjectilePrefab,
-                    FirePoint.position,
-                    rot,
-                    Owner,
-                    ProjectileSpeed,
-                    Damage,
-                    Range)
-                : Instantiate(
-                    ProjectilePrefab,
-                    FirePoint.position,
-                    rot);
+                ? ProjectilePool.Instance.Spawn(ProjectilePrefab, origin, rot, Owner, ProjectileSpeed, Damage, Range)
+                : Instantiate(ProjectilePrefab, origin, rot);
 
             if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
+
+            // remove on prod
+            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);  
+            Debug.DrawLine(origin, target, Color.yellow);
+            Debug.DrawRay(origin, dir * 5f, Color.green);
         }
 
         public void SetPrefabReference(Weapon prefab)
@@ -111,10 +101,7 @@ namespace LastTrain.Weapons.Types
 
         public virtual bool GetIsLoopedFireSound() => false;
 
-        public virtual void InvokeStopFire()
-        {
-            OnStopFired?.Invoke();
-        }
+        public virtual void InvokeStopFire() => OnStopFired?.Invoke();
 
         protected void InvokeFire()
         {
@@ -123,28 +110,15 @@ namespace LastTrain.Weapons.Types
 
         protected virtual void OnWeaponFire()
         {
-            var proj = UsePooling
-                ? ProjectilePool.Instance.Spawn(
-                    ProjectilePrefab,
-                    FirePoint.position,
-                    Quaternion.LookRotation(Direction),
-                    Owner,
-                    ProjectileSpeed,
-                    Damage,
-                    Range)
-                        : Instantiate(
-                            ProjectilePrefab,
-                            FirePoint.position,
-                            Quaternion.LookRotation(Direction));
+            // Ёто хук дл€ наследников (Flamethrower и т.п.)
         }
 
         protected bool FirePossibleCalculate()
         {
-            if (Time.time - _lastFireTime < _currentFireDelay)
-                return false;
-
+            if (Time.time - _lastFireTime < _currentFireDelay) return false;
             _lastFireTime = Time.time;
             return true;
         }
     }
 }
+

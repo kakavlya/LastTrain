@@ -14,6 +14,7 @@ namespace LastTrain.Weapons.System
         [SerializeField] private Ammunition[] _ammunitions;
         [SerializeField] private PlayerInput _weaponInput;
         [SerializeField] private WeaponCreator _weaponCreator;
+        [SerializeField] private AimingTargetProvider _aimProvider;
 
         private Weapon[] _weapons;
         private Weapon _currentWeapon;
@@ -34,8 +35,9 @@ namespace LastTrain.Weapons.System
             _weaponInput.StopFired -= HandleStopFire;
         }
 
-        public void Init()
+        public void Init(AimingTargetProvider aimProvider)
         {
+            _aimProvider = aimProvider;
             _weaponCreator.Init();
             _weapons = _weaponCreator.CreateWeapons();
             _weaponAmmoDictonary = _weaponCreator.CreateAmmunitionDictionary(_weapons, _ammunitions);
@@ -96,7 +98,7 @@ namespace LastTrain.Weapons.System
                 _currentWeapon.gameObject.SetActive(true);
 
                 ActivateCurrentWeaponUI();
-
+                _currentWeapon.SetAimProvider(_aimProvider);
                 OnWeaponChange?.Invoke(_currentWeapon);
             }
         }
@@ -122,7 +124,7 @@ namespace LastTrain.Weapons.System
             {
                 if (ammo.HasAmmo)
                 {
-                    _currentWeapon.Fire(ammo, target);
+                    _currentWeapon.Fire(ammo);
                 }
                 else
                 {
@@ -131,7 +133,7 @@ namespace LastTrain.Weapons.System
             }
             else
             {
-                _currentWeapon.Fire(null, target);
+                _currentWeapon.Fire(null);
             }
         }
 

@@ -19,70 +19,92 @@ namespace LastTrain.Weapons.Types
             _currentSpreadAngle = fireAngle ?? _spreadAngle;
         }
 
-        public override void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
+        public override void Fire(Ammunition ammo = null)
         {
-            if (!FirePossibleCalculate())
-                return;
+            if (!FirePossibleCalculate()) return;
+            if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
+            if (Aim == null || FirePoint == null || ProjectilePrefab == null) return;
 
-            if (ammo != null && !ammo.HasAmmo)
+            var ad = Aim.GetAim();
+            Vector3 origin = FirePoint.position;
+            Vector3 target = ad.worldPoint;
+
+            Vector3 centerDir = target - origin;
+            if (centerDir.sqrMagnitude < 1e-6f) centerDir = FirePoint.forward;
+                else centerDir.Normalize();
+
+            float distToTarget = Vector3.Distance(origin, target);
+            float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
+            Vector3 originNoSelf = origin + centerDir * 0.02f;
+
+            if (Physics.Raycast(originNoSelf, centerDir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
             {
-                InvokeStopFire();
-                return;
+                target = block.point;
+                centerDir = (target - origin).normalized;
             }
 
             InvokeFire();
 
-            if (targetWorldPos.HasValue)
+            for (int i = 0; i < _bulletsInShot; i++)
             {
-                for (int i = 0; i < _bulletsInShot; i++)
-                {
-                    Vector3 dir = targetWorldPos.Value - FirePoint.position;
-                    dir.y = 0;
-                    dir = dir.normalized;
-                    Vector3 spreadDir = GetRandomSpread();
+                Vector3 dir = SampleYawOnly(centerDir, _currentSpreadAngle * 0.5f);
+                dir.y = 0;
+                dir = dir.normalized;
+                //Vector3 spreadDir = GetRandomSpread();
 
-                    var proj = UsePooling
-                        ? ProjectilePool.Instance.Spawn(
-                            ProjectilePrefab,
-                            FirePoint.position,
-                            Quaternion.LookRotation(spreadDir),
-                            Owner,
-                            ProjectileSpeed,
-                            Damage,
-                            Range)
-                        : Instantiate(
-                            ProjectilePrefab,
-                            FirePoint.position,
-                            Quaternion.LookRotation(spreadDir));
-                }
-            }
-            else
-            {
-                OnWeaponFire();
+                var proj = UsePooling
+                    ? ProjectilePool.Instance.Spawn(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(dir),
+                        Owner,
+                        ProjectileSpeed,
+                        Damage,
+                        Range)
+                    : Instantiate(
+                        ProjectilePrefab,
+                        FirePoint.position,
+                        Quaternion.LookRotation(dir));
             }
 
             if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
+
+            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan); 
+            Debug.DrawLine(origin, origin + centerDir * 5f, Color.yellow);
         }
 
-        protected override void OnWeaponFire()
+        //protected override void OnWeaponFire()
+        //{
+        //    for (int i = 0; i < _bulletsInShot; i++)
+        //    {
+        //        var proj = UsePooling
+        //            ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+        //            Quaternion.LookRotation(GetRandomSpread()), Owner, ProjectileSpeed, Damage, Range)
+        //            : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+        //    }
+        //}
+
+        private Vector3 SampleYawOnly(Vector3 centerDir, float halfAngleDeg)
         {
-            for (int i = 0; i < _bulletsInShot; i++)
-            {
-                var proj = UsePooling
-                    ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
-                    Quaternion.LookRotation(GetRandomSpread()), Owner, ProjectileSpeed, Damage, Range)
-                    : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
-            }
+            // спроецировать центральное направление на горизонт
+            Vector3 flat = Vector3.ProjectOnPlane(centerDir, Vector3.up);
+            if (flat.sqrMagnitude < 1e-6f) flat = Vector3.ProjectOnPlane(FirePoint.forward, Vector3.up);
+            flat.Normalize();
+
+            float yaw = Random.Range(-halfAngleDeg, halfAngleDeg);
+            Quaternion q = Quaternion.AngleAxis(yaw, Vector3.up);
+            return (q * flat).normalized;
         }
 
-        private Vector3 GetRandomSpread()
+        private Vector3 GetRandomSpread(Vector3 centerDir)
         {
             float horizontalSpread = Random.Range(-_currentSpreadAngle / 2, _currentSpreadAngle / 2);
             Quaternion spreadRotation = Quaternion.Euler(0, horizontalSpread, 0);
-            return spreadRotation * Direction;
+
+            return spreadRotation * centerDir;
         }
     }
 }

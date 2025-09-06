@@ -6,25 +6,19 @@ namespace LastTrain.UI.Gameplay
     [RequireComponent(typeof(RectTransform))]
     public class UICursorFollower : MonoBehaviour
     {
-        [Header("References")]
         [SerializeField] private Canvas _canvas;
-        [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _cam;
         [SerializeField] private AimingTargetProvider _aim;
 
-        [Header("Options")]
-        [Tooltip("≈сли true Ч использовать 3D хит (TryGetWorldTarget), иначе Ч планарную точку GetTargetPoint().")]
-        [SerializeField] private bool _useWorldHit = false;
+        private RectTransform _rt;
 
-        private RectTransform _rectTransform;
-
-        private void Awake()
+        public void Init(Canvas canvas, Camera cam, AimingTargetProvider aim)
         {
-            _rectTransform = GetComponent<RectTransform>();
-            if (_camera == null) _camera = Camera.main;
-        }
+            _rt = GetComponent<RectTransform>();
+            _canvas = canvas != null ? canvas : GetComponentInParent<Canvas>();
+            _cam = cam != null ? cam : Camera.main;
+            _aim = aim;
 
-        private void OnEnable()
-        {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -37,37 +31,33 @@ namespace LastTrain.UI.Gameplay
 
         private void LateUpdate()
         {
-            if (_aim == null || _camera == null || _canvas == null) return;
+            if (_aim == null || _cam == null || _canvas == null) return;
 
-            Vector3 worldPoint = _useWorldHit && _aim.TryGetWorldTarget(out var wp) ? wp : _aim.GetTargetPoint();
-            Vector3 screenPoint = _camera.WorldToScreenPoint(worldPoint);
+            var ad = _aim.GetAim();
+            Vector3 screen = _cam.WorldToScreenPoint(ad.worldPoint);
 
             switch (_canvas.renderMode)
             {
                 case RenderMode.ScreenSpaceOverlay:
-                    _rectTransform.position = screenPoint;
+                    _rt.position = screen;
                     break;
+
                 case RenderMode.ScreenSpaceCamera:
                     {
-                        var canvasRect = (RectTransform)_canvas.transform;
-                        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPoint, _canvas.worldCamera, out var local))
-                            _rectTransform.anchoredPosition = local;
+                        var canvasRT = (RectTransform)_canvas.transform;
+                        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRT, screen, _canvas.worldCamera, out var local))
+                            _rt.anchoredPosition = local;
                         break;
                     }
+
                 case RenderMode.WorldSpace:
                     {
-                        var canvasRect = (RectTransform)_canvas.transform;
-                        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, screenPoint, _canvas.worldCamera ?? _camera, out var worldOnCanvas))
-                            _rectTransform.position = worldOnCanvas;
+                        var canvasRT = (RectTransform)_canvas.transform;
+                        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRT, screen, _canvas.worldCamera ?? _cam, out var worldOnCanvas))
+                            _rt.position = worldOnCanvas;
                         break;
                     }
             }
-        }
-
-        public void Init()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-            Cursor.visible = true;
         }
     }
 }

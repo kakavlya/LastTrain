@@ -68,12 +68,7 @@ namespace LastTrain.Player
         {
             if (Input.GetMouseButton(0))
             {
-                if (_aim == null) return;
-
-                Vector3 target = _useWorldHit && _aim.TryGetWorldTarget(out var wp)
-                                 ? wp
-                                 : _aim.GetTargetPoint();
-
+                var target = _aim.GetAim().worldPoint;
                 Fired?.Invoke(target);
             }
 

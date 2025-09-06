@@ -35,7 +35,7 @@ namespace LastTrain.Weapons.Types
             }
         }
 
-        public override void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
+        public override void Fire(Ammunition ammo = null)
         {
             if (!FirePossibleCalculate())
                 return;
@@ -79,7 +79,6 @@ namespace LastTrain.Weapons.Types
                 _flameParticle.Stop();
             }
         }
-
 
         protected override void OnWeaponFire()
         {

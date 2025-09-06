@@ -15,6 +15,8 @@ namespace LastTrain.Core
 {
     public class CompositionRoot : MonoBehaviour
     {
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private Camera _cam;
         [SerializeField] private UIStateMachine _uIStateMachine;
         [SerializeField] private LevelStateMachine _levelStateMachine;
         [SerializeField] private GameplayTraining _gameplayTraining;
@@ -40,9 +42,9 @@ namespace LastTrain.Core
         {
             _enemySpawner.Init();
             _aimingTargetProvider.Init();
-            _uiCursorFollower.Init();
+            _uiCursorFollower.Init(_canvas, _cam, _aimingTargetProvider);
             _weaponRotator.Init();
-            _weaponHandler.Init();
+            _weaponHandler.Init(_aimingTargetProvider);
             _trainMovement.Init();
             _levelElementsCreator.Init();
             _pickableAmmunitionPool.Init();
