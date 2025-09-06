@@ -36,6 +36,14 @@
             "platform": true
         },
         {
+            "name": "GamePix",
+            "version": "1.0",
+            "download": "https://boosty.to/maximalist/posts/9c7554d6-f125-4061-8d9d-0c6b92303516",
+            "noLoad": true,
+            "doc": "https://max-games.ru/gamepix/",
+            "platform": true
+        },
+        {
             "name": "InterstitialAdv",
             "version": "1.01",
             "download": "https://max-games.ru/public/pluginYG2/modules/InterstitialAdv.unitypackage",
