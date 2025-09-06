@@ -12965,6 +12965,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2588846362032867538, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: _aim
+      value: 
+      objectReference: {fileID: 888596584}
+    - target: {fileID: 2588846362032867538, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1126611521}
+    - target: {fileID: 2588846362032867538, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: _canvas
+      value: 
+      objectReference: {fileID: 1433297221}
+    - target: {fileID: 2588846362032867538, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
+      propertyPath: _useWorldHit
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9066092495799479122, guid: 2689b0d9106d40949832c2d44e96bf06, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -14733,6 +14749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystick: {fileID: 1781950845}
+  _aim: {fileID: 888596584}
+  _useWorldHit: 0
 --- !u!4 &1538978595
 Transform:
   m_ObjectHideFlags: 0

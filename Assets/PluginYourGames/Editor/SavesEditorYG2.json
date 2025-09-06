@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 921,
+    "idSave": 1263,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,11 +49,11 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 1,
+        "HealthLevel": 3,
         "SlotsLevel": 1,
-        "AmmoLevel": 2
+        "AmmoLevel": 3
     },
-    "Coins": 515,
+    "Coins": 763,
     "EffectsVolume": 0.4316578805446625,
     "MusicVolume": 0.061709046363830569,
     "InventorySlotsCount": 0,
@@ -214,7 +214,7 @@
                     "DamageLevel": 5,
                     "RangeLevel": 6,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 6
+                    "AttackSpeedLevel": 8
                 }
             },
             {

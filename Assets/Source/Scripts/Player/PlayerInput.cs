@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using LastTrain.Core;
+using LastTrain.Weapons.System;
 
 namespace LastTrain.Player
 {
     public class PlayerInput : MonoBehaviour
     {
         [SerializeField] private Joystick _joystick;
+        [SerializeField] private AimingTargetProvider _aim; 
+        [SerializeField] private bool _useWorldHit = false;
 
         private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
 
@@ -65,17 +68,17 @@ namespace LastTrain.Player
         {
             if (Input.GetMouseButton(0))
             {
-                Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    Fired?.Invoke(hit.point);
-                }
+                if (_aim == null) return;
+
+                Vector3 target = _useWorldHit && _aim.TryGetWorldTarget(out var wp)
+                                 ? wp
+                                 : _aim.GetTargetPoint();
+
+                Fired?.Invoke(target);
             }
 
             if (Input.GetMouseButtonUp(0))
-            {
                 StopFired?.Invoke();
-            }
         }
 
         private void HandleWeaponSwitch()

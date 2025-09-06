@@ -15104,6 +15104,7 @@ MonoBehaviour:
   FireDelay: 1
   UsePooling: 1
   ProjectileSpeed: 120
+  _shootPlanar: 0
   _aoeDamage: 150
   _aoeRange: 20
 --- !u!82 &4716221909597274126

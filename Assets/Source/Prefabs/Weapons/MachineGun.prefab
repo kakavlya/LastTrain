@@ -108,6 +108,7 @@ MonoBehaviour:
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 190
+  _shootPlanar: 0
 --- !u!114 &356231242550243592
 MonoBehaviour:
   m_ObjectHideFlags: 0

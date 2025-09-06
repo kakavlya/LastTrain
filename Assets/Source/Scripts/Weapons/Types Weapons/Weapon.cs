@@ -20,6 +20,10 @@ namespace LastTrain.Weapons.Types
         [SerializeField] protected bool UsePooling = true;
         [SerializeField] protected float ProjectileSpeed = 100;
 
+        [Header("Aiming Mode")]
+        [Tooltip("Если true — летим по плоскости (Y игнорируется). Если false — полностью 3D.")]
+        [SerializeField] private bool _shootPlanar = false;
+
         private float _lastFireTime;
         private float _currentFireDelay;
 
@@ -33,6 +37,7 @@ namespace LastTrain.Weapons.Types
         protected Vector3 Direction => FirePoint.forward;
 
         public Weapon PrefabReference { get; private set; }
+        public Transform FirepointPosition => FirePoint;
 
         public Sprite UISpriteActive => _uiSpriteActive;
 
@@ -48,7 +53,7 @@ namespace LastTrain.Weapons.Types
 
         public virtual void Fire(Ammunition ammo = null, Vector3? targetWorldPos = null)
         {
-            if (!FirePossibleCalculate())
+            if(!FirePossibleCalculate())
                 return;
 
             if (ammo != null && !ammo.HasAmmo)
@@ -59,30 +64,39 @@ namespace LastTrain.Weapons.Types
 
             OnFired?.Invoke();
 
+            Vector3 dir;
+
             if (targetWorldPos.HasValue)
             {
-                Vector3 dir = targetWorldPos.Value - FirePoint.position;
-                dir.y = 0;
-                dir = dir.normalized;
+                var toTarget = targetWorldPos.Value - FirePoint.position;
 
-                var proj = UsePooling
-                    ? ProjectilePool.Instance.Spawn(
-                        ProjectilePrefab,
-                        FirePoint.position,
-                        Quaternion.LookRotation(dir),
-                        Owner,
-                        ProjectileSpeed,
-                        Damage,
-                        Range)
-                    : Instantiate(
-                        ProjectilePrefab,
-                        FirePoint.position,
-                        Quaternion.LookRotation(dir));
+                if (_shootPlanar)
+                    dir = Vector3.ProjectOnPlane(toTarget, Vector3.up).normalized; 
+                else
+                    dir = toTarget.normalized;                                     
+
+                if (dir.sqrMagnitude < 1e-6f)
+                    dir = FirePoint.forward; // fallback
             }
             else
             {
-                OnWeaponFire();
+                dir = FirePoint.forward;
             }
+
+            var rot = Quaternion.LookRotation(dir);
+            var proj = UsePooling
+                ? ProjectilePool.Instance.Spawn(
+                    ProjectilePrefab,
+                    FirePoint.position,
+                    rot,
+                    Owner,
+                    ProjectileSpeed,
+                    Damage,
+                    Range)
+                : Instantiate(
+                    ProjectilePrefab,
+                    FirePoint.position,
+                    rot);
 
             if (_muzzleEffectPrefab != null)
                 ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);

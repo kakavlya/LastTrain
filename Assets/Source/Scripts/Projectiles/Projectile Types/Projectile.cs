@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     private void OnEnable()
     {
         _spawnTime = Time.time;
-        SetVelocity();
+        //SetVelocity();
     }
 
     public virtual void SetVelocity()
@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
         if (Owner != null && collider.transform.IsChildOf(Owner.transform))
             return;
 
-        if(IsFriendlyFire(collider))
+        if (IsFriendlyFire(collider))
             return;
 
         if (collider.TryGetComponent<IDamageable>(out var dmg))
@@ -83,7 +83,7 @@ public class Projectile : MonoBehaviour
     }
 
     public virtual void Initial(
-        Vector3 position,
+           Vector3 position,
         Quaternion rotation,
         GameObject owner,
         float speed,
@@ -93,8 +93,7 @@ public class Projectile : MonoBehaviour
         float aoeDamage = 0,
         float aoeRange = 0)
     {
-        transform.position = position;
-        transform.rotation = rotation;
+        transform.SetPositionAndRotation(position, rotation);
         Owner = owner;
         Speed = speed;
         Damage = damage;
@@ -102,8 +101,12 @@ public class Projectile : MonoBehaviour
         UsePooling = usePooling;
 
         if (owner != null)
-        {
             gameObject.layer = owner.layer;
+
+        if (ProjectileRigidbody != null)
+        {
+            ProjectileRigidbody.angularVelocity = Vector3.zero;
+            ProjectileRigidbody.velocity = transform.forward * Speed;
         }
 
         _trail?.Play(Speed);
