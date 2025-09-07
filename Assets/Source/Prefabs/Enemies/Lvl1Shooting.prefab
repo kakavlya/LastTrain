@@ -780,7 +780,7 @@ MonoBehaviour:
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
   _renderersToFlash:
-  - {fileID: 2165826585781179773}
+  - {fileID: 2165826585781177145}
   _flashColor: {r: 0.9339623, g: 0.005873861, b: 0.005873861, a: 0}
   _flashDuration: 0.2
 --- !u!114 &4647971876647877547
