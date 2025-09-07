@@ -16,6 +16,8 @@ public class ObjectsRandomizer : MonoBehaviour
     [SerializeField] private GameObject[] _farObjects;
     [SerializeField] private int _spawnCount;
     [SerializeField] private float _maxScale;
+    [Range(0f, 0.3f)]
+    [SerializeField] private float _colorVariation;
 
     [Header("Spline Settings")]
     [SerializeField] private Spline _spline;
@@ -51,6 +53,7 @@ public class ObjectsRandomizer : MonoBehaviour
             float scale = Random.Range(minScale, _maxScale);
             Vector3 baseScale = instance.transform.localScale;
             instance.transform.localScale = new Vector3(scale, scale, scale);
+            RandomizeColorSimple(instance);
         }
     }
 #endif
@@ -74,6 +77,26 @@ public class ObjectsRandomizer : MonoBehaviour
         }
 }
 #endif
+
+    private void RandomizeColorSimple(GameObject inctance)
+    {
+        MeshRenderer renderer = inctance.GetComponent<MeshRenderer>();
+        
+        if (renderer != null)
+        {
+
+            Material material = new Material(renderer.sharedMaterial);
+
+            Color variation = new Color(
+                Random.Range(1f -_colorVariation, 1f + _colorVariation),
+                Random.Range(1f -_colorVariation, 1f + _colorVariation),
+                Random.Range(1f -_colorVariation, 1f + _colorVariation)
+            );
+
+            material.color *= variation;
+            renderer.sharedMaterial = material;
+        }
+    }
 }
 
 

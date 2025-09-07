@@ -48,13 +48,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planeMeshRenderer: {fileID: 4020896267731845182}
   _transformParent: {fileID: 2390037061895923021}
-  _spawnObjects:
+  _nearObjects:
+  - {fileID: 140364, guid: 139607ad2747097498d3ad76a5d00606, type: 3}
+  - {fileID: 146780, guid: 894af6b171d432d43b341ce869b1e648, type: 3}
+  - {fileID: 114234, guid: ec822a9da9f5f834c83e982ff67ad650, type: 3}
+  - {fileID: 148274, guid: b0dad7b45132a1e46891e44f45be7167, type: 3}
+  - {fileID: 132230, guid: 49c571efe37336d4e8425e60bcea6b11, type: 3}
+  - {fileID: 176646, guid: 59a64c6f5b937d948af21825d2e7510c, type: 3}
+  - {fileID: 115238, guid: 22c373f966379694eb995ec198f0cc06, type: 3}
+  - {fileID: 133600, guid: c10a0ca79c993ff47974f7093824cfc0, type: 3}
+  - {fileID: 148966, guid: ca5c59fb14bf88f47bbb5b7baec7526d, type: 3}
+  _farObjects:
   - {fileID: 199452, guid: 3d5cd6565dd6db54d8d31f98ddcad778, type: 3}
-  _spawnCount: 1000
-  _minScale: 5
+  _spawnCount: 5000
   _maxScale: 20
   _spline: {fileID: 4949635635816918986}
-  _roadOffset: 120
+  _roadOffsetNear: 30
+  _roadOffsetDistant: 150
 --- !u!1 &7188828559733460512
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 3488896187488807974, guid: 15bfb940d05c28345b0f6cc787e24f15, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 435f7717b90bb4743a35456240e7beba, type: 2}
+      objectReference: {fileID: 2100000, guid: 66ac974c7a7d26b4aab521296908f74c, type: 2}
     - target: {fileID: 3516132633264037963, guid: 15bfb940d05c28345b0f6cc787e24f15, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
