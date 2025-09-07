@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 1358,
+    "idSave": 1558,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,12 +49,12 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 3,
+        "HealthLevel": 4,
         "SlotsLevel": 1,
-        "AmmoLevel": 3
+        "AmmoLevel": 4
     },
-    "Coins": 1606,
-    "EffectsVolume": 0.4316578805446625,
+    "Coins": 820,
+    "EffectsVolume": 0.26402467489242556,
     "MusicVolume": 0.061709046363830569,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
@@ -110,7 +110,7 @@
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 12,
@@ -211,10 +211,10 @@
                 },
                 "data": {
                     "WeaponId": "MachineGun",
-                    "DamageLevel": 5,
-                    "RangeLevel": 6,
+                    "DamageLevel": 7,
+                    "RangeLevel": 7,
                     "IsAvailable": true,
-                    "AttackSpeedLevel": 8
+                    "AttackSpeedLevel": 9
                 }
             },
             {

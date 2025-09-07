@@ -781,7 +781,7 @@ MonoBehaviour:
   _deathSound: {fileID: 0}
   _renderersToFlash:
   - {fileID: 8566165774999835422}
-  _flashColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashColor: {r: 1, g: 0.015723169, b: 0.015723169, a: 0}
   _flashDuration: 0.2
 --- !u!114 &4647971876647877547
 MonoBehaviour:

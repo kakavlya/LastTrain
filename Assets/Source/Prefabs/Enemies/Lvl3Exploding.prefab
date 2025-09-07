@@ -492,7 +492,6 @@ MonoBehaviour:
   _flyDuration: 1
   _rotateDuration: 2
   _disappearDelay: 0.1
-  _deactivateTime: 1
 --- !u!1 &6965205965109951990
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turnSpeed: 120
+  _moveSpeed: 0
 --- !u!114 &4866243460939307604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +583,7 @@ MonoBehaviour:
   _deathSound: {fileID: 0}
   _renderersToFlash:
   - {fileID: 1293446217900438750}
-  _flashColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashColor: {r: 1, g: 0.006289184, b: 0.006289184, a: 0}
   _flashDuration: 0.1
 --- !u!114 &5469338553170756925
 MonoBehaviour:
@@ -634,7 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86f315223ce9434396a81179b902516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCollider: {fileID: -5482390200032144320}
   _checkRadius: 10
 --- !u!65 &-5482390200032144320
 BoxCollider:
