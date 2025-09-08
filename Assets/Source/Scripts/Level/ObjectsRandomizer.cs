@@ -1,5 +1,7 @@
 using UnityEngine;
 using SplineMesh;
+using System.Linq;
+
 
 
 #if UNITY_EDITOR
@@ -29,6 +31,8 @@ public class ObjectsRandomizer : MonoBehaviour
 #if UNITY_EDITOR
     public void SpawnObjects(GameObject[] spawnObjects, float minDist, float maxDist)
     {
+        spawnObjects = spawnObjects.Where(obj => obj != null).ToArray();
+
         _planeSize = _planeMeshRenderer.bounds.size;
 
         for (int i = 0; i < _spawnCount; i++)
@@ -75,22 +79,22 @@ public class ObjectsRandomizer : MonoBehaviour
         {
             DestroyImmediate(_transformParent.GetChild(i).gameObject);
         }
-}
+    }
 #endif
 
     private void RandomizeColorSimple(GameObject inctance)
     {
         MeshRenderer renderer = inctance.GetComponent<MeshRenderer>();
-        
+
         if (renderer != null)
         {
 
             Material material = new Material(renderer.sharedMaterial);
 
             Color variation = new Color(
-                Random.Range(1f -_colorVariation, 1f + _colorVariation),
-                Random.Range(1f -_colorVariation, 1f + _colorVariation),
-                Random.Range(1f -_colorVariation, 1f + _colorVariation)
+                Random.Range(1f - _colorVariation, 1f + _colorVariation),
+                Random.Range(1f - _colorVariation, 1f + _colorVariation),
+                Random.Range(1f - _colorVariation, 1f + _colorVariation)
             );
 
             material.color *= variation;

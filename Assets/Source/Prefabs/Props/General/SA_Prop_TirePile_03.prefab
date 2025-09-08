@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &108322
+--- !u!1 &171926
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 419386}
-  - component: {fileID: 3326670}
-  - component: {fileID: 2363486}
+  - component: {fileID: 452182}
+  - component: {fileID: 3359640}
+  - component: {fileID: 2305956}
   m_Layer: 0
-  m_Name: SA_Prop_JunkpileGrass_01
+  m_Name: SA_Prop_TirePile_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &419386
+--- !u!4 &452182
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108322}
+  m_GameObject: {fileID: 171926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,21 +33,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3326670
+--- !u!33 &3359640
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108322}
-  m_Mesh: {fileID: 4300000, guid: d3a41e2082b379c4a9538a8130f12a51, type: 3}
---- !u!23 &2363486
+  m_GameObject: {fileID: 171926}
+  m_Mesh: {fileID: 4300000, guid: 0031b30afa516d641a5bc624fe37f142, type: 3}
+--- !u!23 &2305956
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108322}
+  m_GameObject: {fileID: 171926}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
