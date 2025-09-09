@@ -11,11 +11,9 @@ namespace LastTrain.Inventory
         private Transform _originalParent;
         private string _dragLayerName = "DragLayer";
         private Transform _dragLayer;
-        private WeaponSlotUI _originalWeaponSlotUI;
 
         private void Start()
         {
-            _originalWeaponSlotUI = GetComponentInParent<WeaponSlotUI>();
             _rectTransform = GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -24,6 +22,7 @@ namespace LastTrain.Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            _originalParent = transform.parent;
             var slotTransform = GetComponentInParent<RectTransform>();
             slotTransform.SetAsLastSibling();
             _canvasGroup.blocksRaycasts = false;
@@ -47,8 +46,6 @@ namespace LastTrain.Inventory
             }
             else
             {
-                _originalWeaponSlotUI.SetSlotUnfilled();
-                _originalWeaponSlotUI = GetComponentInParent<WeaponSlotUI>();
                 transform.localPosition = Vector3.zero;
                 _canvasGroup.blocksRaycasts = true;
             }
