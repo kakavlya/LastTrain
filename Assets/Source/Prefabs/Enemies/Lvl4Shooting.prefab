@@ -1192,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73878a91a1495a04b86bb1067a41c832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitVFX: {fileID: 19821056, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
+  _hitVFX: {fileID: 1829163952570794, guid: f171ac3dbb620c44e81cd88ddee1cbbd, type: 3}
   _deathVFXOptions:
   - {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
   - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
@@ -1259,8 +1259,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3652835, y: 9.589436, z: 9.295792}
-  m_Center: {x: 0.008657774, y: 5.0319576, z: 0.050518673}
+  m_Size: {x: 4.37, y: 3.74, z: 9.295792}
+  m_Center: {x: 0.008657774, y: 2.1, z: 0.050518673}
 --- !u!65 &3432597265437497995
 BoxCollider:
   m_ObjectHideFlags: 0
