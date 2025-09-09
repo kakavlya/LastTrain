@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73878a91a1495a04b86bb1067a41c832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitVFX: {fileID: 0}
+  _hitVFX: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
   _deathVFXOptions:
   - {fileID: 1159970587636746, guid: e7473d9620ab29341b98bf21b400e598, type: 3}
   - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
@@ -530,10 +530,6 @@ MonoBehaviour:
   _deathVFXlife: 2
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 8580376144634268085}
-  _flashColor: {r: 1, g: 0, b: 0, a: 0}
-  _flashDuration: 0.1
 --- !u!114 &5469338553170756925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,8 +565,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5984144, y: 15, z: 5.0373373}
-  m_Center: {x: -0.04139185, y: 7.25, z: 0.056656837}
+  m_Size: {x: 3.3, y: 2.5, z: 5.15}
+  m_Center: {x: -0.04139185, y: 0.96, z: 0.056656837}
 --- !u!114 &2249419107156347508
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -610,7 +610,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.97, y: 0, z: -7.9}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3209630958734134741}
@@ -665,10 +665,6 @@ MonoBehaviour:
   _deathVFXlife: 2
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 5946368150703292773}
-  _flashColor: {r: 1, g: 0, b: 0, a: 0}
-  _flashDuration: 0.1
 --- !u!114 &5469338553170756925
 MonoBehaviour:
   m_ObjectHideFlags: 0
