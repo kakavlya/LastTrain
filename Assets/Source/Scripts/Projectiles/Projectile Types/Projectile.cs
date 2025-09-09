@@ -55,6 +55,13 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            if (_impactPrefab != null)
+                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+            Despawn();
+        }
+
         if (Owner != null && collider.transform.IsChildOf(Owner.transform))
             return;
 
@@ -112,7 +119,7 @@ public class Projectile : MonoBehaviour
         _trail?.Play(Speed);
     }
 
-    private void Despawn()
+    protected void Despawn()
     {
         _trail?.BeginDetachFade();
 

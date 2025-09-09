@@ -21,12 +21,12 @@ namespace LastTrain.Enemies
 
             _moveSpeed = speed;
 
-            #if UNITY_EDITOR || DEVELOPMENT_BUILD
-    if (Mathf.Approximately(speed, 0f))
-    {
-        Debug.Log($"[Movement] SetSpeed(0) on {name}\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
-    }
-#endif
+    //        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+    //if (Mathf.Approximately(speed, 0f))
+    //{
+    //    Debug.Log($"[Movement] SetSpeed(0) on {name}\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+    //}
+//#endif
         }
 
         public void MoveForwardTo(Vector3 target)
