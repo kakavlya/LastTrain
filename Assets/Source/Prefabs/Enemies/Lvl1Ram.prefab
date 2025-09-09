@@ -153,17 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73878a91a1495a04b86bb1067a41c832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitVFX: {fileID: 191186, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
+  _hitVFX: {fileID: 19821056, guid: 3ada67b7fad601e498038e8679ab5aac, type: 3}
   _deathVFXOptions:
   - {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
   - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
   _deathVFXlife: 0
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 2652764040309809835}
-  _flashColor: {r: 0.990566, g: 0, b: 0.009425991, a: 0}
-  _flashDuration: 0.2
 --- !u!114 &4018487660860795687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,11 +326,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27c877f120f6904099e590f9088807c, type: 3}
---- !u!23 &2652764040309809835 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2380236, guid: a27c877f120f6904099e590f9088807c, type: 3}
-  m_PrefabInstance: {fileID: 2652764040312189799}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2652764040312095037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 488026, guid: a27c877f120f6904099e590f9088807c, type: 3}

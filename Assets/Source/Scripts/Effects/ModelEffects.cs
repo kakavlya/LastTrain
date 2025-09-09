@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using LastTrain.Particles;
+using System.Collections;
 using UnityEngine;
 
 namespace LastTrain.Effects
@@ -6,7 +7,7 @@ namespace LastTrain.Effects
     public class ModelEffects : MonoBehaviour
     {
         [Header("Visual FX")]
-        [SerializeField] private GameObject _hitVFX;
+        [SerializeField] private ParticleSystem _hitVFX;
         [SerializeField] private GameObject[] _deathVFXOptions;
         [SerializeField] private float _deathVFXlife = 2f;
 
@@ -24,7 +25,8 @@ namespace LastTrain.Effects
         public void PlayHitFX()
         {
             if (_hitVFX)
-                Instantiate(_hitVFX, transform.position, Quaternion.identity);
+                ParticlePool.Instance.Spawn(_hitVFX, transform.position);
+                //Instantiate(_hitVFX, transform.position, Quaternion.identity);
 
             if (_hitSound)
                 AudioSource.PlayClipAtPoint(_hitSound, transform.position);

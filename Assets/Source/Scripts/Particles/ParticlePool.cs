@@ -10,8 +10,10 @@ namespace LastTrain.Particles
         public static ParticlePool Instance { get; private set; }
 
         [SerializeField] private ParticleSystem[] _particlePrefabs;
+        [SerializeField] private int _defaultCapacity = 8;
+        [SerializeField] private int _maxSize = 64;
 
-        private Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> _pools =
+        private readonly Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> _pools =
             new Dictionary<ParticleSystem, ObjectPool<ParticleSystem>>();
 
         public void Init()
@@ -20,59 +22,103 @@ namespace LastTrain.Particles
             InitializePools();
         }
 
-        public ParticleSystem Spawn(ParticleSystem particleSystem, Vector3 position)
+        public ParticleSystem Spawn(ParticleSystem prefab, Vector3 position, Quaternion? rotation = null, Vector3? scale = null)
         {
-            if (!_pools.ContainsKey(particleSystem))
+            if (!_pools.TryGetValue(prefab, out var pool))
             {
-                CreatePoolForPrefab(particleSystem);
+                pool = CreatePoolForPrefab(prefab);
             }
 
-            var particle = _pools[particleSystem].Get();
-            particle.transform.position = position;
-            particle.Play();
-            StartCoroutine(ReleaseWhenFinished(particle, particleSystem));
+            var particle = pool.Get();
+
+            // Готовим трансформ ДО Play
+            var transform = particle.transform;
+            transform.SetParent(base.transform, worldPositionStays: false);
+            transform.position = position;
+            if (rotation.HasValue) transform.rotation = rotation.Value;
+            if (scale.HasValue) transform.localScale = scale.Value;
+
+            particle.Clear(true);
+            particle.Play(true);
+
+            StartCoroutine(ReleaseWhenFinished(particle, prefab));
             return particle;
         }
 
         private void InitializePools()
         {
-            foreach (var particlePrefab in _particlePrefabs)
+            if (_particlePrefabs == null) return;
+            foreach (var prefab in _particlePrefabs)
             {
-                CreatePoolForPrefab(particlePrefab);
+                if (prefab) CreatePoolForPrefab(prefab);
             }
         }
 
-        private void CreatePoolForPrefab(ParticleSystem particlePrefab)
+        private ObjectPool<ParticleSystem> CreatePoolForPrefab(ParticleSystem prefab)
         {
-            if (!_pools.ContainsKey(particlePrefab))
-            {
-                _pools[particlePrefab] = new ObjectPool<ParticleSystem>(
-                    createFunc: () => CreateParticle(particlePrefab, transform),
-                    actionOnGet: (obj) => obj.gameObject.SetActive(true),
-                    actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-                    actionOnDestroy: (obj) => Destroy(obj.gameObject)
-                );
-            }
+            var pool = new ObjectPool<ParticleSystem>(
+                createFunc: () => CreateParticle(prefab, parent: transform),
+                actionOnGet: particle =>
+                {
+
+                    var gameObject = particle.gameObject;
+                    if (!gameObject.activeSelf) gameObject.SetActive(true);
+
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    particle.Clear(true);
+                },
+                actionOnRelease: particle =>
+                {
+                    if (!particle) return;
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    particle.gameObject.SetActive(false);
+                },
+                actionOnDestroy: partlicle =>
+                {
+                    if (partlicle) Destroy(partlicle.gameObject);
+                },
+                collectionCheck: false,
+                defaultCapacity: _defaultCapacity,
+                maxSize: _maxSize
+            );
+
+            _pools[prefab] = pool;
+            return pool;
         }
 
-        private IEnumerator ReleaseWhenFinished(ParticleSystem particle, ParticleSystem prefab)
+        private IEnumerator ReleaseWhenFinished(ParticleSystem particleSystem, ParticleSystem prefabKey)
         {
-            while (particle.isPlaying)
+            while (particleSystem && particleSystem.IsAlive(true))
                 yield return null;
 
-            if (particle != null && _pools.ContainsKey(prefab))
+            if (particleSystem && _pools.TryGetValue(prefabKey, out var pool))
             {
-                _pools[prefab].Release(particle);
+                pool.Release(particleSystem);
             }
         }
 
-        private ParticleSystem CreateParticle(ParticleSystem particlePrefab, Transform transform)
+        private ParticleSystem CreateParticle(ParticleSystem prefab, Transform parent)
         {
-            var particle = Instantiate(particlePrefab, transform);
-            var main = particle.main;
+            if (!prefab)
+            {
+                Debug.LogError("[ParticlePool] Prefab is null");
+                return null;
+            }
+
+            var go = Instantiate(prefab.gameObject, parent, false);
+            var ps = go.GetComponent<ParticleSystem>();
+            if (!ps)
+            {
+                Debug.LogError($"[ParticlePool] No ParticleSystem on '{prefab.name}' root");
+                Destroy(go);
+                return null;
+            }
+
+            var main = ps.main;
             main.loop = false;
-            main.playOnAwake = false;
-            return particle;
+            main.playOnAwake = false;        
+            go.SetActive(false);
+            return ps;
         }
     }
 }
