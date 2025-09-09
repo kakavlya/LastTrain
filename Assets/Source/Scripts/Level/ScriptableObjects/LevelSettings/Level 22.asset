@@ -15,10 +15,10 @@ MonoBehaviour:
   LevelNumber: 22
   IsAvailable: 0
   LevelElements:
-  - {fileID: 1368646668707456488, guid: 9451fb1344dcac04a941e3e649b5df66, type: 3}
-  - {fileID: 8134982692920179091, guid: 29553d03a6a38d349acc769cafefc00a, type: 3}
-  - {fileID: 2131427372412416358, guid: 6c03474ee51cec840b06ecebe538a9cf, type: 3}
-  - {fileID: 7293236608379303586, guid: 8eecf55ee455d2b4b9fd9b6f298d33a4, type: 3}
+  - {fileID: 501883077434377656, guid: 9e7cc32350b00cf4f99fe16e0382b996, type: 3}
+  - {fileID: 835704160610999110, guid: 04c51dab156171e4983cbbb0ca284ba1, type: 3}
+  - {fileID: 5990614331311851307, guid: 83467b9f9197b9d4bbfc1842d00c10a7, type: 3}
+  - {fileID: 1257921783099294876, guid: c11f65173b5dde742b6b2be4c1d99bdb, type: 3}
   LevelDurationSec: 190
   LevelReward: 450
   AmmunitionGeneratePercent: 57
