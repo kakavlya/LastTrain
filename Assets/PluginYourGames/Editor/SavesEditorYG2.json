@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 1723,
+    "idSave": 1764,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -64,8 +64,8 @@
         ""
     ],
     "PlayerInventorySlots": [
-        "Flamethrower",
-        "MachineGun"
+        "MachineGun",
+        "Flamethrower"
     ],
     "LevelsAvailability": [
         {

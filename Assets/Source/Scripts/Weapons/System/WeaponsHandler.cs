@@ -46,7 +46,8 @@ namespace LastTrain.Weapons.System
 
             _currentNumberWeapon = 0;
             _currentWeapon = _weapons[0];
-            _weapons[0].gameObject.SetActive(true);
+            _currentWeapon.SetAimProvider(_aimProvider);
+            _currentWeapon.gameObject.SetActive(true);
 
             ActivateCurrentWeaponUI();
 

@@ -15,8 +15,8 @@ namespace LastTrain.Weapons.Types
         [SerializeField] protected Transform FirePoint;
         [SerializeField] protected Projectile ProjectilePrefab;
         [SerializeField] protected ParticleSystem _muzzleEffectPrefab;
-        [SerializeField] private AimingTargetProvider _aim;     
-        [SerializeField] private LayerMask _obstacleMask = ~0;  
+        [SerializeField] private AimingTargetProvider _aim;
+        [SerializeField] private LayerMask _obstacleMask = ~0;
 
         [Header("Shoot Settings")]
         [SerializeField] protected float FireDelay = 0.1f;
@@ -52,9 +52,18 @@ namespace LastTrain.Weapons.Types
 
         public virtual void Fire(Ammunition ammo = null)
         {
+
             if (!FirePossibleCalculate()) return;
-            if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
-            if (_aim == null || FirePoint == null) return;
+
+            if (ammo != null && !ammo.HasAmmo)
+            {
+                InvokeStopFire();
+                return;
+            }
+            if (_aim == null || FirePoint == null)
+            {
+                return;
+            }
 
 
             var ad = _aim.GetAim();
@@ -89,7 +98,7 @@ namespace LastTrain.Weapons.Types
             ammo?.DecreaseProjectilesCount();
 
             // remove on prod
-            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);  
+            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);
             Debug.DrawLine(origin, target, Color.yellow);
             Debug.DrawRay(origin, dir * 5f, Color.green);
         }
@@ -115,7 +124,12 @@ namespace LastTrain.Weapons.Types
 
         protected bool FirePossibleCalculate()
         {
-            if (Time.time - _lastFireTime < _currentFireDelay) return false;
+            var fireTimeDifference = Time.time - _lastFireTime;
+            if (fireTimeDifference < _currentFireDelay)
+            {
+                return false;
+            }
+
             _lastFireTime = Time.time;
             return true;
         }
