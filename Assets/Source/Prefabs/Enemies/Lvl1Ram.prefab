@@ -160,10 +160,6 @@ MonoBehaviour:
   _deathVFXlife: 0
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 2652764040309809835}
-  _flashColor: {r: 0.990566, g: 0, b: 0.009425991, a: 0}
-  _flashDuration: 0.2
 --- !u!114 &4018487660860795687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +195,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.1547642, y: 15, z: 8.013972}
-  m_Center: {x: -0.013474464, y: 7, z: 0.049869537}
+  m_Size: {x: 3.1547642, y: 3.77, z: 8.013972}
+  m_Center: {x: -0.013474464, y: 1.36, z: 0.049869537}
 --- !u!114 &1578270108317604101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,11 +326,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27c877f120f6904099e590f9088807c, type: 3}
---- !u!23 &2652764040309809835 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2380236, guid: a27c877f120f6904099e590f9088807c, type: 3}
-  m_PrefabInstance: {fileID: 2652764040312189799}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2652764040312095037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 488026, guid: a27c877f120f6904099e590f9088807c, type: 3}

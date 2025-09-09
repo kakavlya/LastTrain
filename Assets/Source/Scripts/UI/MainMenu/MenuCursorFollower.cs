@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class MenuCursorFollower : MonoBehaviour
+namespace LastTrain.UI.MainMenu
 {
-    private void Awake()
+    public class MenuCursorFollower : MonoBehaviour
     {
-        Cursor.visible = false;
-    }
+        private void Awake()
+        {
+            Cursor.visible = false;
+        }
 
-    private void Update()
-    {
-        transform.position = Input.mousePosition;
-    }
+        private void Update()
+        {
+            transform.position = Input.mousePosition;
+        }
 
-    private void OnDisable()
-    {
-        Cursor.visible = true;
+        private void OnDisable()
+        {
+            Cursor.visible = true;
+        }
     }
 }

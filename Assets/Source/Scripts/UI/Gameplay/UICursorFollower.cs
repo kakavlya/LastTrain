@@ -31,10 +31,27 @@ namespace LastTrain.UI.Gameplay
 
         private void LateUpdate()
         {
-            if (_aim == null || _cam == null || _canvas == null) return;
+            if (_cam == null || _canvas == null) return;
 
-            var ad = _aim.GetAim();
-            Vector3 screen = _cam.WorldToScreenPoint(ad.worldPoint);
+            Vector3 screen = Vector3.zero;
+
+            if (_aim != null)
+            {
+                var ad = _aim.GetAim();
+
+                if (ad.hasHit)
+                {
+                    screen = _cam.WorldToScreenPoint(ad.worldPoint);
+                }
+                else
+                {
+                    screen = Input.mousePosition;
+                }
+            }
+            else
+            {
+                screen = Input.mousePosition;
+            }
 
             switch (_canvas.renderMode)
             {

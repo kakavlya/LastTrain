@@ -663,10 +663,6 @@ MonoBehaviour:
   _deathVFXlife: 0
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 3624616819566288616}
-  _flashColor: {r: 1, g: 0.025157154, b: 0.025157154, a: 0}
-  _flashDuration: 0.2
 --- !u!114 &4018487660860795687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,8 +698,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.348984, y: 14.652232, z: 7.123645}
-  m_Center: {x: 0.024421614, y: 7.1738844, z: -0.124804184}
+  m_Size: {x: 3.23, y: 4.04, z: 7.123645}
+  m_Center: {x: 0.024421614, y: 1.8, z: -0.124804184}
 --- !u!114 &1578270108317604101
 MonoBehaviour:
   m_ObjectHideFlags: 0
