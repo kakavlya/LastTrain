@@ -15,10 +15,10 @@ MonoBehaviour:
   LevelNumber: 21
   IsAvailable: 0
   LevelElements:
-  - {fileID: 6676778827862199369, guid: 029ca95597f71494c86a35174e44b1db, type: 3}
-  - {fileID: 1703130289155735752, guid: ec9e683eccf01f2459a75388cece5810, type: 3}
-  - {fileID: 5725334276713727054, guid: b744b59c471c01543aaff9946e861332, type: 3}
-  - {fileID: 794830123326803708, guid: 4c1a2f16ac484d54fa172ab4cbf2a82e, type: 3}
+  - {fileID: 501883077434377656, guid: 9e7cc32350b00cf4f99fe16e0382b996, type: 3}
+  - {fileID: 835704160610999110, guid: 04c51dab156171e4983cbbb0ca284ba1, type: 3}
+  - {fileID: 5990614331311851307, guid: 83467b9f9197b9d4bbfc1842d00c10a7, type: 3}
+  - {fileID: 1257921783099294876, guid: c11f65173b5dde742b6b2be4c1d99bdb, type: 3}
   LevelDurationSec: 184
   LevelReward: 430
   AmmunitionGeneratePercent: 59

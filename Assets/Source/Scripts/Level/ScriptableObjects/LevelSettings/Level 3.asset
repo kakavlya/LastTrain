@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   LevelNumber: 3
-  IsAvailable: 0
+  IsAvailable: 1
   LevelElements:
-  - {fileID: 7352752174153647220, guid: 3fb1be141b189494f8d092c99f7c39ea, type: 3}
-  - {fileID: 9114253221733017198, guid: 4d21c1274379e484ab80f98261069118, type: 3}
-  - {fileID: 1456816861291629571, guid: a22368415c84fc44db5d24504502e709, type: 3}
-  - {fileID: 789032710577607464, guid: 313268c1ccdb06e41bee70e9d49d030d, type: 3}
+  - {fileID: 6410658247320384737, guid: a7d27a456904e0140980367058c3e784, type: 3}
+  - {fileID: 6428578280582014813, guid: 69ae4f2e3b56eca4481fa52041198953, type: 3}
+  - {fileID: 3259564917138523543, guid: b35f3a4ed0bd06a4dabebf297351d15f, type: 3}
+  - {fileID: 4418678909824445242, guid: d62da18bb08413140ad17dedd5c8e578, type: 3}
   LevelDurationSec: 72
   LevelReward: 100
   AmmunitionGeneratePercent: 96
