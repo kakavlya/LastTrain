@@ -1,9 +1,6 @@
 using UnityEngine;
 using SplineMesh;
 using System.Linq;
-
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -29,7 +26,7 @@ public class ObjectsRandomizer : MonoBehaviour
     private Vector3 _planeSize;
 
 #if UNITY_EDITOR
-    public void SpawnObjects(GameObject[] spawnObjects, float minDist, float maxDist)
+    public void SpawnLevelObjects(GameObject[] spawnObjects, float minDist, float maxDist)
     {
         spawnObjects = spawnObjects.Where(obj => obj != null).ToArray();
 
@@ -62,17 +59,17 @@ public class ObjectsRandomizer : MonoBehaviour
     }
 #endif
 
+#if UNITY_EDITOR
     public void SpawnNearObjects()
     {
-        SpawnObjects(_nearObjects, _roadOffsetNear, _roadOffsetDistant);
+        SpawnLevelObjects(_nearObjects, _roadOffsetNear, _roadOffsetDistant);
     }
 
     public void SpawnFarObjects()
     {
-        SpawnObjects(_farObjects, _roadOffsetDistant, float.MaxValue);
+        SpawnLevelObjects(_farObjects, _roadOffsetDistant, float.MaxValue);
     }
 
-#if UNITY_EDITOR
     public void DeleteObjects()
     {
         for (int i = _transformParent.childCount - 1; i >= 0; i--)
