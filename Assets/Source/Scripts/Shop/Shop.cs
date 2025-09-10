@@ -136,7 +136,7 @@ namespace LastTrain.ShopSystem
             {
                 InventoryWeapon inventoryWeapon = Instantiate(_inventoryWeaponPrefab, lastSlot.transform);
                 inventoryWeapon.Init(weaponConfig);
-                lastSlot.SetSlotFilled();
+                lastSlot.SetSlotFilled(inventoryWeapon);
             }
 
             YG2.SaveProgress();

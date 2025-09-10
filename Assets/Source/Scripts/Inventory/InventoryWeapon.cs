@@ -14,7 +14,9 @@ namespace LastTrain.Inventory
         private WeaponUpgradeConfig _weaponConfig;
         private Image _currentIcon;
         private TextMeshProUGUI _currentText;
+        private WeaponSlotUI _currentSlot;
 
+        public WeaponSlotUI CurrentSlot => _currentSlot;
         public WeaponUpgradeConfig WeaponConfig => _weaponConfig;
 
         private void Awake()
@@ -32,6 +34,7 @@ namespace LastTrain.Inventory
             _currentText.enabled = true;
             _currentText.text = _weaponConfig.Name;
             _currentText.enabled = false;
+            _currentSlot = GetComponentInParent<WeaponSlotUI>();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -42,6 +45,11 @@ namespace LastTrain.Inventory
         public void OnPointerExit(PointerEventData eventData)
         {
             _currentText.enabled = false;
+        }
+
+        public void SetCurrentSlot(WeaponSlotUI weaponSlotUI)
+        {
+            _currentSlot = weaponSlotUI;
         }
     }
 }

@@ -129,10 +129,6 @@ MonoBehaviour:
   _deathVFXlife: 0
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
-  _renderersToFlash:
-  - {fileID: 2688450537510603404}
-  _flashColor: {r: 0.8773585, g: 0.29343653, b: 0.29343653, a: 0}
-  _flashDuration: 0.1
 --- !u!1 &1467216178549182896
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +187,7 @@ MonoBehaviour:
   - {fileID: 4122278453931483580, guid: 9e7a06c8366095f418870ab6346a5279, type: 3}
   _weaponInput: {fileID: 0}
   _weaponCreator: {fileID: 0}
+  _aimProvider: {fileID: 0}
 --- !u!114 &6094426346783559762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e57ada2dda95b24b9e7ff39e7e9f4dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _joystick: {fileID: 0}
   _weaponHandler: {fileID: 4064344279607870458}
   _targetProvider: {fileID: 0}
   _rotationSpeed: 270
