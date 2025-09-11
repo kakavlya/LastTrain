@@ -120,8 +120,6 @@ namespace LastTrain.Enemies
             health.SetCurrentHealth(spawnEntry.behaviorSettings.Health);
 
             spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
-
-            // activating after setup to avoid issues
         }
     }
 }
