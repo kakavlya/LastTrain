@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using LastTrain.UI.Gameplay;
 
 namespace LastTrain.Enemies
 {
@@ -26,8 +27,9 @@ namespace LastTrain.Enemies
 
             var enemyInstance = _pools[enemyPrefab].Get();
             enemyInstance.transform.SetPositionAndRotation(position, rotation);
-
+            PointerHandler.Instance.AddToDictonary(enemyInstance);
             var pooled = enemyInstance.GetComponent<PooledEnemyKey>();
+
             if (pooled != null) pooled.SetKey(enemyPrefab);
 
             return enemyInstance;
@@ -45,6 +47,8 @@ namespace LastTrain.Enemies
             {
                 Destroy(enemyInstance.gameObject);
             }
+
+            PointerHandler.Instance.RemoveFromList(enemyInstance);
         }
 
         private void InitializePools()

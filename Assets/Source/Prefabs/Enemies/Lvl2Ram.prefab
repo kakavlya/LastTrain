@@ -643,7 +643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyView: {fileID: 4380234752805251115}
   _deathEffect: {fileID: 4169378433265268266}
-  _delayBeforeDespawn: 2.5
+  _delayBeforeDespawn: 1
 --- !u!114 &4380234752805251115
 MonoBehaviour:
   m_ObjectHideFlags: 0

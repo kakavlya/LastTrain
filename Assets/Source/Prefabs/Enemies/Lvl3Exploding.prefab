@@ -560,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyView: {fileID: 416923362260610303}
   _deathEffect: {fileID: 5794946387610806708}
-  _delayBeforeDespawn: 2
+  _delayBeforeDespawn: 1
 --- !u!114 &416923362260610303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
   - {fileID: 1159970587636746, guid: e7473d9620ab29341b98bf21b400e598, type: 3}
   - {fileID: 1607639662943796, guid: a1a36200a3c61b34b9abfaed1373f4cc, type: 3}
   - {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
-  _deathVFXlife: 2
+  _deathVFXlife: 1
   _hitSound: {fileID: 0}
   _deathSound: {fileID: 0}
 --- !u!114 &5469338553170756925
