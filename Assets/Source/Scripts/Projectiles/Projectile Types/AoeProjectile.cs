@@ -1,6 +1,7 @@
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 using LastTrain.Enemies;
+using LastTrain.Particles;
 
 public class AoeProjectile : Projectile
 {
@@ -10,22 +11,11 @@ public class AoeProjectile : Projectile
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        AoeExplode();
     }
 
-    private void AoeExplode()
+    protected override void BeforeDespawn()
     {
-        if (_aoeRange <= 0) return;
-
-        Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
-
-        foreach (Collider target in targets)
-        {
-            if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
-            {
-                aoeDmg.TakeDamage(_aoeDamage);
-            }
-        }
+        AoeExplode();
     }
 
     public override void Initial(
@@ -47,6 +37,24 @@ public class AoeProjectile : Projectile
         if (owner != null)
         {
             gameObject.layer = owner.layer;
+        }
+    }
+
+    private void AoeExplode()
+    {
+        if (_impactPrefab != null)
+            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+
+        if (_aoeRange <= 0) return;
+
+        Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
+
+        foreach (Collider target in targets)
+        {
+            if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
+            {
+                aoeDmg.TakeDamage(_aoeDamage);
+            }
         }
     }
 }
