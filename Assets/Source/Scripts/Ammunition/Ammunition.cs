@@ -34,7 +34,8 @@ namespace LastTrain.AmmunitionSystem
             {
                 CurrentAmmo--;
             }
-            else
+
+            if (CurrentAmmo <= 0)
             {
                 HasAmmo = false;
             }

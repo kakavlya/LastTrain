@@ -14,12 +14,13 @@ namespace LastTrain.UI.Gameplay
         [SerializeField] private int _cellNumber;
         [SerializeField] private TextMeshProUGUI _ammoCountText;
         [SerializeField] private TextMeshProUGUI _addedCountText;
+        [SerializeField] private GameObject _addedAmmoBackground;
 
         private int _showTime = 2;
         private Image _image;
         private Ammunition _currentAmmunition;
         private string _infinitySymbol = "∞";
-        private string _plusSymblos = "+ ";
+        private string _plusSymbol = "+";
 
         public event Action<int> UconClicked;
 
@@ -28,9 +29,10 @@ namespace LastTrain.UI.Gameplay
         private void Awake()
         {
             _image = GetComponent<Image>();
+            _addedAmmoBackground.SetActive(false);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (_currentAmmunition != null)
             {
@@ -43,6 +45,12 @@ namespace LastTrain.UI.Gameplay
         {
             if (currentWeapon != null)
             {
+                if (_currentAmmunition != null)
+                {
+                    _currentAmmunition.Updated -= UpdateAmmoText;
+                    _currentAmmunition.AmmoAdded -= LaunchAddedAmmo;
+                }
+
                 _currentAmmunition = ammunition;
 
                 if (_currentAmmunition != null)
@@ -82,9 +90,11 @@ namespace LastTrain.UI.Gameplay
 
         private IEnumerator ShowAddedAmmo(int addedAmmo)
         {
-            _addedCountText.text = _plusSymblos + addedAmmo.ToString();
+            _addedAmmoBackground.gameObject.SetActive(true);
+            _addedCountText.text = _plusSymbol + addedAmmo.ToString();
             yield return new WaitForSeconds(_showTime);
             _addedCountText.text = null;
+            _addedAmmoBackground.gameObject.SetActive(false);
         }
     }
 }

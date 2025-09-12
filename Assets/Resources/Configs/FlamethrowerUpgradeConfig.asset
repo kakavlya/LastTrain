@@ -74,8 +74,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     MaxLevel: 10
     Costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
-    MinValue: 50
-    MaxValue: 80
+    MinValue: 40
+    MaxValue: 70
     IsShowFractionalValue: 0
   - LocalizationKey: Characteristic.AttackAngle
     StatType: 4

@@ -2,6 +2,7 @@ using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
+using LastTrain.Player;
 
 namespace LastTrain.Weapons.Types
 {
@@ -103,10 +104,15 @@ namespace LastTrain.Weapons.Types
                 {
                     Vector3 directionToTarget = (_hits[i].transform.position - transform.position).normalized;
 
-                    if (CheckHorizontalAngle(directionToTarget) && CheckVerticalAngle(directionToTarget))
+                    if (CheckHorizontalAngle(directionToTarget))
                     {
                         enemyHealth.TakeDamage(Damage);
                     }
+                }
+
+                if (_hits[i].TryGetComponent(out PickableAmmunition pickableAmmunition))
+                {
+                    pickableAmmunition.Collect(GetComponentInParent<TrainMovement>().transform);
                 }
             }
         }
@@ -117,14 +123,6 @@ namespace LastTrain.Weapons.Types
             Vector3 horizontalForward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
             float horizontalAngle = Vector3.Angle(horizontalForward, horizontalDirection);
             return horizontalAngle <= _currentHorisontalAngle / 2f;
-        }
-
-        private bool CheckVerticalAngle(Vector3 directionToTarget)
-        {
-            Vector3 verticalDirection = new Vector3(0, directionToTarget.y, 0).normalized;
-            Vector3 verticalForward = new Vector3(0, transform.forward.y, 0).normalized;
-            float verticalAngle = Vector3.Angle(verticalForward, verticalDirection);
-            return verticalAngle <= _verticalAngle / 2f;
         }
     }
 }
