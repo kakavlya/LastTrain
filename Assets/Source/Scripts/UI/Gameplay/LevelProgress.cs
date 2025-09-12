@@ -13,7 +13,7 @@ namespace LastTrain.UI.Gameplay
 {
     public class LevelProgress : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _countdownText;
+        [SerializeField] private GameObject _startTimer;
         [SerializeField] private Slider _progressSlider;
         [SerializeField] private int _startDelaySeconds;
         [SerializeField] private Button _nextLevelButton;
@@ -30,6 +30,8 @@ namespace LastTrain.UI.Gameplay
         {
             if (_sharedData.LevelSetting.LevelDurationSec > 0)
                 _levelDurationSeconds = _sharedData.LevelSetting.LevelDurationSec;
+
+            _startTimer.SetActive(false);
         }
 
         public void StartCountdown()
@@ -40,17 +42,18 @@ namespace LastTrain.UI.Gameplay
 
         private IEnumerator CountdownBeforePlaying()
         {
-            _countdownText.enabled = true;
+            _startTimer.SetActive(true);
+            TextMeshProUGUI timerText = _startTimer.GetComponentInChildren<TextMeshProUGUI>();
             int seconds = _startDelaySeconds;
 
             while (seconds > 0)
             {
-                _countdownText.text = seconds.ToString();
+                timerText.text = seconds.ToString();
                 seconds -= _progressValue;
                 yield return new WaitForSeconds(_progressValue);
             }
 
-            _countdownText.enabled = false;
+            _startTimer.SetActive(false);
             StartCoroutine(CountdownLevelProgress());
         }
 
