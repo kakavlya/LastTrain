@@ -45,5 +45,11 @@ namespace LastTrain.Enemies
             _deathHandler?.HandleDeath();
             CoinsHandler.Instance.AddCoins(_rewardForKill);
         }
+
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            CombatEvents.RaiseHit();
+        }
     }
 }

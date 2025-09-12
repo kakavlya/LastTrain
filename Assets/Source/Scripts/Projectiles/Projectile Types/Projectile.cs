@@ -5,14 +5,14 @@ using LastTrain.Particles;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _impactPrefab;
+    [SerializeField] protected ParticleSystem _impactPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
     [SerializeField] private TrailHandler _trail;
 
     protected Rigidbody ProjectileRigidbody;
 
-    private float _spawnTime;
+    protected float _spawnTime;
 
     public event Action<Projectile> OnReturnToPool;
 
@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
             ProjectileRigidbody.velocity = transform.forward * Speed;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (Time.time - _spawnTime >= Lifetime)
             Despawn();
@@ -52,6 +52,8 @@ public class Projectile : MonoBehaviour
                 Despawn();
         }
     }
+
+    protected virtual void BeforeDespawn() { }
 
     protected virtual void OnTriggerEnter(Collider collider)
     {
@@ -122,6 +124,8 @@ public class Projectile : MonoBehaviour
     protected void Despawn()
     {
         _trail?.BeginDetachFade();
+
+        BeforeDespawn();
 
         if (UsePooling)
         {

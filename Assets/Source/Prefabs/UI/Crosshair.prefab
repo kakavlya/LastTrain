@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9066092495799479122}
   - component: {fileID: 2588846362032867538}
   - component: {fileID: 8784365226314350506}
+  - component: {fileID: 7974304160400543630}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc7aa09b981539e478d6310dfb5b990b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d42ac916834ec0644a88a0a2e67797ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,6 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f7b739e2fe48846a801649cc36cbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 0}
+  _cam: {fileID: 0}
+  _aim: {fileID: 0}
 --- !u!114 &8784365226314350506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +105,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fce840fa7ec07af4094bd536182f5732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundMask:
+  _cam: {fileID: 0}
+  _aimMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
+  _maxDistance: 5000
+--- !u!114 &7974304160400543630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370933560245044842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38bc941ea315bfb4e894fc31a84db8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useComplementary: 0
+  _fixedFlashColor: {r: 0.9622642, g: 0.015129842, b: 0.015129842, a: 1}
+  _valueBoost: 0.71
+  _saturationBoost: 0.248
+  _flashTime: 0.1
+  _fadeTime: 0.12
+  _minInterval: 0.03
+  _useScalePunch: 1
+  _punchScale: 1.2
