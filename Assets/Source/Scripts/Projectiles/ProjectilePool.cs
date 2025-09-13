@@ -27,7 +27,6 @@ namespace LastTrain.Projectiles
 
             Projectile proj = null;
 
-            // достаём неактивный экземпляр
             while (pool.Count > 0 && proj == null)
             {
                 var candidate = pool.Dequeue();

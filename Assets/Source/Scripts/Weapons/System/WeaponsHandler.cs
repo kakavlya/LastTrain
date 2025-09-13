@@ -41,16 +41,12 @@ namespace LastTrain.Weapons.System
             _weaponCreator.Init();
             _weapons = _weaponCreator.CreateWeapons();
             _weaponAmmoDictonary = _weaponCreator.CreateAmmunitionDictionary(_weapons, _ammunitions);
-
             SetupUI();
-
             _currentNumberWeapon = 0;
             _currentWeapon = _weapons[0];
             _currentWeapon.SetAimProvider(_aimProvider);
             _currentWeapon.gameObject.SetActive(true);
-
             ActivateCurrentWeaponUI();
-
             OnWeaponChange?.Invoke(_currentWeapon);
             _weaponInput.WeaponChanged += ChangeWeapon;
             _weaponInput.Fired += HandleFire;

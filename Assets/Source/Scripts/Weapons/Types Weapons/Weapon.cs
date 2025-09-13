@@ -54,29 +54,27 @@ namespace LastTrain.Weapons.Types
 
         public virtual void Fire(Ammunition ammo = null)
         {
-
-            if (!FirePossibleCalculate()) return;
-
             if (ammo != null && !ammo.HasAmmo)
             {
                 InvokeStopFire();
                 return;
             }
+
+            if (!FirePossibleCalculate()) return;
+
             if (_aim == null || FirePoint == null)
             {
                 return;
             }
 
-
             var ad = _aim.GetAim();
             Vector3 origin = FirePoint.position;
             Vector3 target = ad.worldPoint;
-
             Vector3 dir = target - origin;
+
             if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;
             else dir.Normalize();
 
-            // 3) анти-стенка: луч от дула к цели, с небольшим отступом от своего коллайдера
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
             Vector3 originNoSelf = origin + dir * 0.02f;
@@ -88,7 +86,6 @@ namespace LastTrain.Weapons.Types
             }
 
             OnFired?.Invoke();
-
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
             var proj = UsePooling
                 ? ProjectilePool.Instance.Spawn(ProjectilePrefab, origin, rot, Owner, ProjectileSpeed, Damage, Range)
@@ -98,11 +95,6 @@ namespace LastTrain.Weapons.Types
                 ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
-
-            // remove on prod
-            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);
-            Debug.DrawLine(origin, target, Color.yellow);
-            Debug.DrawRay(origin, dir * 5f, Color.green);
         }
 
         public void SetPrefabReference(Weapon prefab)
@@ -121,12 +113,13 @@ namespace LastTrain.Weapons.Types
 
         protected virtual void OnWeaponFire()
         {
-            // Это хук для наследников (Flamethrower и т.п.)
+
         }
 
         protected bool FirePossibleCalculate()
         {
             var fireTimeDifference = Time.time - _lastFireTime;
+
             if (fireTimeDifference < _currentFireDelay)
             {
                 return false;

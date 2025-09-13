@@ -23,7 +23,9 @@ namespace LastTrain.Weapons.Types
         {
 
             if (!FirePossibleCalculate()) return;
+
             if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
+
             if (Aim == null || FirePoint == null) return;
 
             var ad = Aim.GetAim();
@@ -66,10 +68,6 @@ namespace LastTrain.Weapons.Types
                 ParticlePool.Instance.Spawn(_muzzleEffectPrefab, origin);
 
             ammo?.DecreaseProjectilesCount();
-
-            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan, 0.02f);
-            Debug.DrawLine(origin, target, Color.yellow, 0.02f);
-            Debug.DrawRay(origin, dir * 5f, Color.green, 0.02f);
         }
 
         //protected override void OnWeaponFire()

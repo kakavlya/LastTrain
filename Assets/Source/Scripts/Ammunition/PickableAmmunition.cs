@@ -14,33 +14,63 @@ namespace LastTrain.AmmunitionSystem
         private float _distanceCatch = 30f;
         private float _durationMovement = 1f;
         private int _currentProjectilesCount;
+        private Collider _collider;
 
         public int CountProjectiles { get; private set; }
+
+        private void Awake()
+        {
+            _collider = GetComponent<Collider>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out Projectile projectile))
             {
-                var ammunitionType = PrefabTypeOfWeapon.GetType();
-                Ammunition[] ammunitions = projectile.Owner.transform.parent.GetComponentsInChildren<Ammunition>();
-
-                foreach (Ammunition ammunition in ammunitions)
-                {
-                    if (ammunition.WeaponPrefab.GetType() == ammunitionType)
-                    {
-                        ammunition.IncreaseProjectilesCount(CountProjectiles);
-                    }
-                }
-
-                StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
+                Collect(projectile);
             }
         }
 
         public void Init(PickableAmmunition pickableAmmunition, float ammoPercent)
         {
+            _collider.enabled = true;
             _currentProjectilesCount = (int)(_countProjectiles * ammoPercent / 100f);
             CountProjectiles = _currentProjectilesCount;
             SetPrefabKey(pickableAmmunition);
+        }
+
+        public void Collect(Transform target)
+        {
+            var ammunitionType = PrefabTypeOfWeapon.GetType();
+            Ammunition[] ammunitions = target.transform.GetComponentsInChildren<Ammunition>();
+            _collider.enabled = false;
+
+            foreach (Ammunition ammunition in ammunitions)
+            {
+                if (ammunition.WeaponPrefab.GetType() == ammunitionType)
+                {
+                    ammunition.IncreaseProjectilesCount(CountProjectiles);
+                }
+            }
+
+            StartCoroutine(DoPickableAnimation(target.transform));
+        }
+
+        private void Collect(Projectile projectile)
+        {
+            var ammunitionType = PrefabTypeOfWeapon.GetType();
+            Ammunition[] ammunitions = projectile.Owner.transform.parent.GetComponentsInChildren<Ammunition>();
+            _collider.enabled = false;
+
+            foreach (Ammunition ammunition in ammunitions)
+            {
+                if (ammunition.WeaponPrefab.GetType() == ammunitionType)
+                {
+                    ammunition.IncreaseProjectilesCount(CountProjectiles);
+                }
+            }
+
+            StartCoroutine(DoPickableAnimation(projectile.Owner.transform));
         }
 
         private void SetPrefabKey(PickableAmmunition pickableAmmunition)
