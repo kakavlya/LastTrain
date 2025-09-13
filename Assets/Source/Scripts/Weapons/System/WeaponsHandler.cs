@@ -22,7 +22,7 @@ namespace LastTrain.Weapons.System
         private Dictionary<Weapon, Ammunition> _weaponAmmoDictonary;
 
         public event Action<Weapon> OnWeaponChange;
-
+        public Weapon CurrentWeapon => _currentWeapon;
         private void OnDisable()
         {
             foreach (var cell in _uiCells)

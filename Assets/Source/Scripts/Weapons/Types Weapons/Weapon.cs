@@ -39,6 +39,8 @@ namespace LastTrain.Weapons.Types
         public Transform FirepointPosition => FirePoint;
         public Sprite UISpriteActive => _uiSpriteActive;
         public Sprite UISpriteDeactive => _uiSpriteDeactive;
+        public Transform Muzzle => FirePoint;
+        public float MaxRange => Range;
 
         public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
