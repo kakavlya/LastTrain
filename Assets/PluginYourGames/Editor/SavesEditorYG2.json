@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 2730,
+    "idSave": 2763,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -53,20 +53,20 @@
         "SlotsLevel": 1,
         "AmmoLevel": 4
     },
-    "Coins": 5100,
+    "Coins": 5250,
     "EffectsVolume": 0.17404389381408692,
     "MusicVolume": 0.06159151345491409,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
         "SubmachineGun",
-        "Flamethrower",
+        "MachineGun",
         "",
         ""
     ],
     "PlayerInventorySlots": [
         "GrenadeLauncher",
-        "MachineGun"
+        "Flamethrower"
     ],
     "LevelsAvailability": [
         {
