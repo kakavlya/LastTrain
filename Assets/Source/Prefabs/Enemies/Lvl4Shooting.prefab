@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1057683180257551447}
   - component: {fileID: 1057683180256783579}
   - component: {fileID: 1057683180255641501}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 1057683180257593443}
   - component: {fileID: 1057683180256832605}
   - component: {fileID: 1057683180255789851}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 1057683180257600843}
   - component: {fileID: 1057683180256819309}
   - component: {fileID: 1057683180255805295}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 1057683180257602701}
   - component: {fileID: 1057683180256769069}
   - component: {fileID: 1057683180255777841}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Extras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 1057683180257558819}
   - component: {fileID: 1057683180256769789}
   - component: {fileID: 1057683180255621205}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_R4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1057683180257551305}
   - component: {fileID: 1057683180256869825}
   - component: {fileID: 1057683180255801199}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 1057683180257557271}
   - component: {fileID: 1057683180256823903}
   - component: {fileID: 1057683180255615267}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_R2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 1057683180257670645}
   - component: {fileID: 1057683180256776601}
   - component: {fileID: 1057683180255794829}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_L3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 1057683180257666685}
   - component: {fileID: 1057683180256833841}
   - component: {fileID: 1057683180255578019}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 1057683180257648525}
   - component: {fileID: 1057683180256840269}
   - component: {fileID: 1057683180255579959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_L4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 1057683180257563245}
   - component: {fileID: 1057683180256787365}
   - component: {fileID: 1057683180255785005}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_R3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 1057683180257615707}
   - component: {fileID: 1057683180256821579}
   - component: {fileID: 1057683180255618667}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_APC_Wheel_L2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1016,7 +1016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4183980290887206902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 2026353489567958849}
   - component: {fileID: 6389925700278884652}
   - component: {fileID: 6221278349584701046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisualRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 1298204711765028295}
   - component: {fileID: -4629150032632883478}
   - component: {fileID: 3432597265437497995}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lvl4Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}

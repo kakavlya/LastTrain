@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2165826585782977935}
   - component: {fileID: 2165826585780114943}
   - component: {fileID: 2165826585781008737}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Wheel_RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2165826585782913623}
   - component: {fileID: 2165826585780088865}
   - component: {fileID: 2165826585781177145}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2165826585782986841}
   - component: {fileID: 2165826585780108545}
   - component: {fileID: 2165826585780947727}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 2165826585782916955}
   - component: {fileID: 2165826585780069713}
   - component: {fileID: 2165826585780947259}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 2165826585782988851}
   - component: {fileID: 2165826585780123055}
   - component: {fileID: 2165826585781205471}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 2165826585783006965}
   - component: {fileID: 2165826585780136827}
   - component: {fileID: 2165826585781179773}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Extras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 2165826585782966767}
   - component: {fileID: 2165826585780112499}
   - component: {fileID: 2165826585780957093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Troopcar_Wheel_RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4183980290887206902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 2026353489567958849}
   - component: {fileID: 6389925700278884652}
   - component: {fileID: 6221278349584701046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisualRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 1298204711765028295}
   - component: {fileID: -4629150032632883478}
   - component: {fileID: 3432597265437497995}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lvl1Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}

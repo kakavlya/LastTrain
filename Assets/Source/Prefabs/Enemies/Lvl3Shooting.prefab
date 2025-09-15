@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2402637218959789660}
   - component: {fileID: 2402637218956932486}
   - component: {fileID: 2402637218957975944}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_RL1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2402637218959783210}
   - component: {fileID: 2402637218956908924}
   - component: {fileID: 2402637218957981010}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2402637218959779354}
   - component: {fileID: 2402637218956853714}
   - component: {fileID: 2402637218957517472}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_RL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 2402637218959742576}
   - component: {fileID: 2402637218956932480}
   - component: {fileID: 2402637218957952062}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Extras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2402637218959759424}
   - component: {fileID: 2402637218956935418}
   - component: {fileID: 2402637218957493712}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 2402637218959727646}
   - component: {fileID: 2402637218956858376}
   - component: {fileID: 2402637218957968134}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 2402637218959829028}
   - component: {fileID: 2402637218956921958}
   - component: {fileID: 2402637218958013426}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_RR2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 2402637218959811720}
   - component: {fileID: 2402637218956904370}
   - component: {fileID: 2402637218957958916}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 2402637218959740074}
   - component: {fileID: 2402637218956944952}
   - component: {fileID: 2402637218957511996}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Armytruck_Wheel_RR1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,7 +764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4183980290887206902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 2026353489567958849}
   - component: {fileID: 6389925700278884652}
   - component: {fileID: 6221278349584701046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VisualRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 1298204711765028295}
   - component: {fileID: -4629150032632883478}
   - component: {fileID: 3432597265437497995}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lvl3Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 3624616819563941432}
   - component: {fileID: 3624616819567345280}
   - component: {fileID: 3624616819565827242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck_Wheel_FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3624616819563866058}
   - component: {fileID: 3624616819567310490}
   - component: {fileID: 3624616819566289900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck_Wheel_RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 3624616819563899842}
   - component: {fileID: 3624616819567241934}
   - component: {fileID: 3624616819566248404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck_Wheel_RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 3624616819563846258}
   - component: {fileID: 3624616819567354924}
   - component: {fileID: 3624616819566285748}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck_Wheel_FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 3624616819563828514}
   - component: {fileID: 3624616819567250006}
   - component: {fileID: 3624616819566279112}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck_Extras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 3624616819563842620}
   - component: {fileID: 3624616819567361456}
   - component: {fileID: 3624616819566288616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SA_Veh_Firetruck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
