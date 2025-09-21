@@ -37,8 +37,8 @@ namespace LastTrain.Advertisement
                     CoinsHandler.Instance.AddCoins(_rewardCount);
                     _rewardButton.interactable = false;
                 }
-
-            });
+            }
+            );
         }
 
         private void ShowRewardScreen()

@@ -62,7 +62,8 @@ namespace LastTrain.ShopSystem
             int level = _progress.GetLevel(stat);
             int maxLevel = _upgradeConfig.GetMaxLevel(stat);
 
-            if (level >= maxLevel) return;
+            if (level >= maxLevel)
+                return;
 
             var coins = CoinsHandler.Instance.CoinsCount;
             int cost = _upgradeConfig.GetCost(stat, level);

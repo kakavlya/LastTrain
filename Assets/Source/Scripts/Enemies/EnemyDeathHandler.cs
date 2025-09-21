@@ -14,7 +14,6 @@ namespace LastTrain.Enemies
         private VisualWobble _wobble;
         private Collider[] _collidersToToggle;
         private Rigidbody _rb;
-
         private bool _despawnScheduled;
 
         private void Awake()
@@ -30,12 +29,18 @@ namespace LastTrain.Enemies
         {
             _despawnScheduled = false;
 
-            if (_movement != null) _movement.enabled = true;
-            if (_controller != null) _controller.enabled = true;
-            if (_wobble != null) _wobble.enabled = true;
+            if (_movement != null)
+                _movement.enabled = true;
+
+            if (_controller != null)
+                _controller.enabled = true;
+
+            if (_wobble != null)
+                _wobble.enabled = true;
 
             foreach (var col in _collidersToToggle)
-                if (col != null) col.enabled = true;
+                if (col != null)
+                    col.enabled = true;
 
             if (_rb != null)
             {
@@ -53,7 +58,9 @@ namespace LastTrain.Enemies
 
         public void HandleDeath()
         {
-            if (_despawnScheduled) return;
+            if (_despawnScheduled)
+                return;
+
             _despawnScheduled = true;
 
             if (_movement != null)
@@ -62,11 +69,15 @@ namespace LastTrain.Enemies
                 _movement.enabled = false;
             }
 
-            if (_controller != null) _controller.enabled = false;
-            if (_wobble != null) _wobble.enabled = false;
+            if (_controller != null)
+                _controller.enabled = false;
+
+            if (_wobble != null)
+                _wobble.enabled = false;
 
             foreach (var col in _collidersToToggle)
-                if (col != null) col.enabled = false;
+                if (col != null)
+                    col.enabled = false;
 
             if (_rb != null)
             {
@@ -76,13 +87,13 @@ namespace LastTrain.Enemies
 
             _enemyView?.PlayDeathFX();
             _deathEffect?.Play();
-
             Invoke(nameof(Despawn), _delayBeforeDespawn);
         }
 
         private void Despawn()
         {
-            if (!gameObject.activeInHierarchy) return;
+            if (!gameObject.activeInHierarchy)
+                return;
 
             EnemyPool.Instance.ReleaseEnemy(gameObject);
         }

@@ -20,7 +20,6 @@ namespace LastTrain.AmmunitionSystem
 
         public int CurrentAmmo { get; private set; }
 
-
         public void Init(float ammoPercent)
         {
             _currentAmmo = (int)(_maxAmmo * ammoPercent / 100f);

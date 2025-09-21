@@ -26,29 +26,40 @@ public class CrosshairHitFlash : MonoBehaviour
     private void OnDisable()
     {
         CombatEvents.EnemyHit -= OnHit;
-        if (_co != null) StopCoroutine(_co);
+
+        if (_co != null)
+            StopCoroutine(_co);
+
         _rt.localScale = Vector3.one;
     }
 
     private void OnHit()
     {
         float now = Time.unscaledTime;
-        if (now - _last < _minInterval) return;
+
+        if (now - _last < _minInterval)
+            return;
+
         _last = now;
 
-        if (_co != null) StopCoroutine(_co);
+        if (_co != null)
+            StopCoroutine(_co);
+
         _co = StartCoroutine(PunchRoutine());
     }
 
     private IEnumerator PunchRoutine()
     {
-
         _rt.localScale = Vector3.one * _punchScale;
-
         float t = 0f;
-        while (t < _holdTime) { t += Time.unscaledDeltaTime; yield return null; }
+
+        while (t < _holdTime)
+        {
+            t += Time.unscaledDeltaTime; yield return null;
+        }
 
         t = 0f;
+
         while (t < _returnTime)
         {
             t += Time.unscaledDeltaTime;

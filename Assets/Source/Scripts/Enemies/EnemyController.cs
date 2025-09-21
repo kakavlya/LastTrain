@@ -26,23 +26,23 @@ namespace LastTrain.Enemies
             ResetStateForSpawn();
         }
 
-
         protected virtual void OnDisable()
         {
             OnDespawn();
         }
-
-        private void HandleDeath_Internal()
-        {
-            if (!IsAlive) return;
-            IsAlive = false;
-            OnDeath();         
-        }
-
         
         protected abstract void ResetStateForSpawn(); 
         protected virtual void OnSpawn() { }          
         protected virtual void OnDespawn() { }        
         protected virtual void OnDeath() { }
+
+        private void HandleDeath_Internal()
+        {
+            if (!IsAlive)
+                return;
+
+            IsAlive = false;
+            OnDeath();
+        }
     }
 }
