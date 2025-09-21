@@ -5,26 +5,20 @@ using UnityEngine.Serialization;
 public class TrailVfxSettings : ScriptableObject
 {
     [Header("Length (world units) via time = length / speed")]
-    [FormerlySerializedAs("desiredLength")]
     [Min(0.01f)] public float DesiredLength = 4.5f; // длиннее
 
-    [FormerlySerializedAs("minTime")]
     [Min(0.01f)] public float MinTime = 0.05f;
 
-    [FormerlySerializedAs("maxTime")]
     [Min(0.01f)] public float MaxTime = 0.18f;
 
 
     [Header("Geometry")]
-    [FormerlySerializedAs("width")]
     [Min(0.001f)] public float Width = 0.018f; // тоньше
 
-    [FormerlySerializedAs("minVertexDistance")]
     [Min(0.001f)] public float MinVertexDistance = 0.035f;
 
 
     [Header("Curves & Colors")]
-    [FormerlySerializedAs("widthCurve")]
     public AnimationCurve WidthCurve = new AnimationCurve(
         new Keyframe(0.00f, 1.00f, 0, 0),
         new Keyframe(0.15f, 0.85f, 0, 0),
@@ -32,12 +26,10 @@ public class TrailVfxSettings : ScriptableObject
         new Keyframe(1.00f, 0.00f, 0, 0)
     );
 
-    [FormerlySerializedAs("colorGradient")]
     public Gradient ColorGradient = DefaultGradient();
 
 
     [Header("Misc")]
-    [FormerlySerializedAs("fadePadding")]
     [Tooltip("Добавка к ожиданию затухания при отстыковке")]
     public float FadePadding = 0.02f;
 
