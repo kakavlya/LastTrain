@@ -13,6 +13,7 @@ namespace LastTrain.Enemies
         private Transform _player;
         private BoxCollider _playerCollider;
         private EnemyMovement _movement;
+
         private float _safeOffset;
         private float _holdDistance;
         private float _holdSpeed;
@@ -21,6 +22,7 @@ namespace LastTrain.Enemies
         private float _holdPauseMin;
         private float _holdPauseMax;
         private int _damage;
+
         private State _state;
         private float _stateTimer;
         private float _currentSpeed;
@@ -37,11 +39,8 @@ namespace LastTrain.Enemies
 
         private void Update()
         {
-            if (!IsAlive)
-                return;
-
-            if (_player == null || _playerCollider == null)
-                return;
+            if (!IsAlive) return;
+            if (_player == null || _playerCollider == null) return;
 
             float dt = Time.deltaTime;
             float rate = (_currentSpeed < _targetSpeed) ? _accel : _decel;
@@ -70,6 +69,7 @@ namespace LastTrain.Enemies
         {
             _player = player;
             _playerCollider = playerCollider;
+
             _safeOffset = Mathf.Max(0.01f, impactOffset);
             _holdDistance = Mathf.Max(0.01f, holdDistance);
             _holdSpeed = Mathf.Max(0f, holdSpeed);
@@ -84,10 +84,11 @@ namespace LastTrain.Enemies
                 enabled = false;
                 return;
             }
-
             _currentSpeed = _holdSpeed;
             _targetSpeed = _holdSpeed;
+
             EnterHold();
+
             _movement.SetSpeed(_currentSpeed);
         }
 
@@ -96,6 +97,7 @@ namespace LastTrain.Enemies
         protected override void ResetStateForSpawn()
         {
             _state = State.Hold;
+
             _currentSpeed = 0f;
             _targetSpeed = 0f;
             _stateTimer = 0f;
@@ -144,8 +146,7 @@ namespace LastTrain.Enemies
 
         private void UpdateCharge()
         {
-            if (!IsAlive) 
-                return;
+            if (!IsAlive) return;
 
             Vector3 anchor = SafeAnchorOnPlane();
             Vector3 toAnchor = (anchor - transform.position);
@@ -162,7 +163,6 @@ namespace LastTrain.Enemies
                     if (_canDealDamageWindow)
                     {
                         var dmg = _player.GetComponent<IDamageable>();
-
                         if (dmg != null)
                             dmg.TakeDamage(_damage);
 
@@ -214,9 +214,7 @@ namespace LastTrain.Enemies
             {
                 d = transform.position - _player.position;
                 d.y = 0f;
-
-                if (d.sqrMagnitude < 1e-6f)
-                    d = Vector3.forward;
+                if (d.sqrMagnitude < 1e-6f) d = Vector3.forward;
             }
 
             return d.normalized;

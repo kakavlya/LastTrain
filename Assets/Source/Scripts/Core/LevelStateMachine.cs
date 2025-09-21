@@ -35,8 +35,7 @@ namespace LastTrain.Core
 
         public void PauseLevel()
         {
-            if (!_isRunning || _isPaused)
-                return;
+            if (!_isRunning || _isPaused) return;
 
             Time.timeScale = 0f;
             _trainMovement.StopMovement();
@@ -46,8 +45,7 @@ namespace LastTrain.Core
 
         public void ResumeLevel()
         {
-            if (!_isPaused)
-                return;
+            if (!_isPaused) return;
 
             Time.timeScale = 1f;
             _trainMovement.StartMovement();

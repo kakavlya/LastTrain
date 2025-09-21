@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 using LastTrain.Enemies;
 using LastTrain.Particles;
 
@@ -29,6 +30,7 @@ public class AoeProjectile : Projectile
         float aoeRange = 0)
     {
         base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
+
         _aoeDamage = aoeDamage;
         _aoeRange = aoeRange;
 
@@ -40,11 +42,10 @@ public class AoeProjectile : Projectile
 
     private void AoeExplode()
     {
-        if (ImpactPrefab != null)
-            ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
+        if (_impactPrefab != null)
+            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
-        if (_aoeRange <= 0)
-            return;
+        if (_aoeRange <= 0) return;
 
         Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
 

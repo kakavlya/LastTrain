@@ -7,27 +7,26 @@ namespace LastTrain.Enemies
     {
         [Header("Movement")]
         [Tooltip("Movement to target")]
-        public float MoveSpeed = 5f;
+        public float moveSpeed = 5f;
 
         [Header("Explosion")]
-        public float ExplosionRadius = 3f;
+        public float explosionRadius = 3f;
 
         [Tooltip("Damage in radius")]
-        public int Damage = 100;
+        public int damage = 100;
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var exploder = enemy.GetComponent<EnemyExplodingController>();
-
             if (exploder == null)
                 exploder = enemy.AddComponent<EnemyExplodingController>();
 
             exploder.Init(
                 player: playerTarget,
                 playerCollider: playerCollider,
-                speed: MoveSpeed,
-                explosionRadius: ExplosionRadius,
-                damage: Damage
+                speed: moveSpeed,
+                explosionRadius: explosionRadius,
+                damage: damage
             );
         }
     }

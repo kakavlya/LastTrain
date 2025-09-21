@@ -100,6 +100,7 @@ public class ObjectsRandomizer : MonoBehaviour
     }
 }
 
+
 #if UNITY_EDITOR
 [CustomEditor(typeof(ObjectsRandomizer))]
 public class RandomSpawnerEditorInspector : Editor

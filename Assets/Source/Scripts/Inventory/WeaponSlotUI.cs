@@ -48,8 +48,7 @@ namespace LastTrain.Inventory
             InventoryWeapon newWeapon = drag.GetComponent<InventoryWeapon>();
             WeaponSlotUI originalSlot = newWeapon.CurrentSlot;
 
-            if (originalSlot == this)
-                return;
+            if (originalSlot == this) return;
 
             if (_isFilled)
             {
