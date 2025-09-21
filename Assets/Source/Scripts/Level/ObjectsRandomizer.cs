@@ -1,129 +1,101 @@
 using UnityEngine;
 using SplineMesh;
 using System.Linq;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-public class ObjectsRandomizer : MonoBehaviour
+namespace LastTrain.Level
 {
-    [SerializeField] private MeshRenderer _planeMeshRenderer;
-    [SerializeField] private Transform _transformParent;
+    public class ObjectsRandomizer : MonoBehaviour
+    {
+        [SerializeField] private MeshRenderer _planeMeshRenderer;
+        [SerializeField] private Transform _transformParent;
 
-    [Header("Objects Settings")]
-    [SerializeField] private GameObject[] _nearObjects;
-    [SerializeField] private GameObject[] _farObjects;
-    [SerializeField] private int _spawnCount;
-    [SerializeField] private float _maxScale;
-    [Range(0f, 0.3f)]
-    [SerializeField] private float _colorVariation;
+        [Header("Objects Settings")]
+        [SerializeField] private GameObject[] _nearObjects;
+        [SerializeField] private GameObject[] _farObjects;
+        [SerializeField] private int _spawnCount;
+        [SerializeField] private float _maxScale;
+        [Range(0f, 0.3f)]
+        [SerializeField] private float _colorVariation;
 
-    [Header("Spline Settings")]
-    [SerializeField] private Spline _spline;
-    [SerializeField] private float _roadOffsetNear;
-    [SerializeField] private float _roadOffsetDistant;
+        [Header("Spline Settings")]
+        [SerializeField] private Spline _spline;
+        [SerializeField] private float _roadOffsetNear;
+        [SerializeField] private float _roadOffsetDistant;
 
-    private Vector3 _planeSize;
+        private Vector3 _planeSize;
 
 #if UNITY_EDITOR
-    public void SpawnLevelObjects(GameObject[] spawnObjects, float minDist, float maxDist)
-    {
-        spawnObjects = spawnObjects.Where(obj => obj != null).ToArray();
-
-        _planeSize = _planeMeshRenderer.bounds.size;
-
-        for (int i = 0; i < _spawnCount; i++)
+        public void SpawnLevelObjects(GameObject[] spawnObjects, float minDist, float maxDist)
         {
-            GameObject prefab = spawnObjects[Random.Range(0, spawnObjects.Length)];
+            spawnObjects = spawnObjects.Where(obj => obj != null).ToArray();
 
-            float randomX = Random.Range(-_planeSize.x / 2, _planeSize.x / 2);
-            float randomZ = Random.Range(-_planeSize.z / 2, _planeSize.z / 2);
+            _planeSize = _planeMeshRenderer.bounds.size;
 
-            Vector3 spawnPos = _planeMeshRenderer.transform.position + new Vector3(randomX, 0, randomZ);
+            for (int i = 0; i < _spawnCount; i++)
+            {
+                GameObject prefab = spawnObjects[Random.Range(0, spawnObjects.Length)];
 
-            var projection = _spline.GetProjectionSample(spawnPos);
-            float distToRoad = Vector3.Distance(spawnPos, projection.location);
+                float randomX = Random.Range(-_planeSize.x / 2, _planeSize.x / 2);
+                float randomZ = Random.Range(-_planeSize.z / 2, _planeSize.z / 2);
 
-            if (distToRoad < minDist || distToRoad > maxDist)
-                continue;
+                Vector3 spawnPos = _planeMeshRenderer.transform.position + new Vector3(randomX, 0, randomZ);
 
-            GameObject instance = Instantiate(prefab, _transformParent);
-            instance.transform.position = spawnPos;
-            instance.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-            float minScale = instance.transform.localScale.x;
-            float scale = Random.Range(minScale, _maxScale);
-            Vector3 baseScale = instance.transform.localScale;
-            instance.transform.localScale = new Vector3(scale, scale, scale);
-            RandomizeColorSimple(instance);
+                var projection = _spline.GetProjectionSample(spawnPos);
+                float distToRoad = Vector3.Distance(spawnPos, projection.location);
+
+                if (distToRoad < minDist || distToRoad > maxDist)
+                    continue;
+
+                GameObject instance = Instantiate(prefab, _transformParent);
+                instance.transform.position = spawnPos;
+                instance.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                float minScale = instance.transform.localScale.x;
+                float scale = Random.Range(minScale, _maxScale);
+                Vector3 baseScale = instance.transform.localScale;
+                instance.transform.localScale = new Vector3(scale, scale, scale);
+                RandomizeColorSimple(instance);
+            }
         }
-    }
 #endif
 
 #if UNITY_EDITOR
-    public void SpawnNearObjects()
-    {
-        SpawnLevelObjects(_nearObjects, _roadOffsetNear, _roadOffsetDistant);
-    }
-
-    public void SpawnFarObjects()
-    {
-        SpawnLevelObjects(_farObjects, _roadOffsetDistant, float.MaxValue);
-    }
-
-    public void DeleteObjects()
-    {
-        for (int i = _transformParent.childCount - 1; i >= 0; i--)
+        public void SpawnNearObjects()
         {
-            DestroyImmediate(_transformParent.GetChild(i).gameObject);
+            SpawnLevelObjects(_nearObjects, _roadOffsetNear, _roadOffsetDistant);
         }
-    }
+
+        public void SpawnFarObjects()
+        {
+            SpawnLevelObjects(_farObjects, _roadOffsetDistant, float.MaxValue);
+        }
+
+        public void DeleteObjects()
+        {
+            for (int i = _transformParent.childCount - 1; i >= 0; i--)
+            {
+                DestroyImmediate(_transformParent.GetChild(i).gameObject);
+            }
+        }
 #endif
 
-    private void RandomizeColorSimple(GameObject inctance)
-    {
-        MeshRenderer renderer = inctance.GetComponent<MeshRenderer>();
-
-        if (renderer != null)
+        private void RandomizeColorSimple(GameObject inctance)
         {
+            MeshRenderer renderer = inctance.GetComponent<MeshRenderer>();
 
-            Material material = new Material(renderer.sharedMaterial);
+            if (renderer != null)
+            {
 
-            Color variation = new Color(
-                Random.Range(1f - _colorVariation, 1f + _colorVariation),
-                Random.Range(1f - _colorVariation, 1f + _colorVariation),
-                Random.Range(1f - _colorVariation, 1f + _colorVariation)
-            );
+                Material material = new Material(renderer.sharedMaterial);
 
-            material.color *= variation;
-            renderer.sharedMaterial = material;
+                Color variation = new Color(
+                    Random.Range(1f - _colorVariation, 1f + _colorVariation),
+                    Random.Range(1f - _colorVariation, 1f + _colorVariation),
+                    Random.Range(1f - _colorVariation, 1f + _colorVariation)
+                );
+
+                material.color *= variation;
+                renderer.sharedMaterial = material;
+            }
         }
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(ObjectsRandomizer))]
-public class RandomSpawnerEditorInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        ObjectsRandomizer script = (ObjectsRandomizer)target;
-
-        if (GUILayout.Button("—генерировать ближние"))
-        {
-            script.SpawnNearObjects();
-        }
-
-        if (GUILayout.Button("—генерировать дальние"))
-        {
-            script.SpawnFarObjects();
-        }
-
-        if (GUILayout.Button("”далить все"))
-        {
-            script.DeleteObjects();
-        }
-    }
-}
-#endif
