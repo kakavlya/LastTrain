@@ -20,7 +20,9 @@ namespace LastTrain.Enemies
 
         private void Awake()
         {
-            if (_visualRoot == null) _visualRoot = transform;
+            if (_visualRoot == null)
+                _visualRoot = transform;
+
             CacheInitialPose();
         }
 
@@ -39,7 +41,9 @@ namespace LastTrain.Enemies
 
         public void Play()
         {
-            if (_visualRoot == null) _visualRoot = transform;
+            if (_visualRoot == null)
+                _visualRoot = transform;
+
             KillTweens();
 
             if (!_visualRoot.gameObject.activeSelf)
@@ -69,13 +73,17 @@ namespace LastTrain.Enemies
             _deathSequence?.Kill(false);
             _deathSequence = null;
 
-            if (_visualRoot != null) DOTween.Kill(_visualRoot, complete: false);
+            if (_visualRoot != null)
+                DOTween.Kill(_visualRoot, complete: false);
+
             _visualRoot?.DOKill(false);
         }
 
         private void CacheInitialPose()
         {
-            if (_visualRoot == null) return;
+            if (_visualRoot == null)
+                return;
+
             _initLocalPos = _visualRoot.localPosition;
             _initLocalRot = _visualRoot.localRotation;
             _initLocalScale = _visualRoot.localScale;
@@ -84,7 +92,9 @@ namespace LastTrain.Enemies
 
         private void RestoreInitialPose()
         {
-            if (!_cached || _visualRoot == null) return;
+            if (!_cached || _visualRoot == null)
+                return;
+
             _visualRoot.localPosition = _initLocalPos;
             _visualRoot.localRotation = _initLocalRot;
             _visualRoot.localScale = _initLocalScale;

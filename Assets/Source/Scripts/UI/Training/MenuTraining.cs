@@ -221,7 +221,6 @@ namespace LastTrain.Training
             SwitchTrainingWindows(MenuTrainingState.End);
         }
 
-
         private void DisableAllTrainingScreens()
         {
             _startTrainingScreen.SetActive(false);

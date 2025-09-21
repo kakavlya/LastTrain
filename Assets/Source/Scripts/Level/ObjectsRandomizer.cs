@@ -99,35 +99,3 @@ namespace LastTrain.Level
         }
     }
 }
-<<<<<<< HEAD
-=======
-
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(ObjectsRandomizer))]
-public class RandomSpawnerEditorInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        ObjectsRandomizer script = (ObjectsRandomizer)target;
-
-        if (GUILayout.Button("—генерировать ближние"))
-        {
-            script.SpawnNearObjects();
-        }
-
-        if (GUILayout.Button("—генерировать дальние"))
-        {
-            script.SpawnFarObjects();
-        }
-
-        if (GUILayout.Button("”далить все"))
-        {
-            script.DeleteObjects();
-        }
-    }
-}
-#endif
->>>>>>> parent of 021b5a6 (first document rew)

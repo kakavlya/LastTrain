@@ -5,14 +5,13 @@ using LastTrain.Particles;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] protected ParticleSystem _impactPrefab;
+    [SerializeField] protected ParticleSystem ImpactPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
     [SerializeField] private TrailHandler _trail;
 
     protected Rigidbody ProjectileRigidbody;
-
-    protected float _spawnTime;
+    protected float SpawnTime;
 
     public event Action<Projectile> OnReturnToPool;
 
@@ -29,8 +28,7 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawnTime = Time.time;
-        //SetVelocity();
+        SpawnTime = Time.time;
     }
 
     public virtual void SetVelocity()
@@ -41,7 +39,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Time.time - _spawnTime >= Lifetime)
+        if (Time.time - SpawnTime >= Lifetime)
             Despawn();
 
         if (Owner != null)
@@ -59,8 +57,9 @@ public class Projectile : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (_impactPrefab != null)
-                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+            if (ImpactPrefab != null)
+                ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
+
             Despawn();
         }
 
@@ -75,15 +74,16 @@ public class Projectile : MonoBehaviour
             dmg.TakeDamage(Damage);
         }
 
-        if (_impactPrefab != null)
-            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+        if (ImpactPrefab != null)
+            ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
 
         Despawn();
     }
 
     private bool IsFriendlyFire(Collider other)
     {
-        if (Owner == null) return false;
+        if (Owner == null)
+            return false;
 
         bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
         bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
@@ -92,7 +92,7 @@ public class Projectile : MonoBehaviour
     }
 
     public virtual void Initial(
-           Vector3 position,
+        Vector3 position,
         Quaternion rotation,
         GameObject owner,
         float speed,
@@ -124,7 +124,6 @@ public class Projectile : MonoBehaviour
     protected void Despawn()
     {
         _trail?.BeginDetachFade();
-
         BeforeDespawn();
 
         if (UsePooling)

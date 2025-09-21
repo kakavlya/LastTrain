@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using LastTrain.Enemies;
-using LastTrain.Particles;
 
 public class PiercingProjectile : Projectile
 {

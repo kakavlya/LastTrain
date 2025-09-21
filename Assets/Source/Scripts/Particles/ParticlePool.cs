@@ -30,27 +30,31 @@ namespace LastTrain.Particles
             }
 
             var particle = pool.Get();
-
-            // Готовим трансформ ДО Play
             var transform = particle.transform;
             transform.SetParent(base.transform, worldPositionStays: false);
             transform.position = position;
-            if (rotation.HasValue) transform.rotation = rotation.Value;
-            if (scale.HasValue) transform.localScale = scale.Value;
+
+            if (rotation.HasValue)
+                transform.rotation = rotation.Value;
+
+            if (scale.HasValue)
+                transform.localScale = scale.Value;
 
             particle.Clear(true);
             particle.Play(true);
-
             StartCoroutine(ReleaseWhenFinished(particle, prefab));
             return particle;
         }
 
         private void InitializePools()
         {
-            if (_particlePrefabs == null) return;
+            if (_particlePrefabs == null)
+                return;
+
             foreach (var prefab in _particlePrefabs)
             {
-                if (prefab) CreatePoolForPrefab(prefab);
+                if (prefab)
+                    CreatePoolForPrefab(prefab);
             }
         }
 
@@ -60,22 +64,26 @@ namespace LastTrain.Particles
                 createFunc: () => CreateParticle(prefab, parent: transform),
                 actionOnGet: particle =>
                 {
-
                     var gameObject = particle.gameObject;
-                    if (!gameObject.activeSelf) gameObject.SetActive(true);
+
+                    if (!gameObject.activeSelf)
+                        gameObject.SetActive(true);
 
                     particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                     particle.Clear(true);
                 },
                 actionOnRelease: particle =>
                 {
-                    if (!particle) return;
+                    if (!particle)
+                        return;
+
                     particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                     particle.gameObject.SetActive(false);
                 },
                 actionOnDestroy: partlicle =>
                 {
-                    if (partlicle) Destroy(partlicle.gameObject);
+                    if (partlicle)
+                        Destroy(partlicle.gameObject);
                 },
                 collectionCheck: false,
                 defaultCapacity: _defaultCapacity,
@@ -101,15 +109,14 @@ namespace LastTrain.Particles
         {
             if (!prefab)
             {
-                Debug.LogError("[ParticlePool] Prefab is null");
                 return null;
             }
 
             var go = Instantiate(prefab.gameObject, parent, false);
             var ps = go.GetComponent<ParticleSystem>();
+
             if (!ps)
             {
-                Debug.LogError($"[ParticlePool] No ParticleSystem on '{prefab.name}' root");
                 Destroy(go);
                 return null;
             }

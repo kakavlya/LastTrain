@@ -27,7 +27,8 @@ namespace LastTrain.Weapons.System
         
         public AimData GetAim()
         {
-            if (_cam == null) _cam = Camera.main;
+            if (_cam == null)
+                _cam = Camera.main;
 
             Vector2 sp = ScreenPoint == Vector2.zero ? (Vector2)Input.mousePosition : ScreenPoint;
             Ray ray = _cam.ScreenPointToRay(sp);

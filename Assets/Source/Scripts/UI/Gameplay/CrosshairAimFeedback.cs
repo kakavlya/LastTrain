@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LastTrain.Weapons.System;
 using LastTrain.Weapons.Types;
-using LastTrain.Enemies; // для EnemyHealth (опционально)
+using LastTrain.Enemies;
 
 [RequireComponent(typeof(Image))]
 public class CrosshairAimFeedback : MonoBehaviour
@@ -14,7 +14,8 @@ public class CrosshairAimFeedback : MonoBehaviour
     [Header("Detection")]
     [Tooltip("Слои врагов. Если 0 — будетfallback по компонентам EnemyHealth/IDamageable.")]
     [SerializeField] private LayerMask _enemyMask = 0;
-    [Tooltip("Что блокирует выстрел от дула (земля/стены/укрытия). НЕ включай Enemy/Player/Weapon/UI/Ignore Raycast.")]
+    [Tooltip("Что блокирует выстрел от дула (земля/стены/укрытия)." +
+        " НЕ включай Enemy/Player/Weapon/UI/Ignore Raycast.")]
     [SerializeField] private LayerMask _losBlockMask = 0;
     [SerializeField] private float _camCheckDistance = 5000f;
     [SerializeField] private float _selfEpsilon = 0.02f; 
@@ -41,13 +42,17 @@ public class CrosshairAimFeedback : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_weapons != null) _weapons.OnWeaponChange += OnWeaponChange;
-        if (_weapons != null) _weapon = _weapons.CurrentWeapon;
+        if (_weapons != null)
+            _weapons.OnWeaponChange += OnWeaponChange;
+
+        if (_weapons != null)
+            _weapon = _weapons.CurrentWeapon;
     }
 
     private void OnDisable()
     {
-        if (_weapons != null) _weapons.OnWeaponChange -= OnWeaponChange;
+        if (_weapons != null)
+            _weapons.OnWeaponChange -= OnWeaponChange;
     }
 
     private void OnWeaponChange(Weapon w) => _weapon = w;
@@ -60,16 +65,22 @@ public class CrosshairAimFeedback : MonoBehaviour
             Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);
 
         var target = _defaultColor;
+
         switch (state)
         {
-            case State.EnemyReachable: target = _reachableColor; break;
-            case State.None: target = _defaultColor; break;
+            case State.EnemyReachable:
+                target = _reachableColor;
+                break;
+
+            case State.None: target = _defaultColor;
+                break;
         }
 
         _img.color = Color.Lerp(_img.color, target, Time.unscaledDeltaTime * _lerpSpeed);
 
         if (_debugDraw && state != State.None && _weapon != null && _weapon.Muzzle != null)
-            Debug.DrawLine(_weapon.Muzzle.position, hit.point, state == State.EnemyReachable ? Color.green : Color.yellow);
+            Debug.DrawLine(_weapon.Muzzle.position, hit.point, state == State.EnemyReachable ?
+                Color.green : Color.yellow);
     }
 
     private State GetState(out AimData aimDirection, out RaycastHit enemyHit)
@@ -90,18 +101,23 @@ public class CrosshairAimFeedback : MonoBehaviour
         }
         else
         {
-            if (!Physics.Raycast(camRay, out enemyHit, _camCheckDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            if (!Physics.Raycast(
+                camRay, out enemyHit, _camCheckDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
                 return State.None;
 
             bool isEnemy = enemyHit.collider.GetComponentInParent<EnemyHealth>() != null
                         || enemyHit.collider.GetComponentInParent<IDamageable>() != null;
-            if (!isEnemy) return State.None;
+
+            if (!isEnemy)
+                return State.None;
         }
 
         Vector3 muzzle = _weapon.Muzzle.position;
         Vector3 toDistance = enemyHit.point - muzzle;
         float dist = toDistance.magnitude;
-        if (dist <= 1e-4f) return State.None;
+
+        if (dist <= 1e-4f)
+            return State.None;
 
         if (_weapon.MaxRange > 0f && dist > _weapon.MaxRange)
             return State.EnemyTooFar;
@@ -118,7 +134,8 @@ public class CrosshairAimFeedback : MonoBehaviour
 
     private void EnsureDefaultBlockMask()
     {
-        if (_losBlockMask != 0) return;
+        if (_losBlockMask != 0)
+            return;
 
         int exclude = 0;
         exclude |= LayerMask.GetMask("Enemy");
@@ -126,7 +143,6 @@ public class CrosshairAimFeedback : MonoBehaviour
         exclude |= LayerMask.GetMask("Weapon");
         exclude |= LayerMask.GetMask("UI");
         exclude |= LayerMask.GetMask("Ignore Raycast");
-
         _losBlockMask = Physics.DefaultRaycastLayers & ~exclude;
     }
 }

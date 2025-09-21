@@ -25,14 +25,18 @@ namespace LastTrain.UI.Gameplay
 
         public void Show()
         {
-            if (_isShowed) return;
+            if (_isShowed)
+                return;
+
             _isShowed = true;
             _pointerImage.enabled = true;
         }
 
         public void Hide()
         {
-            if (!_isShowed) return;
+            if (!_isShowed)
+                return;
+
             _isShowed = false;
             _pointerImage.enabled = false;
         }

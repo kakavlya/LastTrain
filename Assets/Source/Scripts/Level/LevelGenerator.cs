@@ -57,7 +57,8 @@ namespace LastTrain.Level
 
         private void CalculateNextPosition()
         {
-            if (_elementsOnScene.Count == 0) return;
+            if (_elementsOnScene.Count == 0)
+                return;
 
             LevelElement lastElement = _elementsOnScene[_elementsOnScene.Count - 1];
             float elementWidth = GetElementWidth(lastElement);

@@ -53,7 +53,8 @@ namespace LastTrain.Effects
 
         private void Update()
         {
-            if (_visualRoot == null) return;
+            if (_visualRoot == null)
+                return;
 
             float sway = Mathf.Sin((Time.time + _swayOffset) * _swaySpeed) * _swayAmount * _massFactor;
             float bounce = Mathf.PerlinNoise(0, (Time.time + _bounceOffset) * _bounceSpeed) * _bounceAmount * _massFactor;
