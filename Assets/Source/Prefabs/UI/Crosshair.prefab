@@ -122,12 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bc941ea315bfb4e894fc31a84db8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useComplementary: 0
-  _fixedFlashColor: {r: 0.9622642, g: 0.015129842, b: 0.015129842, a: 1}
-  _valueBoost: 0.71
-  _saturationBoost: 0.248
-  _flashTime: 0.1
-  _fadeTime: 0.12
-  _minInterval: 0.03
-  _useScalePunch: 1
   _punchScale: 1.2
+  _holdTime: 0.06
+  _returnTime: 0.12
+  _minInterval: 0.03

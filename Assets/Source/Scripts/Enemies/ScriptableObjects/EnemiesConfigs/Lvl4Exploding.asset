@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Reward: 24
   Health: 40
-  moveSpeed: 65
-  explosionRadius: 7
-  damage: 42
+  MoveSpeed: 65
+  ExplosionRadius: 7
+  Damage: 42

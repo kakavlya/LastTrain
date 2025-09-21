@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Reward: 18
   Health: 77
-  moveSpeed: 65
-  turnSpeed: 100
-  attackSpeedFactorMin: 0.65
-  attackSpeedFactorMax: 0.95
-  speedChange: 8
-  minDistanceFromSurface: 13
-  maxDistanceFromSurface: 35
-  orbitSpeedDegrees: 2
-  checkRadius: 16
-  changeDirectionEvery: {x: 5, y: 9}
-  shootingDistance: 65
-  projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
-  fireInterval: 1.7
-  projectileSpeed: 100
-  projectileDamage: 10
+  MoveSpeed: 4
+  TurnSpeed: 100
+  AttackSpeedFactorMin: 0.65
+  AttackSpeedFactorMax: 0.95
+  SpeedChange: 8
+  MinDistanceFromSurface: 13
+  MaxDistanceFromSurface: 35
+  OrbitSpeedDegrees: 2
+  CheckRadius: 16
+  ChangeDirectionEvery: {x: 5, y: 9}
+  ShootingDistance: 65
+  ProjectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
+  FireInterval: 1.7
+  ProjectileSpeed: 100
+  ProjectileDamage: 10

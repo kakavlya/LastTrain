@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Reward: 15
   Health: 40
-  holdDistance: 25
-  impactOffset: 1
-  holdSpeed: 50
-  chargeSpeed: 80
-  turnSpeed: 100
-  impactPause: 3.5
-  holdPauseRange: {x: 8, y: 15}
-  damage: 17
-  maxAccel: 25
-  maxDecel: 45
-  speedSmoothTime: 0.12
-  checkRadius: 10
+  HoldDistance: 25
+  ImpactOffset: 1
+  HoldSpeed: 50
+  ChargeSpeed: 80
+  TurnSpeed: 100
+  ImpactPause: 3.5
+  HoldPauseRange: {x: 8, y: 15}
+  Damage: 17
+  MaxAccel: 25
+  MaxDecel: 45
+  SpeedSmoothTime: 0.12
+  CheckRadius: 10
   impactRecover:
     serializedVersion: 2
     m_Curve:

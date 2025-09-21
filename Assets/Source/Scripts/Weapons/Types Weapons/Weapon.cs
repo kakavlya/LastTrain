@@ -69,7 +69,7 @@ namespace LastTrain.Weapons.Types
 
             var ad = _aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.worldPoint;
+            Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
             if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;

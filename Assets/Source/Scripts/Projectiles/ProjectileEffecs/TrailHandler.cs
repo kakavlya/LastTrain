@@ -30,10 +30,10 @@ public sealed class TrailHandler : MonoBehaviour
     void ApplyStaticSettings()
     {
         if (_settings == null) return;
-        _trail.widthMultiplier = _settings.width;               // тоньше/толще
-        _trail.widthCurve = _settings.widthCurve;          // форма сужения
-        _trail.colorGradient = _settings.colorGradient;       // градиент
-        _trail.minVertexDistance = _settings.minVertexDistance;   // гладкость
+        _trail.widthMultiplier = _settings.Width;               // тоньше/толще
+        _trail.widthCurve = _settings.WidthCurve;          // форма сужения
+        _trail.colorGradient = _settings.ColorGradient;       // градиент
+        _trail.minVertexDistance = _settings.MinVertexDistance;   // гладкость
         // Alignment = View и TextureMode = Stretch поставь в инспекторе
     }
 
@@ -48,9 +48,9 @@ public sealed class TrailHandler : MonoBehaviour
         transform.localScale = _initLocalScale;
 
         gameObject.SetActive(true);
-        float L = _settings ? _settings.desiredLength : 3f;
-        float tMin = _settings ? _settings.minTime : 0.03f;
-        float tMax = _settings ? _settings.maxTime : 0.25f;
+        float L = _settings ? _settings.DesiredLength : 3f;
+        float tMin = _settings ? _settings.MinTime : 0.03f;
+        float tMax = _settings ? _settings.MaxTime : 0.25f;
         float speed = Mathf.Max(0.001f, projectileSpeed);
 
         _trail.time = Mathf.Clamp(L / speed, tMin, tMax);
@@ -73,7 +73,7 @@ public sealed class TrailHandler : MonoBehaviour
 
     IEnumerator FadeAndReturn()
     {
-        float pad = _settings ? _settings.fadePadding : 0.02f;
+        float pad = _settings ? _settings.FadePadding : 0.02f;
         float wait = Mathf.Max(0.01f, _trail.time) + pad;
         yield return new WaitForSeconds(wait);
 

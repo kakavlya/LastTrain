@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -6,43 +7,45 @@ namespace LastTrain.Enemies
     public class EnemyRamSettings : EnemyBehaviorSettings
     {
         [Header("Ram Distances")]
-        public float holdDistance;
-        public float impactOffset;
+        public float HoldDistance;
+        public float ImpactOffset;
 
         [Header("Ram Speeds")]
-        public float holdSpeed;
-        public float chargeSpeed;
-        public float turnSpeed;
+        public float HoldSpeed;
+        public float ChargeSpeed;
+        public float TurnSpeed;
 
         [Header("Ram Delays")]
-        public float impactPause;
-        public Vector2 holdPauseRange;
+        public float ImpactPause;
+        public Vector2 HoldPauseRange;
 
         [Header("Ram Damage")]
-        public int damage;
-
+        public int Damage;
+        
         [Header("Ram Tuning (Dynamics)")]
-        public float maxAccel = 30f;
-        public float maxDecel = 40f;
-        public float speedSmoothTime = 0.12f;
-        public float checkRadius = 10f;
+        public float MaxAccel = 30f;
+        public float MaxDecel = 40f;
+        public float SpeedSmoothTime = 0.12f;
+        public float CheckRadius = 10f;
+
         public AnimationCurve impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var ram = enemy.GetComponent<EnemyRamController>();
-            if (ram == null) ram = enemy.AddComponent<EnemyRamController>();
+            if (ram == null)
+                ram = enemy.AddComponent<EnemyRamController>();
 
             ram.Init(
                 player: playerTarget,
                 playerCollider: playerCollider,
-                impactOffset: impactOffset,
-                holdDistance: holdDistance,
-                holdSpeed: holdSpeed,
-                chargeSpeed: chargeSpeed,
-                impactPause: impactPause,
-                holdPauseRange: holdPauseRange,
-                damage: damage
+                impactOffset: ImpactOffset,
+                holdDistance: HoldDistance,
+                holdSpeed: HoldSpeed,
+                chargeSpeed: ChargeSpeed,
+                impactPause: ImpactPause,
+                holdPauseRange: HoldPauseRange,
+                damage: Damage
             );
         }
     }

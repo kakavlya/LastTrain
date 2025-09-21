@@ -56,8 +56,8 @@ public class CrosshairAimFeedback : MonoBehaviour
     {
         var state = GetState(out var ad, out var hit);
 
-        if (_debugDraw && ad.camRay.direction != Vector3.zero)
-            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan);
+        if (_debugDraw && ad.CamRay.direction != Vector3.zero)
+            Debug.DrawLine(ad.CamRay.origin, ad.WorldPoint, Color.cyan);
 
         var target = _defaultColor;
         switch (state)
@@ -81,7 +81,7 @@ public class CrosshairAimFeedback : MonoBehaviour
             return State.None;
 
         aimDirection = _aim.GetAim();
-        Ray camRay = aimDirection.camRay;
+        Ray camRay = aimDirection.CamRay;
 
         if (_enemyMask != 0)
         {

@@ -5024,16 +5024,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff3448c2f62857f46a102bba46223474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _muzzleEffectPrefab: {fileID: 0}
   _uiSpriteActive: {fileID: 21300000, guid: 8ea25020e2e1dda4f9fc6bd7e25b48e4, type: 3}
   _uiSpriteDeactive: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   FirePoint: {fileID: 3476638899428692577}
   ProjectilePrefab: {fileID: 0}
+  _muzzleEffectPrefab: {fileID: 0}
+  _aim: {fileID: 0}
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 100
+  Range: 2000
   _horisontalAngle: 10
-  _verticalAngle: 90
   _flameParticle: {fileID: 7865432686051139408}
 --- !u!1001 &7029888338804750894
 PrefabInstance:

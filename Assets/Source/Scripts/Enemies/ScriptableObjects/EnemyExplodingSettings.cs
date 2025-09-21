@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -7,13 +8,16 @@ namespace LastTrain.Enemies
     {
         [Header("Movement")]
         [Tooltip("Movement to target")]
-        public float moveSpeed = 5f;
+        [FormerlySerializedAs("moveSpeed")]
+        public float MoveSpeed = 5f;
 
         [Header("Explosion")]
-        public float explosionRadius = 3f;
+        [FormerlySerializedAs("explosionRadius")]
+        public float ExplosionRadius = 3f;
 
         [Tooltip("Damage in radius")]
-        public int damage = 100;
+        [FormerlySerializedAs("damage")]
+        public int Damage = 100;
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
@@ -24,9 +28,9 @@ namespace LastTrain.Enemies
             exploder.Init(
                 player: playerTarget,
                 playerCollider: playerCollider,
-                speed: moveSpeed,
-                explosionRadius: explosionRadius,
-                damage: damage
+                speed: MoveSpeed,
+                explosionRadius: ExplosionRadius,
+                damage: Damage
             );
         }
     }

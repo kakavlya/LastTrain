@@ -34,7 +34,7 @@ namespace LastTrain.Enemies
                 _timers[i] += Time.deltaTime;
                 var entry = _entries[i];
 
-                if (_timers[i] >= entry.spawnInterval)
+                if (_timers[i] >= entry.SpawnInterval)
                 {
                     Spawn(entry, _spawnPoints, _playerTarget);
                     _timers[i] = 0f;
@@ -87,13 +87,13 @@ namespace LastTrain.Enemies
             _timers = new float[_entries.Length];
 
             for (int i = 0; i < _entries.Length; i++)
-                _timers[i] = _entries[i].spawnInterval;
+                _timers[i] = _entries[i].SpawnInterval;
         }
 
         private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)
         {
-            var spawnPoints = (spawnEntry.overrideSpawnPoints != null && spawnEntry.overrideSpawnPoints.Length > 0)
-                ? spawnEntry.overrideSpawnPoints
+            var spawnPoints = (spawnEntry.OverrideSpawnPoints != null && spawnEntry.OverrideSpawnPoints.Length > 0)
+                ? spawnEntry.OverrideSpawnPoints
                 : points;
 
             List<Transform> spawnPointsList = new List<Transform>(spawnPoints);
@@ -108,18 +108,18 @@ namespace LastTrain.Enemies
 
             var sp = spawnPointsList[UnityEngine.Random.Range(0, spawnPointsList.Count)];
             Vector3 pos = sp.position;
-            pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
-            pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
+            pos.x += UnityEngine.Random.Range(-spawnEntry.RandRangeXZ.x, spawnEntry.RandRangeXZ.x);
+            pos.z += UnityEngine.Random.Range(-spawnEntry.RandRangeXZ.y, spawnEntry.RandRangeXZ.y);
 
-            var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
+            var enemy = EnemyPool.Instance.Spawn(spawnEntry.Prefab, pos, sp.rotation);
 
             enemy.SetActive(true);
 
             var health = enemy.GetComponent<EnemyHealth>();
-            health.SetRewardForKill(spawnEntry.behaviorSettings.Reward);
-            health.SetCurrentHealth(spawnEntry.behaviorSettings.Health);
+            health.SetRewardForKill(spawnEntry.BehaviorSettings.Reward);
+            health.SetCurrentHealth(spawnEntry.BehaviorSettings.Health);
 
-            spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
+            spawnEntry.BehaviorSettings?.Initialize(enemy, player, _trainCollider);
         }
     }
 }

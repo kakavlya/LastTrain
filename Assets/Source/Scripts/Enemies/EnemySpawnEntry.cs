@@ -1,17 +1,23 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
     [Serializable]
     public struct EnemySpawnEntry
     {
-        public GameObject prefab;
-        public float spawnInterval;
-        public Vector2 randRangeXZ;
-        public EnemyBehaviorSettings behaviorSettings;
+        [FormerlySerializedAs("prefab")]
+        public GameObject Prefab;
+        [FormerlySerializedAs("spawnInterval")]
+        public float SpawnInterval;
+        [FormerlySerializedAs("randRangeXZ")]
+        public Vector2 RandRangeXZ;
+        [FormerlySerializedAs("behaviorSettings")]
+        public EnemyBehaviorSettings BehaviorSettings;
 
         [Tooltip("Take spawnPoints from SpawnerConfig if nothing set")]
-        public Transform[] overrideSpawnPoints;
+        [FormerlySerializedAs("overrideSpawnPoints")]
+        public Transform[] OverrideSpawnPoints;
     }
 }

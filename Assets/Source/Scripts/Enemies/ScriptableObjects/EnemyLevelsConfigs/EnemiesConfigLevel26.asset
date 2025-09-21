@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemiesConfigLevel26
   m_EditorClassIdentifier: 
   entries:
-  - prefab: {fileID: 9087697433412347612, guid: 68fa096a7387a384db346574c77ca6e5, type: 3}
-    spawnInterval: 4
-    randRangeXZ: {x: 50, y: 50}
-    behaviorSettings: {fileID: 11400000, guid: 60cb5a84cf0bf7b4dbcb97aa3cf15269, type: 2}
-    overrideSpawnPoints: []
+  - Prefab: {fileID: 9087697433412347612, guid: 68fa096a7387a384db346574c77ca6e5, type: 3}
+    SpawnInterval: 4
+    RandRangeXZ: {x: 50, y: 50}
+    BehaviorSettings: {fileID: 11400000, guid: 60cb5a84cf0bf7b4dbcb97aa3cf15269, type: 2}
+    OverrideSpawnPoints: []

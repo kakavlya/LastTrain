@@ -40,7 +40,7 @@ namespace LastTrain.Weapons.System
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
             var ad = _targetProvider.GetAim();
-            Vector3 aimPoint = ad.worldPoint;
+            Vector3 aimPoint = ad.WorldPoint;
 
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;

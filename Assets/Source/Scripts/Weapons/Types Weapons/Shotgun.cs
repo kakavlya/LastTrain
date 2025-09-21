@@ -27,7 +27,7 @@ namespace LastTrain.Weapons.Types
 
             var ad = Aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.worldPoint;
+            Vector3 target = ad.WorldPoint;
 
             Vector3 centerDir = target - origin;
             if (centerDir.sqrMagnitude < 1e-6f) centerDir = FirePoint.forward;
@@ -72,7 +72,7 @@ namespace LastTrain.Weapons.Types
 
             ammo?.DecreaseProjectilesCount();
 
-            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan); 
+            Debug.DrawLine(ad.CamRay.origin, ad.WorldPoint, Color.cyan); 
             Debug.DrawLine(origin, origin + centerDir * 5f, Color.yellow);
         }
 

@@ -105,10 +105,14 @@ MonoBehaviour:
   FirePoint: {fileID: 1960534411642063156}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
+  _aim: {fileID: 0}
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   FireDelay: 0.1
   UsePooling: 1
   ProjectileSpeed: 190
-  _shootPlanar: 0
+  Range: 2000
 --- !u!114 &356231242550243592
 MonoBehaviour:
   m_ObjectHideFlags: 0

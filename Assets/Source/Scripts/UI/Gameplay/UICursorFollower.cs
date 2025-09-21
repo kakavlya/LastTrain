@@ -39,9 +39,9 @@ namespace LastTrain.UI.Gameplay
             {
                 var ad = _aim.GetAim();
 
-                if (ad.hasHit)
+                if (ad.HasHit)
                 {
-                    screen = _cam.WorldToScreenPoint(ad.worldPoint);
+                    screen = _cam.WorldToScreenPoint(ad.WorldPoint);
                 }
                 else
                 {
