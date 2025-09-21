@@ -18,6 +18,7 @@ namespace LastTrain.UI.Gameplay
             _canvas = canvas != null ? canvas : GetComponentInParent<Canvas>();
             _cam = cam != null ? cam : Camera.main;
             _aim = aim;
+
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -30,8 +31,7 @@ namespace LastTrain.UI.Gameplay
 
         private void LateUpdate()
         {
-            if (_cam == null || _canvas == null)
-                return;
+            if (_cam == null || _canvas == null) return;
 
             Vector3 screen = Vector3.zero;
 

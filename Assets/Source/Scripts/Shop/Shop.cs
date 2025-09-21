@@ -87,6 +87,7 @@ namespace LastTrain.ShopSystem
                     progress = _data.TrainProgress;
                 }
 
+
                 var itemUi = Instantiate(_shopItemPrefab, _contentParent);
                 _uiItems.Add(itemUi);
                 itemUi.Init(upgradeConfig, progress, OnItemSelected);

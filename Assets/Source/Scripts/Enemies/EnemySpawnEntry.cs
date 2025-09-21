@@ -6,12 +6,12 @@ namespace LastTrain.Enemies
     [Serializable]
     public struct EnemySpawnEntry
     {
-        public GameObject Prefab;
-        public float SpawnInterval;
-        public Vector2 RandRangeXZ;
-        public EnemyBehaviorSettings BehaviorSettings;
+        public GameObject prefab;
+        public float spawnInterval;
+        public Vector2 randRangeXZ;
+        public EnemyBehaviorSettings behaviorSettings;
 
         [Tooltip("Take spawnPoints from SpawnerConfig if nothing set")]
-        public Transform[] OverrideSpawnPoints;
+        public Transform[] overrideSpawnPoints;
     }
 }

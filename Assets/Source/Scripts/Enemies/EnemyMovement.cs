@@ -5,8 +5,8 @@ namespace LastTrain.Enemies
     public class EnemyMovement : MonoBehaviour
     {
         [SerializeField] private float _turnSpeed = 120f;
-        [SerializeField] private float _moveSpeed;
 
+        [SerializeField] private float _moveSpeed;
         public float TurnSpeed => _turnSpeed;
 
         public void SetTurnSpeed(float speed) => _turnSpeed = speed;
@@ -20,14 +20,20 @@ namespace LastTrain.Enemies
             }
 
             _moveSpeed = speed;
+
+    //        #if UNITY_EDITOR || DEVELOPMENT_BUILD
+    //if (Mathf.Approximately(speed, 0f))
+    //{
+    //    Debug.Log($"[Movement] SetSpeed(0) on {name}\n{UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+    //}
+//#endif
         }
 
         public void MoveForwardTo(Vector3 target)
         {
             float dt = Time.deltaTime;
 
-            if (dt <= 0f)
-                return;
+            if (dt <= 0f) return;
 
             Vector3 to = (target - transform.position).WithY(0f);
             float sqr = to.sqrMagnitude;
@@ -48,8 +54,7 @@ namespace LastTrain.Enemies
                 fwd = Vector3.forward;
             }
 
-            if (float.IsNaN(_moveSpeed) || float.IsInfinity(_moveSpeed))
-                _moveSpeed = 0f;
+            if (float.IsNaN(_moveSpeed) || float.IsInfinity(_moveSpeed)) _moveSpeed = 0f;
 
             transform.position += fwd * (_moveSpeed * dt);
         }

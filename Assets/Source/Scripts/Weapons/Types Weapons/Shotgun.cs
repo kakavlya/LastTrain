@@ -21,23 +21,15 @@ namespace LastTrain.Weapons.Types
 
         public override void Fire(Ammunition ammo = null)
         {
-            if (!FirePossibleCalculate()) 
-                return;
-
-            if (ammo != null && !ammo.HasAmmo)
-            {
-                InvokeStopFire(); 
-                return;
-            }
-
-            if (Aim == null || FirePoint == null || ProjectilePrefab == null) 
-                return;
+            if (!FirePossibleCalculate()) return;
+            if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
+            if (Aim == null || FirePoint == null || ProjectilePrefab == null) return;
 
             var ad = Aim.GetAim();
             Vector3 origin = FirePoint.position;
             Vector3 target = ad.worldPoint;
-            Vector3 centerDir = target - origin;
 
+            Vector3 centerDir = target - origin;
             if (centerDir.sqrMagnitude < 1e-6f) centerDir = FirePoint.forward;
                 else centerDir.Normalize();
 
@@ -56,7 +48,10 @@ namespace LastTrain.Weapons.Types
             for (int i = 0; i < _bulletsInShot; i++)
             {
                 Vector3 dir = SampleYawOnly(centerDir, _currentSpreadAngle * 0.5f);
+                dir.y = 0;
                 dir = dir.normalized;
+                //Vector3 spreadDir = GetRandomSpread();
+
                 var proj = UsePooling
                     ? ProjectilePool.Instance.Spawn(
                         ProjectilePrefab,
@@ -76,21 +71,40 @@ namespace LastTrain.Weapons.Types
                 ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
+
+            Debug.DrawLine(ad.camRay.origin, ad.worldPoint, Color.cyan); 
+            Debug.DrawLine(origin, origin + centerDir * 5f, Color.yellow);
         }
+
+        //protected override void OnWeaponFire()
+        //{
+        //    for (int i = 0; i < _bulletsInShot; i++)
+        //    {
+        //        var proj = UsePooling
+        //            ? ProjectilePool.Instance.Spawn(ProjectilePrefab, FirePoint.position,
+        //            Quaternion.LookRotation(GetRandomSpread()), Owner, ProjectileSpeed, Damage, Range)
+        //            : Instantiate(ProjectilePrefab, FirePoint.position, Quaternion.LookRotation(Direction));
+        //    }
+        //}
 
         private Vector3 SampleYawOnly(Vector3 centerDir, float halfAngleDeg)
         {
-            Vector3 baseDir = centerDir;
+            // спроецировать центральное направление на горизонт
+            Vector3 flat = Vector3.ProjectOnPlane(centerDir, Vector3.up);
+            if (flat.sqrMagnitude < 1e-6f) flat = Vector3.ProjectOnPlane(FirePoint.forward, Vector3.up);
+            flat.Normalize();
 
-            if (baseDir.sqrMagnitude < 1e-6f) 
-                baseDir = FirePoint.forward;
+            float yaw = Random.Range(-halfAngleDeg, halfAngleDeg);
+            Quaternion q = Quaternion.AngleAxis(yaw, Vector3.up);
+            return (q * flat).normalized;
+        }
 
-            baseDir.Normalize();
-            float randomYaw = Random.Range(-halfAngleDeg, halfAngleDeg);
-            float randomPitch = Random.Range(-halfAngleDeg, halfAngleDeg);
-            Quaternion yawRotation = Quaternion.AngleAxis(randomYaw, Vector3.up);
-            Quaternion pitchRotation = Quaternion.AngleAxis(randomPitch, Vector3.right);
-            return pitchRotation * yawRotation * baseDir;
+        private Vector3 GetRandomSpread(Vector3 centerDir)
+        {
+            float horizontalSpread = Random.Range(-_currentSpreadAngle / 2, _currentSpreadAngle / 2);
+            Quaternion spreadRotation = Quaternion.Euler(0, horizontalSpread, 0);
+
+            return spreadRotation * centerDir;
         }
     }
 }

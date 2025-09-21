@@ -30,8 +30,7 @@ namespace LastTrain.Enemies
             PointerHandler.Instance.AddToDictonary(enemyInstance);
             var pooled = enemyInstance.GetComponent<PooledEnemyKey>();
 
-            if (pooled != null)
-                pooled.SetKey(enemyPrefab);
+            if (pooled != null) pooled.SetKey(enemyPrefab);
 
             return enemyInstance;
         }
@@ -62,8 +61,7 @@ namespace LastTrain.Enemies
 
         private void CreatePoolForPrefab(GameObject enemyPrefab)
         {
-            if (_pools.ContainsKey(enemyPrefab))
-                return;
+            if (_pools.ContainsKey(enemyPrefab)) return;
 
             _pools[enemyPrefab] = new ObjectPool<GameObject>(
                 createFunc: () =>

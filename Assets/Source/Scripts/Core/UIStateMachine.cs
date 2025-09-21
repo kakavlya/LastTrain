@@ -50,15 +50,9 @@ namespace LastTrain.Core
             _startButton.onClick.AddListener(OnStartButton);
 
             foreach (var button in _pauseButtons)
-                button.onClick.AddListener(() => {
-                    PauseClicked?.Invoke();
-                    SwitchState(UIState.Pause); 
-                });
+                button.onClick.AddListener(() => { PauseClicked?.Invoke(); SwitchState(UIState.Pause); });
 
-            _resumeButton.onClick.AddListener(() => {
-                ResumeClicked?.Invoke();
-                SwitchState(UIState.Playing);
-            });
+            _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); SwitchState(UIState.Playing); });
 
             foreach (var button in _restartButtons)
                 button.onClick.AddListener(OnRestartButton);

@@ -7,8 +7,7 @@ namespace LastTrain.Projectiles
     {
         public static ProjectilePool Instance { get; private set; }
 
-        private readonly Dictionary<Projectile, Queue<Projectile>> _pools =
-            new Dictionary<Projectile, Queue<Projectile>>();
+        private readonly Dictionary<Projectile, Queue<Projectile>> _pools = new Dictionary<Projectile, Queue<Projectile>>();
 
         public void Init()
         {
@@ -31,9 +30,10 @@ namespace LastTrain.Projectiles
             while (pool.Count > 0 && proj == null)
             {
                 var candidate = pool.Dequeue();
-
                 if (candidate && !candidate.gameObject.activeSelf)
                     proj = candidate;
+                else if (candidate && candidate.gameObject.activeSelf)
+                    Debug.LogWarning("ProjectilePool: dequeued active projectile — creating a new one.");
             }
 
             if (proj == null)
@@ -41,21 +41,31 @@ namespace LastTrain.Projectiles
 
             proj.Initial(position, rotation, owner, speed, damage, maxDistance, true, aoeDamage, aoeRange);
             proj.gameObject.SetActive(true);
+
             return proj;
+        }
+
+        private Projectile CreateNew(Projectile projectilePrefab, Queue<Projectile> pool)
+        {
+            var projectile = Instantiate(projectilePrefab, transform);
+            projectile.gameObject.SetActive(false);
+            projectile.OnReturnToPool += (proj) => ReturnToPool(projectilePrefab, proj);
+            pool.Enqueue(projectile);
+            return projectile;
         }
 
         private Projectile CreateNew(Projectile projectilePrefab)
         {
             var projectile = Instantiate(projectilePrefab, transform);
             projectile.gameObject.SetActive(false);
+
             projectile.OnReturnToPool += (proj) => ReturnToPool(projectilePrefab, proj);
             return projectile;
         }
 
         private void ReturnToPool(Projectile projectilePrefab, Projectile proj)
         {
-            if (!proj)
-                return;
+            if (!proj) return;
 
             proj.gameObject.SetActive(false);
             proj.transform.SetParent(transform);

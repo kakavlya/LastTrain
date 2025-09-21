@@ -27,15 +27,14 @@ namespace LastTrain.Enemies
 
         private void Update()
         {
-            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null)
-                return;
+            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null) return;
 
             for (int i = 0; i < _entries.Length; i++)
             {
                 _timers[i] += Time.deltaTime;
                 var entry = _entries[i];
 
-                if (_timers[i] >= entry.SpawnInterval)
+                if (_timers[i] >= entry.spawnInterval)
                 {
                     Spawn(entry, _spawnPoints, _playerTarget);
                     _timers[i] = 0f;
@@ -52,7 +51,7 @@ namespace LastTrain.Enemies
         public void Init()
         {
             _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
-            _entries = _spawnerConfig.Entries;
+            _entries = _spawnerConfig.entries;
             _levelGenerator.StartedElementDefined += SetSpawnPoint;
             _levelGenerator.ElementChanged += SetSpawnPoint;
         }
@@ -88,13 +87,13 @@ namespace LastTrain.Enemies
             _timers = new float[_entries.Length];
 
             for (int i = 0; i < _entries.Length; i++)
-                _timers[i] = _entries[i].SpawnInterval;
+                _timers[i] = _entries[i].spawnInterval;
         }
 
         private void Spawn(EnemySpawnEntry spawnEntry, Transform[] points, Transform player)
         {
-            var spawnPoints = (spawnEntry.OverrideSpawnPoints != null && spawnEntry.OverrideSpawnPoints.Length > 0)
-                ? spawnEntry.OverrideSpawnPoints
+            var spawnPoints = (spawnEntry.overrideSpawnPoints != null && spawnEntry.overrideSpawnPoints.Length > 0)
+                ? spawnEntry.overrideSpawnPoints
                 : points;
 
             List<Transform> spawnPointsList = new List<Transform>(spawnPoints);
@@ -109,18 +108,18 @@ namespace LastTrain.Enemies
 
             var sp = spawnPointsList[UnityEngine.Random.Range(0, spawnPointsList.Count)];
             Vector3 pos = sp.position;
-            pos.x += UnityEngine.Random.Range(-spawnEntry.RandRangeXZ.x, spawnEntry.RandRangeXZ.x);
-            pos.z += UnityEngine.Random.Range(-spawnEntry.RandRangeXZ.y, spawnEntry.RandRangeXZ.y);
+            pos.x += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.x, spawnEntry.randRangeXZ.x);
+            pos.z += UnityEngine.Random.Range(-spawnEntry.randRangeXZ.y, spawnEntry.randRangeXZ.y);
 
-            var enemy = EnemyPool.Instance.Spawn(spawnEntry.Prefab, pos, sp.rotation);
+            var enemy = EnemyPool.Instance.Spawn(spawnEntry.prefab, pos, sp.rotation);
 
             enemy.SetActive(true);
 
             var health = enemy.GetComponent<EnemyHealth>();
-            health.SetRewardForKill(spawnEntry.BehaviorSettings.Reward);
-            health.SetCurrentHealth(spawnEntry.BehaviorSettings.Health);
+            health.SetRewardForKill(spawnEntry.behaviorSettings.Reward);
+            health.SetCurrentHealth(spawnEntry.behaviorSettings.Health);
 
-            spawnEntry.BehaviorSettings?.Initialize(enemy, player, _trainCollider);
+            spawnEntry.behaviorSettings?.Initialize(enemy, player, _trainCollider);
         }
     }
 }
