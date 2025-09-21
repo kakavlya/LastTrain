@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.Particles;
+using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Projectile : MonoBehaviour
 
     protected Rigidbody ProjectileRigidbody;
 
-    protected float _spawnTime;
+    [FormerlySerializedAs("_spawnTime")]
+    protected float SpawnTime;
 
     public event Action<Projectile> OnReturnToPool;
 
@@ -29,8 +31,7 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawnTime = Time.time;
-        //SetVelocity();
+        SpawnTime = Time.time;
     }
 
     public virtual void SetVelocity()
@@ -41,7 +42,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Time.time - _spawnTime >= Lifetime)
+        if (Time.time - SpawnTime >= Lifetime)
             Despawn();
 
         if (Owner != null)
@@ -61,6 +62,7 @@ public class Projectile : MonoBehaviour
         {
             if (_impactPrefab != null)
                 ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+
             Despawn();
         }
 
@@ -79,17 +81,7 @@ public class Projectile : MonoBehaviour
             ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
         Despawn();
-    }
-
-    private bool IsFriendlyFire(Collider other)
-    {
-        if (Owner == null) return false;
-
-        bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
-        bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
-
-        return ownerIsEnemy && targetIsEnemy;
-    }
+    }    
 
     public virtual void Initial(
            Vector3 position,
@@ -135,5 +127,16 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private bool IsFriendlyFire(Collider other)
+    {
+        if (Owner == null)
+            return false;
+
+        bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
+        bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
+
+        return ownerIsEnemy && targetIsEnemy;
     }
 }

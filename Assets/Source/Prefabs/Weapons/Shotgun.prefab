@@ -14786,13 +14786,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiSpriteActive: {fileID: 21300000, guid: c487b782e3ca11c46adc9edd4c22a198, type: 3}
   _uiSpriteDeactive: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
-  FirePoint: {fileID: 6155232861971313899}
-  ProjectilePrefab: {fileID: 63259604309037807, guid: 5e803b15a24fec64b936cac386976e88, type: 3}
-  _muzzleEffectPrefab: {fileID: 198586439706424864, guid: f9f016040c11f4a45a8904688623ce0a, type: 3}
   _aim: {fileID: 0}
   _obstacleMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  FirePoint: {fileID: 6155232861971313899}
+  ProjectilePrefab: {fileID: 63259604309037807, guid: 5e803b15a24fec64b936cac386976e88, type: 3}
+  _muzzleEffectPrefab: {fileID: 198586439706424864, guid: f9f016040c11f4a45a8904688623ce0a, type: 3}
   FireDelay: 0.7
   UsePooling: 1
   ProjectileSpeed: 125

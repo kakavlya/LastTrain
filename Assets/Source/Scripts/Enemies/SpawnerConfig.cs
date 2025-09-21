@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -6,6 +7,6 @@ namespace LastTrain.Enemies
     public class SpawnerConfig : ScriptableObject
     {
         [Header("What to spawn and how often")]
-        public EnemySpawnEntry[] entries;
+        public EnemySpawnEntry[] Entries;
     }
 }

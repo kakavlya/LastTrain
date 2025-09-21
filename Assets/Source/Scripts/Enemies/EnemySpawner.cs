@@ -51,7 +51,7 @@ namespace LastTrain.Enemies
         public void Init()
         {
             _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
-            _entries = _spawnerConfig.entries;
+            _entries = _spawnerConfig.Entries;
             _levelGenerator.StartedElementDefined += SetSpawnPoint;
             _levelGenerator.ElementChanged += SetSpawnPoint;
         }

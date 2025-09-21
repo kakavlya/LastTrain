@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b29cd5ca2bc4742b1c6a40bbf40778, type: 3}
   m_Name: EnemiesConfigLevel20
   m_EditorClassIdentifier: 
-  entries:
+  Entries:
   - Prefab: {fileID: 4899597090557373887, guid: 9c6a7608a7165104c98279d3528c0474, type: 3}
     SpawnInterval: 3
     RandRangeXZ: {x: 50, y: 50}
