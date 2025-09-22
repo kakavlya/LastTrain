@@ -1,19 +1,22 @@
 using UnityEngine;
 using LastTrain.Enemies;
 
-public class PiercingProjectile : Projectile
+namespace LastTrain.Projectiles.Types
 {
-    protected override void OnTriggerEnter(Collider collider)
+    public class PiercingProjectile : Projectile
     {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        protected override void OnTriggerEnter(Collider collider)
         {
-            Despawn();
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            {
+                Despawn();
+            }
+
+            if (Owner != null && collider.transform.IsChildOf(Owner.transform))
+                return;
+
+            if (collider.TryGetComponent<IDamageable>(out var dmg))
+                dmg.TakeDamage(Damage);
         }
-
-        if (Owner != null && collider.transform.IsChildOf(Owner.transform))
-            return;
-
-        if (collider.TryGetComponent<IDamageable>(out var dmg))
-            dmg.TakeDamage(Damage);
     }
 }

@@ -1,3 +1,4 @@
+using LastTrain.Projectiles.Types;
 using System.Collections.Generic;
 using UnityEngine;
 

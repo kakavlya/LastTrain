@@ -88,16 +88,4 @@ namespace LastTrain.Persistence
             return Array.Exists(_statConfigs, s => s.StatType == statType);
         }
     }
-
-    public enum StatType
-    {
-        Damage,
-        Range,
-        Ammo,
-        AttackSpeed,
-        AttackAngle,
-        AoeDamage,
-        Health,
-        Slots
-    }
 }

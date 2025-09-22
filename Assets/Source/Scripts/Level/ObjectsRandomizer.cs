@@ -28,18 +28,14 @@ namespace LastTrain.Level
         public void SpawnLevelObjects(GameObject[] spawnObjects, float minDist, float maxDist)
         {
             spawnObjects = spawnObjects.Where(obj => obj != null).ToArray();
-
             _planeSize = _planeMeshRenderer.bounds.size;
 
             for (int i = 0; i < _spawnCount; i++)
             {
                 GameObject prefab = spawnObjects[Random.Range(0, spawnObjects.Length)];
-
                 float randomX = Random.Range(-_planeSize.x / 2, _planeSize.x / 2);
                 float randomZ = Random.Range(-_planeSize.z / 2, _planeSize.z / 2);
-
                 Vector3 spawnPos = _planeMeshRenderer.transform.position + new Vector3(randomX, 0, randomZ);
-
                 var projection = _spline.GetProjectionSample(spawnPos);
                 float distToRoad = Vector3.Distance(spawnPos, projection.location);
 

@@ -2,58 +2,61 @@ using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.Particles;
 
-public class AoeProjectile : Projectile
+namespace LastTrain.Projectiles.Types
 {
-    private float _aoeRange;
-    private float _aoeDamage;
-
-    protected override void OnTriggerEnter(Collider other)
+    public class AoeProjectile : Projectile
     {
-        base.OnTriggerEnter(other);
-    }
+        private float _aoeRange;
+        private float _aoeDamage;
 
-    protected override void BeforeDespawn()
-    {
-        AoeExplode();
-    }
-
-    public override void Initial(
-        Vector3 position,
-        Quaternion rotation,
-        GameObject owner,
-        float speed,
-        float damage,
-        float maxAttackDistance,
-        bool usePooling,
-        float aoeDamage = 0,
-        float aoeRange = 0)
-    {
-        base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
-
-        _aoeDamage = aoeDamage;
-        _aoeRange = aoeRange;
-
-        if (owner != null)
+        protected override void OnTriggerEnter(Collider other)
         {
-            gameObject.layer = owner.layer;
+            base.OnTriggerEnter(other);
         }
-    }
 
-    private void AoeExplode()
-    {
-        if (_impactPrefab != null)
-            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
-
-        if (_aoeRange <= 0)
-            return;
-
-        Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
-
-        foreach (Collider target in targets)
+        protected override void BeforeDespawn()
         {
-            if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
+            AoeExplode();
+        }
+
+        public override void Initial(
+            Vector3 position,
+            Quaternion rotation,
+            GameObject owner,
+            float speed,
+            float damage,
+            float maxAttackDistance,
+            bool usePooling,
+            float aoeDamage = 0,
+            float aoeRange = 0)
+        {
+            base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
+
+            _aoeDamage = aoeDamage;
+            _aoeRange = aoeRange;
+
+            if (owner != null)
             {
-                aoeDmg.TakeDamage(_aoeDamage);
+                gameObject.layer = owner.layer;
+            }
+        }
+
+        private void AoeExplode()
+        {
+            if (_impactPrefab != null)
+                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+
+            if (_aoeRange <= 0)
+                return;
+
+            Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
+
+            foreach (Collider target in targets)
+            {
+                if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
+                {
+                    aoeDmg.TakeDamage(_aoeDamage);
+                }
             }
         }
     }

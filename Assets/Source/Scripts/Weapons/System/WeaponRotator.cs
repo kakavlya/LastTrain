@@ -44,7 +44,7 @@ namespace LastTrain.Weapons.System
                 return;
 
             var ad = _targetProvider.GetAim();
-            Vector3 aimPoint = ad.worldPoint;
+            Vector3 aimPoint = ad.WorldPoint;
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;
 

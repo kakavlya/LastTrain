@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using LastTrain.Weapons.Types;
+using LastTrain.Projectiles.Types;
 
 namespace LastTrain.AmmunitionSystem
 {

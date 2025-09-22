@@ -1,5 +1,4 @@
 ﻿using LastTrain.Particles;
-using System.Collections;
 using UnityEngine;
 
 namespace LastTrain.Effects
