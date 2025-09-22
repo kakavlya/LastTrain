@@ -52,7 +52,8 @@ namespace LastTrain.Weapons.Types
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
             Vector3 originNoSelf = origin + dir * 0.02f;
 
-            if (Physics.Raycast(originNoSelf, dir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(
+                originNoSelf, dir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
             {
                 target = block.point;
                 dir = (target - origin).normalized;

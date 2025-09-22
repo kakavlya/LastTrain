@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e159c41771626c3428f433edbdd61b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInput: {fileID: 0}
   _target: {fileID: 0}
-  _offset: {x: 0, y: 400, z: -260}
-  _angles: {x: 60, y: 0, z: 0}
+  _targetOffset: {x: 0, y: 70, z: -100}
+  _distance: 100
+  _rotationSpeed: 90
+  _fixedPitch: 20
+  _rotationSmoothing: 10

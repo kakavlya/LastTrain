@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498978aac28a9414d8311cfa471f05ac, type: 3}
   m_Name: TrailVfxSettings
   m_EditorClassIdentifier: 
-  desiredLength: 4.5
-  minTime: 0.18
-  maxTime: 0.35
-  width: 0.18
-  minVertexDistance: 0.39
-  widthCurve:
+  DesiredLength: 4.5
+  MinTime: 0.18
+  MaxTime: 0.35
+  Width: 0.18
+  MinVertexDistance: 0.39
+  WidthCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -59,7 +59,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  colorGradient:
+  ColorGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0.85, b: 0.55, a: 0}
     key1: {r: 1, g: 0.7, b: 0.3, a: 1}
@@ -89,4 +89,4 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 4
-  fadePadding: 0.02
+  FadePadding: 0.02

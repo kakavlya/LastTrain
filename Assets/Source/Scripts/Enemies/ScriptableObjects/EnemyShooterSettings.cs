@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -33,7 +34,7 @@ namespace LastTrain.Enemies
         [Tooltip("Angular speed of circling around the player (deg/s). 5–90. More – faster circling.")]
         [Range(1f, 180f)] public float OrbitSpeedDegrees = 5f;
 
-        [Tooltip("Radius of early check from player CENTER (m). Set ≥ (maxDistanceFromSurface + 3).")]
+        [Tooltip("Radius of early check from player CENTER (m). Set ≥ (MaxDistanceFromSurface + 3).")]
         [Min(1f)] public float CheckRadius = 10f;
 
         [Tooltip("Interval of possible change of bypass direction [min, max] in seconds. Usually 1.5–4.")]
@@ -41,10 +42,10 @@ namespace LastTrain.Enemies
 
         [Header("Shooting")]
         [Tooltip("The maximum distance from the player's SURFACE that shooting is allowed." +
-            " Usually ≥ minDistanceFromSurface.")]
+            " Usually ≥ MinDistanceFromSurface.")]
         [Min(0.1f)] public float ShootingDistance = 20f;
 
-        [Tooltip("Projectile prefab.")]
+        [Tooltip("Projectile Prefab.")]
         public Projectile ProjectilePrefab;
 
         [Tooltip("Pause between shots (sec). Typically 0.2–2.0.")]
@@ -65,6 +66,7 @@ namespace LastTrain.Enemies
 
             float safeCheckRadius = Mathf.Max(CheckRadius, MaxDistanceFromSurface + 3f);
             float safeShootingDist = Mathf.Max(ShootingDistance, MinDistanceFromSurface + 0.25f);
+
             shooter.Init(
                 player: playerTarget,
                 playerCollider: playerCollider,

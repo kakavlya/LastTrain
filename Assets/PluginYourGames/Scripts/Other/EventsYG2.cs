@@ -47,7 +47,6 @@ namespace YG
             public TriggerEvent callback = new TriggerEvent();
         }
 
-        [FormerlySerializedAs("delegates")]
         [SerializeField]
         private List<Entry> m_Delegates;
 

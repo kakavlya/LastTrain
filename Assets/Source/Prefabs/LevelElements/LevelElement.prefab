@@ -62,6 +62,7 @@ MonoBehaviour:
   - {fileID: 199452, guid: 3d5cd6565dd6db54d8d31f98ddcad778, type: 3}
   _spawnCount: 5000
   _maxScale: 20
+  _colorVariation: 0
   _spline: {fileID: 4949635635816918986}
   _roadOffsetNear: 30
   _roadOffsetDistant: 150

@@ -20,19 +20,20 @@ namespace LastTrain.Enemies
 
         [Header("Ram Damage")]
         public int Damage;
-
+        
         [Header("Ram Tuning (Dynamics)")]
         public float MaxAccel = 30f;
         public float MaxDecel = 40f;
         public float SpeedSmoothTime = 0.12f;
         public float CheckRadius = 10f;
-        public AnimationCurve ImpactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+        public AnimationCurve impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var ram = enemy.GetComponent<EnemyRamController>();
 
-            if (ram == null) 
+            if (ram == null)
                 ram = enemy.AddComponent<EnemyRamController>();
 
             ram.Init(

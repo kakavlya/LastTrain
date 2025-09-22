@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 8
   m_EditorClassIdentifier: 
   LevelNumber: 8
-  IsAvailable: 0
+  IsAvailable: 1
   LevelElements:
   - {fileID: 8477197755613222439, guid: ba5b6a08a7a4049428c11023f2b28789, type: 3}
   - {fileID: 7206719280736628894, guid: 5866b0116d817f542a845b8eb7ef44f4, type: 3}

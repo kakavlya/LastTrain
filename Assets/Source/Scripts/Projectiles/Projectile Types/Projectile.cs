@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.Particles;
+using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] protected ParticleSystem ImpactPrefab;
+    [SerializeField] private TrailHandler _trail;
+    [SerializeField] protected ParticleSystem _impactPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
-    [SerializeField] private TrailHandler _trail;
 
     protected Rigidbody ProjectileRigidbody;
     protected float SpawnTime;
@@ -57,8 +58,8 @@ public class Projectile : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (ImpactPrefab != null)
-                ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
+            if (_impactPrefab != null)
+                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
             Despawn();
         }
@@ -74,25 +75,14 @@ public class Projectile : MonoBehaviour
             dmg.TakeDamage(Damage);
         }
 
-        if (ImpactPrefab != null)
-            ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
+        if (_impactPrefab != null)
+            ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
         Despawn();
-    }
-
-    private bool IsFriendlyFire(Collider other)
-    {
-        if (Owner == null)
-            return false;
-
-        bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
-        bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
-
-        return ownerIsEnemy && targetIsEnemy;
-    }
+    }    
 
     public virtual void Initial(
-        Vector3 position,
+           Vector3 position,
         Quaternion rotation,
         GameObject owner,
         float speed,
@@ -134,5 +124,15 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private bool IsFriendlyFire(Collider other)
+    {
+        if (Owner == null)
+            return false;
+
+        bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
+        bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
+        return ownerIsEnemy && targetIsEnemy;
     }
 }

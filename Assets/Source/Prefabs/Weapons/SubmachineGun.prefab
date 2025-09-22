@@ -9934,13 +9934,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiSpriteActive: {fileID: 21300000, guid: 7b6a7d4e06dd3e84fb6b56d4de585f2c, type: 3}
   _uiSpriteDeactive: {fileID: 21300000, guid: 56935beba2aeda645b598ef6cbc9c8ce, type: 3}
+  _aim: {fileID: 0}
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   FirePoint: {fileID: 3714373281497009292}
   ProjectilePrefab: {fileID: 63259604309037807, guid: 0477b1096cbd8a24cb0d6ca4b6d0fec9, type: 3}
   _muzzleEffectPrefab: {fileID: 198347678361706746, guid: 3a1abf749742d4848b58374d36edb4ee, type: 3}
   FireDelay: 0.4
   UsePooling: 1
   ProjectileSpeed: 150
-  _shootPlanar: 0
+  Range: 2000
 --- !u!82 &7648024438478845875
 AudioSource:
   m_ObjectHideFlags: 0
