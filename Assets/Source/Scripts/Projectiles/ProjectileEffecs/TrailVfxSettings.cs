@@ -28,7 +28,7 @@ namespace LastTrain.Projectiles.Effects
         [Tooltip("ƒобавка к ожиданию затухани€ при отстыковке")]
         public float FadePadding = 0.02f;
 
-        static Gradient DefaultGradient()
+        private static Gradient DefaultGradient()
         {
             var g = new Gradient();
             g.SetKeys(

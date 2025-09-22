@@ -12,14 +12,14 @@ namespace LastTrain.Audio
 
         private void OnEnable()
         {
-            _weapon.OnFired += PlayAudioEffect;
-            _weapon.OnStopFired += StopAudioEffect;
+            _weapon.Fired += PlayAudioEffect;
+            _weapon.StopFired += StopAudioEffect;
         }
 
         private void OnDisable()
         {
-            _weapon.OnFired -= PlayAudioEffect;
-            _weapon.OnStopFired -= StopAudioEffect;
+            _weapon.Fired -= PlayAudioEffect;
+            _weapon.StopFired -= StopAudioEffect;
         }
 
         private void OnDestroy()

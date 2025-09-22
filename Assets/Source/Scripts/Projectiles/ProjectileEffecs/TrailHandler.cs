@@ -55,11 +55,16 @@ namespace LastTrain.Projectiles.Effects
 
         public void Play(float projectileSpeed)
         {
-            if (_fadeCo != null) { StopCoroutine(_fadeCo); _fadeCo = null; }
+            if (_fadeCo != null) 
+            {
+                StopCoroutine(_fadeCo);
+                _fadeCo = null;
+            }
 
             _fading = false;
 
-            if (_homeParent) transform.SetParent(_homeParent, false);
+            if (_homeParent)
+                transform.SetParent(_homeParent, false);
 
             transform.localPosition = _initLocalPos;
             transform.localRotation = _initLocalRot;

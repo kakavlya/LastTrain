@@ -33,8 +33,8 @@ namespace LastTrain.Weapons.Types
         protected AimingTargetProvider Aim => _aim;
         protected LayerMask ObstacleMask => _obstacleMask;
 
-        public event Action OnFired;
-        public event Action OnStopFired;
+        public event Action Fired;
+        public event Action StopFired;
 
         public Weapon PrefabReference { get; private set; }
         public Transform FirepointPosition => FirePoint;
@@ -86,7 +86,7 @@ namespace LastTrain.Weapons.Types
                 dir = (target - origin).normalized;
             }
 
-            OnFired?.Invoke();
+            Fired?.Invoke();
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
             var proj = UsePooling
                 ? ProjectilePool.Instance.Spawn(ProjectilePrefab, origin, rot, Owner, ProjectileSpeed, Damage, Range)
@@ -105,16 +105,11 @@ namespace LastTrain.Weapons.Types
 
         public virtual bool GetIsLoopedFireSound() => false;
 
-        public virtual void InvokeStopFire() => OnStopFired?.Invoke();
+        public virtual void InvokeStopFire() => StopFired?.Invoke();
 
         protected void InvokeFire()
         {
-            OnFired?.Invoke();
-        }
-
-        protected virtual void OnWeaponFire()
-        {
-
+            Fired?.Invoke();
         }
 
         protected bool FirePossibleCalculate()

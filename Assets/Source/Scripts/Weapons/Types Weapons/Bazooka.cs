@@ -21,7 +21,6 @@ namespace LastTrain.Weapons.Types
 
         public override void Fire(Ammunition ammo = null)
         {
-
             if (!FirePossibleCalculate())
                 return;
 
@@ -60,7 +59,6 @@ namespace LastTrain.Weapons.Types
             }
 
             InvokeFire();
-            OnWeaponFire();
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
 
             var proj = UsePooling

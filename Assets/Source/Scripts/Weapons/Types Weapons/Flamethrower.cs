@@ -81,7 +81,7 @@ namespace LastTrain.Weapons.Types
             }
         }
 
-        protected override void OnWeaponFire()
+        private void OnWeaponFire()
         {
             if (!_isFiring)
             {

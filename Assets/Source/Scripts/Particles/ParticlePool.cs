@@ -22,7 +22,8 @@ namespace LastTrain.Particles
             InitializePools();
         }
 
-        public ParticleSystem Spawn(ParticleSystem prefab, Vector3 position, Quaternion? rotation = null, Vector3? scale = null)
+        public ParticleSystem Spawn(
+            ParticleSystem prefab, Vector3 position, Quaternion? rotation = null, Vector3? scale = null)
         {
             if (!_pools.TryGetValue(prefab, out var pool))
             {
