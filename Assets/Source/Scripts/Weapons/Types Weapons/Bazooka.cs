@@ -74,8 +74,8 @@ namespace LastTrain.Weapons.Types
                       _aoeRange)
                 : Instantiate(ProjectilePrefab, origin, rot);
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, origin);
+            if (MuzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(MuzzleEffectPrefab, origin);
 
             ammo?.DecreaseProjectilesCount();
         }

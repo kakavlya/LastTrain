@@ -81,8 +81,8 @@ namespace LastTrain.UI.Gameplay
 
             _img.color = Color.Lerp(_img.color, target, Time.unscaledDeltaTime * _lerpSpeed);
 
-            if (_debugDraw && state != State.None && _weapon != null && _weapon.Muzzle != null)
-                Debug.DrawLine(_weapon.Muzzle.position, hit.point, state == State.EnemyReachable ?
+            if (_debugDraw && state != State.None && _weapon != null && _weapon.FirePoint != null)
+                Debug.DrawLine(_weapon.FirePoint.position, hit.point, state == State.EnemyReachable ?
                     Color.green : Color.yellow);
         }
 
@@ -91,7 +91,7 @@ namespace LastTrain.UI.Gameplay
             aimDirection = default;
             enemyHit = default;
 
-            if (_aim == null || _weapon == null || _weapon.Muzzle == null)
+            if (_aim == null || _weapon == null || _weapon.FirePoint == null)
                 return State.None;
 
             aimDirection = _aim.GetAim();
@@ -115,7 +115,7 @@ namespace LastTrain.UI.Gameplay
                     return State.None;
             }
 
-            Vector3 muzzle = _weapon.Muzzle.position;
+            Vector3 muzzle = _weapon.FirePoint.position;
             Vector3 toDistance = enemyHit.point - muzzle;
             float dist = toDistance.magnitude;
 

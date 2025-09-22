@@ -72,8 +72,8 @@ namespace LastTrain.Weapons.Types
                         Quaternion.LookRotation(dir));
             }
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
+            if (MuzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(MuzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
         }

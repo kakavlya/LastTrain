@@ -32,7 +32,7 @@ namespace LastTrain.Weapons.System
         private void SetWeaponPivot(Weapon weapon)
         {
             _weaponPivot = weapon.transform;
-            _muzzle = weapon.FirepointPosition != null ? weapon.FirepointPosition : weapon.transform;
+            _muzzle = weapon.FirePoint != null ? weapon.FirePoint : weapon.transform;
         }
 
         private void Rotate()
