@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using LastTrain.AmmunitionSystem;
 using LastTrain.CameraSystem;
 using LastTrain.Enemies;
@@ -15,9 +15,13 @@ namespace LastTrain.Core
 {
     public class CompositionRoot : MonoBehaviour
     {
+        [Header("UI & Camera")]
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Camera _cam;
         [SerializeField] private UIStateMachine _uIStateMachine;
+        [SerializeField] private UICursorFollower _uiCursorFollower;
+
+        [Header("Core gameplay")]
         [SerializeField] private LevelStateMachine _levelStateMachine;
         [SerializeField] private GameplayTraining _gameplayTraining;
         [SerializeField] private EnemySpawner _enemySpawner;
@@ -25,18 +29,24 @@ namespace LastTrain.Core
         [SerializeField] private PlayerHealth _playerHealth;
         [SerializeField] private TrainMovement _trainMovement;
         [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private LevelProgress _levelProgress;
+        [SerializeField] private LevelElementsCreator _levelElementsCreator;
+
+        [Header("Weapons & Aiming")]
         [SerializeField] private WeaponsHandler _weaponHandler;
         [SerializeField] private WeaponRotator _weaponRotator;
         [SerializeField] private AimingTargetProvider _aimingTargetProvider;
-        [SerializeField] private UICursorFollower _uiCursorFollower;
+
+        [Header("Pools & Camera Follow")]
         [SerializeField] private ParticlePool _particlePool;
         [SerializeField] private PickableAmmunitionPool _pickableAmmunitionPool;
-        [SerializeField] private ProjectilePool _projectilePool;
-        [SerializeField] private CameraFollower _cameraFollower;
-        [SerializeField] private LevelProgress _levelProgress;
-        [SerializeField] private LevelElementsCreator _levelElementsCreator;
         [SerializeField] private PickableAmmunitionSpawner _pickableAmmunitionSpawner;
+        [SerializeField] private ProjectilePool _projectilePool;
         [SerializeField] private EnemyPool _enemyPool;
+        [SerializeField] private CameraFollower _cameraFollower;
+
+        [Header("Scenes")]
+        [SerializeField] private string _menuScene = "MainMenu";
 
         private void Awake()
         {
@@ -54,7 +64,14 @@ namespace LastTrain.Core
             _projectilePool.Init();
             _levelProgress.Init();
 
-            _levelStateMachine.Construct(_enemySpawner, _player, _playerHealth, _trainMovement, _levelProgress);
+            _levelStateMachine.Construct(
+                _enemySpawner,
+                _player,
+                _playerHealth,
+                _trainMovement,
+                _levelProgress,
+                _menuScene
+            );
 
             _uIStateMachine.StartClicked += _levelStateMachine.StartLevel;
             _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;
@@ -66,8 +83,8 @@ namespace LastTrain.Core
             _levelStateMachine.PlayerDied += () => _uIStateMachine.SwitchState(UIState.GameOver);
             _levelStateMachine.LevelCompleted += () => _uIStateMachine.SwitchState(UIState.EndLevel);
 
-            _gameplayTraining.ScreenShowed += _levelStateMachine.StopGameplay;
-            _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeGameplay;
+            _gameplayTraining.ScreenShowed += _levelStateMachine.PauseLevel;
+            _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeLevel;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace LastTrain.UI.Gameplay
         private LevelSetting _nextLevel;
 
         public event Action CountdownFinished;
-        public event Action LevelComplited;
+        public event Action LevelCompleted;
 
         public void Init()
         {
@@ -68,7 +68,7 @@ namespace LastTrain.UI.Gameplay
                 yield return new WaitForSeconds(_progressValue);
             }
 
-            LevelComplited?.Invoke();
+            LevelCompleted?.Invoke();
             UnlockNextLevel();
             CoinsHandler.Instance.AddCoins(_sharedData.LevelSetting.LevelReward);
         }

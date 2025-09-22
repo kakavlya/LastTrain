@@ -9,104 +9,174 @@ namespace LastTrain.Core
 {
     public class LevelStateMachine : MonoBehaviour
     {
-        [SerializeField] private string _menuScene;
+        public enum State { Idle, Running, Paused, PlayerDead, Completed }
+
+        private string _menuScene;
 
         private EnemySpawner _spawner;
         private PlayerHealth _playerHealth;
         private TrainMovement _trainMovement;
         private LevelProgress _levelProgress;
-        private bool _isRunning;
-        private bool _isPaused;
+        private Transform _player;
+
+        private State _state = State.Idle;
+        private bool _bound;
 
         public event Action PlayerDied;
         public event Action LevelCompleted;
 
+        private void Awake()
+        {
+            if (_spawner == null || _playerHealth == null || _trainMovement == null || _levelProgress == null || _player == null)
+                ResolveFromSceneOrThrow();
+        }
+
+        private void OnEnable() => Bind();
+        private void OnDisable() => Unbind();
+
+        public void Construct(
+            EnemySpawner spawner,
+            Transform player,
+            PlayerHealth playerHealth,
+            TrainMovement trainMovement,
+            LevelProgress levelProgress,
+            string menuScene = null)
+        {
+            _spawner = spawner;
+            _player = player;
+            _playerHealth = playerHealth;
+            _trainMovement = trainMovement;
+            _levelProgress = levelProgress;
+            _menuScene = menuScene;
+
+            if (_spawner != null && _player != null)
+                _spawner.SetTarget(_player);
+        }
+
+        private void Bind()
+        {
+            if (_bound) return;
+
+            if (_spawner == null || _playerHealth == null || _trainMovement == null || _levelProgress == null || _player == null)
+                ResolveFromSceneOrThrow();
+
+            _playerHealth.Died += OnPlayerDiedInternal;
+            _levelProgress.LevelCompleted += OnLevelCompletedInternal;
+
+            _bound = true;
+        }
+
+        private void Unbind()
+        {
+            if (!_bound) return;
+
+            if (_playerHealth != null) _playerHealth.Died -= OnPlayerDiedInternal;
+            if (_levelProgress != null) _levelProgress.LevelCompleted -= OnLevelCompletedInternal;
+
+            _bound = false;
+        }
+
+        private void ResolveFromSceneOrThrow()
+        {
+            if (_player == null)
+            {
+                var playerGo = GameObject.FindGameObjectWithTag("Player");
+                if (playerGo == null)
+                    throw new InvalidOperationException("LevelStateMachine: GameObject with tag 'Player' not found.");
+                _player = playerGo.transform;
+            }
+
+            _spawner ??= FindObjectOfType<EnemySpawner>();
+            _playerHealth ??= FindObjectOfType<PlayerHealth>();
+            _trainMovement ??= FindObjectOfType<TrainMovement>();
+            _levelProgress ??= FindObjectOfType<LevelProgress>();
+
+            if (_spawner == null) throw new InvalidOperationException("LevelStateMachine: EnemySpawner not found in scene.");
+            if (_playerHealth == null) throw new InvalidOperationException("LevelStateMachine: PlayerHealth not found in scene.");
+            if (_trainMovement == null) throw new InvalidOperationException("LevelStateMachine: TrainMovement not found in scene.");
+            if (_levelProgress == null) throw new InvalidOperationException("LevelStateMachine: LevelProgress not found in scene.");
+
+            _spawner.SetTarget(_player);
+        }
+
         public void StartLevel()
         {
-            Time.timeScale = 1f;
+            if (_state == State.Running) return;
+
+            SetTimeScale(1f);
             _trainMovement.StartMovement();
             _levelProgress.StartCountdown();
             _spawner.Begin();
-            _playerHealth.Died += OnPlayerDied;
-            _levelProgress.LevelComplited += OnLevelComplited;
-            _isRunning = true;
-            _isPaused = false;
+
+            _state = State.Running;
         }
 
         public void PauseLevel()
         {
-            if (!_isRunning || _isPaused)
-                return;
+            if (_state != State.Running) return;
 
-            Time.timeScale = 0f;
+            SetTimeScale(0f);
             _trainMovement.StopMovement();
             _spawner.Pause();
-            _isPaused = true;
+
+            _state = State.Paused;
         }
 
         public void ResumeLevel()
         {
-            if (!_isPaused)
-                return;
+            if (_state != State.Paused) return;
 
-            Time.timeScale = 1f;
+            SetTimeScale(1f);
             _trainMovement.StartMovement();
             _spawner.Resume();
-            _isPaused = false;
+
+            _state = State.Running;
         }
 
         public void RestartLevel()
         {
-            Time.timeScale = 1f;
-            Scene current = SceneManager.GetActiveScene();
+            StopGameplayInternal();
+            SetTimeScale(1f);
+
+            var current = SceneManager.GetActiveScene();
             SceneManager.LoadScene(current.name);
-        }
-
-        public void StopGameplay()
-        {
-            _isRunning = false;
-            _trainMovement.StopMovement();
-            _spawner.Pause();
-            Time.timeScale = 0f;
-        }
-
-        public void ResumeGameplay()
-        {
-            _isRunning = true;
-            _trainMovement.StartMovement();
-            _spawner.Resume();
-            Time.timeScale = 1f;
         }
 
         public void ReturnToMenu()
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(_menuScene);
+            StopGameplayInternal();
+            SetTimeScale(1f);
+
+            if (!string.IsNullOrEmpty(_menuScene))
+                SceneManager.LoadScene(_menuScene);
         }
 
-        internal void Construct(EnemySpawner spawner,
-            Transform player, PlayerHealth playerHealth,
-            TrainMovement trainMovement, LevelProgress levelProgress)
+        private void OnPlayerDiedInternal()
         {
-            _spawner = spawner;
-            _playerHealth = playerHealth;
-            _trainMovement = trainMovement;
-            _spawner.SetTarget(player);
-            _levelProgress = levelProgress;
-        }
-
-        private void OnPlayerDied()
-        {
+            _state = State.PlayerDead;
+            StopGameplayInternal();
+            SetTimeScale(0f);
             PlayerDied?.Invoke();
-            _playerHealth.Died -= OnPlayerDied;
-            Time.timeScale = 0f;
         }
 
-        private void OnLevelComplited()
+        private void OnLevelCompletedInternal()
         {
-            StopGameplay();
-            _levelProgress.LevelComplited -= OnLevelComplited;
+            _state = State.Completed;
+            StopGameplayInternal();
+            SetTimeScale(0f);
             LevelCompleted?.Invoke();
+        }
+
+        private void StopGameplayInternal()
+        {
+            _trainMovement.StopMovement();
+            _spawner.Pause();
+        }
+
+        private static void SetTimeScale(float value)
+        {
+            if (Math.Abs(Time.timeScale - value) > 0.0001f)
+                Time.timeScale = value;
         }
     }
 }

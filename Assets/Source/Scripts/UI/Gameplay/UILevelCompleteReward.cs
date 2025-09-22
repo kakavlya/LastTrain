@@ -17,7 +17,7 @@ namespace LastTrain.UI.Gameplay
 
         private void Start()
         {
-            _levelProgress.LevelComplited += ShowLevelResults;
+            _levelProgress.LevelCompleted += ShowLevelResults;
             CoinsHandler.Instance.Added += AddCoinsForKills;
             _countCoinsForCompleted = _sharedData.LevelSetting.LevelReward;
         }
@@ -25,7 +25,7 @@ namespace LastTrain.UI.Gameplay
         private void OnDisable()
         {
             CoinsHandler.Instance.Added -= AddCoinsForKills;
-            _levelProgress.LevelComplited -= ShowLevelResults;
+            _levelProgress.LevelCompleted -= ShowLevelResults;
         }
 
         private void AddCoinsForKills(int reward)
