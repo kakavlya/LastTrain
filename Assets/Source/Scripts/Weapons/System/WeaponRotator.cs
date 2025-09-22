@@ -32,7 +32,7 @@ namespace LastTrain.Weapons.System
         private void SetWeaponPivot(Weapon weapon)
         {
             _weaponPivot = weapon.transform;
-            _muzzle = weapon.FirepointPosition != null ? weapon.FirepointPosition : weapon.transform;
+            _muzzle = weapon.FirePoint != null ? weapon.FirePoint : weapon.transform;
         }
 
         private void Rotate()
@@ -44,7 +44,7 @@ namespace LastTrain.Weapons.System
                 return;
 
             var ad = _targetProvider.GetAim();
-            Vector3 aimPoint = ad.worldPoint;
+            Vector3 aimPoint = ad.WorldPoint;
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;
 

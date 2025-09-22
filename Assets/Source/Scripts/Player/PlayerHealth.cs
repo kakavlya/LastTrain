@@ -27,7 +27,7 @@ namespace LastTrain.Player
             base.Awake();
             OnDeath.AddListener(OnPlayerDeath);
             _maxHealth = GetMaxHealthValue();
-            CurrentHealth = _maxHealth;
+            SetCurrentHealth(_maxHealth);
             _healthText.text = MaxHealth.ToString("F0");
             _healthSlider.maxValue = MaxHealth;
             _healthSlider.value = MaxHealth;
@@ -36,8 +36,8 @@ namespace LastTrain.Player
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
-            _healthText.text = GetCurrentHealth.ToString("F0");
-            _healthSlider.value = GetCurrentHealth;
+            _healthText.text = CurrentHealth.ToString("F0");
+            _healthSlider.value = CurrentHealth;
         }
 
         private void OnPlayerDeath()

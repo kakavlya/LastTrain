@@ -1,105 +1,113 @@
 using System.Collections;
 using UnityEngine;
 
-public sealed class TrailHandler : MonoBehaviour
+namespace LastTrain.Projectiles.Effects
 {
-    [SerializeField] private TrailRenderer _trail;
-    [SerializeField] private TrailVfxSettings _settings;
-
-    private Transform _homeParent;
-    private Vector3 _initLocalPos;
-    private Quaternion _initLocalRot;
-    private Vector3 _initLocalScale;
-    private Coroutine _fadeCo;
-    private bool _fading;
-
-    private void Reset() { _trail = GetComponent<TrailRenderer>(); }
-
-    private void Awake()
+    public sealed class TrailHandler : MonoBehaviour
     {
-        if (!_trail)
-            _trail = GetComponent<TrailRenderer>();
+        [SerializeField] private TrailRenderer _trail;
+        [SerializeField] private TrailVfxSettings _settings;
 
-        _homeParent = transform.parent;
-        _initLocalPos = transform.localPosition;
-        _initLocalRot = transform.localRotation;
-        _initLocalScale = transform.localScale;
-        ApplyStaticSettings();
-        _trail.emitting = false;
-        _trail.Clear();
-    }
+        private Transform _homeParent;
+        private Vector3 _initLocalPos;
+        private Quaternion _initLocalRot;
+        private Vector3 _initLocalScale;
+        private Coroutine _fadeCo;
+        private bool _fading;
 
-    private void OnDisable()
-    {
-        if (_fading)
-            return;
+        private void Reset() { _trail = GetComponent<TrailRenderer>(); }
 
-        _trail?.Clear();
+        private void Awake()
+        {
+            if (!_trail)
+                _trail = GetComponent<TrailRenderer>();
 
-        if (_trail)
+            _homeParent = transform.parent;
+            _initLocalPos = transform.localPosition;
+            _initLocalRot = transform.localRotation;
+            _initLocalScale = transform.localScale;
+            ApplyStaticSettings();
             _trail.emitting = false;
-    }
+            _trail.Clear();
+        }
 
-    private void ApplyStaticSettings()
-    {
-        if (_settings == null)
-            return;
+        private void OnDisable()
+        {
+            if (_fading)
+                return;
 
-        _trail.widthMultiplier = _settings.Width;
-        _trail.widthCurve = _settings.WidthCurve;
-        _trail.colorGradient = _settings.ColorGradient;
-        _trail.minVertexDistance = _settings.MinVertexDistance;
-    }
+            _trail?.Clear();
 
-    public void Play(float projectileSpeed)
-    {
-        if (_fadeCo != null) { StopCoroutine(_fadeCo); _fadeCo = null; }
+            if (_trail)
+                _trail.emitting = false;
+        }
 
-        _fading = false;
+        private void ApplyStaticSettings()
+        {
+            if (_settings == null)
+                return;
 
-        if (_homeParent) transform.SetParent(_homeParent, false);
+            _trail.widthMultiplier = _settings.Width;
+            _trail.widthCurve = _settings.WidthCurve;
+            _trail.colorGradient = _settings.ColorGradient;
+            _trail.minVertexDistance = _settings.MinVertexDistance;
+        }
 
-        transform.localPosition = _initLocalPos;
-        transform.localRotation = _initLocalRot;
-        transform.localScale = _initLocalScale;
-        gameObject.SetActive(true);
-        float L = _settings ? _settings.DesiredLength : 3f;
-        float tMin = _settings ? _settings.MinTime : 0.03f;
-        float tMax = _settings ? _settings.MaxTime : 0.25f;
-        float speed = Mathf.Max(0.001f, projectileSpeed);
-        _trail.time = Mathf.Clamp(L / speed, tMin, tMax);
-        _trail.Clear();
-        _trail.emitting = true;
-    }
+        public void Play(float projectileSpeed)
+        {
+            if (_fadeCo != null) 
+            {
+                StopCoroutine(_fadeCo);
+                _fadeCo = null;
+            }
 
-    public void BeginDetachFade()
-    {
-        if (!_trail || _fading)
-            return;
+            _fading = false;
 
-        _fading = true;
-        transform.SetParent(null, true);
-        _trail.emitting = false;
+            if (_homeParent)
+                transform.SetParent(_homeParent, false);
 
-        if (_fadeCo != null)
-            StopCoroutine(_fadeCo);
+            transform.localPosition = _initLocalPos;
+            transform.localRotation = _initLocalRot;
+            transform.localScale = _initLocalScale;
+            gameObject.SetActive(true);
+            float L = _settings ? _settings.DesiredLength : 3f;
+            float tMin = _settings ? _settings.MinTime : 0.03f;
+            float tMax = _settings ? _settings.MaxTime : 0.25f;
+            float speed = Mathf.Max(0.001f, projectileSpeed);
+            _trail.time = Mathf.Clamp(L / speed, tMin, tMax);
+            _trail.Clear();
+            _trail.emitting = true;
+        }
 
-        _fadeCo = StartCoroutine(FadeAndReturn());
-    }
+        public void BeginDetachFade()
+        {
+            if (!_trail || _fading)
+                return;
 
-    IEnumerator FadeAndReturn()
-    {
-        float pad = _settings ? _settings.FadePadding : 0.02f;
-        float wait = Mathf.Max(0.01f, _trail.time) + pad;
-        yield return new WaitForSeconds(wait);
+            _fading = true;
+            transform.SetParent(null, true);
+            _trail.emitting = false;
 
-        if (!_trail)
-            yield break;
+            if (_fadeCo != null)
+                StopCoroutine(_fadeCo);
 
-        _trail.Clear();
-        gameObject.SetActive(false);
-        transform.SetParent(_homeParent, true);
-        _fading = false;
-        _fadeCo = null;
+            _fadeCo = StartCoroutine(FadeAndReturn());
+        }
+
+        IEnumerator FadeAndReturn()
+        {
+            float pad = _settings ? _settings.FadePadding : 0.02f;
+            float wait = Mathf.Max(0.01f, _trail.time) + pad;
+            yield return new WaitForSeconds(wait);
+
+            if (!_trail)
+                yield break;
+
+            _trail.Clear();
+            gameObject.SetActive(false);
+            transform.SetParent(_homeParent, true);
+            _fading = false;
+            _fadeCo = null;
+        }
     }
 }

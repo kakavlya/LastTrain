@@ -21,7 +21,6 @@ namespace LastTrain.Weapons.Types
 
         public override void Fire(Ammunition ammo = null)
         {
-
             if (!FirePossibleCalculate())
                 return;
 
@@ -36,7 +35,7 @@ namespace LastTrain.Weapons.Types
 
             var ad = Aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.worldPoint;
+            Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
             if (dir.sqrMagnitude < 1e-6f)
@@ -60,8 +59,6 @@ namespace LastTrain.Weapons.Types
             }
 
             InvokeFire();
-            OnWeaponFire();
-
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
 
             var proj = UsePooling
@@ -77,29 +74,10 @@ namespace LastTrain.Weapons.Types
                       _aoeRange)
                 : Instantiate(ProjectilePrefab, origin, rot);
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, origin);
+            if (MuzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(MuzzleEffectPrefab, origin);
 
             ammo?.DecreaseProjectilesCount();
         }
-
-        //protected override void OnWeaponFire()
-        //{
-        //    Quaternion rotation = Quaternion.LookRotation(Direction, Vector3.forward);
-        //    var proj = UsePooling
-        //    ? ProjectilePool.Instance.Spawn(
-        //        ProjectilePrefab,
-        //        FirePoint.position,
-        //        rotation,
-        //        Owner,
-        //        ProjectileSpeed, Damage,
-        //        Range,
-        //        _currentAoeDamage,
-        //        _aoeRange
-        //        )
-        //    : Instantiate(ProjectilePrefab, FirePoint.position, rotation);
-
-        //    proj.SetVelocity();
-        //}
     }
 }

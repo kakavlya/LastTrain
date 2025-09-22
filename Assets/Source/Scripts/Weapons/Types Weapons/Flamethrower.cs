@@ -50,8 +50,8 @@ namespace LastTrain.Weapons.Types
             InvokeFire();
             OnWeaponFire();
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.transform.position);
+            if (MuzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(MuzzleEffectPrefab, FirePoint.transform.position);
 
             ammo?.DecreaseProjectilesCount();
         }
@@ -81,7 +81,7 @@ namespace LastTrain.Weapons.Types
             }
         }
 
-        protected override void OnWeaponFire()
+        private void OnWeaponFire()
         {
             if (!_isFiring)
             {

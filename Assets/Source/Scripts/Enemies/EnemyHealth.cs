@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-using LastTrain.Coins;
+﻿using LastTrain.Coins;
 using LastTrain.Core;
 
 namespace LastTrain.Enemies
 {
     public class EnemyHealth : HealthBase
     {
-        [Header("Health Settings")]
-        [SerializeField] private float _maxHealth = 100;
-
         private EnemyDeathHandler _deathHandler;
         private int _rewardForKill;
 
@@ -21,17 +17,11 @@ namespace LastTrain.Enemies
         protected override void OnEnable()
         {
             base.OnEnable();
-            CurrentHealth = _maxHealth;
         }
 
         public void SetRewardForKill(int reward)
         {
             _rewardForKill = reward;
-        }
-
-        public void SetCurrentHealth(float health)
-        {
-            CurrentHealth = health;
         }
 
         public void HandleDie()

@@ -35,7 +35,7 @@ namespace LastTrain.Weapons.Types
 
             var ad = Aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.worldPoint;
+            Vector3 target = ad.WorldPoint;
             Vector3 centerDir = target - origin;
 
             if (centerDir.sqrMagnitude < 1e-6f) centerDir = FirePoint.forward;
@@ -72,8 +72,8 @@ namespace LastTrain.Weapons.Types
                         Quaternion.LookRotation(dir));
             }
 
-            if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
+            if (MuzzleEffectPrefab != null)
+                ParticlePool.Instance.Spawn(MuzzleEffectPrefab, FirePoint.position);
 
             ammo?.DecreaseProjectilesCount();
         }

@@ -1,5 +1,4 @@
 ﻿using LastTrain.Particles;
-using System.Collections;
 using UnityEngine;
 
 namespace LastTrain.Effects
@@ -15,18 +14,10 @@ namespace LastTrain.Effects
         [SerializeField] private AudioClip _hitSound;
         [SerializeField] private AudioClip _deathSound;
 
-        private Color[] _originalColors;
-        private Material[] _materials;
-
-        private void Awake()
-        {
-        }
-
         public void PlayHitFX()
         {
             if (_hitVFX)
                 ParticlePool.Instance.Spawn(_hitVFX, transform.position);
-                //Instantiate(_hitVFX, transform.position, Quaternion.identity);
 
             if (_hitSound)
                 AudioSource.PlayClipAtPoint(_hitSound, transform.position);
@@ -37,6 +28,7 @@ namespace LastTrain.Effects
         public void PlayDeathFX()
         {
             var selectedVFX = GetRandomVFX(_deathVFXOptions);
+
             if (selectedVFX != null)
             {
                 var fx = Instantiate(selectedVFX, transform.position, Quaternion.identity);

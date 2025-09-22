@@ -4,6 +4,7 @@ using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
 using LastTrain.Projectiles;
 using LastTrain.Weapons.System;
+using LastTrain.Projectiles.Types;
 
 namespace LastTrain.Weapons.Types
 {
@@ -12,42 +13,58 @@ namespace LastTrain.Weapons.Types
         [Header("References")]
         [SerializeField] private Sprite _uiSpriteActive;
         [SerializeField] private Sprite _uiSpriteDeactive;
-        [SerializeField] protected Transform FirePoint;
-        [SerializeField] protected Projectile ProjectilePrefab;
-        [SerializeField] protected ParticleSystem _muzzleEffectPrefab;
+        [SerializeField] private Transform _firePoint;
+        [SerializeField] private Projectile _projectilePrefab;
+        [SerializeField] private ParticleSystem _muzzleEffectPrefab;
         [SerializeField] private AimingTargetProvider _aim;
         [SerializeField] private LayerMask _obstacleMask = ~0;
 
         [Header("Shoot Settings")]
-        [SerializeField] protected float FireDelay = 0.1f;
-        [SerializeField] protected bool UsePooling = true;
-        [SerializeField] protected float ProjectileSpeed = 100;
-        [SerializeField] protected float Range = 2000f;
+        [SerializeField] private float _fireDelay = 0.1f;
+        [SerializeField] private bool _usePooling = true;
+        [SerializeField] private float _projectileSpeed = 100;
+        [SerializeField] protected float _range = 2000f;
 
         private float _lastFireTime;
         private float _currentFireDelay;
 
         protected GameObject Owner;
         protected float Damage;
+
         protected AimingTargetProvider Aim => _aim;
         protected LayerMask ObstacleMask => _obstacleMask;
 
-        public event Action OnFired;
-        public event Action OnStopFired;
+        public event Action Fired;
+        public event Action StopFired;
+
+        public Transform FirePoint => _firePoint;
+
+        public ParticleSystem MuzzleEffectPrefab => _muzzleEffectPrefab;
+
+        public Projectile ProjectilePrefab => _projectilePrefab;
+
+        public float FireDelay => _fireDelay;
+
+        public bool UsePooling => _usePooling;
+
+        public float ProjectileSpeed => _projectileSpeed;
+
+        public float Range => _range;
 
         public Weapon PrefabReference { get; private set; }
-        public Transform FirepointPosition => FirePoint;
+
         public Sprite UISpriteActive => _uiSpriteActive;
+
         public Sprite UISpriteDeactive => _uiSpriteDeactive;
-        public Transform Muzzle => FirePoint;
-        public float MaxRange => Range;
+
+        public float MaxRange => _range;
 
         public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
             Owner = gameObject;
             Damage = damage;
-            if (range > 0) Range = range;
-            _currentFireDelay = fireDelay ?? FireDelay;
+            if (range > 0) _range = range;
+            _currentFireDelay = fireDelay ?? _fireDelay;
         }
 
         public void SetAimProvider(AimingTargetProvider provider) => _aim = provider;
@@ -62,21 +79,21 @@ namespace LastTrain.Weapons.Types
 
             if (!FirePossibleCalculate()) return;
 
-            if (_aim == null || FirePoint == null)
+            if (_aim == null || _firePoint == null)
             {
                 return;
             }
 
             var ad = _aim.GetAim();
-            Vector3 origin = FirePoint.position;
-            Vector3 target = ad.worldPoint;
+            Vector3 origin = _firePoint.position;
+            Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
-            if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;
+            if (dir.sqrMagnitude < 1e-6f) dir = _firePoint.forward;
             else dir.Normalize();
 
             float distToTarget = Vector3.Distance(origin, target);
-            float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
+            float maxRay = (_range > 0f) ? Mathf.Min(distToTarget, _range) : distToTarget;
             Vector3 originNoSelf = origin + dir * 0.02f;
 
             if (Physics.Raycast(originNoSelf, dir, out var block, maxRay, _obstacleMask, QueryTriggerInteraction.Ignore))
@@ -85,14 +102,14 @@ namespace LastTrain.Weapons.Types
                 dir = (target - origin).normalized;
             }
 
-            OnFired?.Invoke();
+            Fired?.Invoke();
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
-            var proj = UsePooling
-                ? ProjectilePool.Instance.Spawn(ProjectilePrefab, origin, rot, Owner, ProjectileSpeed, Damage, Range)
-                : Instantiate(ProjectilePrefab, origin, rot);
+            var proj = _usePooling
+                ? ProjectilePool.Instance.Spawn(_projectilePrefab, origin, rot, Owner, _projectileSpeed, Damage, Range)
+                : Instantiate(_projectilePrefab, origin, rot);
 
             if (_muzzleEffectPrefab != null)
-                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, FirePoint.position);
+                ParticlePool.Instance.Spawn(_muzzleEffectPrefab, _firePoint.position);
 
             ammo?.DecreaseProjectilesCount();
         }
@@ -104,16 +121,11 @@ namespace LastTrain.Weapons.Types
 
         public virtual bool GetIsLoopedFireSound() => false;
 
-        public virtual void InvokeStopFire() => OnStopFired?.Invoke();
+        public virtual void InvokeStopFire() => StopFired?.Invoke();
 
         protected void InvokeFire()
         {
-            OnFired?.Invoke();
-        }
-
-        protected virtual void OnWeaponFire()
-        {
-
+            Fired?.Invoke();
         }
 
         protected bool FirePossibleCalculate()
