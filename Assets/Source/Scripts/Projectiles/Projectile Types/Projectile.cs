@@ -6,14 +6,12 @@ using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private TrailHandler _trail;
     [SerializeField] protected ParticleSystem _impactPrefab;
     [field: SerializeField] public float Lifetime { get; private set; } = 3f;
     [field: SerializeField] public bool UsePooling { get; private set; } = false;
-    [SerializeField] private TrailHandler _trail;
 
     protected Rigidbody ProjectileRigidbody;
-
-    [FormerlySerializedAs("_spawnTime")]
     protected float SpawnTime;
 
     public event Action<Projectile> OnReturnToPool;
@@ -116,7 +114,6 @@ public class Projectile : MonoBehaviour
     protected void Despawn()
     {
         _trail?.BeginDetachFade();
-
         BeforeDespawn();
 
         if (UsePooling)
@@ -136,7 +133,6 @@ public class Projectile : MonoBehaviour
 
         bool ownerIsEnemy = Owner.GetComponentInParent<EnemyController>() != null;
         bool targetIsEnemy = other.GetComponentInParent<EnemyController>() != null;
-
         return ownerIsEnemy && targetIsEnemy;
     }
 }

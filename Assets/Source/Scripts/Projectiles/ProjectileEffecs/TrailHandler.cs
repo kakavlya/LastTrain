@@ -6,68 +6,84 @@ public sealed class TrailHandler : MonoBehaviour
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private TrailVfxSettings _settings;
 
-    Transform _homeParent;
-    Vector3 _initLocalPos; Quaternion _initLocalRot; Vector3 _initLocalScale;
-    Coroutine _fadeCo; bool _fading;
+    private Transform _homeParent;
+    private Vector3 _initLocalPos;
+    private Quaternion _initLocalRot;
+    private Vector3 _initLocalScale;
+    private Coroutine _fadeCo;
+    private bool _fading;
 
-    void Reset() { _trail = GetComponent<TrailRenderer>(); }
+    private void Reset() { _trail = GetComponent<TrailRenderer>(); }
 
-    void Awake()
+    private void Awake()
     {
-        if (!_trail) _trail = GetComponent<TrailRenderer>();
-        _homeParent = transform.parent;
+        if (!_trail)
+            _trail = GetComponent<TrailRenderer>();
 
+        _homeParent = transform.parent;
         _initLocalPos = transform.localPosition;
         _initLocalRot = transform.localRotation;
         _initLocalScale = transform.localScale;
-
         ApplyStaticSettings();
         _trail.emitting = false;
         _trail.Clear();
-        // Check Autodestruct is unselected !
     }
 
-    void ApplyStaticSettings()
+    private void OnDisable()
     {
-        if (_settings == null) return;
-        _trail.widthMultiplier = _settings.Width;               // тоньше/толще
-        _trail.widthCurve = _settings.WidthCurve;          // форма сужения
-        _trail.colorGradient = _settings.ColorGradient;       // градиент
-        _trail.minVertexDistance = _settings.MinVertexDistance;   // гладкость
-        // Alignment = View и TextureMode = Stretch поставь в инспекторе
+        if (_fading)
+            return;
+
+        _trail?.Clear();
+
+        if (_trail)
+            _trail.emitting = false;
+    }
+
+    private void ApplyStaticSettings()
+    {
+        if (_settings == null)
+            return;
+
+        _trail.widthMultiplier = _settings.Width;
+        _trail.widthCurve = _settings.WidthCurve;
+        _trail.colorGradient = _settings.ColorGradient;
+        _trail.minVertexDistance = _settings.MinVertexDistance;
     }
 
     public void Play(float projectileSpeed)
     {
         if (_fadeCo != null) { StopCoroutine(_fadeCo); _fadeCo = null; }
+
         _fading = false;
 
         if (_homeParent) transform.SetParent(_homeParent, false);
+
         transform.localPosition = _initLocalPos;
         transform.localRotation = _initLocalRot;
         transform.localScale = _initLocalScale;
-
         gameObject.SetActive(true);
         float L = _settings ? _settings.DesiredLength : 3f;
         float tMin = _settings ? _settings.MinTime : 0.03f;
         float tMax = _settings ? _settings.MaxTime : 0.25f;
         float speed = Mathf.Max(0.001f, projectileSpeed);
-
         _trail.time = Mathf.Clamp(L / speed, tMin, tMax);
-
         _trail.Clear();
         _trail.emitting = true;
     }
 
     public void BeginDetachFade()
     {
-        if (!_trail || _fading) return;
-        _fading = true;
+        if (!_trail || _fading)
+            return;
 
-        transform.SetParent(null, true); // остаётся там, где догорит
+        _fading = true;
+        transform.SetParent(null, true);
         _trail.emitting = false;
 
-        if (_fadeCo != null) StopCoroutine(_fadeCo);
+        if (_fadeCo != null)
+            StopCoroutine(_fadeCo);
+
         _fadeCo = StartCoroutine(FadeAndReturn());
     }
 
@@ -77,20 +93,13 @@ public sealed class TrailHandler : MonoBehaviour
         float wait = Mathf.Max(0.01f, _trail.time) + pad;
         yield return new WaitForSeconds(wait);
 
-        if (!_trail) yield break;
+        if (!_trail)
+            yield break;
 
         _trail.Clear();
         gameObject.SetActive(false);
         transform.SetParent(_homeParent, true);
-
         _fading = false;
         _fadeCo = null;
-    }
-
-    void OnDisable()
-    {
-        if (_fading) return;
-        _trail?.Clear();
-        if (_trail) _trail.emitting = false;
     }
 }

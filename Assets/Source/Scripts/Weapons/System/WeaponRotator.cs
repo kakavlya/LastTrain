@@ -20,7 +20,8 @@ namespace LastTrain.Weapons.System
 
         private void OnDisable()
         {
-            if (_weaponHandler != null) _weaponHandler.OnWeaponChange -= SetWeaponPivot;
+            if (_weaponHandler != null)
+                _weaponHandler.OnWeaponChange -= SetWeaponPivot;
         }
 
         public void Init()
@@ -36,22 +37,23 @@ namespace LastTrain.Weapons.System
 
         private void Rotate()
         {
-            if (_targetProvider == null || _weaponPivot == null) return;
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+            if (_targetProvider == null || _weaponPivot == null)
+                return;
+
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
 
             var ad = _targetProvider.GetAim();
-            Vector3 aimPoint = ad.WorldPoint;
-
+            Vector3 aimPoint = ad.worldPoint;
             Vector3 direction = aimPoint - _weaponPivot.position;
             direction.y = 0f;
-            if (direction.sqrMagnitude < 0.01f) return;
+
+            if (direction.sqrMagnitude < 0.01f)
+                return;
 
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
-            _weaponPivot.rotation = Quaternion.RotateTowards(_weaponPivot.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-
-            if (_muzzle != null) Debug.DrawLine(_muzzle.position, aimPoint, Color.yellow);
-            Debug.DrawRay(_weaponPivot.position, _weaponPivot.forward * 5f, Color.green);
-
+            _weaponPivot.rotation = Quaternion.RotateTowards(
+                _weaponPivot.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
             Rotated?.Invoke(direction.normalized);
         }
     }

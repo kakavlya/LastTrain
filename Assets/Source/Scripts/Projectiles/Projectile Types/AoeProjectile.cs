@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 using LastTrain.Enemies;
 using LastTrain.Particles;
 
@@ -45,7 +44,8 @@ public class AoeProjectile : Projectile
         if (_impactPrefab != null)
             ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
 
-        if (_aoeRange <= 0) return;
+        if (_aoeRange <= 0)
+            return;
 
         Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
 

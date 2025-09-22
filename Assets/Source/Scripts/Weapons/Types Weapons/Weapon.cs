@@ -12,11 +12,11 @@ namespace LastTrain.Weapons.Types
         [Header("References")]
         [SerializeField] private Sprite _uiSpriteActive;
         [SerializeField] private Sprite _uiSpriteDeactive;
-        [SerializeField] private AimingTargetProvider _aim;
-        [SerializeField] private LayerMask _obstacleMask = ~0;
         [SerializeField] protected Transform FirePoint;
         [SerializeField] protected Projectile ProjectilePrefab;
         [SerializeField] protected ParticleSystem _muzzleEffectPrefab;
+        [SerializeField] private AimingTargetProvider _aim;
+        [SerializeField] private LayerMask _obstacleMask = ~0;
 
         [Header("Shoot Settings")]
         [SerializeField] protected float FireDelay = 0.1f;
@@ -46,9 +46,7 @@ namespace LastTrain.Weapons.Types
         {
             Owner = gameObject;
             Damage = damage;
-            if (range > 0) 
-                Range = range;
-
+            if (range > 0) Range = range;
             _currentFireDelay = fireDelay ?? FireDelay;
         }
 
@@ -71,7 +69,7 @@ namespace LastTrain.Weapons.Types
 
             var ad = _aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.WorldPoint;
+            Vector3 target = ad.worldPoint;
             Vector3 dir = target - origin;
 
             if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;

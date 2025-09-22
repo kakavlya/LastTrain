@@ -27,7 +27,8 @@ namespace LastTrain.Enemies
 
         private void Update()
         {
-            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null) return;
+            if (_paused || _stopped || _entries == null || _timers == null || _spawnPoints == null)
+                return;
 
             for (int i = 0; i < _entries.Length; i++)
             {

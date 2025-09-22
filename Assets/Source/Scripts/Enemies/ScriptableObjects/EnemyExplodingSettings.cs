@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -19,6 +18,7 @@ namespace LastTrain.Enemies
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var exploder = enemy.GetComponent<EnemyExplodingController>();
+
             if (exploder == null)
                 exploder = enemy.AddComponent<EnemyExplodingController>();
 

@@ -68,7 +68,7 @@ namespace LastTrain.Player
         {
             if (Input.GetMouseButton(0))
             {
-                var target = _aim.GetAim().WorldPoint;
+                var target = _aim.GetAim().worldPoint;
                 Fired?.Invoke(target);
             }
 

@@ -22,19 +22,31 @@ namespace LastTrain.Weapons.Types
         public override void Fire(Ammunition ammo = null)
         {
 
-            if (!FirePossibleCalculate()) return;
+            if (!FirePossibleCalculate())
+                return;
 
-            if (ammo != null && !ammo.HasAmmo) { InvokeStopFire(); return; }
+            if (ammo != null && !ammo.HasAmmo) 
+            { 
+                InvokeStopFire();
+                return;
+            }
 
-            if (Aim == null || FirePoint == null) return;
+            if (Aim == null || FirePoint == null)
+                return;
 
             var ad = Aim.GetAim();
             Vector3 origin = FirePoint.position;
-            Vector3 target = ad.WorldPoint;
-
+            Vector3 target = ad.worldPoint;
             Vector3 dir = target - origin;
-            if (dir.sqrMagnitude < 1e-6f) dir = FirePoint.forward;
-            else dir.Normalize();
+
+            if (dir.sqrMagnitude < 1e-6f)
+            {
+                dir = FirePoint.forward;
+            }
+            else
+            {
+                dir.Normalize();
+            }
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;

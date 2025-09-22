@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LastTrain.Enemies
 {
@@ -33,6 +32,7 @@ namespace LastTrain.Enemies
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var ram = enemy.GetComponent<EnemyRamController>();
+
             if (ram == null)
                 ram = enemy.AddComponent<EnemyRamController>();
 
