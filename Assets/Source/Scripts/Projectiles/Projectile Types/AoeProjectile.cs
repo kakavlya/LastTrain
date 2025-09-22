@@ -43,8 +43,8 @@ namespace LastTrain.Projectiles.Types
 
         private void AoeExplode()
         {
-            if (_impactPrefab != null)
-                ParticlePool.Instance.Spawn(_impactPrefab, transform.position);
+            if (ImpactPrefab != null)
+                ParticlePool.Instance.Spawn(ImpactPrefab, transform.position);
 
             if (_aoeRange <= 0)
                 return;

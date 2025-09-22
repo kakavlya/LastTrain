@@ -9,40 +9,44 @@ namespace LastTrain.Projectiles.Types
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private TrailHandler _trail;
-        [SerializeField] protected ParticleSystem _impactPrefab;
+        [SerializeField] private ParticleSystem _impactPrefab;
         [field: SerializeField] public float Lifetime { get; private set; } = 3f;
         [field: SerializeField] public bool UsePooling { get; private set; } = false;
 
-        protected Rigidbody ProjectileRigidbody;
-        protected float SpawnTime;
+        private Rigidbody _projectileRigidbody;
+        private float _spawnTime;
 
         public event Action<Projectile> OnReturnToPool;
 
         public float Speed { get; private set; } = 100f;
+
         public float Damage { get; private set; } = 50;
+
         public float MaxAttackDistance { get; private set; } = 100;
+
+        public ParticleSystem ImpactPrefab => _impactPrefab;
 
         public GameObject Owner { get; private set; }
 
         private void Awake()
         {
-            ProjectileRigidbody = GetComponent<Rigidbody>();
+            _projectileRigidbody = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            SpawnTime = Time.time;
+            _spawnTime = Time.time;
         }
 
         public virtual void SetVelocity()
         {
-            if (ProjectileRigidbody != null)
-                ProjectileRigidbody.velocity = transform.forward * Speed;
+            if (_projectileRigidbody != null)
+                _projectileRigidbody.velocity = transform.forward * Speed;
         }
 
         protected virtual void Update()
         {
-            if (Time.time - SpawnTime >= Lifetime)
+            if (Time.time - _spawnTime >= Lifetime)
                 Despawn();
 
             if (Owner != null)
@@ -104,10 +108,10 @@ namespace LastTrain.Projectiles.Types
             if (owner != null)
                 gameObject.layer = owner.layer;
 
-            if (ProjectileRigidbody != null)
+            if (_projectileRigidbody != null)
             {
-                ProjectileRigidbody.angularVelocity = Vector3.zero;
-                ProjectileRigidbody.velocity = transform.forward * Speed;
+                _projectileRigidbody.angularVelocity = Vector3.zero;
+                _projectileRigidbody.velocity = transform.forward * Speed;
             }
 
             _trail?.Play(Speed);

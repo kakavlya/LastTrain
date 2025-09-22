@@ -11,9 +11,10 @@ namespace LastTrain.Inventory
         [SerializeField] private InventoryWeapon _weaponUIPrefab;
 
         private string _ñonfigsFolder = "Configs";
+        private List<string> _inventorySlots = new List<string>();
+        private List<WeaponSlotUI> _activeSlotUIs = new List<WeaponSlotUI>();
 
-        protected List<string> InventorySlots = new List<string>();
-        protected List<WeaponSlotUI> ActiveSlotUIs = new List<WeaponSlotUI>();
+        protected List<WeaponSlotUI> ActiveSlotUIs => _activeSlotUIs;
 
         protected virtual void Start()
         {
@@ -22,22 +23,22 @@ namespace LastTrain.Inventory
 
         public WeaponSlotUI GetLastActiveSlotUIs()
         {
-            if (ActiveSlotUIs.Count > 0)
-                return ActiveSlotUIs[ActiveSlotUIs.Count - 1];
+            if (_activeSlotUIs.Count > 0)
+                return _activeSlotUIs[_activeSlotUIs.Count - 1];
 
             return null;
         }
 
         public void SubmitActiveSlots()
         {
-            ActiveSlotUIs.Clear();
-            InventorySlots = GetAllSlotsFromSave();
+            _activeSlotUIs.Clear();
+            _inventorySlots = GetAllSlotsFromSave();
 
-            for (int i = 0; i < InventorySlots.Count; i++)
+            for (int i = 0; i < _inventorySlots.Count; i++)
             {
                 var weaponSlotUI = _slots[i].GetComponent<WeaponSlotUI>();
                 _slots[i].SetActive(true);
-                ActiveSlotUIs.Add(weaponSlotUI);
+                _activeSlotUIs.Add(weaponSlotUI);
                 weaponSlotUI.Filled += SaveLocationInInventory;
             }
 
@@ -52,22 +53,22 @@ namespace LastTrain.Inventory
 
         protected virtual void SaveLocationInInventory()
         {
-            while (InventorySlots.Count < ActiveSlotUIs.Count)
+            while (_inventorySlots.Count < _activeSlotUIs.Count)
             {
-                InventorySlots.Add("");
+                _inventorySlots.Add("");
             }
 
-            for (int i = 0; i < ActiveSlotUIs.Count; i++)
+            for (int i = 0; i < _activeSlotUIs.Count; i++)
             {
-                var inventoryWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
+                var inventoryWeapon = _activeSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
                 if (inventoryWeapon != null && inventoryWeapon.WeaponConfig != null)
                 {
-                    InventorySlots[i] = inventoryWeapon.WeaponConfig.WeaponId;
+                    _inventorySlots[i] = inventoryWeapon.WeaponConfig.WeaponId;
                 }
                 else
                 {
-                    InventorySlots[i] = "";
+                    _inventorySlots[i] = "";
                 }
             }
 
@@ -76,7 +77,7 @@ namespace LastTrain.Inventory
 
         private void LoadWeaponsLocationInInventory()
         {
-            List<string> weaponsIdes = InventorySlots;
+            List<string> weaponsIdes = _inventorySlots;
 
             for (int i = 0; i < _slots.Length && i < weaponsIdes.Count; i++)
             {
@@ -84,7 +85,7 @@ namespace LastTrain.Inventory
 
                 if (!string.IsNullOrEmpty(id))
                 {
-                    var existingWeapon = ActiveSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
+                    var existingWeapon = _activeSlotUIs[i].GetComponentInChildren<InventoryWeapon>();
 
                     if (existingWeapon != null)
                     {

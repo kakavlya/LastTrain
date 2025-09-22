@@ -8,14 +8,13 @@ namespace LastTrain.Core
     public class HealthBase : MonoBehaviour, IDamageable
     {      
         private ModelEffects _view;
-
-        protected float CurrentHealth;
+        private float _currentHealth;
 
         public UnityEvent OnDeath;
 
         public bool IsDead { get; private set; }
 
-        public float GetCurrentHealth => CurrentHealth;
+        public float CurrentHealth => _currentHealth;
 
         protected virtual void Awake()
         {
@@ -32,13 +31,18 @@ namespace LastTrain.Core
             if (IsDead)
                 return;
 
-            CurrentHealth -= damage;
+            _currentHealth -= damage;
             _view?.PlayHitFX();
 
-            if (CurrentHealth <= 0)
+            if (_currentHealth <= 0)
             {
                 Die();
             }
+        }
+
+        public void SetCurrentHealth(float health)
+        {
+            _currentHealth = health;
         }
 
         protected virtual void Die()
