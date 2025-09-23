@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using YG;
 using LastTrain.Coins;
-using LastTrain.Data;
 using LastTrain.Level;
 using LastTrain.Persistence;
+using LastTrain.Data;
 
 namespace LastTrain.Training
 {
@@ -17,7 +17,6 @@ namespace LastTrain.Training
         [SerializeField] private string _gameplaySceneName;
         [SerializeField] private LevelSetting _trainingSetting;
         [SerializeField] private List<WeaponUpgradeConfig> _trainingsWeapons;
-        [SerializeField] private SharedData _sharedData;
 
         private bool _isDoneGameplayTraining;
         private bool _isDoneMenuTraining;
@@ -64,8 +63,8 @@ namespace LastTrain.Training
         {
             if (SceneManager.GetActiveScene().name == _menuSceneName && !_isDoneGameplayTraining && !_isDoneMenuTraining)
             {
-                _sharedData.LevelSetting = _trainingSetting;
-                _sharedData.WeaponConfigs = _trainingsWeapons;
+                TransferData.Instance.SetLevelSetting(_trainingSetting);
+                TransferData.Instance.SetWeaponConfigs(_trainingsWeapons);
                 CoinsHandler.Instance.SetTrainingStatus(true);
                 SceneManager.LoadScene(_gameplaySceneName);
             }

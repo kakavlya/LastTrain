@@ -15,7 +15,6 @@ namespace LastTrain.Level
         [SerializeField] private ScrollRect _scrollRect;
         [SerializeField] private TextMeshProUGUI _textCurrentLevel;
         [SerializeField] private Sprite _unavailableIcon;
-        [SerializeField] private SharedData _sharedData;
 
         public bool IsChosed { get; private set; }
 
@@ -46,18 +45,7 @@ namespace LastTrain.Level
                 YG2.SaveProgress();
             }
 
-            foreach (var setting in _levelSettings)
-            {
-                foreach (var level in levelsAvailability)
-                {
-                    if (setting.LevelNumber == level.LevelNumber)
-                    {
-                        setting.SetAvailable(level.IsAvailable);
-                    }
-                }
-            }
-
-            _sharedData.SetAllLevels(_levelSettings);
+            TransferData.Instance.SetAllLevels(_levelSettings);
         }
 
         private void CreateLevelButtons()
@@ -108,7 +96,7 @@ namespace LastTrain.Level
 
         private void LoadLevelSettings(LevelSetting levelSetting)
         {
-            _sharedData.LevelSetting = levelSetting;
+            TransferData.Instance.SetLevelSetting(levelSetting);
             ShowCurrentLevel(levelSetting);
             IsChosed = true;
         }

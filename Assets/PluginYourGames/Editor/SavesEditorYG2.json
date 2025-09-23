@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3266,
+    "idSave": 274,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -26,24 +26,6 @@
         },
         {
             "rid": 1005
-        },
-        {
-            "rid": 1006
-        },
-        {
-            "rid": 1007
-        },
-        {
-            "rid": 1008
-        },
-        {
-            "rid": 1009
-        },
-        {
-            "rid": 1010
-        },
-        {
-            "rid": 1011
         }
     ],
     "TrainingWeaponsProgress": [
@@ -67,25 +49,21 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 7,
-        "SlotsLevel": 2,
-        "AmmoLevel": 4
+        "HealthLevel": 0,
+        "SlotsLevel": 1,
+        "AmmoLevel": 0
     },
-    "Coins": 7009,
-    "EffectsVolume": 0.17404389381408692,
-    "MusicVolume": 0.06159151345491409,
+    "Coins": 680,
+    "EffectsVolume": 0.5,
+    "MusicVolume": 0.0,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
-        "SubmachineGun",
         "",
-        "",
-        "",
-        "Shotgun"
+        ""
     ],
     "PlayerInventorySlots": [
-        "GrenadeLauncher",
-        "Flamethrower",
+        "SubmachineGun",
         "MachineGun"
     ],
     "LevelsAvailability": [
@@ -115,23 +93,23 @@
         },
         {
             "LevelNumber": 7,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 8,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 9,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 10,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 12,
@@ -216,11 +194,11 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
+                    "_weaponId": "SubmachineGun",
+                    "_damageLevel": 1,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "AttackSpeedLevel": 2
+                    "_isAvailable": true,
+                    "AttackSpeedLevel": 1
                 }
             },
             {
@@ -231,11 +209,11 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
+                    "_weaponId": "MachineGun",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "AttackSpeedLevel": 9
+                    "_isAvailable": true,
+                    "AttackSpeedLevel": 0
                 }
             },
             {
@@ -246,7 +224,7 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
+                    "_weaponId": "GrenadeLauncher",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
@@ -261,7 +239,7 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
+                    "_weaponId": "Flamethrower",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
@@ -276,7 +254,7 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
+                    "_weaponId": "Crossbow",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
@@ -291,95 +269,11 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
+                    "_weaponId": "Shotgun",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
                     "AttackAngleLevel": 0
-                }
-            },
-            {
-                "rid": 1006,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "SubmachineGun",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1007,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "MachineGun",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1008,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "Shotgun",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1009,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "Crossbow",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1010,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "Flamethrower",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1011,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "GrenadeLauncher",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
                 }
             }
         ]

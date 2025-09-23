@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 using LastTrain.AmmunitionSystem;
-using LastTrain.Data;
 using LastTrain.Persistence;
 using LastTrain.Weapons.Types;
+using LastTrain.Data;
 
 namespace LastTrain.Weapons.System
 {
     public class WeaponCreator : MonoBehaviour
     {
-        [SerializeField] private SharedData _sharedData;
-
         private float _ammoPercent;
 
         public void Init()
@@ -22,7 +20,7 @@ namespace LastTrain.Weapons.System
         public Weapon[] CreateWeapons()
         {
             List<WeaponProgress> weaponProgresses = GetWeaponProgressType();
-            var weaponConfigs = _sharedData.WeaponConfigs;
+            var weaponConfigs = TransferData.Instance.WeaponConfigs;
             Weapon[] weapons = new Weapon[weaponConfigs.Count];
 
             for (int i = 0; i < weaponConfigs.Count; i++)
@@ -98,7 +96,7 @@ namespace LastTrain.Weapons.System
 
         private float GetAmmoPercent()
         {
-            var trainConfig = _sharedData.TrainUpgradeConfig.StatConfigs;
+            var trainConfig = TransferData.Instance.TrainUpgradeConfig.StatConfigs;
             var ammoLevel = YG2.saves.TrainProgress.AmmoLevel;
             StatConfig ammoConfig = null;
 

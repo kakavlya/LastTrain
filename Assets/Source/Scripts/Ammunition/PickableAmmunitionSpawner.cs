@@ -11,7 +11,6 @@ namespace LastTrain.AmmunitionSystem
     {
         [Header("References")]
         [SerializeField] private LevelGenerator _levelGenerator;
-        [SerializeField] private SharedData _sharedData;
         [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
 
         private List<PickableAmmunition> _selectedAmmunitionPrefabs = new List<PickableAmmunition>();
@@ -22,7 +21,7 @@ namespace LastTrain.AmmunitionSystem
         public void Init()
         {
             _ammoPercent = GetAmmoPercent();
-            _generatePercent = _sharedData.LevelSetting.AmmunitionGeneratePercent;
+            _generatePercent = TransferData.Instance.LevelSetting.AmmunitionGeneratePercent;
             _levelGenerator.StartedElementDefined += SetStartedRandomAmmunition;
             _levelGenerator.ElementChanged += SetNextRandomAmmunition;
             SelectAmmunition();
@@ -30,7 +29,7 @@ namespace LastTrain.AmmunitionSystem
 
         private void SelectAmmunition()
         {
-            var selectedWeapons = _sharedData.WeaponConfigs;
+            var selectedWeapons = TransferData.Instance.WeaponConfigs;
 
             for (int i = 0; i < _pickableAmmunitionPrefabs.Length; i++)
             {
@@ -78,7 +77,7 @@ namespace LastTrain.AmmunitionSystem
 
         private float GetAmmoPercent()
         {
-            var trainConfig = _sharedData.TrainUpgradeConfig.StatConfigs;
+            var trainConfig = TransferData.Instance.TrainUpgradeConfig.StatConfigs;
             var ammoLevel = YG2.saves.TrainProgress.AmmoLevel;
             StatConfig ammoConfig = null;
 

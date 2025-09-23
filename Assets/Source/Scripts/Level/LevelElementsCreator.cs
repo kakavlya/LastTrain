@@ -6,13 +6,12 @@ namespace LastTrain.Level
     public class LevelElementsCreator : MonoBehaviour
     {
         [SerializeField] private Transform _parentTransformForElements;
-        [SerializeField] private SharedData _sharedData;
 
         private LevelElement[] _levelElementsPrefabs;
 
         public void Init()
         {
-            _levelElementsPrefabs = _sharedData.LevelSetting.LevelElements;
+            _levelElementsPrefabs = TransferData.Instance.LevelSetting.LevelElements;
         }
 
         public LevelElement CreateElement(Vector3 position)
