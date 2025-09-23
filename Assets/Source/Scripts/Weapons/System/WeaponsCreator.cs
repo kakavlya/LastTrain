@@ -33,22 +33,28 @@ namespace LastTrain.Weapons.System
                 float? fireAngle = null;
                 float? aoeDamage = null;
 
-                if (weaponProgress is AttackSpeedUpdatingWeaponProgress attackSpeedProgress &&
-                    config.TryFindStat(StatType.AttackSpeed))
+                if (weaponProgress is SpecialWeaponProgress specialProgress)
                 {
-                    fireDelay = 1f / weaponConfigs[i].GetStat(StatType.AttackSpeed, attackSpeedProgress.AttackSpeedLevel);
-                }
+                    if (config.TryFindStat(StatType.AttackSpeed) && 
+                        specialProgress.SpecialStatType == StatType.AttackSpeed)
+                    {
+                        int level = specialProgress.GetLevel(StatType.AttackSpeed);
+                        fireDelay = 1f / weaponConfigs[i].GetStat(StatType.AttackSpeed, level);
+                    }
 
-                if (weaponProgress is AttackAngleUpdatingWeaponProgress attackAngleProgress &&
-                    config.TryFindStat(StatType.AttackAngle))
-                {
-                    fireAngle = weaponConfigs[i].GetStat(StatType.AttackAngle, attackAngleProgress.AttackAngleLevel);
-                }
+                    if (config.TryFindStat(StatType.AttackAngle) && 
+                        specialProgress.SpecialStatType == StatType.AttackAngle)
+                    {
+                        int level = specialProgress.GetLevel(StatType.AttackAngle);
+                        fireAngle = weaponConfigs[i].GetStat(StatType.AttackAngle, level);
+                    }
 
-                if (weaponProgress is AoeDamageUpdatingWeaponProgress aeoDamageProgress &&
-                    config.TryFindStat(StatType.AoeDamage))
-                {
-                    aoeDamage = weaponConfigs[i].GetStat(StatType.AoeDamage, aeoDamageProgress.AoeDamageLevel);
+                    if (config.TryFindStat(StatType.AoeDamage) && 
+                        specialProgress.SpecialStatType == StatType.AoeDamage)
+                    {
+                        int level = specialProgress.GetLevel(StatType.AoeDamage);
+                        aoeDamage = weaponConfigs[i].GetStat(StatType.AoeDamage, level);
+                    }
                 }
 
                 Weapon weaponInstance = Instantiate(weaponConfigs[i].WeaponPrefab, transform);

@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3443,
+    "idSave": 3462,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -71,7 +71,7 @@
         "SlotsLevel": 2,
         "AmmoLevel": 8
     },
-    "Coins": 3914,
+    "Coins": 4043,
     "EffectsVolume": 0.17404389381408692,
     "MusicVolume": 0.12906306982040406,
     "InventorySlotsCount": 0,
@@ -221,7 +221,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AttackSpeedLevel": 2
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -236,7 +237,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AttackSpeedLevel": 9
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -251,7 +253,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AoeDamageLevel": 1
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -266,7 +269,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AttackAngleLevel": 0
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -281,7 +285,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AttackSpeedLevel": 0
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -296,7 +301,8 @@
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false,
-                    "AttackAngleLevel": 0
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
