@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Train Equipment
   _localizationKey: UpgradeName.TrainEquipment
   _statConfigs:
-  - LocalizationKey: Characteristic.Health
-    StatType: 6
-    Curve:
+  - _localizationKey: Characteristic.Health
+    _statType: 6
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f0500005307000079090000990c0000b3100000f9150000
-    MinValue: 100
-    MaxValue: 350
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.WeaponSlots
-    StatType: 7
-    Curve:
+    _maxLevel: 10
+    _costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f0500005307000079090000990c0000b3100000f9150000
+    _minValue: 100
+    _maxValue: 350
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.WeaponSlots
+    _statType: 7
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 2
-    Costs: 2c010000e8030000
-    MinValue: 1
-    MaxValue: 3
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.Ammo
-    StatType: 2
-    Curve:
+    _maxLevel: 2
+    _costs: 2c010000e8030000
+    _minValue: 1
+    _maxValue: 3
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.Ammo
+    _statType: 2
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,9 +103,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 78000000a0000000c80000000e0100005e010000cc010000580200000c030000e803000014050000
-    MinValue: 100
-    MaxValue: 250
-    IsShowFractionalValue: 0
-  Icon: {fileID: 21300000, guid: 8fea869ff7f6ec74f8e6953b63f7d199, type: 3}
+    _maxLevel: 10
+    _costs: 78000000a0000000c80000000e0100005e010000cc010000580200000c030000e803000014050000
+    _minValue: 100
+    _maxValue: 250
+    _isShowFractionalValue: 0
+  _icon: {fileID: 21300000, guid: 8fea869ff7f6ec74f8e6953b63f7d199, type: 3}

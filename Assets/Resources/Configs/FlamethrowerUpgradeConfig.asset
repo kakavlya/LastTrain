@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Flamethrower
   _localizationKey: UprgadeName.Flamethrower
   _statConfigs:
-  - LocalizationKey: Characteristic.Damage
-    StatType: 0
-    Curve:
+  - _localizationKey: Characteristic.Damage
+    _statType: 0
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 82000000a5000000d7000000220100009001000030020000160300006004000036060000d4080000
-    MinValue: 6
-    MaxValue: 10
-    IsShowFractionalValue: 1
-  - LocalizationKey: Characteristic.Range
-    StatType: 1
-    Curve:
+    _maxLevel: 10
+    _costs: 82000000a5000000d7000000220100009001000030020000160300006004000036060000d4080000
+    _minValue: 6
+    _maxValue: 10
+    _isShowFractionalValue: 1
+  - _localizationKey: Characteristic.Range
+    _statType: 1
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
-    MinValue: 40
-    MaxValue: 70
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.AttackAngle
-    StatType: 4
-    Curve:
+    _maxLevel: 10
+    _costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
+    _minValue: 40
+    _maxValue: 70
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.AttackAngle
+    _statType: 4
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,12 +103,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 780000009b000000cd000000130100007701000008020000da02000010040000c30500003e080000
-    MinValue: 15
-    MaxValue: 35
-    IsShowFractionalValue: 0
-  Icon: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
+    _maxLevel: 10
+    _costs: 780000009b000000cd000000130100007701000008020000da02000010040000c30500003e080000
+    _minValue: 15
+    _maxValue: 35
+    _isShowFractionalValue: 0
+  _icon: {fileID: 21300000, guid: 9c3753bec8ea3a34f848128660ca5a38, type: 3}
   _weaponId: Flamethrower
-  WeaponPrefab: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}
-  UnblockingCost: 1000
+  _weaponPrefab: {fileID: 4888273117753640418, guid: b6ae7488962959646977395a80386d76, type: 3}
+  _unblockingCost: 1000

@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Machine Gun
   _localizationKey: UpgradeName.MachineGun
   _statConfigs:
-  - LocalizationKey: Characteristic.Damage
-    StatType: 0
-    Curve:
+  - _localizationKey: Characteristic.Damage
+    _statType: 0
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 5a000000730000009b000000d70000002c010000a40100004e0200003e0300009204000068060000
-    MinValue: 6
-    MaxValue: 18
-    IsShowFractionalValue: 1
-  - LocalizationKey: Characteristic.Range
-    StatType: 1
-    Curve:
+    _maxLevel: 10
+    _costs: 5a000000730000009b000000d70000002c010000a40100004e0200003e0300009204000068060000
+    _minValue: 6
+    _maxValue: 18
+    _isShowFractionalValue: 1
+  - _localizationKey: Characteristic.Range
+    _statType: 1
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 460000005f00000082000000b4000000fa0000005e010000ea010000a8020000a2030000e2040000
-    MinValue: 90
-    MaxValue: 140
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.AttackSpeed
-    StatType: 3
-    Curve:
+    _maxLevel: 10
+    _costs: 460000005f00000082000000b4000000fa0000005e010000ea010000a8020000a2030000e2040000
+    _minValue: 90
+    _maxValue: 140
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.AttackSpeed
+    _statType: 3
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,12 +103,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
-    MinValue: 3.5
-    MaxValue: 6
-    IsShowFractionalValue: 1
-  Icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
+    _maxLevel: 10
+    _costs: 6e00000091000000be000000ff00000059010000d6010000850200007a030000ce040000a4060000
+    _minValue: 3.5
+    _maxValue: 6
+    _isShowFractionalValue: 1
+  _icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
   _weaponId: MachineGun
-  WeaponPrefab: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
-  UnblockingCost: 400
+  _weaponPrefab: {fileID: 4145541452217694962, guid: 73d05164d3efa4944bcffe2d1eff88c2, type: 3}
+  _unblockingCost: 400

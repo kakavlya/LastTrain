@@ -4,8 +4,19 @@ namespace LastTrain.Weapons.System
 {
     public struct AimData
     {
-        public Ray CamRay;
-        public bool HasHit;
-        public Vector3 WorldPoint;
+        [SerializeField] private Ray _camRay;
+        [SerializeField] private bool _hasHit;
+        [SerializeField] private Vector3 _worldPoint;
+
+        public Ray CamRay => _camRay;
+        public bool HasHit => _hasHit;
+        public Vector3 WorldPoint => _worldPoint;
+
+        public AimData(Ray ray, bool hasHit, Vector3 point)
+        {
+            _camRay = ray;
+            _hasHit = hasHit;
+            _worldPoint = point;
+        }
     }
 }

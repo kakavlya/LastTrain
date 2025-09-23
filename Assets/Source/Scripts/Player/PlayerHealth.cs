@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 using LastTrain.Core;
-using LastTrain.Data;
 using LastTrain.Persistence;
 using LastTrain.Training;
+using LastTrain.Data;
 
 namespace LastTrain.Player
 {
@@ -14,7 +14,6 @@ namespace LastTrain.Player
     {
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private TextMeshProUGUI _healthText;
-        [SerializeField] private SharedData _sharedData;
 
         private float _maxHealth;
 
@@ -48,7 +47,7 @@ namespace LastTrain.Player
 
         private float GetMaxHealthValue()
         {
-            var trainConfigs = _sharedData.TrainUpgradeConfig.StatConfigs;
+            var trainConfigs = TransferData.Instance.TrainUpgradeConfig.StatConfigs;
             var healthLevel = YG2.saves.TrainProgress.HealthLevel;
             StatConfig healthConfig = null;
 

@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Crossbow
   _localizationKey: UprgadeName.Crossbow
   _statConfigs:
-  - LocalizationKey: Characteristic.Damage
-    StatType: 0
-    Curve:
+  - _localizationKey: Characteristic.Damage
+    _statType: 0
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 7800000096000000c80000000e0100005e010000cc010000580200000c030000e803000014050000
-    MinValue: 25
-    MaxValue: 60
-    IsShowFractionalValue: 1
-  - LocalizationKey: Characteristic.Range
-    StatType: 1
-    Curve:
+    _maxLevel: 10
+    _costs: 7800000096000000c80000000e0100005e010000cc010000580200000c030000e803000014050000
+    _minValue: 25
+    _maxValue: 60
+    _isShowFractionalValue: 1
+  - _localizationKey: Characteristic.Range
+    _statType: 1
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 6400000082000000aa000000e600000040010000c201000080020000840300001405000008070000
-    MinValue: 120
-    MaxValue: 220
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.AttackSpeed
-    StatType: 3
-    Curve:
+    _maxLevel: 10
+    _costs: 6400000082000000aa000000e600000040010000c201000080020000840300001405000008070000
+    _minValue: 120
+    _maxValue: 220
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.AttackSpeed
+    _statType: 3
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,12 +103,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 8c000000b4000000f00000002c0100009001000026020000da020000d403000028050000f4060000
-    MinValue: 0.8
-    MaxValue: 1.4
-    IsShowFractionalValue: 1
-  Icon: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
+    _maxLevel: 10
+    _costs: 8c000000b4000000f00000002c0100009001000026020000da020000d403000028050000f4060000
+    _minValue: 0.8
+    _maxValue: 1.4
+    _isShowFractionalValue: 1
+  _icon: {fileID: 21300000, guid: 59274044f77485147af77e27fc9bc185, type: 3}
   _weaponId: Crossbow
-  WeaponPrefab: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
-  UnblockingCost: 900
+  _weaponPrefab: {fileID: 3412282889252128567, guid: dee483b7035e1f7429d8a4981601d097, type: 3}
+  _unblockingCost: 900

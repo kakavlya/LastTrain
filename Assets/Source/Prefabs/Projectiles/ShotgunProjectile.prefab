@@ -355,10 +355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913c37d6334f52c4fa1ee0de83c785a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trail: {fileID: 8796321984103242564}
   _impactPrefab: {fileID: 198670200411678530, guid: cd6fe2d389c791b418cd61418ae7b1e1, type: 3}
   <Lifetime>k__BackingField: 2
   <UsePooling>k__BackingField: 1
-  _trail: {fileID: 8796321984103242564}
 --- !u!54 &7764178993956972349
 Rigidbody:
   m_ObjectHideFlags: 0

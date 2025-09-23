@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74277a9078a810f48adc82df6515ce04, type: 3}
   m_Name: Lvl3Ram
   m_EditorClassIdentifier: 
-  Reward: 22
-  Health: 58
-  HoldDistance: 30
-  ImpactOffset: 1
-  HoldSpeed: 50
-  ChargeSpeed: 85
-  TurnSpeed: 100
-  ImpactPause: 3
-  HoldPauseRange: {x: 8, y: 15}
-  Damage: 22
-  MaxAccel: 25
-  MaxDecel: 45
-  SpeedSmoothTime: 0.12
-  CheckRadius: 10
-  impactRecover:
+  _reward: 22
+  _health: 58
+  _holdDistance: 30
+  _impactOffset: 1
+  _holdSpeed: 50
+  _chargeSpeed: 85
+  _turnSpeed: 100
+  _impactPause: 3
+  _holdPauseRange: {x: 8, y: 15}
+  _damage: 22
+  _maxAccel: 25
+  _maxDecel: 45
+  _speedSmoothTime: 0.12
+  _checkRadius: 10
+  _impactRecover:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3

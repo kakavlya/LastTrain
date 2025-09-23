@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Grenade Launcher
   _localizationKey: UpgradeName.GrenadeLauncher
   _statConfigs:
-  - LocalizationKey: Characteristic.Damage
-    StatType: 0
-    Curve:
+  - _localizationKey: Characteristic.Damage
+    _statType: 0
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 96000000c3000000ff0000004a010000ae01000030020000da020000b6030000d304000040060000
-    MinValue: 50
-    MaxValue: 160
-    IsShowFractionalValue: 1
-  - LocalizationKey: Characteristic.Range
-    StatType: 1
-    Curve:
+    _maxLevel: 10
+    _costs: 96000000c3000000ff0000004a010000ae01000030020000da020000b6030000d304000040060000
+    _minValue: 50
+    _maxValue: 160
+    _isShowFractionalValue: 1
+  - _localizationKey: Characteristic.Range
+    _statType: 1
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 7800000096000000c800000018010000900100003a020000200300004c040000c80500009e070000
-    MinValue: 100
-    MaxValue: 180
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.AoeDamage
-    StatType: 5
-    Curve:
+    _maxLevel: 10
+    _costs: 7800000096000000c800000018010000900100003a020000200300004c040000c80500009e070000
+    _minValue: 100
+    _maxValue: 180
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.AoeDamage
+    _statType: 5
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,12 +103,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 96000000c8000000040100004a010000c201000058020000200300004c040000dc05000034080000
-    MinValue: 30
-    MaxValue: 100
-    IsShowFractionalValue: 1
-  Icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
+    _maxLevel: 10
+    _costs: 96000000c8000000040100004a010000c201000058020000200300004c040000dc05000034080000
+    _minValue: 30
+    _maxValue: 100
+    _isShowFractionalValue: 1
+  _icon: {fileID: 21300000, guid: 7adedc9f0f0e8b242aa41803afb4a9b7, type: 3}
   _weaponId: GrenadeLauncher
-  WeaponPrefab: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
-  UnblockingCost: 1200
+  _weaponPrefab: {fileID: 7063093083045466000, guid: 18ff820e5495b414d93cea3a737d0882, type: 3}
+  _unblockingCost: 1200

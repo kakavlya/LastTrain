@@ -1,15 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
-using LastTrain.Data;
 using LastTrain.ShopSystem;
+using LastTrain.Data;
 
 namespace LastTrain.Inventory
 {
     public class PlayerInventoryHandler : InventoryHandler
     {
         [SerializeField] private Shop _shop;
-        [SerializeField] private SharedData _sharedData;
 
         protected override void Start()
         {
@@ -19,14 +18,15 @@ namespace LastTrain.Inventory
 
         public bool TryGiveInventoryWeaponFromSlots()
         {
-            _sharedData.WeaponConfigs.Clear();
+            TransferData.Instance.WeaponConfigs.Clear();
             int gaveWeaponsCount = 0;
 
             foreach (var slot in ActiveSlotUIs)
             {
                 if (slot.GetComponentInChildren<InventoryWeapon>() != null)
                 {
-                    _sharedData.WeaponConfigs.Add(slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
+                    TransferData.Instance.WeaponConfigs.Add(
+                        slot.GetComponentInChildren<InventoryWeapon>().WeaponConfig);
                     gaveWeaponsCount++;
                 }
             }

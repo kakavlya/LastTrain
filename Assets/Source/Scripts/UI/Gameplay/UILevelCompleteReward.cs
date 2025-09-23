@@ -9,7 +9,6 @@ namespace LastTrain.UI.Gameplay
     {
         [SerializeField] private TextMeshProUGUI _textForKillsCount;
         [SerializeField] private TextMeshProUGUI _textForLevelCount;
-        [SerializeField] private SharedData _sharedData;
         [SerializeField] private LevelProgress _levelProgress;
 
         private int _countCoinsForKills;
@@ -19,7 +18,7 @@ namespace LastTrain.UI.Gameplay
         {
             _levelProgress.LevelCompleted += ShowLevelResults;
             CoinsHandler.Instance.Added += AddCoinsForKills;
-            _countCoinsForCompleted = _sharedData.LevelSetting.LevelReward;
+            _countCoinsForCompleted = TransferData.Instance.LevelSetting.LevelReward;
         }
 
         private void OnDisable()

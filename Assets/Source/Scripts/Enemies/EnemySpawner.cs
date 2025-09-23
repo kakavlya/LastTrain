@@ -10,7 +10,6 @@ namespace LastTrain.Enemies
     {
         [Header("References")]
         [SerializeField] private LevelGenerator _levelGenerator;
-        [SerializeField] private SharedData _sharedData;
         [SerializeField] private TrainMovement _trainMovement;
         [SerializeField] private BoxCollider _trainCollider;
 
@@ -51,7 +50,7 @@ namespace LastTrain.Enemies
 
         public void Init()
         {
-            _spawnerConfig = _sharedData.LevelSetting.SpawnerConfig;
+            _spawnerConfig = TransferData.Instance.LevelSetting.SpawnerConfig;
             _entries = _spawnerConfig.Entries;
             _levelGenerator.StartedElementDefined += SetSpawnPoint;
             _levelGenerator.ElementChanged += SetSpawnPoint;

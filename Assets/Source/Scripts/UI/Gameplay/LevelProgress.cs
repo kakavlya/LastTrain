@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
 using LastTrain.Coins;
-using LastTrain.Data;
 using LastTrain.Level;
+using LastTrain.Data;
 
 namespace LastTrain.UI.Gameplay
 {
@@ -17,7 +17,6 @@ namespace LastTrain.UI.Gameplay
         [SerializeField] private Slider _progressSlider;
         [SerializeField] private int _startDelaySeconds;
         [SerializeField] private Button _nextLevelButton;
-        [SerializeField] private SharedData _sharedData;
 
         private int _levelDurationSeconds;
         private int _progressValue = 1;
@@ -28,8 +27,8 @@ namespace LastTrain.UI.Gameplay
 
         public void Init()
         {
-            if (_sharedData.LevelSetting.LevelDurationSec > 0)
-                _levelDurationSeconds = _sharedData.LevelSetting.LevelDurationSec;
+            if (TransferData.Instance.LevelSetting.LevelDurationSec > 0)
+                _levelDurationSeconds = TransferData.Instance.LevelSetting.LevelDurationSec;
 
             _startTimer.SetActive(false);
         }
@@ -70,20 +69,19 @@ namespace LastTrain.UI.Gameplay
 
             LevelCompleted?.Invoke();
             UnlockNextLevel();
-            CoinsHandler.Instance.AddCoins(_sharedData.LevelSetting.LevelReward);
+            CoinsHandler.Instance.AddCoins(TransferData.Instance.LevelSetting.LevelReward);
         }
 
         private void UnlockNextLevel()
         {
-            var currentLevel = _sharedData.LevelSetting;
-            var levelsArray = _sharedData.AllLevels;
+            var currentLevel = TransferData.Instance.LevelSetting;
+            var levelsArray = TransferData.Instance.AllLevels;
 
             for (int i = 0; i < levelsArray.Length; i++)
             {
                 if (levelsArray[i] == currentLevel && i + 1 < levelsArray.Length)
                 {
                     var nextLevel = levelsArray[i + 1];
-                    nextLevel.IsAvailable = true;
                     var savedLevel = YG2.saves.LevelsAvailability.Find(level => level.LevelNumber == nextLevel.LevelNumber);
 
                     if (savedLevel != null)
@@ -101,7 +99,7 @@ namespace LastTrain.UI.Gameplay
 
         private void StartNextLevel()
         {
-            _sharedData.LevelSetting = _nextLevel;
+            TransferData.Instance.SetLevelSetting(_nextLevel);
             Scene current = SceneManager.GetActiveScene();
             SceneManager.LoadScene(current.name);
         }

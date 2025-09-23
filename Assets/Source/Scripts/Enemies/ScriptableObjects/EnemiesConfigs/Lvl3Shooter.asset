@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: Lvl3Shooter
   m_EditorClassIdentifier: 
-  Reward: 13
-  Health: 54
-  MoveSpeed: 4
-  TurnSpeed: 110
-  AttackSpeedFactorMin: 0.65
-  AttackSpeedFactorMax: 0.95
-  SpeedChange: 8
-  MinDistanceFromSurface: 13
-  MaxDistanceFromSurface: 35
-  OrbitSpeedDegrees: 2
-  CheckRadius: 16
-  ChangeDirectionEvery: {x: 4, y: 7}
-  ShootingDistance: 60
-  ProjectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
-  FireInterval: 1.5
-  ProjectileSpeed: 150
-  ProjectileDamage: 10
+  _reward: 13
+  _health: 54
+  _moveSpeed: 4
+  _turnSpeed: 110
+  _attackSpeedFactorMin: 0.65
+  _attackSpeedFactorMax: 0.95
+  _speedChange: 8
+  _minDistanceFromSurface: 13
+  _maxDistanceFromSurface: 35
+  _orbitSpeedDegrees: 2
+  _checkRadius: 16
+  _changeDirectionEvery: {x: 4, y: 7}
+  _shootingDistance: 60
+  _projectilePrefab: {fileID: 6040889134373183686, guid: c7082e5f366295f47b89d8c203c4d9b4, type: 3}
+  _fireInterval: 1.5
+  _projectileSpeed: 150
+  _projectileDamage: 10

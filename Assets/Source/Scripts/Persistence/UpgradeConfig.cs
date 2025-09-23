@@ -9,8 +9,7 @@ namespace LastTrain.Persistence
         [SerializeField] private string _name;
         [SerializeField] private string _localizationKey;
         [SerializeField] private StatConfig[] _statConfigs;
-
-        public Sprite Icon;
+        [SerializeField] private Sprite _icon;
 
         public string Name
         {
@@ -26,6 +25,8 @@ namespace LastTrain.Persistence
         }
 
         public StatConfig[] StatConfigs => _statConfigs;
+
+        public Sprite Icon => _icon;
 
         public float GetStat(StatType stat, int level)
         {

@@ -1,32 +1,43 @@
 using System;
+using UnityEngine;
 
 namespace LastTrain.Persistence
 {
     [Serializable]
     public class WeaponProgress : BaseProgress
     {
-        public string WeaponId;
-        public int DamageLevel;
-        public int RangeLevel;
-        public bool IsAvailable;
+        [SerializeField] private string _weaponId;
+        [SerializeField] private int _damageLevel;
+        [SerializeField] private int _rangeLevel;
+        [SerializeField] private bool _isAvailable;
+
+        public string WeaponId => _weaponId;
+        public int DamageLevel => _damageLevel;
+        public int RangeLevel => _rangeLevel;
+        public bool IsAvailable => _isAvailable;
 
         public WeaponProgress(string weaponId, int defaultStatLevel = 0)
         {
-            WeaponId = weaponId;
-            DamageLevel = defaultStatLevel;
-            RangeLevel = defaultStatLevel;
+            _weaponId = weaponId;
+            _damageLevel = defaultStatLevel;
+            _rangeLevel = defaultStatLevel;
+        }
+
+        public void SetAvailable(bool available)
+        {
+            _isAvailable = available;
         }
 
         public override int GetLevel(StatType stat)
         {
             if (stat == StatType.Damage)
             {
-                return DamageLevel;
+                return _damageLevel;
             }
             else if
                 (stat == StatType.Range)
             {
-                return RangeLevel;
+                return _rangeLevel;
             }
 
             return 0;
@@ -34,18 +45,18 @@ namespace LastTrain.Persistence
 
         public override int GetSumLevels()
         {
-            return DamageLevel + RangeLevel;
+            return _damageLevel + _rangeLevel;
         }
 
         public override void Increment(StatType stat)
         {
             if (stat == StatType.Damage)
             {
-                DamageLevel++;
+                _damageLevel++;
             }
             else if (stat == StatType.Range)
             {
-                RangeLevel++;
+                _rangeLevel++;
             }
         }
     }

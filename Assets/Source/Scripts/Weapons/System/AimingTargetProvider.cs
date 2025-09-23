@@ -25,9 +25,9 @@ namespace LastTrain.Weapons.System
             Ray ray = _cam.ScreenPointToRay(sp);
 
             if (Physics.Raycast(ray, out var hit, _maxDistance, _aimMask, QueryTriggerInteraction.Ignore))
-                return new AimData { CamRay = ray, HasHit = true, WorldPoint = hit.point };
+                return new AimData (ray, true, hit.point);
 
-            return new AimData { CamRay = ray, HasHit = false, WorldPoint = ray.GetPoint(_maxDistance) };
+            return new AimData (ray, false, ray.GetPoint(_maxDistance));
         }
     }
 }
