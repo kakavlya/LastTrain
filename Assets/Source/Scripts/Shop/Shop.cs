@@ -125,7 +125,7 @@ namespace LastTrain.ShopSystem
 
         private void InitialNewInventoryWeapon(WeaponProgress progress, WeaponUpgradeConfig weaponConfig)
         {
-            progress.IsAvailable = true;
+            progress.SetAvailable(true);
             YG2.saves.InventorySlots.Add(weaponConfig.WeaponId);
             _inventoryHandler.SubmitActiveSlots();
 

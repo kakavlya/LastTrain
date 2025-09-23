@@ -83,7 +83,7 @@ namespace LastTrain.UI.Gameplay
                 if (levelsArray[i] == currentLevel && i + 1 < levelsArray.Length)
                 {
                     var nextLevel = levelsArray[i + 1];
-                    nextLevel.IsAvailable = true;
+                    nextLevel.SetAvailable(true);
                     var savedLevel = YG2.saves.LevelsAvailability.Find(level => level.LevelNumber == nextLevel.LevelNumber);
 
                     if (savedLevel != null)

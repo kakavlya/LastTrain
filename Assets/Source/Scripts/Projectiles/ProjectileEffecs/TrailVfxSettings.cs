@@ -6,27 +6,36 @@ namespace LastTrain.Projectiles.Effects
     public class TrailVfxSettings : ScriptableObject
     {
         [Header("Length (world units) via time = length / speed")]
-        [Min(0.01f)] public float DesiredLength = 4.5f;
-        [Min(0.01f)] public float MinTime = 0.05f;
-        [Min(0.01f)] public float MaxTime = 0.18f;
+        [Min(0.01f)] [SerializeField] private float _desiredLength = 4.5f;
+        [Min(0.01f)] [SerializeField] private float _minTime = 0.05f;
+        [Min(0.01f)] [SerializeField] private float _maxTime = 0.18f;
 
         [Header("Geometry")]
-        [Min(0.001f)] public float Width = 0.018f;
-        [Min(0.001f)] public float MinVertexDistance = 0.035f;
+        [Min(0.001f)] [SerializeField] private float _width = 0.018f;
+        [Min(0.001f)] [SerializeField] private float _minVertexDistance = 0.035f;
 
         [Header("Curves & Colors")]
-        public AnimationCurve WidthCurve = new AnimationCurve(
+        [SerializeField] private AnimationCurve _widthCurve = new AnimationCurve(
             new Keyframe(0.00f, 1.00f, 0, 0),
             new Keyframe(0.15f, 0.85f, 0, 0),
             new Keyframe(0.60f, 0.28f, 0, 0),
             new Keyframe(1.00f, 0.00f, 0, 0)
         );
 
-        public Gradient ColorGradient = DefaultGradient();
+        [SerializeField] private Gradient _colorGradient = DefaultGradient();
 
         [Header("Misc")]
         [Tooltip("ƒобавка к ожиданию затухани€ при отстыковке")]
-        public float FadePadding = 0.02f;
+        [SerializeField] private float _fadePadding = 0.02f;
+
+        public float DesiredLength => _desiredLength;
+        public float MinTime => _minTime;
+        public float MaxTime => _maxTime;
+        public float Width => _width;
+        public float MinVertexDistance => _minVertexDistance;
+        public AnimationCurve WidthCurve => _widthCurve;
+        public Gradient ColorGradient => _colorGradient;
+        public float FadePadding => _fadePadding;
 
         private static Gradient DefaultGradient()
         {

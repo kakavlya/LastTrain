@@ -52,7 +52,7 @@ namespace LastTrain.Level
                 {
                     if (setting.LevelNumber == level.LevelNumber)
                     {
-                        setting.IsAvailable = level.IsAvailable;
+                        setting.SetAvailable(level.IsAvailable);
                     }
                 }
             }

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4255f7018f2ed47802c6527e39f4e1, type: 3}
   m_Name: Level 13
   m_EditorClassIdentifier: 
-  LevelNumber: 13
-  IsAvailable: 0
-  LevelElements:
+  _levelNumber: 13
+  _isAvailable: 0
+  _levelElements:
   - {fileID: 501883077434377656, guid: 9e7cc32350b00cf4f99fe16e0382b996, type: 3}
   - {fileID: 835704160610999110, guid: 04c51dab156171e4983cbbb0ca284ba1, type: 3}
   - {fileID: 5990614331311851307, guid: 83467b9f9197b9d4bbfc1842d00c10a7, type: 3}
   - {fileID: 1257921783099294876, guid: c11f65173b5dde742b6b2be4c1d99bdb, type: 3}
-  LevelDurationSec: 134
-  LevelReward: 280
-  AmmunitionGeneratePercent: 75
-  SpawnerConfig: {fileID: 11400000, guid: af12cc19d82130e4abaecfe5ef618315, type: 2}
+  _levelDurationSec: 134
+  _levelReward: 280
+  _ammunitionGeneratePercent: 75
+  _spawnerConfig: {fileID: 11400000, guid: af12cc19d82130e4abaecfe5ef618315, type: 2}

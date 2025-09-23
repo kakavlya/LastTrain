@@ -7,11 +7,13 @@ namespace LastTrain.Persistence
     public class WeaponUpgradeConfig : UpgradeConfig
     {
         [SerializeField] private string _weaponId;
-
-        public Weapon WeaponPrefab;
-        public int UnblockingCost;
+        [SerializeField] private Weapon _weaponPrefab;
+        [SerializeField] private int _unblockingCost;
 
         public string WeaponId =>
             string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
+
+        public Weapon WeaponPrefab => _weaponPrefab;
+        public int UnblockingCost => _unblockingCost;
     }
 }

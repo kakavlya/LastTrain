@@ -15,9 +15,9 @@ MonoBehaviour:
   _name: Shotgun
   _localizationKey: UprgadeName.Shotgun
   _statConfigs:
-  - LocalizationKey: Characteristic.Damage
-    StatType: 0
-    Curve:
+  - _localizationKey: Characteristic.Damage
+    _statType: 0
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -41,14 +41,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f050000
-    MinValue: 8
-    MaxValue: 14
-    IsShowFractionalValue: 1
-  - LocalizationKey: Characteristic.Range
-    StatType: 1
-    Curve:
+    _maxLevel: 10
+    _costs: 6400000082000000af000000eb0000003b010000a90100003f020000070300000b0400005f050000
+    _minValue: 8
+    _maxValue: 14
+    _isShowFractionalValue: 1
+  - _localizationKey: Characteristic.Range
+    _statType: 1
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -72,14 +72,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 50000000690000008c000000be0000000401000068010000f4010000b2020000ac030000ec040000
-    MinValue: 45
-    MaxValue: 80
-    IsShowFractionalValue: 0
-  - LocalizationKey: Characteristic.AttackAngle
-    StatType: 4
-    Curve:
+    _maxLevel: 10
+    _costs: 50000000690000008c000000be0000000401000068010000f4010000b2020000ac030000ec040000
+    _minValue: 45
+    _maxValue: 80
+    _isShowFractionalValue: 0
+  - _localizationKey: Characteristic.AttackAngle
+    _statType: 4
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -103,12 +103,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    MaxLevel: 10
-    Costs: 5a000000730000009b000000d70000002c010000a40100004e0200003e0300009204000068060000
-    MinValue: 40
-    MaxValue: 25
-    IsShowFractionalValue: 0
-  Icon: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
+    _maxLevel: 10
+    _costs: 5a000000730000009b000000d70000002c010000a40100004e0200003e0300009204000068060000
+    _minValue: 40
+    _maxValue: 25
+    _isShowFractionalValue: 0
+  _icon: {fileID: 21300000, guid: aaef13ab8917aec419e831e7d2229451, type: 3}
   _weaponId: Shotgun
-  WeaponPrefab: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
-  UnblockingCost: 600
+  _weaponPrefab: {fileID: 3678828438717905573, guid: 7b522d5c0d2127e44966b0a743ade843, type: 3}
+  _unblockingCost: 600
