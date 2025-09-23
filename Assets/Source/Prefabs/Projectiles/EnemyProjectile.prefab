@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913c37d6334f52c4fa1ee0de83c785a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trail: {fileID: 0}
   _impactPrefab: {fileID: 0}
   <Lifetime>k__BackingField: 2
   <UsePooling>k__BackingField: 0
-  _trail: {fileID: 0}
 --- !u!54 &5777038618512275300
 Rigidbody:
   m_ObjectHideFlags: 0

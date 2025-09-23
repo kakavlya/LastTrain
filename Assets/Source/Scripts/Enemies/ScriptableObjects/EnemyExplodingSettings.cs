@@ -7,13 +7,13 @@ namespace LastTrain.Enemies
     {
         [Header("Movement")]
         [Tooltip("Movement to target")]
-        public float MoveSpeed = 5f;
+        [SerializeField] private float _moveSpeed = 5f;
 
         [Header("Explosion")]
-        public float ExplosionRadius = 3f;
+        [SerializeField] private float _explosionRadius = 3f;
 
         [Tooltip("Damage in radius")]
-        public int Damage = 100;
+        [SerializeField] private int _damage = 100;
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
@@ -25,9 +25,9 @@ namespace LastTrain.Enemies
             exploder.Init(
                 player: playerTarget,
                 playerCollider: playerCollider,
-                speed: MoveSpeed,
-                explosionRadius: ExplosionRadius,
-                damage: Damage
+                speed: _moveSpeed,
+                explosionRadius: _explosionRadius,
+                damage: _damage
             );
         }
     }

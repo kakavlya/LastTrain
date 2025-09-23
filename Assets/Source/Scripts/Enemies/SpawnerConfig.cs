@@ -6,6 +6,8 @@ namespace LastTrain.Enemies
     public class SpawnerConfig : ScriptableObject
     {
         [Header("What to spawn and how often")]
-        public EnemySpawnEntry[] Entries;
+        [SerializeField] private EnemySpawnEntry[] _entries;
+
+        public EnemySpawnEntry[] Entries => _entries;
     }
 }

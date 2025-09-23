@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7859129355d47a741970df7b1d38bf97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trail: {fileID: 0}
   _impactPrefab: {fileID: 198670200411678530, guid: cd6fe2d389c791b418cd61418ae7b1e1, type: 3}
   <Lifetime>k__BackingField: 3
   <UsePooling>k__BackingField: 1
-  _trail: {fileID: 0}
 --- !u!136 &255236367223507407
 CapsuleCollider:
   m_ObjectHideFlags: 0

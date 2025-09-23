@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c80ec8bb83c534bae5f7cf8947223e, type: 3}
   m_Name: Lvl2Shooter
   m_EditorClassIdentifier: 
-  Reward: 9
-  Health: 36
+  _reward: 9
+  _health: 36
   MoveSpeed: 4
   TurnSpeed: 110
   AttackSpeedFactorMin: 0.65

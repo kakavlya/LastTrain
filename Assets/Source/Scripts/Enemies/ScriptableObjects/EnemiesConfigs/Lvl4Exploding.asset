@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9caf2cb48d4cb84797143e441739abe, type: 3}
   m_Name: Lvl4Exploding
   m_EditorClassIdentifier: 
-  Reward: 24
-  Health: 40
-  MoveSpeed: 65
-  ExplosionRadius: 7
-  Damage: 42
+  _reward: 24
+  _health: 40
+  _moveSpeed: 65
+  _explosionRadius: 7
+  _damage: 42

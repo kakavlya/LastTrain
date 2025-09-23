@@ -175,7 +175,6 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  _maxHealth: 150
 --- !u!65 &7358646837193593047
 BoxCollider:
   m_ObjectHideFlags: 0
