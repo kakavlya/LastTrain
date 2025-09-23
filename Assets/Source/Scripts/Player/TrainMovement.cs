@@ -73,11 +73,6 @@ namespace LastTrain.Player
 
         public void StopMovement() => _isRunning = false;
 
-        public float Speed()
-        {
-            return _speed;
-        }
-
         private void SetCurrentSpline(LevelElement currentLevelElement, LevelElement nextLevelElement)
         {
             _currentLevelElement = currentLevelElement;

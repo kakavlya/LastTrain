@@ -71,12 +71,6 @@ namespace LastTrain.Enemies
         public void Pause() => _paused = true;
         public void Resume() => _paused = false;
 
-        public void Stop()
-        {
-            _stopped = true;
-            _paused = false;
-        }
-
         public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)
         {
             _spawnPoints = currentElement.EnemySpawnPoints;

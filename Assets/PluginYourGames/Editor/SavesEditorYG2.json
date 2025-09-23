@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3393,
+    "idSave": 3443,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -79,6 +79,7 @@
     "InventorySlots": [
         "SubmachineGun",
         "Shotgun",
+        "",
         "",
         "",
         ""
@@ -309,7 +310,7 @@
                     "_weaponId": "SubmachineGun",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": true
                 }
             },
             {

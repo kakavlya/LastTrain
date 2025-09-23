@@ -31,8 +31,7 @@ namespace LastTrain.Enemies
             OnDespawn();
         }
         
-        protected abstract void ResetStateForSpawn(); 
-        protected virtual void OnSpawn() { }          
+        protected abstract void ResetStateForSpawn();         
         protected virtual void OnDespawn() { }        
         protected virtual void OnDeath() { }
 

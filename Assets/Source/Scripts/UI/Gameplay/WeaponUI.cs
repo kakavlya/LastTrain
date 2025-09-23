@@ -24,8 +24,6 @@ namespace LastTrain.UI.Gameplay
 
         public event Action<int> UconClicked;
 
-        public int CellNumber => _cellNumber;
-
         private void Awake()
         {
             _image = GetComponent<Image>();

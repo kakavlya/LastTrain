@@ -14,8 +14,6 @@ namespace LastTrain.Weapons.System
         private Transform _weaponPivot;
         private Transform _muzzle;
 
-        public event Action<Vector3> Rotated;
-
         private void Update() => Rotate();
 
         private void OnDisable()
@@ -54,7 +52,6 @@ namespace LastTrain.Weapons.System
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
             _weaponPivot.rotation = Quaternion.RotateTowards(
                 _weaponPivot.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-            Rotated?.Invoke(direction.normalized);
         }
     }
 }

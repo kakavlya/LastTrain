@@ -20,10 +20,6 @@ namespace LastTrain.Enemies
         [Tooltip("Maximum speed multiplier during strafing/flanking. Must be ≥ minimum. Typically 0.8–0.95.")]
         [Range(0.3f, 1.0f)] [SerializeField] private float _attackSpeedFactorMax = 0.9f;
 
-        [Tooltip("Smoothing of speed changes (acceleration/deceleration)." +
-            " Currently not used by the controller, reserve for the future.")]
-        [SerializeField] private float _speedChange = 10f;
-
         [Tooltip("Minimum distance from the player's SURFACE (in meters). Recommended 5-15.")]
         [Min(0.1f)] [SerializeField] private float _minDistanceFromSurface = 5f;
 

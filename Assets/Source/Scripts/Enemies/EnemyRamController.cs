@@ -91,8 +91,6 @@ namespace LastTrain.Enemies
             _movement.SetSpeed(_currentSpeed);
         }
 
-        public void SetTurnSpeed(float turnSpeed) => _movement?.SetTurnSpeed(turnSpeed);
-
         protected override void ResetStateForSpawn()
         {
             _state = State.Hold;

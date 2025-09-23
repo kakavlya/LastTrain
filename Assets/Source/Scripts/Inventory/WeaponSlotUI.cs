@@ -12,8 +12,6 @@ namespace LastTrain.Inventory
 
         public event Action Filled;
 
-        public bool IsFilled => _isFilled;
-
         private void Start()
         {
             if (GetComponentInChildren<InventoryWeapon>() != null)

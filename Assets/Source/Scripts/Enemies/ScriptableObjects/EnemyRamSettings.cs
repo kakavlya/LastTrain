@@ -12,7 +12,6 @@ namespace LastTrain.Enemies
         [Header("Ram Speeds")]
         [SerializeField] private float _holdSpeed;
         [SerializeField] private float _chargeSpeed;
-        [SerializeField] private float _turnSpeed;
 
         [Header("Ram Delays")]
         [SerializeField] private float _impactPause;
@@ -20,14 +19,6 @@ namespace LastTrain.Enemies
 
         [Header("Ram Damage")]
         [SerializeField] private int _damage;
-        
-        [Header("Ram Tuning (Dynamics)")]
-        [SerializeField] private float _maxAccel = 30f;
-        [SerializeField] private float _maxDecel = 40f;
-        [SerializeField] private float _speedSmoothTime = 0.12f;
-        [SerializeField] private float _checkRadius = 10f;
-
-        [SerializeField] private AnimationCurve _impactRecover = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {

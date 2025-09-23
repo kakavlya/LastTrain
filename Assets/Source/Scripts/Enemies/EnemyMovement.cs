@@ -7,8 +7,6 @@ namespace LastTrain.Enemies
         [SerializeField] private float _turnSpeed = 120f;
         [SerializeField] private float _moveSpeed;
 
-        public float TurnSpeed => _turnSpeed;
-
         public void SetTurnSpeed(float speed) => _turnSpeed = speed;
 
         public void SetSpeed(float speed)
@@ -52,11 +50,6 @@ namespace LastTrain.Enemies
                 _moveSpeed = 0f;
 
             transform.position += fwd * (_moveSpeed * dt);
-        }
-
-        public void MoveForward()
-        {
-            transform.position += transform.forward * (_moveSpeed * Time.deltaTime);
         }
     }
 }
