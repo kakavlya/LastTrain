@@ -242,7 +242,7 @@ MonoBehaviour:
   _choseLevelScreen: {fileID: 105367988}
   _choseWeaponScreen: {fileID: 2138095018}
   _shopScreen: {fileID: 942260378}
-  _leadeboardScreen: {fileID: 432743403}
+  _leaderboardScreen: {fileID: 0}
   _settingsButton: {fileID: 1436393037}
   _choseLevelButton: {fileID: 8428609134034942123}
   _choseWeaponButton: {fileID: 1975042428}
@@ -2266,11 +2266,6 @@ MonoBehaviour:
   processTranslateLabel: 3/19 completed
   componentTextField: 1
   countLang: 3
---- !u!1 &432743403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1705290334077199572, guid: 494be326bb9335b438d19c92717d0de2, type: 3}
-  m_PrefabInstance: {fileID: 47347780}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &432743404 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1705290334077199573, guid: 494be326bb9335b438d19c92717d0de2, type: 3}
@@ -6398,6 +6393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee17d40e4efa05347b1e1f6b190f1b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trainUpgradeConfig: {fileID: 11400000, guid: 4210ec7823bfcd544bdd168b0fb3c54b, type: 2}
 --- !u!4 &983369301
 Transform:
   m_ObjectHideFlags: 0
