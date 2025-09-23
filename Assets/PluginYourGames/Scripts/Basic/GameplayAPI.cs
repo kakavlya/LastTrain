@@ -20,7 +20,7 @@ namespace YG
 
             if (!gameplaying)
             {
-                Message("Gameplay Start");
+                Message("Gameplay Intro");
                 gameplaying = true;
                 iPlatform.GameplayStart();
             }

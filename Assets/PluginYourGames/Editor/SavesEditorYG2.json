@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3314,
+    "idSave": 3382,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -51,24 +51,24 @@
     "TrainProgress": {
         "HealthLevel": 9,
         "SlotsLevel": 2,
-        "AmmoLevel": 7
+        "AmmoLevel": 8
     },
-    "Coins": 3930,
+    "Coins": 3904,
     "EffectsVolume": 0.17404389381408692,
     "MusicVolume": 0.12906306982040406,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
         "SubmachineGun",
+        "Shotgun",
         "",
         "",
-        "",
-        "Flamethrower"
+        ""
     ],
     "PlayerInventorySlots": [
         "GrenadeLauncher",
         "MachineGun",
-        "Shotgun"
+        "Flamethrower"
     ],
     "LevelsAvailability": [
         {

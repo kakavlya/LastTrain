@@ -1,12 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.Core.FSM;
+using LastTrain.UI;
 using LastTrain.Training;
+using LastTrain.UI.FSM;
 
 namespace LastTrain.Core
 {
-    public class UIStateMachine : MonoBehaviour
+    public class UIStateMachine : TypeStateMachineMono
     {
+        [Header("Screens")]
         [SerializeField] private GameObject _startScreen;
         [SerializeField] private GameObject _hudScreen;
         [SerializeField] private GameObject _gameOverScreen;
@@ -25,146 +29,71 @@ namespace LastTrain.Core
         [Header("Mobile Platorm Control")]
         [SerializeField] private GameObject _joustick;
 
-        private UIState _currentState = UIState.None;
-
         public event Action StartClicked;
         public event Action PauseClicked;
         public event Action ResumeClicked;
         public event Action RestartClicked;
         public event Action MenuClicked;
 
-        public enum UIState
+        public sealed class LevelStart { }
+        public sealed class Playing { }
+        public sealed class GameOver { }
+        public sealed class EndLevel { }
+        public sealed class Pause { }
+        public sealed class Settings { }
+
+        private UIScreenRouter _router;
+
+        private void Awake()
         {
-            None,
-            LevelStart,
-            Playing,
-            GameOver,
-            EndLevel,
-            Pause,
-            Start,
-            Settings
-        }
+            _router = new UIScreenRouter(_startScreen, _hudScreen, _gameOverScreen, _gameEndScreen, _gamePauseScreen, _settingsScreen);
 
-        private void Start()
-        {
-            _startButton.onClick.AddListener(OnStartButton);
+            Register<LevelStart>(new ScreenState<LevelStart>(_router, _startScreen));
+            Register<Playing>(new ScreenState<Playing>(_router, _hudScreen));
+            Register<GameOver>(new ScreenState<GameOver>(_router, _gameOverScreen));
+            Register<EndLevel>(new ScreenState<EndLevel>(_router, _gameEndScreen));
+            Register<Pause>(new ScreenState<Pause>(_router, _gamePauseScreen));
+            Register<Settings>(new ScreenState<Settings>(_router, _settingsScreen));
 
-            foreach (var button in _pauseButtons)
-                button.onClick.AddListener(() => {
-                    PauseClicked?.Invoke();
-                    SwitchState(UIState.Pause); 
-                });
+            _startButton.onClick.AddListener(() => { StartClicked?.Invoke(); Switch<Playing>(); });
 
-            _resumeButton.onClick.AddListener(() => {
-                ResumeClicked?.Invoke();
-                SwitchState(UIState.Playing);
-            });
+            foreach (var b in _pauseButtons)
+                b.onClick.AddListener(() => { PauseClicked?.Invoke(); Switch<Pause>(); });
 
-            foreach (var button in _restartButtons)
-                button.onClick.AddListener(OnRestartButton);
+            _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); Switch<Playing>(); });
 
-            foreach (var button in _menuButtons)
-                button.onClick.AddListener(OnMenuButton);
+            foreach (var b in _restartButtons)
+                b.onClick.AddListener(() => { RestartClicked?.Invoke(); Switch<LevelStart>(); });
 
-            _settingsButton.onClick.AddListener(OnSettingsButton);
+            foreach (var b in _menuButtons)
+                b.onClick.AddListener(() => { MenuClicked?.Invoke(); });
 
-            if (PlatformDetector.Instance != null && PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile)
-            {
-                _joustick.SetActive(true);
-            }
-            else
-            {
-                _joustick.SetActive(false);
-            }
+            _settingsButton.onClick.AddListener(() => Switch<Settings>());
 
-            DisableMenuButtonsIfTraining();
+            _joustick?.SetActive(PlatformDetector.Instance != null &&
+                                  PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile);
+
+            if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
+                foreach (var menu in _menuButtons) menu.interactable = false;
+
+            Switch<LevelStart>();
         }
 
         private void OnDestroy()
         {
-            _startButton.onClick.RemoveListener(OnStartButton);
-
-            foreach (var button in _pauseButtons)
-                button.onClick.RemoveAllListeners();
-
+            _startButton.onClick.RemoveAllListeners();
+            foreach (var b in _pauseButtons) b.onClick.RemoveAllListeners();
             _resumeButton.onClick.RemoveAllListeners();
-
-            foreach (var button in _restartButtons)
-                button.onClick.RemoveListener(OnRestartButton);
+            foreach (var b in _restartButtons) b.onClick.RemoveAllListeners();
+            foreach (var b in _menuButtons) b.onClick.RemoveAllListeners();
+            _settingsButton.onClick.RemoveAllListeners();
         }
 
-        public void SwitchState(UIState state)
-        {
-            if (_currentState == state)
-                return;
-
-            _currentState = state;
-            DisableAll();
-
-            switch (state)
-            {
-                case UIState.LevelStart:
-                    _startScreen.SetActive(true);
-                    break;
-                case UIState.Playing:
-                    _hudScreen.SetActive(true);
-                    break;
-                case UIState.GameOver:
-                    _gameOverScreen.SetActive(true);
-                    break;
-                case UIState.EndLevel:
-                    _gameEndScreen.SetActive(true);
-                    break;
-                case UIState.Pause:
-                    _gamePauseScreen.SetActive(true);
-                    break;
-                case UIState.Settings:
-                    _settingsScreen.SetActive(true);
-                    break;
-            }
-        }
-
-        public void OnStartButton()
-        {
-            StartClicked?.Invoke();
-            SwitchState(UIState.Playing);
-        }
-
-        public void OnRestartButton()
-        {
-            RestartClicked?.Invoke();
-            SwitchState(UIState.LevelStart);
-        }
-
-        public void OnMenuButton()
-        {
-            MenuClicked?.Invoke();
-        }
-
-        public void OnSettingsButton()
-        {
-            SwitchState(UIState.Settings);
-        }
-
-        private void DisableAll()
-        {
-            _startScreen.SetActive(false);
-            _hudScreen.SetActive(false);
-            _gameOverScreen.SetActive(false);
-            _gameEndScreen.SetActive(false);
-            _gamePauseScreen.SetActive(false);
-            _settingsScreen.SetActive(false);
-        }
-
-        private void DisableMenuButtonsIfTraining()
-        {
-            if (TrainingHandler.Instance.IsDoneGameplayTraining == false)
-            {
-                foreach (var menu in _menuButtons)
-                {
-                    menu.interactable = false;
-                }
-            }
-        }
+        public void ShowLevelStart() => Switch<LevelStart>();
+        public void ShowGameOver() => Switch<GameOver>();
+        public void ShowEndLevel() => Switch<EndLevel>();
+        public void ShowPause() => Switch<Pause>();
+        public void ShowHUD() => Switch<Playing>();
+        public void ShowSettings() => Switch<Settings>();
     }
 }

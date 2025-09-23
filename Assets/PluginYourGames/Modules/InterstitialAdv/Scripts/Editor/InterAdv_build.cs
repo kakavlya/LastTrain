@@ -11,7 +11,7 @@ namespace YG.EditorScr.BuildModify
             //    AddIndexCode(addInitCode, CodeType.Init0);
 
             //    string copyCodeAddStartCode = FileTextCopy("InterAdv_start.js");
-            //    AddIndexCode(copyCodeAddStartCode, CodeType.Start);
+            //    AddIndexCode(copyCodeAddStartCode, CodeType.Intro);
             //}
 
             string copyCode = FileTextCopy("InterAdv_js.js");

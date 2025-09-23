@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using LastTrain.Core.FSM;
+using LastTrain.UI;
 using LastTrain.UI.MainMenu;
 
 namespace LastTrain.Core
 {
-    public class UIStateMachineMenu : MonoBehaviour
+    public class UIStateMachineMenu : TypeStateMachineMono
     {
         [SerializeField] private PlayHandler _playHandler;
 
@@ -13,7 +15,7 @@ namespace LastTrain.Core
         [SerializeField] private GameObject _choseLevelScreen;
         [SerializeField] private GameObject _choseWeaponScreen;
         [SerializeField] private GameObject _shopScreen;
-        [SerializeField] private GameObject _leadeboardScreen;
+        [SerializeField] private GameObject _leaderboardScreen;
 
         [Header("Buttons")]
         [SerializeField] private Button _settingsButton;
@@ -23,106 +25,106 @@ namespace LastTrain.Core
         [SerializeField] private Button _leaderBoardButton;
         [SerializeField] private Button[] _returnOnMainButtons;
 
-        public enum UIState
-        {
-            Settings,
-            Level,
-            Weapon,
-            Shop,
-            Leaderboard
-        }
+        public sealed class Root { }
+        public sealed class Settings { }
+        public sealed class Level { }
+        public sealed class Weapon { }
+        public sealed class Shop { }
+        public sealed class Leaderboard { }
+
+        private UIScreenRouter _router;
+        private GameObject[] _mainButtons;
 
         private void Awake()
         {
-            foreach (var button in _returnOnMainButtons)
-                button.onClick.AddListener(OnReturnButton);
+            _router = new UIScreenRouter(_settingsScreen, _choseLevelScreen, _choseWeaponScreen, _shopScreen, _leaderboardScreen);
+            _mainButtons = new[]
+            {
+                _settingsButton.gameObject,
+                _choseLevelButton.gameObject,
+                _choseWeaponButton.gameObject,
+                _shopButton.gameObject,
+                _leaderBoardButton.gameObject
+            };
 
-            _settingsButton.onClick.AddListener(OnSettingsButton);
-            _choseLevelButton.onClick.AddListener(OnLevelChoseButton);
-            _choseWeaponButton.onClick.AddListener(OnWeaponChoseButton);
-            _shopButton.onClick.AddListener(OnShopButton);
-            _leaderBoardButton.onClick.AddListener(OnLeaderboardButton);
+            Register<Root>(new RootState(_router, _mainButtons));
+            Register<Settings>(new ChildScreenState(_router, _settingsScreen, _mainButtons));
+            Register<Level>(new ChildScreenState(_router, _choseLevelScreen, _mainButtons));
+            Register<Weapon>(new ChildScreenState(_router, _choseWeaponScreen, _mainButtons));
+            Register<Shop>(new ChildScreenState(_router, _shopScreen, _mainButtons));
+            Register<Leaderboard>(new ChildScreenState(_router, _leaderboardScreen, _mainButtons));
+
+            _settingsButton.onClick.AddListener(() => Switch<Settings>());
+            _choseLevelButton.onClick.AddListener(() => Switch<Level>());
+            _choseWeaponButton.onClick.AddListener(() => Switch<Weapon>());
+            _shopButton.onClick.AddListener(() => Switch<Shop>());
+            _leaderBoardButton.onClick.AddListener(() => Switch<Leaderboard>());
+
+            foreach (var b in _returnOnMainButtons) b.onClick.AddListener(() => Switch<Root>());
+
+            Switch<Root>();
         }
 
-        private void SwitchState(UIState state)
+        private void OnDestroy()
         {
-            DisableAll();
+            _settingsButton.onClick.RemoveAllListeners();
+            _choseLevelButton.onClick.RemoveAllListeners();
+            _choseWeaponButton.onClick.RemoveAllListeners();
+            _shopButton.onClick.RemoveAllListeners();
+            _leaderBoardButton.onClick.RemoveAllListeners();
+            foreach (var b in _returnOnMainButtons)
+                b.onClick.RemoveAllListeners();
+        }
 
-            switch (state)
+        private sealed class RootState : IState
+        {
+            private readonly UIScreenRouter _router;
+            private readonly GameObject[] _mainButtons;
+
+            public RootState(UIScreenRouter router, GameObject[] mainButtons)
             {
-                case UIState.Settings:
-                    _settingsScreen.SetActive(true);
-                    break;
+                _router = router; _mainButtons = mainButtons;
+            }
 
-                case UIState.Level:
-                    _choseLevelScreen.SetActive(true);
-                    break;
+            public void Enter()
+            {
+                _router.HideAll(); SetMain(true);
+            }
 
-                case UIState.Weapon:
-                    _choseWeaponScreen.SetActive(true);
-                    break;
+            public void Exit()
+            {
+                SetMain(false);
+            }
 
-                case UIState.Shop:
-                    _shopScreen.SetActive(true);
-                    break;
-
-                case UIState.Leaderboard:
-                    _leadeboardScreen.SetActive(true);
-                    break;
+            private void SetMain(bool v)
+            {
+                foreach (var go in _mainButtons) if (go) go.SetActive(v);
             }
         }
 
-        private void OnSettingsButton()
+        private sealed class ChildScreenState : IState
         {
-            SwitchState(UIState.Settings);
-        }
-
-        private void OnLevelChoseButton()
-        {
-            SwitchState(UIState.Level);
-        }
-
-        private void OnWeaponChoseButton()
-        {
-            SwitchState(UIState.Weapon);
-        }
-
-        private void OnShopButton()
-        {
-            SwitchState(UIState.Shop);
-        }
-
-        private void OnLeaderboardButton()
-        {
-            SwitchState(UIState.Leaderboard);
-        }
-
-        private void OnReturnButton()
-        {
-            _settingsScreen.SetActive(false);
-            _choseLevelScreen.SetActive(false);
-            _choseWeaponScreen.SetActive(false);
-            _shopScreen.SetActive(false);
-            _leadeboardScreen.SetActive(false);
-            _settingsButton.gameObject.SetActive(true);
-            _choseLevelButton.gameObject.SetActive(true);
-            _choseWeaponButton.gameObject.SetActive(true);
-            _shopButton.gameObject.SetActive(true);
-            _leaderBoardButton.gameObject.SetActive(true);
-        }
-
-        private void DisableAll()
-        {
-            _settingsScreen.SetActive(false);
-            _choseLevelScreen.SetActive(false);
-            _choseWeaponScreen.SetActive(false);
-            _shopScreen.SetActive(false);
-            _leadeboardScreen.SetActive(false);
-            _settingsButton.gameObject.SetActive(false);
-            _choseLevelButton.gameObject.SetActive(false);
-            _choseWeaponButton.gameObject.SetActive(false);
-            _shopButton.gameObject.SetActive(false);
-            _leaderBoardButton.gameObject.SetActive(false);
+            private readonly UIScreenRouter _router;
+            private readonly GameObject _screen;
+            private readonly GameObject[] _mainButtons;
+            public ChildScreenState(UIScreenRouter router, GameObject screen, GameObject[] mainButtons)
+            {
+                _router = router; _screen = screen; _mainButtons = mainButtons;
+            }
+            public void Enter()
+            {
+                SetMain(false);
+                _router.ShowOnly(_screen);
+            }
+            public void Exit()
+            {
+                _router.HideAll();
+            }
+            private void SetMain(bool v)
+            {
+                foreach (var go in _mainButtons)
+                    if (go) go.SetActive(v);
+            }
         }
     }
 }

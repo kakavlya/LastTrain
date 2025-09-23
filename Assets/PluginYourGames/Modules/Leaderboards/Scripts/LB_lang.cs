@@ -8,7 +8,7 @@ namespace YG.Insides
         public const string t_maxQuantityPlayers = "Максимальное количество игроков в таблице";
         public const string t_quantityTop = "Кол-во получения верхних топ игроков";
         public const string t_quantityAround = "Кол-во получения верхних топ игроков";
-        public const string t_updateLBMethod = "Когда следует обновлять лидерборд?\nStart - Обновлять в методе Start.\nOnEnable - Обновлять при каждой активации объекта (в методе OnEnable)\nDoNotUpdate - Не обновлять лидерборд с помощью данного скрипта (подразоумивается, что метод обновления 'UpdateLB' вы будете запускать сами, когда вам потребуется.";
+        public const string t_updateLBMethod = "Когда следует обновлять лидерборд?\nStart - Обновлять в методе Intro.\nOnEnable - Обновлять при каждой активации объекта (в методе OnEnable)\nDoNotUpdate - Не обновлять лидерборд с помощью данного скрипта (подразоумивается, что метод обновления 'UpdateLB' вы будете запускать сами, когда вам потребуется.";
         public const string t_entriesText = "Перетащите компонент Text для записи описания таблицы, если вы не выбрали продвинутую таблицу (advanced)";
         public const string t_advanced = "Продвинутая таблица. Поддерживает подгрузку авата и конвертацию рекордов в тип Time. Подгружает все данные в отдельные элементы интерфейса.";
         public const string t_rootSpawnPlayersData = "Родительский объект для спавна в нём объектов 'playerDataPrefab'";
