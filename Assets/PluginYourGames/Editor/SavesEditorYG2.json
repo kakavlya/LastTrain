@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3462,
+    "idSave": 3581,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -73,10 +73,11 @@
     },
     "Coins": 4043,
     "EffectsVolume": 0.17404389381408692,
-    "MusicVolume": 0.12906306982040406,
+    "MusicVolume": 0.06721414625644684,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
+        "Flamethrower",
         "SubmachineGun",
         "Shotgun",
         "",
@@ -85,9 +86,9 @@
         ""
     ],
     "PlayerInventorySlots": [
-        "GrenadeLauncher",
         "MachineGun",
-        "Flamethrower"
+        "Shotgun",
+        "GrenadeLauncher"
     ],
     "LevelsAvailability": [
         {
@@ -140,7 +141,7 @@
         },
         {
             "LevelNumber": 13,
-            "IsAvailable": false
+            "IsAvailable": true
         },
         {
             "LevelNumber": 14,
