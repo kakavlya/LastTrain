@@ -12,7 +12,6 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _horisontalAngle = 30f;
         [SerializeField] private ParticleSystem _flameParticle;
 
-        private float _verticalAngle = 60f;
         private float _minStartLifetime = 0.1f;
         private bool _isFiring;
         private Collider[] _hits = new Collider[30];

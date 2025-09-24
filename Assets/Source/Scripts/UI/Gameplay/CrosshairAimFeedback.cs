@@ -25,7 +25,6 @@ namespace LastTrain.UI.Gameplay
         [Header("Colors")]
         [SerializeField] private Color _defaultColor = Color.red;
         [SerializeField] private Color _reachableColor = Color.green;
-        [SerializeField] private bool _useTooFarColor = true;
         [SerializeField] private float _lerpSpeed = 12f;
 
         [Header("Debug")]

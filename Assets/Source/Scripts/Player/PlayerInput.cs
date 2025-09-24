@@ -11,7 +11,6 @@ namespace LastTrain.Player
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private AimingTargetProvider _aim; 
-        [SerializeField] private bool _useWorldHit = false;
 
         private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
 

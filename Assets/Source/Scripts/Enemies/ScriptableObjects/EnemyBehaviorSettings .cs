@@ -2,7 +2,7 @@
 
 namespace LastTrain.Enemies
 {
-    public abstract class EnemyBehaviorSettings : ScriptableObject, IEnemyBehaviorInitializer
+    public abstract class EnemyBehaviorSettings : ScriptableObject
     {
         [SerializeField] private int _reward;
         [SerializeField] private float _health;
