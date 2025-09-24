@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Core.FSM;     
+using LastTrain.Core.FSM; 
 using LastTrain.Inventory;
 using LastTrain.Persistence;
 using LastTrain.ShopSystem;
@@ -53,259 +53,28 @@ namespace LastTrain.Training
         private ShopItemUI[] _shopItems;
         private WeaponSlotUI[] _weaponSlots;
 
-        public sealed class Intro { }
-        public sealed class ShopOpen { }
-        public sealed class ShopInfo { }
-        public sealed class ShopUnlock { }
-        public sealed class ShopClose { }
-        public sealed class InventoryOpen { }
-        public sealed class InventoryDrag { }
-        public sealed class InventoryClose { }
-        public sealed class ChoseLevelOpen { }
-        public sealed class ChoseLevelClose { }
-        public sealed class End { }
-
         private void Start()
         {
-            if (TrainingHandler.Instance.IsDoneGameplayTraining == true &&
-                TrainingHandler.Instance.IsDoneMenuTraining == false)
+            if (TrainingHandler.Instance.IsDoneGameplayTraining &&
+                !TrainingHandler.Instance.IsDoneMenuTraining)
             {
-                RegisterStates();
-                Switch<Intro>();
+                Register(new StartState(this));
+                Register(new ShopOpenState(this));
+                Register(new ShopInfoState(this));
+                Register(new ShopUnlockState(this));
+                Register(new ShopCloseState(this));
+                Register(new InventoryOpenState(this));
+                Register(new InventoryDragState(this));
+                Register(new InventoryCloseState(this));
+                Register(new ChoseLevelOpenState(this));
+                Register(new ChoseLevelCloseState(this));
+                Register(new EndState(this));
+
+                Switch<StartState>();
             }
         }
 
-        private void RegisterStates()
-        {
-            Register<Intro>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    SetAllMainInteractable(false);
-                    _startTrainingScreen.SetActive(true);
-
-                    SaveState(MenuTrainingState.Start);
-
-                    _startTrainingOkButton.onClick.AddListener(OnStartTrainingButton);
-                },
-                exit: () =>
-                {
-                    _startTrainingOkButton.onClick.RemoveListener(OnStartTrainingButton);
-                    _startTrainingScreen.SetActive(false);
-                }));
-
-            Register<ShopOpen>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _shopOpenTrainingScreen.SetActive(true);
-
-                    _shopButton.interactable = true;
-                    _startLevelButton.interactable = false;
-                    _inventoryButton.interactable = false;
-                    _choseLevelButton.interactable = false;
-                    _rewardButton.interactable = false;
-
-                    SaveState(MenuTrainingState.ShopOpen);
-
-                    _shopButton.onClick.AddListener(OnShopOpenTrainingButton);
-                },
-                exit: () =>
-                {
-                    _shopButton.onClick.RemoveListener(OnShopOpenTrainingButton);
-                    _shopOpenTrainingScreen.SetActive(false);
-                }));
-
-            Register<ShopInfo>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _shopScreen.SetActive(true);
-                    _shopLockerScreen.SetActive(true);
-                    _shopInfoTrainingScreen.SetActive(true);
-                    _backFromShopButton.interactable = false;
-
-                    SaveState(MenuTrainingState.ShopInfo);
-
-                    _shopInfoTrainingOkButton.onClick.AddListener(OnShopInfoTrainingButton);
-                },
-                exit: () =>
-                {
-                    _shopInfoTrainingOkButton.onClick.RemoveListener(OnShopInfoTrainingButton);
-                    _shopInfoTrainingScreen.SetActive(false);
-                }));
-
-            Register<ShopUnlock>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _shopScreen.SetActive(true);
-                    _shopLockerScreen.SetActive(false);
-                    _shopUnlockTrainingScreen.SetActive(true);
-
-                    SaveState(MenuTrainingState.ShopUnlock);
-
-                    SignUpShopItemsUILock(); 
-                },
-                exit: () =>
-                {
-                    UnsubscribeShopItems();
-                    _shopUnlockTrainingScreen.SetActive(false);
-                }));
-
-            Register<ShopClose>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _shopScreen.SetActive(true);
-                    _shopBackTrainingScreen.SetActive(true);
-                    _backFromShopButton.interactable = true;
-
-                    SaveState(MenuTrainingState.ShopClose);
-
-                    _backFromShopButton.onClick.AddListener(OnShopBackButton);
-                },
-                exit: () =>
-                {
-                    _backFromShopButton.onClick.RemoveListener(OnShopBackButton);
-                    _shopBackTrainingScreen.SetActive(false);
-                }));
-
-            Register<InventoryOpen>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _shopScreen.SetActive(false);
-
-                    _inventoryOpenTrainingScreen.SetActive(true);
-                    _inventoryButton.interactable = true;
-                    _shopButton.interactable = false;
-
-                    SaveState(MenuTrainingState.InventoryOpen);
-
-                    _inventoryButton.onClick.AddListener(OnInventoryOpen);
-                },
-                exit: () =>
-                {
-                    _inventoryButton.onClick.RemoveListener(OnInventoryOpen);
-                    _inventoryOpenTrainingScreen.SetActive(false);
-                }));
-
-            Register<InventoryDrag>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _inventoryScreen.SetActive(true);
-                    _inventoryDragTrainingScreen.SetActive(true);
-                    _backFromInventoryButton.interactable = false;
-
-                    SaveState(MenuTrainingState.InventoryDrag);
-
-                    SignUpPlayerInventorySlots();
-                },
-                exit: () =>
-                {
-                    UnsubscribeInventorySlots();
-                    _inventoryDragTrainingScreen.SetActive(false);
-                }));
-
-            Register<InventoryClose>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    _inventoryScreen.SetActive(true);
-                    _inventoryLockerScreen.SetActive(true);
-                    _inventoryCloseTrainingScreen.SetActive(true);
-                    _backFromInventoryButton.interactable = true;
-
-                    SaveState(MenuTrainingState.InventoryClose);
-
-                    _backFromInventoryButton.onClick.AddListener(OnInventoryClose);
-                },
-                exit: () =>
-                {
-                    _backFromInventoryButton.onClick.RemoveListener(OnInventoryClose);
-                    _inventoryCloseTrainingScreen.SetActive(false);
-                }));
-
-            Register<ChoseLevelOpen>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-
-                    _inventoryScreen.SetActive(false);
-                    _inventoryLockerScreen.SetActive(false);
-                    _inventoryCloseTrainingScreen.SetActive(false);
-
-                    _inventoryButton.interactable = false;
-                    _shopButton.interactable = false;
-                    _choseLevelButton.interactable = true;
-
-                    SaveState(MenuTrainingState.ChoseLevelOpen);
-
-                    _backFromChoseLevelButton.onClick.AddListener(OnChoseLevelOpen);
-                    _choseLevelOpenScreen.SetActive(true);
-                },
-                exit: () =>
-                {
-                    _backFromChoseLevelButton.onClick.RemoveListener(OnChoseLevelOpen);
-                    _choseLevelOpenScreen.SetActive(false);
-                }));
-
-
-            Register<ChoseLevelClose>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-
-                    SaveState(MenuTrainingState.ChoseLevelClose);
-
-                    _choseLevelCloseScreen.SetActive(true);
-                    _choseLevelCloseButton.onClick.AddListener(OnChoseLevelClose);
-                },
-                exit: () =>
-                {
-                    _choseLevelCloseButton.onClick.RemoveListener(OnChoseLevelClose);
-                    _choseLevelCloseScreen.SetActive(false);
-                }));
-
-            Register<End>(new ActionState(
-                enter: () =>
-                {
-                    DisableAllTrainingScreens();
-                    SetAllMainInteractable(true);
-                    UnlockAllUpgradeButtons();
-
-                    SaveState(MenuTrainingState.End);
-
-                    YG2.saves.IsDoneMenuTraining = true;
-                    YG2.SaveProgress();
-                },
-                exit: () => { }));
-        }
-
-        private void OnStartTrainingButton() => Switch<ShopOpen>();
-        private void OnShopOpenTrainingButton() => Switch<ShopInfo>();
-        private void OnShopInfoTrainingButton() => Switch<ShopUnlock>();
-        private void OnShopBackButton() => Switch<InventoryOpen>();
-        private void OnInventoryOpen() => Switch<InventoryDrag>();
-        private void OnInventoryClose() => Switch<ChoseLevelOpen>();
-        private void OnChoseLevelOpen() => Switch<ChoseLevelClose>();
-        private void OnChoseLevelClose() => Switch<End>();
-
-        private void OnShopUnlockTraining(WeaponProgress _, WeaponUpgradeConfig __)
-        {
-            Switch<ShopClose>();
-            UnsubscribeShopItems();
-        }
-
-        private void OnInventoryDrag()
-        {
-            Switch<InventoryClose>();
-            UnsubscribeInventorySlots();
-        }
-
-        private void DisableAllTrainingScreens()
+        internal void DisableAllTrainingScreens()
         {
             _startTrainingScreen.SetActive(false);
             _shopOpenTrainingScreen.SetActive(false);
@@ -319,82 +88,352 @@ namespace LastTrain.Training
             _choseLevelCloseScreen.SetActive(false);
         }
 
-        private void SetAllMainInteractable(bool value)
+        internal void SetAllMainInteractable(bool v)
         {
-            _inventoryButton.interactable = value;
-            _choseLevelButton.interactable = value;
-            _shopButton.interactable = value;
-            _startLevelButton.interactable = value;
-            _rewardButton.interactable = value;
+            _inventoryButton.interactable = v;
+            _choseLevelButton.interactable = v;
+            _shopButton.interactable = v;
+            _startLevelButton.interactable = v;
+            _rewardButton.interactable = v;
         }
 
-        private void SignUpShopItemsUILock()
+        internal static void SaveStep(MenuTrainingState s)
         {
-            _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>(true);
-            foreach (var item in _shopItems)
-            {
-                item.WeaponUnlocked += OnShopUnlockTraining;
-
-                var upgradeButton = item.GetComponentInChildren<Button>(true);
-                if (upgradeButton != null)
-                    upgradeButton.interactable = false;
-            }
-        }
-
-        private void UnsubscribeShopItems()
-        {
-            if (_shopItems == null)
-                return;
-
-            foreach (var item in _shopItems)
-                item.WeaponUnlocked -= OnShopUnlockTraining;
-        }
-
-        private void UnlockAllUpgradeButtons()
-        {
-            _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>(true);
-
-            foreach (var item in _shopItems)
-            {
-                var upgradeButton = item.GetComponentInChildren<Button>(true);
-                if (upgradeButton != null)
-                    upgradeButton.interactable = true;
-            }
-        }
-
-        private void SignUpPlayerInventorySlots()
-        {
-            _weaponSlots = _playerInventory.GetComponentsInChildren<WeaponSlotUI>(true);
-
-            foreach (var slot in _weaponSlots)
-                slot.Filled += OnInventoryDrag;
-        }
-
-        private void UnsubscribeInventorySlots()
-        {
-            if (_weaponSlots == null) 
-                return;
-
-            foreach (var slot in _weaponSlots)
-                slot.Filled -= OnInventoryDrag;
-        }
-
-        private static void SaveState(MenuTrainingState state)
-        {
-            YG2.saves.TrainingState = state;
+            YG2.saves.TrainingState = s;
             YG2.SaveProgress();
         }
 
-        private sealed class ActionState : IState
+        internal void SignUpShopItemsUILock(Action<WeaponProgress, WeaponUpgradeConfig> onUnlocked)
         {
-            private readonly Action _enter, _exit;
-            public ActionState(Action enter, Action exit) { _enter = enter; _exit = exit; }
-            public void Enter() => _enter?.Invoke();
-            public void Exit() => _exit?.Invoke();
+            _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>(true);
+            foreach (var item in _shopItems)
+            {
+                item.WeaponUnlocked += onUnlocked;
+                var upg = item.GetComponentInChildren<Button>(true);
+                if (upg) upg.interactable = false;
+            }
+        }
+
+        internal void UnsubscribeShopItems(Action<WeaponProgress, WeaponUpgradeConfig> onUnlocked)
+        {
+            if (_shopItems == null) return;
+            foreach (var item in _shopItems)
+                item.WeaponUnlocked -= onUnlocked;
+        }
+
+        internal void UnlockAllUpgradeButtons()
+        {
+            _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>(true);
+            foreach (var item in _shopItems)
+            {
+                var upg = item.GetComponentInChildren<Button>(true);
+                if (upg) upg.interactable = true;
+            }
+        }
+
+        internal void SignUpPlayerInventorySlots(Action onFilled)
+        {
+            _weaponSlots = _playerInventory.GetComponentsInChildren<WeaponSlotUI>(true);
+            foreach (var slot in _weaponSlots)
+                slot.Filled += onFilled;
+        }
+
+        internal void UnsubscribeInventorySlots(Action onFilled)
+        {
+            if (_weaponSlots == null) return;
+            foreach (var slot in _weaponSlots)
+                slot.Filled -= onFilled;
+        }
+
+        private sealed class StartState : IState
+        {
+            private readonly MenuTraining c;
+            public StartState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c.SetAllMainInteractable(false);
+                c._startTrainingScreen.SetActive(true);
+                SaveStep(MenuTrainingState.Start);
+
+                c._startTrainingOkButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                c._startTrainingOkButton.onClick.RemoveListener(OnNext);
+                c._startTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => c.Switch<ShopOpenState>();
+        }
+
+        private sealed class ShopOpenState : IState
+        {
+            private readonly MenuTraining _menu;
+            public ShopOpenState(MenuTraining c) { this._menu = c; }
+
+            public void Enter()
+            {
+                _menu.DisableAllTrainingScreens();
+                _menu._shopOpenTrainingScreen.SetActive(true);
+
+                _menu._shopButton.interactable = true;
+                _menu._startLevelButton.interactable = false;
+                _menu._inventoryButton.interactable = false;
+                _menu._choseLevelButton.interactable = false;
+                _menu._rewardButton.interactable = false;
+
+                SaveStep(MenuTrainingState.ShopOpen);
+                _menu._shopButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                _menu._shopButton.onClick.RemoveListener(OnNext);
+                _menu._shopOpenTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => _menu.Switch<ShopInfoState>();
+        }
+
+        private sealed class ShopInfoState : IState
+        {
+            private readonly MenuTraining _menu;
+            public ShopInfoState(MenuTraining c) { this._menu = c; }
+
+            public void Enter()
+            {
+                _menu.DisableAllTrainingScreens();
+                _menu._shopScreen.SetActive(true);
+                _menu._shopLockerScreen.SetActive(true);
+                _menu._shopInfoTrainingScreen.SetActive(true);
+                _menu._backFromShopButton.interactable = false;
+
+                SaveStep(MenuTrainingState.ShopInfo);
+                _menu._shopInfoTrainingOkButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                _menu._shopInfoTrainingOkButton.onClick.RemoveListener(OnNext);
+                _menu._shopInfoTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => _menu.Switch<ShopUnlockState>();
+        }
+
+        private sealed class ShopUnlockState : IState
+        {
+            private readonly MenuTraining _menu;
+            public ShopUnlockState(MenuTraining c) { this._menu = c; }
+
+            public void Enter()
+            {
+                _menu.DisableAllTrainingScreens();
+                _menu._shopScreen.SetActive(true);
+                _menu._shopLockerScreen.SetActive(false);
+                _menu._shopUnlockTrainingScreen.SetActive(true);
+
+                SaveStep(MenuTrainingState.ShopUnlock);
+                _menu.SignUpShopItemsUILock(OnUnlocked);
+            }
+
+            public void Exit()
+            {
+                _menu.UnsubscribeShopItems(OnUnlocked);
+                _menu._shopUnlockTrainingScreen.SetActive(false);
+            }
+
+            private void OnUnlocked(WeaponProgress progress, WeaponUpgradeConfig config)
+            {
+                _menu.Switch<ShopCloseState>();
+                _menu.UnsubscribeShopItems(OnUnlocked);
+            }
+        }
+
+        private sealed class ShopCloseState : IState
+        {
+            private readonly MenuTraining _menu;
+            public ShopCloseState(MenuTraining c) { this._menu = c; }
+
+            public void Enter()
+            {
+                _menu.DisableAllTrainingScreens();
+                _menu._shopScreen.SetActive(true);
+                _menu._shopBackTrainingScreen.SetActive(true);
+                _menu._backFromShopButton.interactable = true;
+
+                SaveStep(MenuTrainingState.ShopClose);
+                _menu._backFromShopButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                _menu._backFromShopButton.onClick.RemoveListener(OnNext);
+                _menu._shopBackTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => _menu.Switch<InventoryOpenState>();
+        }
+
+        private sealed class InventoryOpenState : IState
+        {
+            private readonly MenuTraining c;
+            public InventoryOpenState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c._shopScreen.SetActive(false);
+                c._inventoryOpenTrainingScreen.SetActive(true);
+
+                c._inventoryButton.interactable = true;
+                c._shopButton.interactable = false;
+
+                SaveStep(MenuTrainingState.InventoryOpen);
+                c._inventoryButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                c._inventoryButton.onClick.RemoveListener(OnNext);
+                c._inventoryOpenTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => c.Switch<InventoryDragState>();
+        }
+
+        private sealed class InventoryDragState : IState
+        {
+            private readonly MenuTraining c;
+            public InventoryDragState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c._inventoryScreen.SetActive(true);
+                c._inventoryDragTrainingScreen.SetActive(true);
+                c._backFromInventoryButton.interactable = false;
+
+                SaveStep(MenuTrainingState.InventoryDrag);
+                c.SignUpPlayerInventorySlots(OnFilled);
+            }
+
+            public void Exit()
+            {
+                c.UnsubscribeInventorySlots(OnFilled);
+                c._inventoryDragTrainingScreen.SetActive(false);
+            }
+
+            private void OnFilled()
+            {
+                c.Switch<InventoryCloseState>();
+                c.UnsubscribeInventorySlots(OnFilled);
+            }
+        }
+
+        private sealed class InventoryCloseState : IState
+        {
+            private readonly MenuTraining c;
+            public InventoryCloseState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c._inventoryScreen.SetActive(true);
+                c._inventoryLockerScreen.SetActive(true);
+                c._inventoryCloseTrainingScreen.SetActive(true);
+                c._backFromInventoryButton.interactable = true;
+
+                SaveStep(MenuTrainingState.InventoryClose);
+                c._backFromInventoryButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                c._backFromInventoryButton.onClick.RemoveListener(OnNext);
+                c._inventoryCloseTrainingScreen.SetActive(false);
+            }
+
+            private void OnNext() => c.Switch<ChoseLevelOpenState>();
+        }
+
+        private sealed class ChoseLevelOpenState : IState
+        {
+            private readonly MenuTraining c;
+            public ChoseLevelOpenState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+
+                c._inventoryScreen.SetActive(false);
+                c._inventoryLockerScreen.SetActive(false);
+                c._inventoryCloseTrainingScreen.SetActive(false);
+
+                c._inventoryButton.interactable = false;
+                c._shopButton.interactable = false;
+                c._choseLevelButton.interactable = true;
+
+                SaveStep(MenuTrainingState.ChoseLevelOpen);
+                c._backFromChoseLevelButton.onClick.AddListener(OnNext);
+                c._choseLevelOpenScreen.SetActive(true);
+            }
+
+            public void Exit()
+            {
+                c._backFromChoseLevelButton.onClick.RemoveListener(OnNext);
+                c._choseLevelOpenScreen.SetActive(false);
+            }
+
+            private void OnNext() => c.Switch<ChoseLevelCloseState>();
+        }
+
+        private sealed class ChoseLevelCloseState : IState
+        {
+            private readonly MenuTraining c;
+            public ChoseLevelCloseState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c._choseLevelCloseScreen.SetActive(true);
+
+                SaveStep(MenuTrainingState.ChoseLevelClose);
+                c._choseLevelCloseButton.onClick.AddListener(OnNext);
+            }
+
+            public void Exit()
+            {
+                c._choseLevelCloseButton.onClick.RemoveAllListeners();
+                c._choseLevelCloseScreen.SetActive(false);
+            }
+
+            private void OnNext() => c.Switch<EndState>();
+        }
+
+        private sealed class EndState : IState
+        {
+            private readonly MenuTraining c;
+            public EndState(MenuTraining c) { this.c = c; }
+
+            public void Enter()
+            {
+                c.DisableAllTrainingScreens();
+                c.SetAllMainInteractable(true);
+                c.UnlockAllUpgradeButtons();
+
+                SaveStep(MenuTrainingState.End);
+                YG2.saves.IsDoneMenuTraining = true;
+                YG2.SaveProgress();
+            }
+
+            public void Exit() { }
         }
     }
 
-    //enum for YG2 saves
     public enum MenuTrainingState
     {
         Start,

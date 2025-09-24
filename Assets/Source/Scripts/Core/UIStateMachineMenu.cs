@@ -25,13 +25,6 @@ namespace LastTrain.Core
         [SerializeField] private Button _leaderBoardButton;
         [SerializeField] private Button[] _returnOnMainButtons;
 
-        public sealed class Root { }
-        public sealed class Settings { }
-        public sealed class Level { }
-        public sealed class Weapon { }
-        public sealed class Shop { }
-        public sealed class Leaderboard { }
-
         private UIScreenRouter _router;
         private GameObject[] _mainButtons;
 
@@ -47,22 +40,23 @@ namespace LastTrain.Core
                 _leaderBoardButton.gameObject
             };
 
-            Register<Root>(new RootState(_router, _mainButtons));
-            Register<Settings>(new ChildScreenState(_router, _settingsScreen, _mainButtons));
-            Register<Level>(new ChildScreenState(_router, _choseLevelScreen, _mainButtons));
-            Register<Weapon>(new ChildScreenState(_router, _choseWeaponScreen, _mainButtons));
-            Register<Shop>(new ChildScreenState(_router, _shopScreen, _mainButtons));
-            Register<Leaderboard>(new ChildScreenState(_router, _leaderboardScreen, _mainButtons));
+            Register(new RootState(this));
+            Register(new SettingsState(this));
+            Register(new LevelState(this));
+            Register(new WeaponState(this));
+            Register(new ShopState(this));
+            Register(new LeaderboardState(this));
 
-            _settingsButton.onClick.AddListener(() => Switch<Settings>());
-            _choseLevelButton.onClick.AddListener(() => Switch<Level>());
-            _choseWeaponButton.onClick.AddListener(() => Switch<Weapon>());
-            _shopButton.onClick.AddListener(() => Switch<Shop>());
-            _leaderBoardButton.onClick.AddListener(() => Switch<Leaderboard>());
+            _settingsButton.onClick.AddListener(() => Switch<SettingsState>());
+            _choseLevelButton.onClick.AddListener(() => Switch<LevelState>());
+            _choseWeaponButton.onClick.AddListener(() => Switch<WeaponState>());
+            _shopButton.onClick.AddListener(() => Switch<ShopState>());
+            _leaderBoardButton.onClick.AddListener(() => Switch<LeaderboardState>());
 
-            foreach (var b in _returnOnMainButtons) b.onClick.AddListener(() => Switch<Root>());
+            foreach (var b in _returnOnMainButtons)
+                b.onClick.AddListener(() => Switch<RootState>());
 
-            Switch<Root>();
+            Switch<RootState>();
         }
 
         private void OnDestroy()
@@ -72,59 +66,62 @@ namespace LastTrain.Core
             _choseWeaponButton.onClick.RemoveAllListeners();
             _shopButton.onClick.RemoveAllListeners();
             _leaderBoardButton.onClick.RemoveAllListeners();
-            foreach (var b in _returnOnMainButtons)
-                b.onClick.RemoveAllListeners();
+            foreach (var b in _returnOnMainButtons) b.onClick.RemoveAllListeners();
         }
 
-        private sealed class RootState : IState
+        private abstract class MMState : IState
         {
-            private readonly UIScreenRouter _router;
-            private readonly GameObject[] _mainButtons;
+            protected readonly UIStateMachineMenu UI;
+            protected MMState(UIStateMachineMenu ui) { UI = ui; }
+            public virtual void Enter() { }
+            public virtual void Exit() { }
 
-            public RootState(UIScreenRouter router, GameObject[] mainButtons)
+            protected void SetMain(bool visible)
             {
-                _router = router; _mainButtons = mainButtons;
-            }
-
-            public void Enter()
-            {
-                _router.HideAll(); SetMain(true);
-            }
-
-            public void Exit()
-            {
-                SetMain(false);
-            }
-
-            private void SetMain(bool v)
-            {
-                foreach (var go in _mainButtons) if (go) go.SetActive(v);
+                foreach (var go in UI._mainButtons) if (go) go.SetActive(visible);
             }
         }
 
-        private sealed class ChildScreenState : IState
+        private sealed class RootState : MMState
         {
-            private readonly UIScreenRouter _router;
-            private readonly GameObject _screen;
-            private readonly GameObject[] _mainButtons;
-            public ChildScreenState(UIScreenRouter router, GameObject screen, GameObject[] mainButtons)
-            {
-                _router = router; _screen = screen; _mainButtons = mainButtons;
-            }
-            public void Enter()
-            {
-                SetMain(false);
-                _router.ShowOnly(_screen);
-            }
-            public void Exit()
-            {
-                _router.HideAll();
-            }
-            private void SetMain(bool v)
-            {
-                foreach (var go in _mainButtons)
-                    if (go) go.SetActive(v);
-            }
+            public RootState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { UI._router.HideAll(); SetMain(true); }
+            public override void Exit() { SetMain(false); }
+        }
+
+        private sealed class SettingsState : MMState
+        {
+            public SettingsState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { SetMain(false); UI._router.ShowOnly(UI._settingsScreen); }
+            public override void Exit() { UI._router.HideAll(); }
+        }
+
+        private sealed class LevelState : MMState
+        {
+            public LevelState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { SetMain(false); UI._router.ShowOnly(UI._choseLevelScreen); }
+            public override void Exit() { UI._router.HideAll(); }
+        }
+
+        private sealed class WeaponState : MMState
+        {
+            public WeaponState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { SetMain(false); UI._router.ShowOnly(UI._choseWeaponScreen); }
+            public override void Exit() { UI._router.HideAll(); }
+        }
+
+        private sealed class ShopState : MMState
+        {
+            public ShopState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { SetMain(false); UI._router.ShowOnly(UI._shopScreen); }
+            public override void Exit() { UI._router.HideAll(); }
+        }
+
+        private sealed class LeaderboardState : MMState
+        {
+            public LeaderboardState(UIStateMachineMenu ui) : base(ui) { }
+            public override void Enter() { SetMain(false); UI._router.ShowOnly(UI._leaderboardScreen); }
+            public override void Exit() { UI._router.HideAll(); }
         }
     }
 }
