@@ -25,6 +25,16 @@ namespace LastTrain.ShopSystem
 
         public event Action<WeaponProgress, WeaponUpgradeConfig> WeaponUnlocked;
 
+        public bool IsUnlocked
+        {
+            get
+            {
+                if (_upgradeConfig is WeaponUpgradeConfig && _progress is WeaponProgress weaponProgress)
+                    return weaponProgress.IsAvailable;
+                return true;
+            }
+        }
+
         public void Init(UpgradeConfig cfg,
                          BaseProgress progress,
                          Action<UpgradeConfig, BaseProgress> onSelected)

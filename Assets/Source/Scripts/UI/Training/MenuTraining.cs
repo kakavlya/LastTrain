@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Core.FSM; 
+using LastTrain.Core.FSM;
 using LastTrain.Inventory;
 using LastTrain.Persistence;
 using LastTrain.ShopSystem;
@@ -70,7 +70,28 @@ namespace LastTrain.Training
                 Register(new ChoseLevelCloseState(this));
                 Register(new EndState(this));
 
-                Switch<StartState>();
+                DisableAllTrainingScreens();
+                SwitchToSavedOrStart();
+            }
+        }
+
+        private void SwitchToSavedOrStart()
+        {
+            var s = YG2.saves.TrainingState;
+            switch (s)
+            {
+                case MenuTrainingState.Start: Switch<StartState>(); break;
+                case MenuTrainingState.ShopOpen: Switch<ShopOpenState>(); break;
+                case MenuTrainingState.ShopInfo: Switch<ShopInfoState>(); break;
+                case MenuTrainingState.ShopUnlock: Switch<ShopUnlockState>(); break;
+                case MenuTrainingState.ShopClose: Switch<ShopCloseState>(); break;
+                case MenuTrainingState.InventoryOpen: Switch<InventoryOpenState>(); break;
+                case MenuTrainingState.InventoryDrag: Switch<InventoryDragState>(); break;
+                case MenuTrainingState.InventoryClose: Switch<InventoryCloseState>(); break;
+                case MenuTrainingState.ChoseLevelOpen: Switch<ChoseLevelOpenState>(); break;
+                case MenuTrainingState.ChoseLevelClose: Switch<ChoseLevelCloseState>(); break;
+                case MenuTrainingState.End: Switch<EndState>(); break;
+                default: Switch<StartState>(); break;
             }
         }
 
@@ -156,7 +177,6 @@ namespace LastTrain.Training
                 c.SetAllMainInteractable(false);
                 c._startTrainingScreen.SetActive(true);
                 SaveStep(MenuTrainingState.Start);
-
                 c._startTrainingOkButton.onClick.AddListener(OnNext);
             }
 
@@ -178,13 +198,11 @@ namespace LastTrain.Training
             {
                 _menu.DisableAllTrainingScreens();
                 _menu._shopOpenTrainingScreen.SetActive(true);
-
                 _menu._shopButton.interactable = true;
                 _menu._startLevelButton.interactable = false;
                 _menu._inventoryButton.interactable = false;
                 _menu._choseLevelButton.interactable = false;
                 _menu._rewardButton.interactable = false;
-
                 SaveStep(MenuTrainingState.ShopOpen);
                 _menu._shopButton.onClick.AddListener(OnNext);
             }
@@ -210,7 +228,6 @@ namespace LastTrain.Training
                 _menu._shopLockerScreen.SetActive(true);
                 _menu._shopInfoTrainingScreen.SetActive(true);
                 _menu._backFromShopButton.interactable = false;
-
                 SaveStep(MenuTrainingState.ShopInfo);
                 _menu._shopInfoTrainingOkButton.onClick.AddListener(OnNext);
             }
@@ -235,7 +252,6 @@ namespace LastTrain.Training
                 _menu._shopScreen.SetActive(true);
                 _menu._shopLockerScreen.SetActive(false);
                 _menu._shopUnlockTrainingScreen.SetActive(true);
-
                 SaveStep(MenuTrainingState.ShopUnlock);
                 _menu.SignUpShopItemsUILock(OnUnlocked);
             }
@@ -264,7 +280,6 @@ namespace LastTrain.Training
                 _menu._shopScreen.SetActive(true);
                 _menu._shopBackTrainingScreen.SetActive(true);
                 _menu._backFromShopButton.interactable = true;
-
                 SaveStep(MenuTrainingState.ShopClose);
                 _menu._backFromShopButton.onClick.AddListener(OnNext);
             }
@@ -288,10 +303,8 @@ namespace LastTrain.Training
                 c.DisableAllTrainingScreens();
                 c._shopScreen.SetActive(false);
                 c._inventoryOpenTrainingScreen.SetActive(true);
-
                 c._inventoryButton.interactable = true;
                 c._shopButton.interactable = false;
-
                 SaveStep(MenuTrainingState.InventoryOpen);
                 c._inventoryButton.onClick.AddListener(OnNext);
             }
@@ -316,7 +329,6 @@ namespace LastTrain.Training
                 c._inventoryScreen.SetActive(true);
                 c._inventoryDragTrainingScreen.SetActive(true);
                 c._backFromInventoryButton.interactable = false;
-
                 SaveStep(MenuTrainingState.InventoryDrag);
                 c.SignUpPlayerInventorySlots(OnFilled);
             }
@@ -346,7 +358,6 @@ namespace LastTrain.Training
                 c._inventoryLockerScreen.SetActive(true);
                 c._inventoryCloseTrainingScreen.SetActive(true);
                 c._backFromInventoryButton.interactable = true;
-
                 SaveStep(MenuTrainingState.InventoryClose);
                 c._backFromInventoryButton.onClick.AddListener(OnNext);
             }
@@ -368,15 +379,12 @@ namespace LastTrain.Training
             public void Enter()
             {
                 c.DisableAllTrainingScreens();
-
                 c._inventoryScreen.SetActive(false);
                 c._inventoryLockerScreen.SetActive(false);
                 c._inventoryCloseTrainingScreen.SetActive(false);
-
                 c._inventoryButton.interactable = false;
                 c._shopButton.interactable = false;
                 c._choseLevelButton.interactable = true;
-
                 SaveStep(MenuTrainingState.ChoseLevelOpen);
                 c._backFromChoseLevelButton.onClick.AddListener(OnNext);
                 c._choseLevelOpenScreen.SetActive(true);
@@ -400,7 +408,6 @@ namespace LastTrain.Training
             {
                 c.DisableAllTrainingScreens();
                 c._choseLevelCloseScreen.SetActive(true);
-
                 SaveStep(MenuTrainingState.ChoseLevelClose);
                 c._choseLevelCloseButton.onClick.AddListener(OnNext);
             }
@@ -424,7 +431,6 @@ namespace LastTrain.Training
                 c.DisableAllTrainingScreens();
                 c.SetAllMainInteractable(true);
                 c.UnlockAllUpgradeButtons();
-
                 SaveStep(MenuTrainingState.End);
                 YG2.saves.IsDoneMenuTraining = true;
                 YG2.SaveProgress();
