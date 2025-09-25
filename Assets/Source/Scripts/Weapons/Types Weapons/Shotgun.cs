@@ -12,6 +12,9 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _spreadAngle = 30;
 
         private float _currentSpreadAngle;
+        private float _selfCollisionOffset = 0.02f;
+        private float _angleDivider = 0.5f;
+        private float _minDirectionSqrMagnitude = 1e-6f;
 
         public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
@@ -38,14 +41,15 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 centerDir = target - origin;
 
-            if (centerDir.sqrMagnitude < 1e-6f) centerDir = FirePoint.forward;
+            if (centerDir.sqrMagnitude < _minDirectionSqrMagnitude) centerDir = FirePoint.forward;
                 else centerDir.Normalize();
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
-            Vector3 originNoSelf = origin + centerDir * 0.02f;
+            Vector3 originNoSelf = origin + centerDir * _selfCollisionOffset;
 
-            if (Physics.Raycast(originNoSelf, centerDir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(
+                originNoSelf, centerDir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
             {
                 target = block.point;
                 centerDir = (target - origin).normalized;
@@ -55,7 +59,7 @@ namespace LastTrain.Weapons.Types
 
             for (int i = 0; i < _bulletsInShot; i++)
             {
-                Vector3 dir = SampleYawOnly(centerDir, _currentSpreadAngle * 0.5f);
+                Vector3 dir = SampleYawOnly(centerDir, _currentSpreadAngle * _angleDivider);
                 dir = dir.normalized;
                 var proj = UsePooling
                     ? ProjectilePool.Instance.Spawn(

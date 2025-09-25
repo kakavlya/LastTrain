@@ -53,6 +53,9 @@ namespace LastTrain.Enemies
         [Tooltip("Damage per projectile.")]
         [Min(0)] [SerializeField] private int _projectileDamage = 25;
 
+        private float _safetyBufferDistance = 3f;
+        private float _minShootingBufferDistance = 0.25f;
+
         public override void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider)
         {
             var shooter = enemy.GetComponent<EnemyShooterController>();
@@ -60,8 +63,10 @@ namespace LastTrain.Enemies
             if (shooter == null)
                 shooter = enemy.AddComponent<EnemyShooterController>();
 
-            float safeCheckRadius = Mathf.Max(_checkRadius, _maxDistanceFromSurface + 3f);
-            float safeShootingDist = Mathf.Max(_shootingDistance, _minDistanceFromSurface + 0.25f);
+            float safeCheckRadius = Mathf.Max(
+                _checkRadius, _maxDistanceFromSurface + _safetyBufferDistance);
+            float safeShootingDist = Mathf.Max(
+                _shootingDistance, _minDistanceFromSurface + _minShootingBufferDistance);
 
             shooter.Init(
                 player: playerTarget,

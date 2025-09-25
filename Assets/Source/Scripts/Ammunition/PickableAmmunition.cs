@@ -8,6 +8,8 @@ namespace LastTrain.AmmunitionSystem
 {
     public class PickableAmmunition : MonoBehaviour
     {
+        private const float _maxPercent = 100f;
+
         [SerializeField] private int _countProjectiles;
         [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
 
@@ -35,7 +37,7 @@ namespace LastTrain.AmmunitionSystem
         public void Init(PickableAmmunition pickableAmmunition, float ammoPercent)
         {
             _collider.enabled = true;
-            _currentProjectilesCount = (int)(_countProjectiles * ammoPercent / 100f);
+            _currentProjectilesCount = (int)(_countProjectiles * ammoPercent / _maxPercent);
             CountProjectiles = _currentProjectilesCount;
             SetPrefabKey(pickableAmmunition);
         }

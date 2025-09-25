@@ -27,6 +27,8 @@ namespace LastTrain.Weapons.Types
 
         private float _lastFireTime;
         private float _currentFireDelay;
+        private float _minDirectionSqrMagnitude = 1e-6f;
+        private float _selfCollisionOffset = 0.02f;
 
         protected GameObject Owner;
         protected float Damage;
@@ -89,12 +91,12 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
-            if (dir.sqrMagnitude < 1e-6f) dir = _firePoint.forward;
+            if (dir.sqrMagnitude < _minDirectionSqrMagnitude) dir = _firePoint.forward;
             else dir.Normalize();
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (_range > 0f) ? Mathf.Min(distToTarget, _range) : distToTarget;
-            Vector3 originNoSelf = origin + dir * 0.02f;
+            Vector3 originNoSelf = origin + dir * _selfCollisionOffset;
 
             if (Physics.Raycast(originNoSelf, dir, out var block, maxRay, _obstacleMask, QueryTriggerInteraction.Ignore))
             {

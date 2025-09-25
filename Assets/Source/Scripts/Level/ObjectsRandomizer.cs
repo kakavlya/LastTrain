@@ -23,6 +23,8 @@ namespace LastTrain.Level
         [SerializeField] private float _roadOffsetDistant;
 
         private Vector3 _planeSize;
+        private float _planeSizeDivider = 2;
+        private float _maxRotationAngle = 360f;
 
 #if UNITY_EDITOR
         public void SpawnLevelObjects(GameObject[] spawnObjects, float minDist, float maxDist)
@@ -33,8 +35,8 @@ namespace LastTrain.Level
             for (int i = 0; i < _spawnCount; i++)
             {
                 GameObject prefab = spawnObjects[Random.Range(0, spawnObjects.Length)];
-                float randomX = Random.Range(-_planeSize.x / 2, _planeSize.x / 2);
-                float randomZ = Random.Range(-_planeSize.z / 2, _planeSize.z / 2);
+                float randomX = Random.Range(-_planeSize.x / _planeSizeDivider, _planeSize.x / _planeSizeDivider);
+                float randomZ = Random.Range(-_planeSize.z / _planeSizeDivider, _planeSize.z / _planeSizeDivider);
                 Vector3 spawnPos = _planeMeshRenderer.transform.position + new Vector3(randomX, 0, randomZ);
                 var projection = _spline.GetProjectionSample(spawnPos);
                 float distToRoad = Vector3.Distance(spawnPos, projection.location);
@@ -44,7 +46,7 @@ namespace LastTrain.Level
 
                 GameObject instance = Instantiate(prefab, _transformParent);
                 instance.transform.position = spawnPos;
-                instance.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                instance.transform.rotation = Quaternion.Euler(0, Random.Range(0f, _maxRotationAngle), 0);
                 float minScale = instance.transform.localScale.x;
                 float scale = Random.Range(minScale, _maxScale);
                 Vector3 baseScale = instance.transform.localScale;

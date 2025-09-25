@@ -12,6 +12,8 @@ namespace LastTrain.Player
 {
     public class PlayerHealth : HealthBase
     {
+        private const string _displayFormat = "F0";
+
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private TextMeshProUGUI _healthText;
 
@@ -27,7 +29,7 @@ namespace LastTrain.Player
             OnDeath.AddListener(OnPlayerDeath);
             _maxHealth = GetMaxHealthValue();
             SetCurrentHealth(_maxHealth);
-            _healthText.text = MaxHealth.ToString("F0");
+            _healthText.text = MaxHealth.ToString(_displayFormat);
             _healthSlider.maxValue = MaxHealth;
             _healthSlider.value = MaxHealth;
         }
@@ -35,7 +37,7 @@ namespace LastTrain.Player
         public override void TakeDamage(float amount)
         {
             base.TakeDamage(amount);
-            _healthText.text = CurrentHealth.ToString("F0");
+            _healthText.text = CurrentHealth.ToString(_displayFormat);
             _healthSlider.value = CurrentHealth;
         }
 

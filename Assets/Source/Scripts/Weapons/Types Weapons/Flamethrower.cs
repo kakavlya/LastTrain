@@ -17,6 +17,7 @@ namespace LastTrain.Weapons.Types
         private Collider[] _hits = new Collider[30];
         private float _nextDamageTime;
         private float _currentHorisontalAngle;
+        private float _angleDivider = 2f;
 
         private void Update()
         {
@@ -121,7 +122,7 @@ namespace LastTrain.Weapons.Types
             Vector3 horizontalDirection = new Vector3(directionToTarget.x, 0, directionToTarget.z).normalized;
             Vector3 horizontalForward = new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
             float horizontalAngle = Vector3.Angle(horizontalForward, horizontalDirection);
-            return horizontalAngle <= _currentHorisontalAngle / 2f;
+            return horizontalAngle <= _currentHorisontalAngle / _angleDivider;
         }
     }
 }

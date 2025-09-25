@@ -1,17 +1,20 @@
 using DG.Tweening;
+using LastTrain.Coins;
+using LastTrain.Persistence;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Coins;
-using LastTrain.Persistence;
 
 namespace LastTrain.ShopSystem
 {
     public class DetailsPanel : MonoBehaviour
     {
+        private const float _fadeInDuration = 0.25f;
+        private const float _fadeOutDuration = 0.2f;
+
         [Header("Common")]
         [SerializeField] private Button _closeBtn;
         [SerializeField] private CanvasGroup _cg;
@@ -96,12 +99,12 @@ namespace LastTrain.ShopSystem
         {
             _cg.alpha = 0;
             gameObject.SetActive(true);
-            DOTween.To(v => _cg.alpha = v, 0, 1, .25f).SetEase(Ease.OutQuad);
+            DOTween.To(v => _cg.alpha = v, 0, 1, _fadeInDuration).SetEase(Ease.OutQuad);
         }
 
         private void Close()
         {
-            DOTween.To(v => _cg.alpha = v, 1, 0, .2f)
+            DOTween.To(v => _cg.alpha = v, 1, 0, _fadeOutDuration)
                    .OnComplete(() =>
                    {
                        gameObject.SetActive(false);

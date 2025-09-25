@@ -7,7 +7,7 @@ namespace LastTrain.Projectiles.Types
     {
         protected override void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            if (collider.gameObject.layer == LayerMask.NameToLayer(GroundLayerName))
             {
                 Despawn();
             }

@@ -6,9 +6,9 @@ namespace LastTrain.AmmunitionSystem
 {
     public class PickableAmmunitionPool : MonoBehaviour
     {
-        [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
-
         public static PickableAmmunitionPool Instance { get; private set; }
+
+        [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
 
         private Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>> _pools =
             new Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>>();

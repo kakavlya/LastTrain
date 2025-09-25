@@ -15,6 +15,7 @@ namespace LastTrain.Level
         private LevelElement _currentElement;
         private LevelElement _nextElement;
         private int _maxCount = 5;
+        private int _nextElementOffset = 2;
         private Vector3 _workingPosition;
 
         public event Action<LevelElement, LevelElement> StartedElementDefined;
@@ -49,8 +50,8 @@ namespace LastTrain.Level
                 CalculateNextPosition();
             }
 
-            _currentElement = _elementsOnScene[_elementsOnScene.Count / 2];
-            _nextElement = _elementsOnScene[_elementsOnScene.Count / 2 + 1];
+            _currentElement = _elementsOnScene[_elementsOnScene.Count / _nextElementOffset];
+            _nextElement = _elementsOnScene[_elementsOnScene.Count / _nextElementOffset + 1];
             StartedElementDefined?.Invoke(_currentElement, _nextElement);
             StartTrainPosition = _currentElement.transform.position;
         }
@@ -69,10 +70,10 @@ namespace LastTrain.Level
         {
             int index = _elementsOnScene.IndexOf(element);
 
-            if (_elementsOnScene.Count > index + 2)
+            if (_elementsOnScene.Count > index + _nextElementOffset)
             {
                 _currentElement = _elementsOnScene[index + 1];
-                _nextElement = _elementsOnScene[index + 2];
+                _nextElement = _elementsOnScene[index + _nextElementOffset];
                 ElementChanged?.Invoke(_currentElement, _nextElement);
                 AddElementOnLevel();
                 CalculateNextPosition();

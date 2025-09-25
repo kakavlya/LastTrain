@@ -8,6 +8,8 @@ namespace LastTrain.Projectiles.Types
 {
     public class Projectile : MonoBehaviour
     {
+        public const string GroundLayerName = "Ground";
+
         [SerializeField] private TrailHandler _trail;
         [SerializeField] private ParticleSystem _impactPrefab;
         [field: SerializeField] public float Lifetime { get; private set; } = 3f;
@@ -62,7 +64,7 @@ namespace LastTrain.Projectiles.Types
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            if (collider.gameObject.layer == LayerMask.NameToLayer(GroundLayerName))
             {
                 if (_impactPrefab != null)
                     ParticlePool.Instance.Spawn(_impactPrefab, transform.position);

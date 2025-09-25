@@ -6,6 +6,8 @@ namespace LastTrain.AmmunitionSystem
 {
     public class Ammunition : MonoBehaviour
     {
+        private const float _maxPercent = 100f;
+
         [SerializeField] private Weapon _weaponPrefab;
         [SerializeField] private int _maxAmmo;
 
@@ -22,7 +24,7 @@ namespace LastTrain.AmmunitionSystem
 
         public void Init(float ammoPercent)
         {
-            _currentAmmo = (int)(_maxAmmo * ammoPercent / 100f);
+            _currentAmmo = (int)(_maxAmmo * ammoPercent / _maxPercent);
             CurrentAmmo = _currentAmmo;
             Updated?.Invoke(CurrentAmmo);
         }

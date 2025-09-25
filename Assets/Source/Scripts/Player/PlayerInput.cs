@@ -1,16 +1,24 @@
+using LastTrain.Core;
+using LastTrain.Weapons.System;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using LastTrain.Core;
-using LastTrain.Weapons.System;
 
 namespace LastTrain.Player
 {
     public class PlayerInput : MonoBehaviour
     {
+        private const int _mouseLeftButton = 0;
+        private const int _weaponSlot1 = 1;
+        private const int _weaponSlot2 = 2;
+        private const int _weaponSlot3 = 3;
+        private const float _rotateLeftValue = -1f;
+        private const float _rotateRightValue = 1f;
+        private const float _rotateNeutralValue = 0f;
+
         [SerializeField] private Joystick _joystick;
-        [SerializeField] private AimingTargetProvider _aim; 
+        [SerializeField] private AimingTargetProvider _aim;
 
         private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
 
@@ -48,7 +56,7 @@ namespace LastTrain.Player
                 }
                 else
                 {
-                    Rotated?.Invoke(0);
+                    Rotated?.Invoke(_rotateNeutralValue);
                 }
             }
             else
@@ -65,13 +73,13 @@ namespace LastTrain.Player
 
         private void HandleShooting()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(_mouseLeftButton))
             {
                 var target = _aim.GetAim().WorldPoint;
                 Fired?.Invoke(target);
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(_mouseLeftButton))
                 StopFired?.Invoke();
         }
 
@@ -79,17 +87,17 @@ namespace LastTrain.Player
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                WeaponChanged?.Invoke(1);
+                WeaponChanged?.Invoke(_weaponSlot1);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                WeaponChanged?.Invoke(2);
+                WeaponChanged?.Invoke(_weaponSlot2);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                WeaponChanged?.Invoke(3);
+                WeaponChanged?.Invoke(_weaponSlot3);
             }
         }
 
@@ -97,15 +105,15 @@ namespace LastTrain.Player
         {
             if (Input.GetKey(KeyCode.A))
             {
-                _rotateValue = -1;
+                _rotateValue = _rotateLeftValue;
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                _rotateValue = 1;
+                _rotateValue = _rotateRightValue;
             }
             else
             {
-                _rotateValue = 0;
+                _rotateValue = _rotateNeutralValue;
             }
 
             Rotated?.Invoke(_rotateValue);

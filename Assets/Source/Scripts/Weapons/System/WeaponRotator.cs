@@ -7,6 +7,8 @@ namespace LastTrain.Weapons.System
 {
     public class WeaponRotator : MonoBehaviour
     {
+        private const float _minDirectionSqrMagnitude = 0.01f;
+
         [SerializeField] private WeaponsHandler _weaponHandler;
         [SerializeField] private AimingTargetProvider _targetProvider;
         [SerializeField] private float _rotationSpeed = 180f;
@@ -44,9 +46,9 @@ namespace LastTrain.Weapons.System
             var ad = _targetProvider.GetAim();
             Vector3 aimPoint = ad.WorldPoint;
             Vector3 direction = aimPoint - _weaponPivot.position;
-            direction.y = 0f;
+            direction.y = 0;
 
-            if (direction.sqrMagnitude < 0.01f)
+            if (direction.sqrMagnitude < _minDirectionSqrMagnitude)
                 return;
 
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
