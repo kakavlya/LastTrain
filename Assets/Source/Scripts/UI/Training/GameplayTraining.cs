@@ -38,47 +38,21 @@ namespace LastTrain.Training
         public event Action ScreenShowed;
         public event Action ScreenLeft;
 
-        public sealed class StartLevel { }
-        public sealed class CameraMovement { }
-        public sealed class Shooting { }
-        public sealed class SwitchWeapon { }
-        public sealed class Ammunition { }
-
         private void Start()
         {
             if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
             {
-                Register<StartLevel>(new StartState(this, _startTraining, _startButton));
-                Register<CameraMovement>(new VariantDelayedState<CameraMovement, Shooting>(
-                    owner: this,
-                    delay: _cameraTrainingDelay,
-                    pcScreen: _computerCameraTraining, pcOk: _computerCameraOkButton,
-                    mobileScreen: _mobileCameraTraining, mobileOk: _mobileCameraOkButton));
+                Register(new StartState(this));
+                Register(new CameraMovementState(this));
+                Register(new ShootingState(this));
+                Register(new SwitchWeaponState(this));
+                Register(new AmmunitionState(this));
 
-                Register<Shooting>(new VariantDelayedState<Shooting, SwitchWeapon>(
-                    owner: this,
-                    delay: _shootingTrainingDelay,
-                    pcScreen: _computerShootingTraining, pcOk: _computerShootingOkButton,
-                    mobileScreen: _mobileShootingTraining, mobileOk: _mobileShootingOkButton));
-
-                Register<SwitchWeapon>(new VariantDelayedState<SwitchWeapon, Ammunition>(
-                    owner: this,
-                    delay: _switchingTrainingDelay,
-                    pcScreen: _computerSwitchTraining, pcOk: _computerSwitchOkButton,
-                    mobileScreen: _mobileSwitchTraining, mobileOk: _mobileSwitchOkButton));
-
-                Register<Ammunition>(new SingleDelayedState<Ammunition, StartLevel>(
-                    owner: this,
-                    delay: _pickUpTrainingDelay,
-                    screen: _pickUpAmmunitionTraining,
-                    okButton: _pickUpOkButton,
-                    switchToNext: false));
-
-                Switch<StartLevel>();
+                Switch<StartState>();
             }
         }
 
-        private void HideAll()
+        internal void HideAll()
         {
             _startTraining.SetActive(false);
             _computerCameraTraining.SetActive(false);
@@ -90,157 +64,211 @@ namespace LastTrain.Training
             _pickUpAmmunitionTraining.SetActive(false);
         }
 
-        // ===== состояния =====
-
-        private sealed class StartState : IState
+        internal static bool IsPC()
         {
-            private readonly GameplayTraining _gameplayTraining;
-            private readonly GameObject _screen;
-            private readonly Button _start;
-
-            public StartState(GameplayTraining gameplayTraining, GameObject screen, Button start)
-            { _gameplayTraining = gameplayTraining; _screen = screen; _start = start; }
-
-            public void Enter()
-            {
-                _gameplayTraining.HideAll();
-                _screen.SetActive(true);
-                _gameplayTraining.ScreenShowed?.Invoke();
-                _start.onClick.AddListener(OnNext);
-            }
-
-            public void Exit()
-            {
-                _start.onClick.RemoveListener(OnNext);
-                _screen.SetActive(false);
-                _gameplayTraining.ScreenLeft?.Invoke();
-            }
-
-            private void OnNext() => _gameplayTraining.Switch<CameraMovement>();
+            return PlatformDetector.Instance == null ||
+                   PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Computer;
         }
 
-        /// ПК/мобайл вариант, с задержкой и OK-кнопками
-        private sealed class VariantDelayedState<TSelf, TNext> : IState
-            where TSelf : class where TNext : class
+        private abstract class GTState : IState
         {
-            private readonly GameplayTraining _o;
-            private readonly int _delay;
-            private readonly GameObject _pc, _mobile;
-            private readonly Button _pcOk, _mobileOk;
+            protected readonly GameplayTraining GT;
+            protected Coroutine DelayRoutine;
 
-            private Coroutine _routine;
+            protected GTState(GameplayTraining gt) { GT = gt; }
 
-            public VariantDelayedState(GameplayTraining owner, int delay,
-                GameObject pcScreen, Button pcOk,
-                GameObject mobileScreen, Button mobileOk)
+            public virtual void Enter() { }
+            public virtual void Exit()
             {
-                _o = owner; _delay = delay;
-                _pc = pcScreen; _pcOk = pcOk;
-                _mobile = mobileScreen; _mobileOk = mobileOk;
+                if (DelayRoutine != null)
+                {
+                    GT.StopCoroutine(DelayRoutine);
+                    DelayRoutine = null;
+                }
             }
 
-            public void Enter()
+            protected void StartDelay(IEnumerator routine)
             {
-                _o.HideAll();
-                _routine = _o.StartCoroutine(Flow());
+                if (DelayRoutine != null) GT.StopCoroutine(DelayRoutine);
+                DelayRoutine = GT.StartCoroutine(routine);
             }
 
-            public void Exit()
+            protected void Showed() => GT.ScreenShowed?.Invoke();
+            protected void Left() => GT.ScreenLeft?.Invoke();
+        }
+
+        private sealed class StartState : GTState
+        {
+            public StartState(GameplayTraining gt) : base(gt) { }
+            public override void Enter()
             {
-                if (_routine != null) { _o.StopCoroutine(_routine); _routine = null; }
-                if (_pcOk != null) _pcOk.onClick.RemoveListener(OnOk);
-                if (_mobileOk != null) _mobileOk.onClick.RemoveListener(OnOk);
-                if (_pc) _pc.SetActive(false);
-                if (_mobile) _mobile.SetActive(false);
-                _o.ScreenLeft?.Invoke();
+                GT.HideAll();
+                GT._startTraining.SetActive(true);
+                Showed();
+                GT._startButton.onClick.AddListener(OnNext);
+            }
+
+            public override void Exit()
+            {
+                GT._startButton.onClick.RemoveListener(OnNext);
+                GT._startTraining.SetActive(false);
+                Left();
+                base.Exit();
+            }
+
+            private void OnNext() => GT.Switch<CameraMovementState>();
+        }
+
+        private sealed class CameraMovementState : GTState
+        {
+            public CameraMovementState(GameplayTraining gt) : base(gt) { }
+            public override void Enter()
+            {
+                GT.HideAll();
+                StartDelay(Flow());
+            }
+
+            public override void Exit()
+            {
+                GT._computerCameraOkButton.onClick.RemoveListener(OnOk);
+                GT._mobileCameraOkButton.onClick.RemoveListener(OnOk);
+                GT._computerCameraTraining.SetActive(false);
+                GT._mobileCameraTraining.SetActive(false);
+                Left();
+                base.Exit();
             }
 
             private IEnumerator Flow()
             {
-                yield return new WaitForSeconds(_delay);
+                yield return new WaitForSeconds(GT._cameraTrainingDelay);
 
-                bool isPC = PlatformDetector.Instance == null ||
-                            PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Computer;
-
-                if (isPC)
+                if (IsPC())
                 {
-                    if (_pc) _pc.SetActive(true);
-                    _pcOk?.onClick.AddListener(OnOk);
+                    GT._computerCameraTraining.SetActive(true);
+                    GT._computerCameraOkButton.onClick.AddListener(OnOk);
                 }
                 else
                 {
-                    if (_mobile) _mobile.SetActive(true);
-                    _mobileOk?.onClick.AddListener(OnOk);
+                    GT._mobileCameraTraining.SetActive(true);
+                    GT._mobileCameraOkButton.onClick.AddListener(OnOk);
                 }
 
-                _o.ScreenShowed?.Invoke();
+                Showed();
             }
 
-            private void OnOk() => _o.Switch<TNext>();
+            private void OnOk() => GT.Switch<ShootingState>();
         }
 
-        private sealed class SingleDelayedState<TSelf, TNext> : IState
-            where TSelf : class where TNext : class
+        private sealed class ShootingState : GTState
         {
-            private readonly GameplayTraining _gameplayTraining;
-            private readonly int _delay;
-            private readonly GameObject _screen;
-            private readonly Button _okButton;
-            private readonly bool _switchToNext;
-
-            private Coroutine _routine;
-
-            public SingleDelayedState(GameplayTraining owner, int delay, GameObject screen, Button okButton, bool switchToNext)
+            public ShootingState(GameplayTraining gt) : base(gt) { }
+            public override void Enter()
             {
-                _gameplayTraining = owner;
-                _delay = delay;
-                _screen = screen;
-                _okButton = okButton;
-                _switchToNext = switchToNext;
+                GT.HideAll();
+                StartDelay(Flow());
             }
 
-            public void Enter()
+            public override void Exit()
             {
-                _gameplayTraining.HideAll();
-                _routine = _gameplayTraining.StartCoroutine(Flow());
-            }
-
-            public void Exit()
-            {
-                if (_routine != null)
-                {
-                    _gameplayTraining.StopCoroutine(_routine); _routine = null;
-                }
-
-                _okButton?.onClick.RemoveListener(OnOk);
-
-                if (_screen)
-                    _screen.SetActive(false);
-                _gameplayTraining.ScreenLeft?.Invoke();
+                GT._computerShootingOkButton.onClick.RemoveListener(OnOk);
+                GT._mobileShootingOkButton.onClick.RemoveListener(OnOk);
+                GT._computerShootingTraining.SetActive(false);
+                GT._mobileShootingTraining.SetActive(false);
+                Left();
+                base.Exit();
             }
 
             private IEnumerator Flow()
             {
-                yield return new WaitForSeconds(_delay);
+                yield return new WaitForSeconds(GT._shootingTrainingDelay);
 
-                if (_screen)
-                    _screen.SetActive(true);
+                if (IsPC())
+                {
+                    GT._computerShootingTraining.SetActive(true);
+                    GT._computerShootingOkButton.onClick.AddListener(OnOk);
+                }
+                else
+                {
+                    GT._mobileShootingTraining.SetActive(true);
+                    GT._mobileShootingOkButton.onClick.AddListener(OnOk);
+                }
 
-                _okButton?.onClick.AddListener(OnOk);
-                _gameplayTraining.ScreenShowed?.Invoke();
+                Showed();
+            }
+
+            private void OnOk() => GT.Switch<SwitchWeaponState>();
+        }
+
+        private sealed class SwitchWeaponState : GTState
+        {
+            public SwitchWeaponState(GameplayTraining gt) : base(gt) { }
+            public override void Enter()
+            {
+                GT.HideAll();
+                StartDelay(Flow());
+            }
+
+            public override void Exit()
+            {
+                GT._computerSwitchOkButton.onClick.RemoveListener(OnOk);
+                GT._mobileSwitchOkButton.onClick.RemoveListener(OnOk);
+                GT._computerSwitchTraining.SetActive(false);
+                GT._mobileSwitchTraining.SetActive(false);
+                Left();
+                base.Exit();
+            }
+
+            private IEnumerator Flow()
+            {
+                yield return new WaitForSeconds(GT._switchingTrainingDelay);
+
+                if (IsPC())
+                {
+                    GT._computerSwitchTraining.SetActive(true);
+                    GT._computerSwitchOkButton.onClick.AddListener(OnOk);
+                }
+                else
+                {
+                    GT._mobileSwitchTraining.SetActive(true);
+                    GT._mobileSwitchOkButton.onClick.AddListener(OnOk);
+                }
+
+                Showed();
+            }
+
+            private void OnOk() => GT.Switch<AmmunitionState>();
+        }
+
+        private sealed class AmmunitionState : GTState
+        {
+            public AmmunitionState(GameplayTraining gt) : base(gt) { }
+            public override void Enter()
+            {
+                GT.HideAll();
+                StartDelay(Flow());
+            }
+
+            public override void Exit()
+            {
+                GT._pickUpOkButton.onClick.RemoveListener(OnOk);
+                GT._pickUpAmmunitionTraining.SetActive(false);
+                Left();
+                base.Exit();
+            }
+
+            private IEnumerator Flow()
+            {
+                yield return new WaitForSeconds(GT._pickUpTrainingDelay);
+                GT._pickUpAmmunitionTraining.SetActive(true);
+                GT._pickUpOkButton.onClick.AddListener(OnOk);
+                Showed();
             }
 
             private void OnOk()
             {
-                if (_switchToNext)
-                    _gameplayTraining.Switch<TNext>();
-                else
-                {
-                    _gameplayTraining.HideAll();
-                    _gameplayTraining.ScreenLeft?.Invoke();
-                }
+                GT.HideAll();
+                Left();
             }
         }
-
     }
 }

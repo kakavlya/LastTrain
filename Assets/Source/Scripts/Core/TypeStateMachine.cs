@@ -15,6 +15,8 @@ namespace LastTrain.Core.FSM
         public void Register<TMarker>(IState state) where TMarker : class
             => _states[typeof(TMarker)] = state;
 
+        public void Register<TState>(TState state) where TState : class, IState
+            => _states[typeof(TState)] = state;
         public void Switch<TMarker>() where TMarker : class
         {
             var key = typeof(TMarker);

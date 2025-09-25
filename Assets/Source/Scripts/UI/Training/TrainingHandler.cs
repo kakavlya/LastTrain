@@ -18,8 +18,8 @@ namespace LastTrain.Training
         [SerializeField] private LevelSetting _trainingSetting;
         [SerializeField] private List<WeaponUpgradeConfig> _trainingsWeapons;
 
-        private bool _isDoneGameplayTraining;
-        private bool _isDoneMenuTraining;
+        private bool _isDoneGameplayTraining = false;
+        private bool _isDoneMenuTraining = false;
 
         public bool IsDoneGameplayTraining => _isDoneGameplayTraining;
         public bool IsDoneMenuTraining => _isDoneMenuTraining;
