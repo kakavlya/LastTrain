@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using LastTrain.Effects;
+﻿using LastTrain.Effects;
+using UnityEngine;
 
 namespace LastTrain.Enemies
 {
@@ -39,8 +39,10 @@ namespace LastTrain.Enemies
                 _wobble.enabled = true;
 
             foreach (var col in _collidersToToggle)
+            {
                 if (col != null)
                     col.enabled = true;
+            }
 
             if (_rb != null)
             {
@@ -76,8 +78,10 @@ namespace LastTrain.Enemies
                 _wobble.enabled = false;
 
             foreach (var col in _collidersToToggle)
+            {
                 if (col != null)
                     col.enabled = false;
+            }
 
             if (_rb != null)
             {

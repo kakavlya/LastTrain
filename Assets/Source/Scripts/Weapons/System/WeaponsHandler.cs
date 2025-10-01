@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Player;
 using LastTrain.UI.Gameplay;
 using LastTrain.Weapons.Types;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace LastTrain.Weapons.System
 {
@@ -13,7 +13,7 @@ namespace LastTrain.Weapons.System
         [SerializeField] private WeaponUI[] _uiCells;
         [SerializeField] private Ammunition[] _ammunitions;
         [SerializeField] private PlayerInput _weaponInput;
-        [SerializeField] private WeaponCreator _weaponCreator;
+        [SerializeField] private WeaponsCreator _weaponCreator;
         [SerializeField] private AimingTargetProvider _aimProvider;
 
         private Weapon[] _weapons;
@@ -22,7 +22,9 @@ namespace LastTrain.Weapons.System
         private Dictionary<Weapon, Ammunition> _weaponAmmoDictonary;
 
         public event Action<Weapon> OnWeaponChange;
+
         public Weapon CurrentWeapon => _currentWeapon;
+
         private void OnDisable()
         {
             foreach (var cell in _uiCells)

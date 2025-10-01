@@ -38,7 +38,7 @@ namespace LastTrain.Projectiles
             }
 
             if (proj == null)
-                proj = CreateNew(projectilePrefab); 
+                proj = CreateNew(projectilePrefab);
 
             proj.Initial(position, rotation, owner, speed, damage, maxDistance, true, aoeDamage, aoeRange);
             proj.gameObject.SetActive(true);

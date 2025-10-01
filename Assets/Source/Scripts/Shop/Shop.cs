@@ -1,11 +1,11 @@
+using LastTrain.Inventory;
+using LastTrain.Persistence;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Inventory;
-using LastTrain.Persistence;
 
 namespace LastTrain.ShopSystem
 {
@@ -148,7 +148,7 @@ namespace LastTrain.ShopSystem
             int totalItems = _contentParent.childCount;
             int columns = Mathf.Max(1, Mathf.FloorToInt((contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
             int rows = Mathf.CeilToInt((float)totalItems / columns);
-            float height = rows * layout.cellSize.y + layout.spacing.y * (rows - 1) + layout.padding.top + layout.padding.bottom;
+            float height = (rows * layout.cellSize.y) + (layout.spacing.y * (rows - 1)) + layout.padding.top + layout.padding.bottom;
             contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         }
 

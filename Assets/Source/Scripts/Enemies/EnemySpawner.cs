@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using LastTrain.Data;
+﻿using LastTrain.Data;
 using LastTrain.Level;
 using LastTrain.Player;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace LastTrain.Enemies
 {
@@ -69,6 +69,7 @@ namespace LastTrain.Enemies
         }
 
         public void Pause() => _paused = true;
+
         public void Resume() => _paused = false;
 
         public void SetSpawnPoint(LevelElement currentElement, LevelElement nextElement)

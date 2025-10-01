@@ -1,12 +1,12 @@
-﻿using System;
+﻿using LastTrain.Core;
+using LastTrain.Persistence;
+using LastTrain.Training;
+using LastTrain.Data;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Core;
-using LastTrain.Persistence;
-using LastTrain.Training;
-using LastTrain.Data;
 
 namespace LastTrain.Player
 {

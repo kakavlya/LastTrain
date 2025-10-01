@@ -1,8 +1,8 @@
+using LastTrain.Persistence;
 using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using LastTrain.Persistence;
 
 namespace LastTrain.ShopSystem
 {

@@ -57,7 +57,8 @@ namespace LastTrain.UI.Gameplay
 
             while (t < _holdTime)
             {
-                t += Time.unscaledDeltaTime; yield return null;
+                t += Time.unscaledDeltaTime;
+                yield return null;
             }
 
             t = 0f;

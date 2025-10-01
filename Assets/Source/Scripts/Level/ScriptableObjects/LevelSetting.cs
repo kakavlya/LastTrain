@@ -1,6 +1,6 @@
+using LastTrain.Enemies;
 using System;
 using UnityEngine;
-using LastTrain.Enemies;
 
 namespace LastTrain.Level
 {
@@ -17,10 +17,15 @@ namespace LastTrain.Level
         [SerializeField] private SpawnerConfig _spawnerConfig;
 
         public int LevelNumber => _levelNumber;
+
         public LevelElement[] LevelElements => _levelElements;
+
         public int LevelDurationSec => _levelDurationSec;
+
         public int LevelReward => _levelReward;
+
         public int AmmunitionGeneratePercent => _ammunitionGeneratePercent;
+
         public SpawnerConfig SpawnerConfig => _spawnerConfig;
     }
 }

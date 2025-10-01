@@ -16,8 +16,11 @@ namespace LastTrain.Data
         private LevelSetting[] _allLevelSettings;
 
         public LevelSetting LevelSetting => _levelSetting;
+
         public List<WeaponUpgradeConfig> WeaponConfigs => _weaponConfigs;
+
         public TrainUpgradeConfig TrainUpgradeConfig => _trainUpgradeConfig;
+
         public LevelSetting[] AllLevels => _allLevelSettings;
 
         private void Awake()

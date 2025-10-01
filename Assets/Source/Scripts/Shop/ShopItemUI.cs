@@ -1,9 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System;
 using LastTrain.Coins;
 using LastTrain.Persistence;
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace LastTrain.ShopSystem
 {
@@ -35,9 +35,7 @@ namespace LastTrain.ShopSystem
             }
         }
 
-        public void Init(UpgradeConfig cfg,
-                         BaseProgress progress,
-                         Action<UpgradeConfig, BaseProgress> onSelected)
+        public void Init(UpgradeConfig cfg, BaseProgress progress, Action<UpgradeConfig, BaseProgress> onSelected)
         {
             _upgradeConfig = cfg;
             _progress = progress;
@@ -54,7 +52,7 @@ namespace LastTrain.ShopSystem
             else if (cfg is TrainUpgradeConfig trainUpgradeConfig
                 && progress is TrainProgress trainProgress)
             {
-                _unlockCostText.text = "";
+                _unlockCostText.text = string.Empty;
                 _unlockButton.gameObject.SetActive(false);
                 _lockPanel.SetActive(false);
                 _upgradeButton.gameObject.SetActive(true);
@@ -76,7 +74,6 @@ namespace LastTrain.ShopSystem
                 _unlockButton.onClick.AddListener(BuyItem);
                 _lockPanel.SetActive(true);
                 _upgradeButton.gameObject.SetActive(false);
-
             }
             else
             {
@@ -106,14 +103,14 @@ namespace LastTrain.ShopSystem
         {
             if (CoinsHandler.Instance.CoinsCount >= _unlockingCost &&
                 _progress is WeaponProgress progress &&
-                _upgradeConfig is WeaponUpgradeConfig _weaponUpgrade)
+                _upgradeConfig is WeaponUpgradeConfig weaponUpgrade)
             {
                 _unlockButton.onClick.RemoveListener(BuyItem);
                 CoinsHandler.Instance.RemoveCoins(_unlockingCost);
                 _unlockButton.gameObject.SetActive(false);
                 _lockPanel.SetActive(false);
                 _upgradeButton.gameObject.SetActive(true);
-                WeaponUnlocked?.Invoke(progress, _weaponUpgrade);
+                WeaponUnlocked?.Invoke(progress, weaponUpgrade);
                 ProgressHandler.Instance.RefreshSumLevels();
             }
         }

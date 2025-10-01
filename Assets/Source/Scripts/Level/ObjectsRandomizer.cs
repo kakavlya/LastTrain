@@ -1,6 +1,6 @@
-using UnityEngine;
 using SplineMesh;
 using System.Linq;
+using UnityEngine;
 
 namespace LastTrain.Level
 {
@@ -82,14 +82,12 @@ namespace LastTrain.Level
 
             if (renderer != null)
             {
-
                 Material material = new Material(renderer.sharedMaterial);
 
                 Color variation = new Color(
                     Random.Range(1f - _colorVariation, 1f + _colorVariation),
                     Random.Range(1f - _colorVariation, 1f + _colorVariation),
-                    Random.Range(1f - _colorVariation, 1f + _colorVariation)
-                );
+                    Random.Range(1f - _colorVariation, 1f + _colorVariation));
 
                 material.color *= variation;
                 renderer.sharedMaterial = material;

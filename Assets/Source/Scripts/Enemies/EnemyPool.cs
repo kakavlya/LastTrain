@@ -1,7 +1,7 @@
+using LastTrain.UI.Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using LastTrain.UI.Gameplay;
 
 namespace LastTrain.Enemies
 {
@@ -46,7 +46,7 @@ namespace LastTrain.Enemies
             }
             else
             {
-                Destroy(enemyInstance.gameObject);
+                Destroy(enemyInstance);
             }
 
             PointerHandler.Instance.RemoveFromList(enemyInstance);
@@ -73,14 +73,14 @@ namespace LastTrain.Enemies
                     return go;
                 },
                 actionOnGet: (enemy) =>
-                {},
+                {
+                },
                 actionOnRelease: (enemy) =>
                 {
                     enemy.SetActive(false);
                     enemy.transform.SetParent(transform, worldPositionStays: false);
                 },
-                actionOnDestroy: (enemy) => Destroy(enemy)
-            );
+                actionOnDestroy: (enemy) => Destroy(enemy));
         }
     }
 }

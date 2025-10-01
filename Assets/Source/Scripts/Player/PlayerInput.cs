@@ -17,18 +17,21 @@ namespace LastTrain.Player
         private const float _rotateRightValue = 1f;
         private const float _rotateNeutralValue = 0f;
 
+        private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
+
         [SerializeField] private Joystick _joystick;
         [SerializeField] private AimingTargetProvider _aim;
-
-        private readonly List<RaycastResult> _raycastResults = new List<RaycastResult>();
 
         private float _rotateValue;
         private bool _isMobilePlatform;
         private Camera _mainCamera;
 
         public event Action<Vector3> Fired;
+
         public event Action StopFired;
+
         public event Action<int> WeaponChanged;
+
         public event Action<float> Rotated;
 
         private void Awake()
@@ -129,10 +132,8 @@ namespace LastTrain.Player
             if (EventSystem.current == null)
                 return false;
 
-            PointerEventData eventData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
+            PointerEventData eventData = new PointerEventData(EventSystem.current) {
+                position = Input.mousePosition};
 
             _raycastResults.Clear();
             EventSystem.current.RaycastAll(eventData, _raycastResults);
@@ -153,10 +154,8 @@ namespace LastTrain.Player
             if (EventSystem.current == null)
                 return false;
 
-            PointerEventData eventData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
+            PointerEventData eventData = new PointerEventData(EventSystem.current) {
+                position = Input.mousePosition};
 
             _raycastResults.Clear();
             EventSystem.current.RaycastAll(eventData, _raycastResults);

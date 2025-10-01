@@ -1,7 +1,7 @@
-using UnityEngine;
-using LastTrain.Projectiles;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
+using LastTrain.Projectiles;
+using UnityEngine;
 
 namespace LastTrain.Weapons.Types
 {
@@ -11,6 +11,8 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _aoeDamage;
         [SerializeField] private float _aoeRange;
 
+        private float _selfCollisionOffset = 0.02f;
+        private float _minDirectionSqrMagnitude = 1e-6f;
         private float _currentAoeDamage;
 
         public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
@@ -24,8 +26,8 @@ namespace LastTrain.Weapons.Types
             if (!FirePossibleCalculate())
                 return;
 
-            if (ammo != null && !ammo.HasAmmo) 
-            { 
+            if (ammo != null && !ammo.HasAmmo)
+            {
                 InvokeStopFire();
                 return;
             }
@@ -38,7 +40,7 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
-            if (dir.sqrMagnitude < 1e-6f)
+            if (dir.sqrMagnitude < _minDirectionSqrMagnitude)
             {
                 dir = FirePoint.forward;
             }
@@ -49,7 +51,7 @@ namespace LastTrain.Weapons.Types
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
-            Vector3 originNoSelf = origin + dir * 0.02f;
+            Vector3 originNoSelf = origin + (dir * _selfCollisionOffset);
 
             if (Physics.Raycast(
                 originNoSelf, dir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))

@@ -1,8 +1,8 @@
+using LastTrain.Inventory;
+using LastTrain.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using LastTrain.Inventory;
-using LastTrain.Level;
 
 namespace LastTrain.UI.MainMenu
 {

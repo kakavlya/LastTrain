@@ -1,8 +1,8 @@
-using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 using LastTrain.Weapons.Types;
 using LastTrain.Projectiles.Types;
+using System.Collections;
+using UnityEngine;
 
 namespace LastTrain.AmmunitionSystem
 {
@@ -10,8 +10,9 @@ namespace LastTrain.AmmunitionSystem
     {
         private const float _maxPercent = 100f;
 
-        [SerializeField] private int _countProjectiles;
         [field: SerializeField] public Weapon PrefabTypeOfWeapon { get; private set; }
+
+        [SerializeField] private int _countProjectiles;
 
         private PickableAmmunition _ammoPrefabKey;
         private float _distanceCatch = 30f;

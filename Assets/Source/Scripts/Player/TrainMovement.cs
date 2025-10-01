@@ -1,7 +1,7 @@
-using System;
-using SplineMesh;
-using UnityEngine;
 using LastTrain.Level;
+using SplineMesh;
+using System;
+using UnityEngine;
 
 namespace LastTrain.Player
 {
@@ -104,8 +104,7 @@ namespace LastTrain.Player
             transform.rotation = Quaternion.Slerp(
                 currentEndSample.Rotation * _rottationCorrection,
                 nextStartSample.Rotation * _rottationCorrection,
-                _transitionProgress
-            );
+                _transitionProgress);
 
             if (_transitionProgress >= 1f)
             {

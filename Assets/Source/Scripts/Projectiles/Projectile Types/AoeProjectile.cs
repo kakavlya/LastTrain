@@ -1,6 +1,6 @@
-using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.Particles;
+using UnityEngine;
 
 namespace LastTrain.Projectiles.Types
 {
@@ -8,15 +8,11 @@ namespace LastTrain.Projectiles.Types
     {
         private float _aoeRange;
         private float _aoeDamage;
+        private Collider[] _resultsCache = new Collider[32];
 
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-        }
-
-        protected override void BeforeDespawn()
-        {
-            AoeExplode();
         }
 
         public override void Initial(
@@ -31,7 +27,6 @@ namespace LastTrain.Projectiles.Types
             float aoeRange = 0)
         {
             base.Initial(position, rotation, owner, speed, damage, maxAttackDistance, usePooling, aoeDamage, aoeRange);
-
             _aoeDamage = aoeDamage;
             _aoeRange = aoeRange;
 
@@ -39,6 +34,11 @@ namespace LastTrain.Projectiles.Types
             {
                 gameObject.layer = owner.layer;
             }
+        }
+
+        protected override void BeforeDespawn()
+        {
+            AoeExplode();
         }
 
         private void AoeExplode()
@@ -49,10 +49,15 @@ namespace LastTrain.Projectiles.Types
             if (_aoeRange <= 0)
                 return;
 
-            Collider[] targets = Physics.OverlapSphere(transform.position, _aoeRange);
+            int count = Physics.OverlapSphereNonAlloc(
+            transform.position,
+            _aoeRange,
+            _resultsCache);
 
-            foreach (Collider target in targets)
+            for (int i = 0; i < count; i++)
             {
+                Collider target = _resultsCache[i];
+
                 if (target.TryGetComponent(out IDamageable aoeDmg) && gameObject.layer != target.gameObject.layer)
                 {
                     aoeDmg.TakeDamage(_aoeDamage);

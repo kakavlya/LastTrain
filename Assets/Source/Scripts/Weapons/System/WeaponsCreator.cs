@@ -1,14 +1,14 @@
-using System.Collections.Generic;
-using UnityEngine;
-using YG;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Persistence;
 using LastTrain.Weapons.Types;
 using LastTrain.Data;
+using System.Collections.Generic;
+using UnityEngine;
+using YG;
 
 namespace LastTrain.Weapons.System
 {
-    public class WeaponCreator : MonoBehaviour
+    public class WeaponsCreator : MonoBehaviour
     {
         private float _ammoPercent;
 
@@ -35,21 +35,21 @@ namespace LastTrain.Weapons.System
 
                 if (weaponProgress is SpecialWeaponProgress specialProgress)
                 {
-                    if (config.TryFindStat(StatType.AttackSpeed) && 
+                    if (config.TryFindStat(StatType.AttackSpeed) &&
                         specialProgress.SpecialStatType == StatType.AttackSpeed)
                     {
                         int level = specialProgress.GetLevel(StatType.AttackSpeed);
                         fireDelay = 1f / weaponConfigs[i].GetStat(StatType.AttackSpeed, level);
                     }
 
-                    if (config.TryFindStat(StatType.AttackAngle) && 
+                    if (config.TryFindStat(StatType.AttackAngle) &&
                         specialProgress.SpecialStatType == StatType.AttackAngle)
                     {
                         int level = specialProgress.GetLevel(StatType.AttackAngle);
                         fireAngle = weaponConfigs[i].GetStat(StatType.AttackAngle, level);
                     }
 
-                    if (config.TryFindStat(StatType.AoeDamage) && 
+                    if (config.TryFindStat(StatType.AoeDamage) &&
                         specialProgress.SpecialStatType == StatType.AoeDamage)
                     {
                         int level = specialProgress.GetLevel(StatType.AoeDamage);

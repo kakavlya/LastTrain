@@ -6,13 +6,13 @@ namespace LastTrain.Core
     {
         public static PlatformDetector Instance { get; private set; }
 
-        [SerializeField] bool _overrideControl = false;
-        [SerializeField] ControlScheme _overrideScheme;
+        [SerializeField] private bool _overrideControl = false;
+        [SerializeField] private ControlScheme _overrideScheme;
 
         public enum ControlScheme
         {
             Computer,
-            Mobile
+            Mobile,
         }
 
         public ControlScheme CurrentControlScheme { get; private set; }

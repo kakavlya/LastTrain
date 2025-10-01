@@ -1,8 +1,8 @@
-using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
 using LastTrain.Player;
+using UnityEngine;
 
 namespace LastTrain.Weapons.Types
 {
@@ -95,8 +95,7 @@ namespace LastTrain.Weapons.Types
             int hitsCount = Physics.OverlapSphereNonAlloc(
                 transform.position,
                 Range,
-                _hits
-                );
+                _hits);
 
             for (int i = 0; i < hitsCount; i++)
             {

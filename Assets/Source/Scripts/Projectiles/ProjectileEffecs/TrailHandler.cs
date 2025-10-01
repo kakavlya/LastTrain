@@ -22,7 +22,10 @@ namespace LastTrain.Projectiles.Effects
         private Coroutine _fadeCo;
         private bool _fading;
 
-        private void Reset() { _trail = GetComponent<TrailRenderer>(); }
+        private void Reset()
+        {
+            _trail = GetComponent<TrailRenderer>();
+        }
 
         private void Awake()
         {
@@ -49,17 +52,6 @@ namespace LastTrain.Projectiles.Effects
                 _trail.emitting = false;
         }
 
-        private void ApplyStaticSettings()
-        {
-            if (_settings == null)
-                return;
-
-            _trail.widthMultiplier = _settings.Width;
-            _trail.widthCurve = _settings.WidthCurve;
-            _trail.colorGradient = _settings.ColorGradient;
-            _trail.minVertexDistance = _settings.MinVertexDistance;
-        }
-
         public void Play(float projectileSpeed)
         {
             if (_fadeCo != null)
@@ -77,11 +69,11 @@ namespace LastTrain.Projectiles.Effects
             transform.localRotation = _initLocalRot;
             transform.localScale = _initLocalScale;
             gameObject.SetActive(true);
-            float L = _settings ? _settings.DesiredLength : _defaultTrailLength;
+            float l = _settings ? _settings.DesiredLength : _defaultTrailLength;
             float tMin = _settings ? _settings.MinTime : _defaultMinTime;
             float tMax = _settings ? _settings.MaxTime : _defaultMaxTime;
             float speed = Mathf.Max(_minProjectileSpeed, projectileSpeed);
-            _trail.time = Mathf.Clamp(L / speed, tMin, tMax);
+            _trail.time = Mathf.Clamp(l / speed, tMin, tMax);
             _trail.Clear();
             _trail.emitting = true;
         }
@@ -101,7 +93,7 @@ namespace LastTrain.Projectiles.Effects
             _fadeCo = StartCoroutine(FadeAndReturn());
         }
 
-        IEnumerator FadeAndReturn()
+        private IEnumerator FadeAndReturn()
         {
             float pad = _settings ? _settings.FadePadding : _defaultFadePadding;
             float wait = Mathf.Max(_minWaitTime, _trail.time) + pad;
@@ -115,6 +107,17 @@ namespace LastTrain.Projectiles.Effects
             transform.SetParent(_homeParent, true);
             _fading = false;
             _fadeCo = null;
+        }
+
+        private void ApplyStaticSettings()
+        {
+            if (_settings == null)
+                return;
+
+            _trail.widthMultiplier = _settings.Width;
+            _trail.widthCurve = _settings.WidthCurve;
+            _trail.colorGradient = _settings.ColorGradient;
+            _trail.minVertexDistance = _settings.MinVertexDistance;
         }
     }
 }

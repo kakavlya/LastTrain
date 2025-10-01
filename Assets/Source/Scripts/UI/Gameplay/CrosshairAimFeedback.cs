@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using LastTrain.Weapons.System;
 using LastTrain.Weapons.Types;
 using LastTrain.Enemies;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace LastTrain.UI.Gameplay
 {
@@ -33,7 +33,12 @@ namespace LastTrain.UI.Gameplay
         private Image _img;
         private Weapon _weapon;
 
-        private enum State { None, EnemyTooFar, EnemyReachable }
+        private enum State 
+        {
+            None,
+            EnemyTooFar,
+            EnemyReachable
+        }
 
         private void Awake()
         {
@@ -81,8 +86,8 @@ namespace LastTrain.UI.Gameplay
             _img.color = Color.Lerp(_img.color, target, Time.unscaledDeltaTime * _lerpSpeed);
 
             if (_debugDraw && state != State.None && _weapon != null && _weapon.FirePoint != null)
-                Debug.DrawLine(_weapon.FirePoint.position, hit.point, state == State.EnemyReachable ?
-                    Color.green : Color.yellow);
+                Debug.DrawLine(
+                    _weapon.FirePoint.position, hit.point, state == State.EnemyReachable ? Color.green : Color.yellow);
         }
 
         private State GetState(out AimData aimDirection, out RaycastHit enemyHit)
@@ -126,7 +131,7 @@ namespace LastTrain.UI.Gameplay
 
             EnsureDefaultBlockMask();
             Vector3 dir = toDistance / dist;
-            Vector3 originNoSelf = muzzle + dir * _selfEpsilon;
+            Vector3 originNoSelf = muzzle + (dir * _selfEpsilon);
 
             if (Physics.Raycast(originNoSelf, dir, dist, _losBlockMask, QueryTriggerInteraction.Ignore))
                 return State.EnemyTooFar;

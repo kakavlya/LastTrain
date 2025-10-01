@@ -1,7 +1,7 @@
+using LastTrain.Persistence;
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
-using LastTrain.Persistence;
 
 namespace LastTrain.Inventory
 {
@@ -55,7 +55,7 @@ namespace LastTrain.Inventory
         {
             while (_inventorySlots.Count < _activeSlotUIs.Count)
             {
-                _inventorySlots.Add("");
+                _inventorySlots.Add(string.Empty);
             }
 
             for (int i = 0; i < _activeSlotUIs.Count; i++)
@@ -68,7 +68,7 @@ namespace LastTrain.Inventory
                 }
                 else
                 {
-                    _inventorySlots[i] = "";
+                    _inventorySlots[i] = string.Empty;
                 }
             }
 

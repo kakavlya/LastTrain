@@ -1,6 +1,6 @@
+using LastTrain.Weapons.Types;
 using System;
 using UnityEngine;
-using LastTrain.Weapons.Types;
 
 namespace LastTrain.AmmunitionSystem
 {
@@ -15,7 +15,6 @@ namespace LastTrain.AmmunitionSystem
 
         public event Action<int> Updated;
         public event Action<int> AmmoAdded;
-
         public Weapon WeaponPrefab => _weaponPrefab;
 
         public bool HasAmmo { get; private set; } = true;

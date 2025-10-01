@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3479,
+    "idSave": 3517,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -71,7 +71,7 @@
         "SlotsLevel": 2,
         "AmmoLevel": 8
     },
-    "Coins": 4163,
+    "Coins": 4189,
     "EffectsVolume": 0.17404389381408692,
     "MusicVolume": 0.12906306982040406,
     "InventorySlotsCount": 0,
@@ -220,9 +220,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {
@@ -236,9 +234,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {
@@ -252,9 +248,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {
@@ -268,9 +262,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {
@@ -284,9 +276,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {
@@ -300,9 +290,7 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_isAvailable": false
                 }
             },
             {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using LastTrain.AmmunitionSystem;
+using LastTrain.Weapons.Types;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using LastTrain.AmmunitionSystem;
-using LastTrain.Weapons.Types;
 
 namespace LastTrain.UI.Gameplay
 {
@@ -88,11 +88,11 @@ namespace LastTrain.UI.Gameplay
 
         private IEnumerator ShowAddedAmmo(int addedAmmo)
         {
-            _addedAmmoBackground.gameObject.SetActive(true);
+            _addedAmmoBackground.SetActive(true);
             _addedCountText.text = _plusSymbol + addedAmmo.ToString();
             yield return new WaitForSeconds(_showTime);
             _addedCountText.text = null;
-            _addedAmmoBackground.gameObject.SetActive(false);
+            _addedAmmoBackground.SetActive(false);
         }
     }
 }

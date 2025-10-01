@@ -1,7 +1,7 @@
-using UnityEngine.Pool;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Pool;
 
 namespace LastTrain.Particles
 {
@@ -9,12 +9,12 @@ namespace LastTrain.Particles
     {
         public static ParticlePool Instance { get; private set; }
 
+        private readonly Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> _pools =
+            new Dictionary<ParticleSystem, ObjectPool<ParticleSystem>>();
+
         [SerializeField] private ParticleSystem[] _particlePrefabs;
         [SerializeField] private int _defaultCapacity = 8;
         [SerializeField] private int _maxSize = 64;
-
-        private readonly Dictionary<ParticleSystem, ObjectPool<ParticleSystem>> _pools =
-            new Dictionary<ParticleSystem, ObjectPool<ParticleSystem>>();
 
         public void Init()
         {
@@ -32,7 +32,7 @@ namespace LastTrain.Particles
 
             var particle = pool.Get();
             var transform = particle.transform;
-            transform.SetParent(base.transform, worldPositionStays: false);
+            transform.SetParent(transform, worldPositionStays: false);
             transform.position = position;
 
             if (rotation.HasValue)
@@ -88,8 +88,7 @@ namespace LastTrain.Particles
                 },
                 collectionCheck: false,
                 defaultCapacity: _defaultCapacity,
-                maxSize: _maxSize
-            );
+                maxSize: _maxSize);
 
             _pools[prefab] = pool;
             return pool;
@@ -124,7 +123,7 @@ namespace LastTrain.Particles
 
             var main = ps.main;
             main.loop = false;
-            main.playOnAwake = false;        
+            main.playOnAwake = false;
             go.SetActive(false);
             return ps;
         }

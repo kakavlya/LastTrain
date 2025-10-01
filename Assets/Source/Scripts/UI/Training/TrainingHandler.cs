@@ -1,11 +1,11 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using YG;
 using LastTrain.Coins;
 using LastTrain.Level;
 using LastTrain.Persistence;
 using LastTrain.Data;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using YG;
 
 namespace LastTrain.Training
 {
@@ -22,6 +22,7 @@ namespace LastTrain.Training
         private bool _isDoneMenuTraining = false;
 
         public bool IsDoneGameplayTraining => _isDoneGameplayTraining;
+
         public bool IsDoneMenuTraining => _isDoneMenuTraining;
 
         private void Start()
@@ -30,7 +31,6 @@ namespace LastTrain.Training
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
-
             }
             else
             {

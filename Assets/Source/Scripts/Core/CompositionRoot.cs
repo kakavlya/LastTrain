@@ -1,15 +1,14 @@
-﻿using UnityEngine;
-using LastTrain.AmmunitionSystem;
+﻿using LastTrain.AmmunitionSystem;
 using LastTrain.CameraSystem;
 using LastTrain.Enemies;
 using LastTrain.Level;
 using LastTrain.Particles;
 using LastTrain.Player;
 using LastTrain.Projectiles;
-using LastTrain.UI.Gameplay;
 using LastTrain.Training;
+using LastTrain.UI.Gameplay;
 using LastTrain.Weapons.System;
-using static LastTrain.Core.UIStateMachine;
+using UnityEngine;
 
 namespace LastTrain.Core
 {
@@ -70,8 +69,7 @@ namespace LastTrain.Core
                 _playerHealth,
                 _trainMovement,
                 _levelProgress,
-                _menuScene
-            );
+                _menuScene);
 
             _uIStateMachine.StartClicked += _levelStateMachine.StartLevel;
             _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;

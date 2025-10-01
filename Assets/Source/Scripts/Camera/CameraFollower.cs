@@ -1,5 +1,5 @@
-using UnityEngine;
 using LastTrain.Player;
+using UnityEngine;
 
 namespace LastTrain.CameraSystem
 {
@@ -34,7 +34,7 @@ namespace LastTrain.CameraSystem
             Quaternion targetRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
             Quaternion smoothRotation = Quaternion.Lerp(transform.rotation, targetRotation, _rotationSmoothing * Time.deltaTime);
             Vector3 offset = new Vector3(0, 0, -_distance);
-            Vector3 targetPosition = targetRotation * offset + _target.position + _targetOffset;
+            Vector3 targetPosition = (targetRotation * offset) + _target.position + _targetOffset;
             transform.rotation = smoothRotation;
             transform.position = targetPosition;
         }
@@ -44,7 +44,7 @@ namespace LastTrain.CameraSystem
             _rotationAngle = 0f;
             Quaternion initialRotation = Quaternion.Euler(_fixedPitch, _rotationAngle, 0f);
             Vector3 initialOffset = new Vector3(0, 0, -_distance);
-            Vector3 initialPosition = initialRotation * initialOffset + _target.position + _targetOffset;
+            Vector3 initialPosition = (initialRotation * initialOffset) + _target.position + _targetOffset;
             transform.rotation = initialRotation;
             transform.position = initialPosition;
         }

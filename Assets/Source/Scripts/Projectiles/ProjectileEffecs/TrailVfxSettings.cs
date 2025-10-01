@@ -42,12 +42,19 @@ namespace LastTrain.Projectiles.Effects
         [SerializeField] private float _fadePadding = 0.02f;
 
         public float DesiredLength => _desiredLength;
+
         public float MinTime => _minTime;
+
         public float MaxTime => _maxTime;
+
         public float Width => _width;
+
         public float MinVertexDistance => _minVertexDistance;
+
         public AnimationCurve WidthCurve => _widthCurve;
+
         public Gradient ColorGradient => _colorGradient;
+
         public float FadePadding => _fadePadding;
 
         private static Gradient DefaultGradient()
@@ -59,13 +66,9 @@ namespace LastTrain.Projectiles.Effects
                     new GradientColorKey(_color2, _color2Time),
                     new GradientColorKey(_color3, _color3Time),
                 },
-                new[] {
-                    _alphaKey1,
-                    _alphaKey2,
-                    _alphaKey3,
-                    _alphaKey4
-                }
-            );
+                new[] {_alphaKey1, _alphaKey2, _alphaKey3, _alphaKey4,
+                });
+
             return g;
         }
     }

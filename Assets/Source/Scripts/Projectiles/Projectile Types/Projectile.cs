@@ -1,8 +1,8 @@
-using System;
-using UnityEngine;
 using LastTrain.Enemies;
 using LastTrain.Particles;
 using LastTrain.Projectiles.Effects;
+using System;
+using UnityEngine;
 
 namespace LastTrain.Projectiles.Types
 {
@@ -12,7 +12,9 @@ namespace LastTrain.Projectiles.Types
 
         [SerializeField] private TrailHandler _trail;
         [SerializeField] private ParticleSystem _impactPrefab;
+
         [field: SerializeField] public float Lifetime { get; private set; } = 3f;
+
         [field: SerializeField] public bool UsePooling { get; private set; } = false;
 
         private Rigidbody _projectileRigidbody;
@@ -40,12 +42,6 @@ namespace LastTrain.Projectiles.Types
             _spawnTime = Time.time;
         }
 
-        public virtual void SetVelocity()
-        {
-            if (_projectileRigidbody != null)
-                _projectileRigidbody.velocity = transform.forward * Speed;
-        }
-
         protected virtual void Update()
         {
             if (Time.time - _spawnTime >= Lifetime)
@@ -59,8 +55,6 @@ namespace LastTrain.Projectiles.Types
                     Despawn();
             }
         }
-
-        protected virtual void BeforeDespawn() { }
 
         protected virtual void OnTriggerEnter(Collider collider)
         {
@@ -89,8 +83,14 @@ namespace LastTrain.Projectiles.Types
             Despawn();
         }
 
+        public virtual void SetVelocity()
+        {
+            if (_projectileRigidbody != null)
+                _projectileRigidbody.velocity = transform.forward * Speed;
+        }
+
         public virtual void Initial(
-               Vector3 position,
+            Vector3 position,
             Quaternion rotation,
             GameObject owner,
             float speed,
@@ -117,6 +117,10 @@ namespace LastTrain.Projectiles.Types
             }
 
             _trail?.Play(Speed);
+        }
+
+        protected virtual void BeforeDespawn()
+        {
         }
 
         protected void Despawn()

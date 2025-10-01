@@ -1,7 +1,7 @@
-using UnityEngine;
-using LastTrain.Projectiles;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
+using LastTrain.Projectiles;
+using UnityEngine;
 
 namespace LastTrain.Weapons.Types
 {
@@ -12,9 +12,7 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _spreadAngle = 30;
 
         private float _currentSpreadAngle;
-        private float _selfCollisionOffset = 0.02f;
         private float _angleDivider = 0.5f;
-        private float _minDirectionSqrMagnitude = 1e-6f;
 
         public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
@@ -24,16 +22,16 @@ namespace LastTrain.Weapons.Types
 
         public override void Fire(Ammunition ammo = null)
         {
-            if (!FirePossibleCalculate()) 
+            if (!FirePossibleCalculate())
                 return;
 
             if (ammo != null && !ammo.HasAmmo)
             {
-                InvokeStopFire(); 
+                InvokeStopFire();
                 return;
             }
 
-            if (Aim == null || FirePoint == null || ProjectilePrefab == null) 
+            if (Aim == null || FirePoint == null || ProjectilePrefab == null)
                 return;
 
             var ad = Aim.GetAim();
@@ -41,12 +39,18 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 centerDir = target - origin;
 
-            if (centerDir.sqrMagnitude < _minDirectionSqrMagnitude) centerDir = FirePoint.forward;
-                else centerDir.Normalize();
+            if (centerDir.sqrMagnitude < MinDirectionSqrMagnitude)
+            {
+                centerDir = FirePoint.forward;
+            }
+            else
+            {
+                centerDir.Normalize();
+            }
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
-            Vector3 originNoSelf = origin + centerDir * _selfCollisionOffset;
+            Vector3 originNoSelf = origin + (centerDir * SelfCollisionOffset);
 
             if (Physics.Raycast(
                 originNoSelf, centerDir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))
@@ -86,7 +90,7 @@ namespace LastTrain.Weapons.Types
         {
             Vector3 baseDir = centerDir;
 
-            if (baseDir.sqrMagnitude < 1e-6f) 
+            if (baseDir.sqrMagnitude < 1e-6f)
                 baseDir = FirePoint.forward;
 
             baseDir.Normalize();

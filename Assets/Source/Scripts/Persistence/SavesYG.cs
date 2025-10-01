@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using UnityEngine;
 using LastTrain.Level;
 using LastTrain.Persistence;
 using LastTrain.Training;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace YG
 {
@@ -42,10 +42,10 @@ namespace YG
             PlayerInventorySlotsCount = 1;
 
             for (int i = 0; i < InventorySlotsCount; i++)
-                InventorySlots.Add("");
+                InventorySlots.Add(string.Empty);
 
             for (int i = 0; i < PlayerInventorySlotsCount; i++)
-                PlayerInventorySlots.Add("");
+                PlayerInventorySlots.Add(string.Empty);
         }
     }
 }

@@ -9,6 +9,6 @@ namespace LastTrain.Persistence
         AttackAngle,
         AoeDamage,
         Health,
-        Slots
+        Slots,
     }
 }

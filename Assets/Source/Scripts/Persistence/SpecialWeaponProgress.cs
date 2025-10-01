@@ -1,23 +1,24 @@
-
 namespace LastTrain.Persistence
 {
     public class SpecialWeaponProgress : WeaponProgress
     {
-        public int SpecialStatLevel;
-        public StatType SpecialStatType;
+        private int _specialStatLevel;
+        private StatType _specialStatType;
 
-        public SpecialWeaponProgress(string weaponId, StatType specialStatType, int defaultStatLevel = 0) :
-            base(weaponId, defaultStatLevel)
+        public SpecialWeaponProgress(string weaponId, StatType specialStatType, int defaultStatLevel = 0)
+            : base(weaponId, defaultStatLevel)
         {
-            SpecialStatLevel = defaultStatLevel;
-            SpecialStatType = specialStatType;
+            _specialStatLevel = defaultStatLevel;
+            _specialStatType = specialStatType;
         }
+
+        public StatType SpecialStatType => _specialStatType;
 
         public override int GetLevel(StatType stat)
         {
             if (stat == SpecialStatType)
             {
-                return SpecialStatLevel;
+                return _specialStatLevel;
             }
 
             return base.GetLevel(stat);
@@ -25,14 +26,14 @@ namespace LastTrain.Persistence
 
         public override int GetSumLevels()
         {
-            return base.GetSumLevels() + SpecialStatLevel;
+            return base.GetSumLevels() + _specialStatLevel;
         }
 
         public override void Increment(StatType stat)
         {
             if (stat == SpecialStatType)
             {
-                SpecialStatLevel++;
+                _specialStatLevel++;
             }
             else
             {

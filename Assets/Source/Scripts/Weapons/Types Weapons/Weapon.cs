@@ -1,10 +1,10 @@
-using System;
-using UnityEngine;
 using LastTrain.AmmunitionSystem;
 using LastTrain.Particles;
 using LastTrain.Projectiles;
-using LastTrain.Weapons.System;
 using LastTrain.Projectiles.Types;
+using LastTrain.Weapons.System;
+using System;
+using UnityEngine;
 
 namespace LastTrain.Weapons.Types
 {
@@ -23,21 +23,29 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _fireDelay = 0.1f;
         [SerializeField] private bool _usePooling = true;
         [SerializeField] private float _projectileSpeed = 100;
-        [SerializeField] protected float _range = 2000f;
+        [SerializeField] private float _range = 2000f;
 
         private float _lastFireTime;
         private float _currentFireDelay;
         private float _minDirectionSqrMagnitude = 1e-6f;
         private float _selfCollisionOffset = 0.02f;
-
-        protected GameObject Owner;
-        protected float Damage;
-
-        protected AimingTargetProvider Aim => _aim;
-        protected LayerMask ObstacleMask => _obstacleMask;
+        private GameObject _owner;
+        private float _damage;
 
         public event Action Fired;
         public event Action StopFired;
+
+        protected float SelfCollisionOffset => _selfCollisionOffset;
+
+        protected float MinDirectionSqrMagnitude => _minDirectionSqrMagnitude;
+
+        protected AimingTargetProvider Aim => _aim;
+
+        protected LayerMask ObstacleMask => _obstacleMask;
+
+        protected GameObject Owner => _owner;
+
+        protected float Damage => _damage;
 
         public Transform FirePoint => _firePoint;
 
@@ -53,19 +61,22 @@ namespace LastTrain.Weapons.Types
 
         public float Range => _range;
 
-        public Weapon PrefabReference { get; private set; }
-
         public Sprite UISpriteActive => _uiSpriteActive;
 
         public Sprite UISpriteDeactive => _uiSpriteDeactive;
 
         public float MaxRange => _range;
 
+        public Weapon PrefabReference { get; private set; }
+
         public virtual void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
         {
-            Owner = gameObject;
-            Damage = damage;
-            if (range > 0) _range = range;
+            _owner = gameObject;
+            _damage = damage;
+
+            if (range > 0)
+                _range = range;
+
             _currentFireDelay = fireDelay ?? _fireDelay;
         }
 
@@ -91,12 +102,18 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
-            if (dir.sqrMagnitude < _minDirectionSqrMagnitude) dir = _firePoint.forward;
-            else dir.Normalize();
+            if (dir.sqrMagnitude < _minDirectionSqrMagnitude)
+            {
+                dir = _firePoint.forward;
+            }
+            else
+            {
+                dir.Normalize();
+            }
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (_range > 0f) ? Mathf.Min(distToTarget, _range) : distToTarget;
-            Vector3 originNoSelf = origin + dir * _selfCollisionOffset;
+            Vector3 originNoSelf = origin + (dir * _selfCollisionOffset);
 
             if (Physics.Raycast(originNoSelf, dir, out var block, maxRay, _obstacleMask, QueryTriggerInteraction.Ignore))
             {
@@ -144,4 +161,3 @@ namespace LastTrain.Weapons.Types
         }
     }
 }
-

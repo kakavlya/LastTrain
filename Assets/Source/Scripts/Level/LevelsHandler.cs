@@ -1,9 +1,9 @@
 using System.Collections;
+using LastTrain.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Data;
 
 namespace LastTrain.Level
 {
@@ -39,7 +39,7 @@ namespace LastTrain.Level
                 for (int i = 0; i < _levelSettings.Length; i++)
                 {
                     levelsAvailability.Add(new LevelAvailability(_levelSettings[i].LevelNumber, false));
-                    levelsAvailability[0].IsAvailable = true; 
+                    levelsAvailability[0].IsAvailable = true;
                 }
 
                 YG2.SaveProgress();
@@ -88,9 +88,11 @@ namespace LastTrain.Level
             var layout = _contentButtonsTransform.GetComponent<GridLayoutGroup>();
             var contentRect = _contentButtonsTransform.GetComponent<RectTransform>();
             int totalItems = _contentButtonsTransform.childCount;
-            int columns = Mathf.Max(1, Mathf.FloorToInt((contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
+            int columns = Mathf.Max(1, Mathf.FloorToInt((
+                contentRect.rect.width + layout.spacing.x) / (layout.cellSize.x + layout.spacing.x)));
             int rows = Mathf.CeilToInt((float)totalItems / columns);
-            float height = rows * layout.cellSize.y + layout.spacing.y * (rows - 1) + layout.padding.top + layout.padding.bottom;
+            float height = (rows * layout.cellSize.y) + (
+                layout.spacing.y * (rows - 1)) + (layout.padding.top + layout.padding.bottom);
             contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         }
 

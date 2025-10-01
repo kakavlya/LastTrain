@@ -1,7 +1,7 @@
+using LastTrain.Coins;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Coins;
 
 namespace LastTrain.Advertisement
 {
@@ -37,8 +37,7 @@ namespace LastTrain.Advertisement
                     CoinsHandler.Instance.AddCoins(_rewardCount);
                     _rewardButton.interactable = false;
                 }
-            }
-            );
+            });
         }
 
         private void ShowRewardScreen()

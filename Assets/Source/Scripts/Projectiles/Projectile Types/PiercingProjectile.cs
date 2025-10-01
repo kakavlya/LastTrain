@@ -1,5 +1,5 @@
-using UnityEngine;
 using LastTrain.Enemies;
+using UnityEngine;
 
 namespace LastTrain.Projectiles.Types
 {

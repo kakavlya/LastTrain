@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using LastTrain.Effects;
+﻿using LastTrain.Effects;
 using LastTrain.Enemies;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace LastTrain.Core
 {
     public class HealthBase : MonoBehaviour, IDamageable
-    {      
+    {
         private ModelEffects _view;
         private float _currentHealth;
 

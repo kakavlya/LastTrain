@@ -1,7 +1,6 @@
-﻿using System;
+﻿using LastTrain.Weapons.Types;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using LastTrain.Weapons.Types;
 
 namespace LastTrain.Weapons.System
 {

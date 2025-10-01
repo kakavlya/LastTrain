@@ -1,5 +1,5 @@
-using UnityEngine;
 using LastTrain.Weapons.Types;
+using UnityEngine;
 
 namespace LastTrain.Persistence
 {
@@ -14,6 +14,7 @@ namespace LastTrain.Persistence
             string.IsNullOrWhiteSpace(_weaponId) ? name : _weaponId;
 
         public Weapon WeaponPrefab => _weaponPrefab;
+
         public int UnblockingCost => _unblockingCost;
     }
 }

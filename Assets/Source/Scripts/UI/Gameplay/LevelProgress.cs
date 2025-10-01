@@ -1,3 +1,6 @@
+using LastTrain.Coins;
+using LastTrain.Level;
+using LastTrain.Data;
 using System;
 using System.Collections;
 using TMPro;
@@ -5,9 +8,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using YG;
-using LastTrain.Coins;
-using LastTrain.Level;
-using LastTrain.Data;
 
 namespace LastTrain.UI.Gameplay
 {
@@ -23,6 +23,7 @@ namespace LastTrain.UI.Gameplay
         private LevelSetting _nextLevel;
 
         public event Action CountdownFinished;
+
         public event Action LevelCompleted;
 
         public void Init()

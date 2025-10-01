@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace LastTrain.Enemies
 {
@@ -49,7 +49,7 @@ namespace LastTrain.Enemies
             if (!_visualRoot.gameObject.activeSelf)
                 _visualRoot.gameObject.SetActive(true);
 
-            Vector3 launchVelocity = Vector3.up * _upwardForce + Random.insideUnitSphere;
+            Vector3 launchVelocity = (Vector3.up * _upwardForce) + Random.insideUnitSphere;
             Vector3 targetPosition = _visualRoot.position + launchVelocity;
             Vector3 endEuler = Random.onUnitSphere * _torqueAmount;
 

@@ -1,8 +1,8 @@
+using LastTrain.ShopSystem;
+using LastTrain.Data;
 using System.Collections.Generic;
 using UnityEngine;
 using YG;
-using LastTrain.ShopSystem;
-using LastTrain.Data;
 
 namespace LastTrain.Inventory
 {
@@ -41,7 +41,7 @@ namespace LastTrain.Inventory
 
         private void AddNewSlot()
         {
-            YG2.saves.PlayerInventorySlots.Add("");
+            YG2.saves.PlayerInventorySlots.Add(string.Empty);
             SubmitActiveSlots();
             YG2.SaveProgress();
         }

@@ -1,7 +1,7 @@
-using TMPro;
-using UnityEngine;
 using LastTrain.Coins;
 using LastTrain.Data;
+using TMPro;
+using UnityEngine;
 
 namespace LastTrain.UI.Gameplay
 {

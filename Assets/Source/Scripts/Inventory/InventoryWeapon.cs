@@ -1,8 +1,8 @@
+using LastTrain.Persistence;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using LastTrain.Persistence;
 
 namespace LastTrain.Inventory
 {
@@ -17,6 +17,7 @@ namespace LastTrain.Inventory
         private WeaponSlotUI _currentSlot;
 
         public WeaponSlotUI CurrentSlot => _currentSlot;
+
         public WeaponUpgradeConfig WeaponConfig => _weaponConfig;
 
         private void Awake()

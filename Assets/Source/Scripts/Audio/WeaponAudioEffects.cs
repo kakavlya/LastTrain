@@ -1,5 +1,5 @@
-using UnityEngine;
 using LastTrain.Weapons.Types;
+using UnityEngine;
 
 namespace LastTrain.Audio
 {

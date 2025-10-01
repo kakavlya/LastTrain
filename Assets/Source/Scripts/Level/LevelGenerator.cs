@@ -1,7 +1,7 @@
+using LastTrain.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using LastTrain.Player;
 
 namespace LastTrain.Level
 {
@@ -19,6 +19,7 @@ namespace LastTrain.Level
         private Vector3 _workingPosition;
 
         public event Action<LevelElement, LevelElement> StartedElementDefined;
+
         public event Action<LevelElement, LevelElement> ElementChanged;
 
         public Vector3 StartTrainPosition { get; private set; }
@@ -51,7 +52,7 @@ namespace LastTrain.Level
             }
 
             _currentElement = _elementsOnScene[_elementsOnScene.Count / _nextElementOffset];
-            _nextElement = _elementsOnScene[_elementsOnScene.Count / _nextElementOffset + 1];
+            _nextElement = _elementsOnScene[(_elementsOnScene.Count / _nextElementOffset) + 1];
             StartedElementDefined?.Invoke(_currentElement, _nextElement);
             StartTrainPosition = _currentElement.transform.position;
         }

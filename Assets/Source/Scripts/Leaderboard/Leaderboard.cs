@@ -1,7 +1,7 @@
+using LastTrain.Persistence;
 using UnityEngine;
 using YG;
 using YG.Utils.LB;
-using LastTrain.Persistence;
 
 namespace LastTrain.Leaderboard
 {

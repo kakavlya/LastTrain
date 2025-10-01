@@ -1,5 +1,5 @@
-using UnityEngine;
 using LastTrain.Data;
+using UnityEngine;
 
 namespace LastTrain.Level
 {
