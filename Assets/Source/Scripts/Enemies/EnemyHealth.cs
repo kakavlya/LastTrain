@@ -14,11 +14,6 @@ namespace LastTrain.Enemies
             _deathHandler = GetComponent<EnemyDeathHandler>();
         }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-        }
-
         public void SetRewardForKill(int reward)
         {
             _rewardForKill = reward;

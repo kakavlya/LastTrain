@@ -5,12 +5,12 @@ namespace LastTrain.Projectiles.Effects
 {
     public sealed class TrailHandler : MonoBehaviour
     {
-        private const float _defaultTrailLength = 3f;
-        private const float _defaultMinTime = 0.03f;
-        private const float _defaultMaxTime = 0.25f;
-        private const float _minProjectileSpeed = 0.001f;
-        private const float _defaultFadePadding = 0.02f;
-        private const float _minWaitTime = 0.01f;
+        private const float DefaultTrailLength = 3f;
+        private const float DefaultMinTime = 0.03f;
+        private const float DefaultMaxTime = 0.25f;
+        private const float MinProjectileSpeed = 0.001f;
+        private const float DefaultFadePadding = 0.02f;
+        private const float MinWaitTime = 0.01f;
 
         [SerializeField] private TrailRenderer _trail;
         [SerializeField] private TrailVfxSettings _settings;
@@ -69,10 +69,10 @@ namespace LastTrain.Projectiles.Effects
             transform.localRotation = _initLocalRot;
             transform.localScale = _initLocalScale;
             gameObject.SetActive(true);
-            float l = _settings ? _settings.DesiredLength : _defaultTrailLength;
-            float tMin = _settings ? _settings.MinTime : _defaultMinTime;
-            float tMax = _settings ? _settings.MaxTime : _defaultMaxTime;
-            float speed = Mathf.Max(_minProjectileSpeed, projectileSpeed);
+            float l = _settings ? _settings.DesiredLength : DefaultTrailLength;
+            float tMin = _settings ? _settings.MinTime : DefaultMinTime;
+            float tMax = _settings ? _settings.MaxTime : DefaultMaxTime;
+            float speed = Mathf.Max(MinProjectileSpeed, projectileSpeed);
             _trail.time = Mathf.Clamp(l / speed, tMin, tMax);
             _trail.Clear();
             _trail.emitting = true;
@@ -95,8 +95,8 @@ namespace LastTrain.Projectiles.Effects
 
         private IEnumerator FadeAndReturn()
         {
-            float pad = _settings ? _settings.FadePadding : _defaultFadePadding;
-            float wait = Mathf.Max(_minWaitTime, _trail.time) + pad;
+            float pad = _settings ? _settings.FadePadding : DefaultFadePadding;
+            float wait = Mathf.Max(MinWaitTime, _trail.time) + pad;
             yield return new WaitForSeconds(wait);
 
             if (!_trail)

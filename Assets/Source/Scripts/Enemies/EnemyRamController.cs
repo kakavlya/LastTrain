@@ -6,9 +6,9 @@ namespace LastTrain.Enemies
     [DisallowMultipleComponent]
     public class EnemyRamController : EnemyController
     {
-        private const float _minDistance = 0.01f;
-        private const float _minOffcet = 0.01f;
-        private const float _comprasionTolerance = 1e-6f;
+        private const float MinDistance = 0.01f;
+        private const float MinOffcet = 0.01f;
+        private const float ComprasionTolerance = 1e-6f;
 
         [SerializeField] private float _accel = 25f;
         [SerializeField] private float _decel = 45f;
@@ -83,8 +83,8 @@ namespace LastTrain.Enemies
         {
             _player = player;
             _playerCollider = playerCollider;
-            _safeOffset = Mathf.Max(_minOffcet, impactOffset);
-            _holdDistance = Mathf.Max(_minDistance, holdDistance);
+            _safeOffset = Mathf.Max(MinOffcet, impactOffset);
+            _holdDistance = Mathf.Max(MinDistance, holdDistance);
             _holdSpeed = Mathf.Max(0f, holdSpeed);
             _chargeSpeed = Mathf.Max(0f, chargeSpeed);
             _impactPause = Mathf.Max(0f, impactPause);
@@ -163,7 +163,7 @@ namespace LastTrain.Enemies
             toAnchor.y = 0f;
             float dist = toAnchor.magnitude;
 
-            if (dist > _comprasionTolerance)
+            if (dist > ComprasionTolerance)
             {
                 Vector3 dir = toAnchor / dist;
                 float step = _currentSpeed * Time.deltaTime;
@@ -221,12 +221,12 @@ namespace LastTrain.Enemies
             Vector3 d = transform.position - anchor;
             d.y = 0f;
 
-            if (d.sqrMagnitude < _comprasionTolerance)
+            if (d.sqrMagnitude < ComprasionTolerance)
             {
                 d = transform.position - _player.position;
                 d.y = 0f;
 
-                if (d.sqrMagnitude < _comprasionTolerance)
+                if (d.sqrMagnitude < ComprasionTolerance)
                     d = Vector3.forward;
             }
 

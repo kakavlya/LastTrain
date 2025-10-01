@@ -22,8 +22,6 @@ namespace LastTrain.UI.Gameplay
         private int _progressValue = 1;
         private LevelSetting _nextLevel;
 
-        public event Action CountdownFinished;
-
         public event Action LevelCompleted;
 
         public void Init()
@@ -37,7 +35,6 @@ namespace LastTrain.UI.Gameplay
         public void StartCountdown()
         {
             StartCoroutine(CountdownBeforePlaying());
-            CountdownFinished?.Invoke();
         }
 
         private IEnumerator CountdownBeforePlaying()

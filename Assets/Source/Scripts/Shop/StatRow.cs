@@ -8,9 +8,9 @@ namespace LastTrain.ShopSystem
 {
     public class StatRow : MonoBehaviour
     {
-        private const string _fractionalFormat = "F1";
-        private const string _integerFormat = "F0";
-        private const string _maxLevelText = "-";
+        private const string FractionalFormat = "F1";
+        private const string IntegerFormat = "F0";
+        private const string MaxLevelText = "-";
 
         [SerializeField] private TextMeshProUGUI _statName;
         [SerializeField] private Slider _slider;
@@ -47,15 +47,15 @@ namespace LastTrain.ShopSystem
 
             if (_isShowFractionalValue)
             {
-                _amount.text = statValue.ToString(_fractionalFormat);
+                _amount.text = statValue.ToString(FractionalFormat);
             }
             else
             {
-                _amount.text = statValue.ToString(_integerFormat);
+                _amount.text = statValue.ToString(IntegerFormat);
             }
 
             bool canUpgrade = currentLevel < maxLevel;
-            _cost.text = canUpgrade ? _upgradeConfig.GetCost(_statType, currentLevel).ToString() : _maxLevelText;
+            _cost.text = canUpgrade ? _upgradeConfig.GetCost(_statType, currentLevel).ToString() : MaxLevelText;
             _upgradeButton.interactable = canUpgrade;
         }
     }

@@ -12,8 +12,8 @@ namespace LastTrain.ShopSystem
 {
     public class DetailsPanel : MonoBehaviour
     {
-        private const float _fadeInDuration = 0.25f;
-        private const float _fadeOutDuration = 0.2f;
+        private const float FadeInDuration = 0.25f;
+        private const float FadeOutDuration = 0.2f;
 
         [Header("Common")]
         [SerializeField] private Button _closeBtn;
@@ -99,12 +99,12 @@ namespace LastTrain.ShopSystem
         {
             _cg.alpha = 0;
             gameObject.SetActive(true);
-            DOTween.To(v => _cg.alpha = v, 0, 1, _fadeInDuration).SetEase(Ease.OutQuad);
+            DOTween.To(v => _cg.alpha = v, 0, 1, FadeInDuration).SetEase(Ease.OutQuad);
         }
 
         private void Close()
         {
-            DOTween.To(v => _cg.alpha = v, 1, 0, _fadeOutDuration)
+            DOTween.To(v => _cg.alpha = v, 1, 0, FadeOutDuration)
                    .OnComplete(() =>
                    {
                        gameObject.SetActive(false);

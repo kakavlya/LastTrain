@@ -5,9 +5,9 @@ namespace LastTrain.Projectiles.Effects
     [CreateAssetMenu(menuName = "VFX/Trail VFX Settings", fileName = "TrailVfxSettings")]
     public class TrailVfxSettings : ScriptableObject
     {
-        private const float _color1Time = 0.05f;
-        private const float _color2Time = 0.40f;
-        private const float _color3Time = 1.00f;
+        private const float Color1Time = 0.05f;
+        private const float Color2Time = 0.40f;
+        private const float Color3Time = 1.00f;
 
         private static readonly Color _color1 = new Color(1f, 0.85f, 0.55f);
         private static readonly Color _color2 = new Color(1f, 0.70f, 0.30f);
@@ -61,9 +61,9 @@ namespace LastTrain.Projectiles.Effects
             var g = new Gradient();
             g.SetKeys(
                 new[] {
-                    new GradientColorKey(_color1, _color1Time),
-                    new GradientColorKey(_color2, _color2Time),
-                    new GradientColorKey(_color3, _color3Time),
+                    new GradientColorKey(_color1, Color1Time),
+                    new GradientColorKey(_color2, Color2Time),
+                    new GradientColorKey(_color3, Color3Time),
                 },
                 new[] {_alphaKey1, _alphaKey2, _alphaKey3, _alphaKey4,});
 

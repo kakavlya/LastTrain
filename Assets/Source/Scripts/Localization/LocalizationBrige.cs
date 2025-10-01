@@ -6,12 +6,12 @@ namespace LastTrain.Localization
 {
     public class LocalizationBrige : MonoBehaviour
     {
-        private const string _nameLanguageRu = "Russian";
-        private const string _nameLanguageEn = "English";
-        private const string _nameLanguageTr = "Turkish";
-        private const string _codelanguageRu = "ru";
-        private const string _codelanguageEn = "en";
-        private const string _codelanguageTr = "tr";
+        private const string NameLanguageRu = "Russian";
+        private const string NameLanguageEn = "English";
+        private const string NameLanguageTr = "Turkish";
+        private const string CodelanguageRu = "ru";
+        private const string CodelanguageEn = "en";
+        private const string CodelanguageTr = "tr";
 
         private void Start()
         {
@@ -29,7 +29,7 @@ namespace LastTrain.Localization
 
         private void InitialLanguage()
         {
-            string initialLanguageCode = !string.IsNullOrEmpty(YG2.lang) ? YG2.lang : _codelanguageEn;
+            string initialLanguageCode = !string.IsNullOrEmpty(YG2.lang) ? YG2.lang : CodelanguageEn;
             OnLanguageChanged(initialLanguageCode);
         }
 
@@ -43,7 +43,7 @@ namespace LastTrain.Localization
             }
             else
             {
-                LocalizationManager.Language = _nameLanguageEn;
+                LocalizationManager.Language = NameLanguageEn;
             }
         }
 
@@ -51,10 +51,10 @@ namespace LastTrain.Localization
         {
             return languageCode switch
             {
-                _codelanguageRu => _nameLanguageRu,
-                _codelanguageEn => _nameLanguageEn,
-                _codelanguageTr => _nameLanguageTr,
-                _ => _nameLanguageEn
+                CodelanguageRu => NameLanguageRu,
+                CodelanguageEn => NameLanguageEn,
+                CodelanguageTr => NameLanguageTr,
+                _ => NameLanguageEn
             };
         }
     }

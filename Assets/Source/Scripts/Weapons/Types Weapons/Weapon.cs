@@ -33,6 +33,7 @@ namespace LastTrain.Weapons.Types
         private float _damage;
 
         public event Action Fired;
+
         public event Action StopFired;
 
         protected float SelfCollisionOffset => _selfCollisionOffset;

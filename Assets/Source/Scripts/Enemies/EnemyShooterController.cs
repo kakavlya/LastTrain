@@ -6,22 +6,22 @@ namespace LastTrain.Enemies
 {
     public class EnemyShooterController : EnemyController
     {
-        private const float _vectorMagnitudeTolerance = 1e-4f;
-        private const float _minLengthThreshold = 0.01f;
-        private const float _minRadiusThreshold = 0.1f;
-        private const float _minDistanceThreshold = 0.2f;
-        private const float _minBrainInterval = 0.05f;
-        private const float _minFireInterval = 0.01f;
-        private const float _hysteresisFactor = 0.5f;
-        private const float _retreatSpeedMultiplier = 1.1f;
-        private const float _strafeInterpolationFactor = 0.1f;
-        private const float _strafeSpeedAverageFactor = 0.5f;
-        private const float _fireIntervalRandomMin = 0.95f;
-        private const float _fireIntervalRandomMax = 1.05f;
-        private const float _projectileDistanceBuffer = 2f;
-        private const float _projectileLifetimeFactor = 3f;
-        private const float _minFireAngle = 1f;
-        private const float _maxFireAngle = 179f;
+        private const float VectorMagnitudeTolerance = 1e-4f;
+        private const float MinLengthThreshold = 0.01f;
+        private const float MinRadiusThreshold = 0.1f;
+        private const float MinDistanceThreshold = 0.2f;
+        private const float MinBrainInterval = 0.05f;
+        private const float MinFireInterval = 0.01f;
+        private const float HysteresisFactor = 0.5f;
+        private const float RetreatSpeedMultiplier = 1.1f;
+        private const float StrafeInterpolationFactor = 0.1f;
+        private const float StrafeSpeedAverageFactor = 0.5f;
+        private const float FireIntervalRandomMin = 0.95f;
+        private const float FireIntervalRandomMax = 1.05f;
+        private const float ProjectileDistanceBuffer = 2f;
+        private const float ProjectileLifetimeFactor = 3f;
+        private const float MinFireAngle = 1f;
+        private const float MaxFireAngle = 179f;
 
         [SerializeField] private Transform _firePoint;
 
@@ -153,8 +153,8 @@ namespace LastTrain.Enemies
             _orbitSpeedDeg = orbitSpeedDeg;
             _changeDirEvery = changeDirEvery;
             _checkRadiusSqr = checkRadius * checkRadius;
-            _brainInterval = Mathf.Max(_minBrainInterval, brainInterval);
-            _fireAngle = Mathf.Clamp(fireAngle, _minFireAngle, _maxFireAngle);
+            _brainInterval = Mathf.Max(MinBrainInterval, brainInterval);
+            _fireAngle = Mathf.Clamp(fireAngle, MinFireAngle, MaxFireAngle);
 
             if (Health != null && Health.IsDead)
             {
@@ -166,7 +166,7 @@ namespace LastTrain.Enemies
             _movement.SetSpeed(_approachSpeed);
             _brainTimer = Random.Range(0f, _brainInterval);
             _changeTimer = Random.Range(_changeDirEvery.x, _changeDirEvery.y);
-            _fireTimer = Random.Range(0f, Mathf.Max(_minFireInterval, _fireInterval));
+            _fireTimer = Random.Range(0f, Mathf.Max(MinFireInterval, _fireInterval));
             EnterApproach();
         }
 
@@ -182,11 +182,11 @@ namespace LastTrain.Enemies
 
             float distSurf = DistanceToPlayerSurface(transform.position);
 
-            if (distSurf < _keepMinSurf - _hysteresisFactor)
+            if (distSurf < _keepMinSurf - HysteresisFactor)
             {
                 EnterRetreat();
             }
-            else if (distSurf > _keepMaxSurf + _hysteresisFactor)
+            else if (distSurf > _keepMaxSurf + HysteresisFactor)
             {
                 EnterApproach();
             }
@@ -203,7 +203,7 @@ namespace LastTrain.Enemies
             Vector3 pFlat = new Vector3(_player.position.x, transform.position.y, _player.position.z);
             Vector3 radial = transform.position - pFlat;
             float rLen = radial.magnitude;
-            radial = rLen > _vectorMagnitudeTolerance ? radial / rLen : transform.forward;
+            radial = rLen > VectorMagnitudeTolerance ? radial / rLen : transform.forward;
             float targetCenterDist = ProjectCenterDistanceForSurface(_keepMaxSurf);
             _currentTarget = pFlat + (radial * targetCenterDist);
         }
@@ -211,11 +211,11 @@ namespace LastTrain.Enemies
         private void EnterRetreat()
         {
             _state = State.Retreat;
-            _currentSpeed = _approachSpeed * _retreatSpeedMultiplier;
+            _currentSpeed = _approachSpeed * RetreatSpeedMultiplier;
             Vector3 pFlat = new Vector3(_player.position.x, transform.position.y, _player.position.z);
             Vector3 radial = transform.position - pFlat;
             float rLen = radial.magnitude;
-            radial = rLen > _vectorMagnitudeTolerance ? radial / rLen : -transform.forward;
+            radial = rLen > VectorMagnitudeTolerance ? radial / rLen : -transform.forward;
             float targetCenterDist = ProjectCenterDistanceForSurface(_keepMinSurf);
             _currentTarget = pFlat + (radial * targetCenterDist);
         }
@@ -223,7 +223,7 @@ namespace LastTrain.Enemies
         private void EnterStrafe()
         {
             _state = State.Strafe;
-            _currentSpeed = _approachSpeed * Mathf.Lerp(_attackSpeedFactorMin, _attackSpeedFactorMax, _strafeSpeedAverageFactor);
+            _currentSpeed = _approachSpeed * Mathf.Lerp(_attackSpeedFactorMin, _attackSpeedFactorMax, StrafeSpeedAverageFactor);
 
             if (_changeTimer <= 0f)
                 _changeTimer = Random.Range(_changeDirEvery.x, _changeDirEvery.y);
@@ -243,12 +243,12 @@ namespace LastTrain.Enemies
             Vector3 pFlat = new Vector3(_player.position.x, pos.y, _player.position.z);
             Vector3 radial = pos - pFlat;
             float radius = radial.magnitude;
-            radial = radius > _vectorMagnitudeTolerance ? radial / radius : transform.forward;
+            radial = radius > VectorMagnitudeTolerance ? radial / radius : transform.forward;
             Vector3 tangent = Vector3.Cross(Vector3.up, radial).normalized * _orbitDir;
             float wRad = _orbitSpeedDeg * Mathf.Deg2Rad;
-            float orbitStep = Mathf.Max(_minLengthThreshold, wRad * Mathf.Max(radius, _minRadiusThreshold)) * Time.deltaTime;
+            float orbitStep = Mathf.Max(MinLengthThreshold, wRad * Mathf.Max(radius, MinRadiusThreshold)) * Time.deltaTime;
             float midSurf = 0.5f * (_keepMinSurf + _keepMaxSurf);
-            float desiredR = Mathf.Lerp(radius, ProjectCenterDistanceForSurface(midSurf), _strafeInterpolationFactor);
+            float desiredR = Mathf.Lerp(radius, ProjectCenterDistanceForSurface(midSurf), StrafeInterpolationFactor);
             Vector3 ringBase = pFlat + (radial * desiredR);
             _currentTarget = ringBase + (tangent * orbitStep);
         }
@@ -272,7 +272,7 @@ namespace LastTrain.Enemies
             Vector3 shootDir = aimPoint - _firePoint.position;
             float len = shootDir.magnitude;
 
-            if (len < _minLengthThreshold)
+            if (len < MinLengthThreshold)
                 return;
 
             shootDir /= len;
@@ -282,13 +282,13 @@ namespace LastTrain.Enemies
                 return;
 
             Fire(shootDir);
-            _fireTimer = _fireInterval * Random.Range(_fireIntervalRandomMin, _fireIntervalRandomMax);
+            _fireTimer = _fireInterval * Random.Range(FireIntervalRandomMin, FireIntervalRandomMax);
         }
 
         private void Fire(Vector3 dir)
         {
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
-            float maxDistance = Mathf.Max(_shootingDistance + _projectileDistanceBuffer, _projectileSpeed * (_fireInterval * _projectileLifetimeFactor));
+            float maxDistance = Mathf.Max(_shootingDistance + ProjectileDistanceBuffer, _projectileSpeed * (_fireInterval * ProjectileLifetimeFactor));
             bool usePooling = _projectilePrefab.UsePooling;
 
             if (usePooling && ProjectilePool.Instance != null)
@@ -330,7 +330,7 @@ namespace LastTrain.Enemies
             float radialNow = (transform.position - pFlat).magnitude;
             float surfNow = DistanceToPlayerSurface(transform.position);
             float delta = desiredSurf - surfNow;
-            return Mathf.Max(_minDistanceThreshold, radialNow + delta);
+            return Mathf.Max(MinDistanceThreshold, radialNow + delta);
         }
     }
 }

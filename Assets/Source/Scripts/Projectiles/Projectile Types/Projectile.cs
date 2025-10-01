@@ -13,14 +13,14 @@ namespace LastTrain.Projectiles.Types
         [SerializeField] private TrailHandler _trail;
         [SerializeField] private ParticleSystem _impactPrefab;
 
-        [field: SerializeField] public float Lifetime { get; private set; } = 3f;
-
-        [field: SerializeField] public bool UsePooling { get; private set; } = false;
-
         private Rigidbody _projectileRigidbody;
         private float _spawnTime;
 
         public event Action<Projectile> OnReturnToPool;
+
+        [field: SerializeField] public float Lifetime { get; private set; } = 3f;
+
+        [field: SerializeField] public bool UsePooling { get; private set; } = false;
 
         public float Speed { get; private set; } = 100f;
 

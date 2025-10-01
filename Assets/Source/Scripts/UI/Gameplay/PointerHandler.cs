@@ -5,10 +5,10 @@ namespace LastTrain.UI.Gameplay
 {
     public class PointerHandler : MonoBehaviour
     {
-        private const float _visiblyDistance = 500f;
-        private const float _screenCenterDivider = 2f;
-        private const float _angleCorrection = 90f;
-        private const float _screenBoundary = 0f;
+        private const float VisiblyDistance = 500f;
+        private const float ScreenCenterDivider = 2f;
+        private const float AngleCorrection = 90f;
+        private const float ScreenBoundary = 0f;
 
         public static PointerHandler Instance;
 
@@ -49,11 +49,11 @@ namespace LastTrain.UI.Gameplay
                 GameObject enemy = pointer.Key;
                 Vector3 distance = enemy.transform.position - _playerTransform.position;
 
-                if (distance.magnitude > _visiblyDistance)
+                if (distance.magnitude > VisiblyDistance)
                     continue;
 
                 EnemyPointerIcon pointerIcon = pointer.Value;
-                float percentDist = distance.magnitude / _visiblyDistance;
+                float percentDist = distance.magnitude / VisiblyDistance;
                 pointerIcon.ChangeAlpha(percentDist);
 
                 Vector3 screenPos = _camera.WorldToScreenPoint(enemy.transform.position);
@@ -62,29 +62,29 @@ namespace LastTrain.UI.Gameplay
                 {
                     screenPos.x = Screen.width - screenPos.x;
                     screenPos.y = Screen.height - screenPos.y;
-                    float clampedX = Mathf.Clamp(screenPos.x, _screenBoundary, Screen.width);
-                    float clampedY = Mathf.Clamp(screenPos.y, _screenBoundary, Screen.height);
+                    float clampedX = Mathf.Clamp(screenPos.x, ScreenBoundary, Screen.width);
+                    float clampedY = Mathf.Clamp(screenPos.y, ScreenBoundary, Screen.height);
                     Vector3 clampedPos = new Vector3(clampedX, clampedY, 0);
                     Vector3 fromCenter = (clampedPos - new Vector3(
-                        Screen.width / _screenCenterDivider, Screen.height / _screenCenterDivider)).normalized;
+                        Screen.width / ScreenCenterDivider, Screen.height / ScreenCenterDivider)).normalized;
                     float angle = Mathf.Atan2(fromCenter.y, fromCenter.x) * Mathf.Rad2Deg;
-                    pointerIcon.SetIconPosition(clampedPos, Quaternion.Euler(0, 0, angle - _angleCorrection));
+                    pointerIcon.SetIconPosition(clampedPos, Quaternion.Euler(0, 0, angle - AngleCorrection));
                     pointerIcon.Show();
                     continue;
                 }
 
-                bool offScreen = screenPos.x < _screenBoundary || screenPos.x > Screen.width ||
-                                 screenPos.y < _screenBoundary || screenPos.y > Screen.height;
+                bool offScreen = screenPos.x < ScreenBoundary || screenPos.x > Screen.width ||
+                                 screenPos.y < ScreenBoundary || screenPos.y > Screen.height;
 
                 if (offScreen)
                 {
-                    float clampedX = Mathf.Clamp(screenPos.x, _screenBoundary, Screen.width);
-                    float clampedY = Mathf.Clamp(screenPos.y, _screenBoundary, Screen.height);
+                    float clampedX = Mathf.Clamp(screenPos.x, ScreenBoundary, Screen.width);
+                    float clampedY = Mathf.Clamp(screenPos.y, ScreenBoundary, Screen.height);
                     Vector3 clampedPos = new Vector3(clampedX, clampedY, screenPos.z);
                     Vector3 fromCenter = (clampedPos - new Vector3(
-                        Screen.width / _screenCenterDivider, Screen.height / _screenCenterDivider)).normalized;
+                        Screen.width / ScreenCenterDivider, Screen.height / ScreenCenterDivider)).normalized;
                     float angle = Mathf.Atan2(fromCenter.y, fromCenter.x) * Mathf.Rad2Deg;
-                    pointerIcon.SetIconPosition(clampedPos, Quaternion.Euler(0, 0, angle - _angleCorrection));
+                    pointerIcon.SetIconPosition(clampedPos, Quaternion.Euler(0, 0, angle - AngleCorrection));
                     pointerIcon.Show();
                 }
                 else
