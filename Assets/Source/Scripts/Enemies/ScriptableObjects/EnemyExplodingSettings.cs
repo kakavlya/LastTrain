@@ -27,8 +27,7 @@ namespace LastTrain.Enemies
                 playerCollider: playerCollider,
                 speed: _moveSpeed,
                 explosionRadius: _explosionRadius,
-                damage: _damage
-            );
+                damage: _damage);
         }
     }
 }

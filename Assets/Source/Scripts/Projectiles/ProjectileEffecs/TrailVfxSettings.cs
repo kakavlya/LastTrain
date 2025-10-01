@@ -32,8 +32,7 @@ namespace LastTrain.Projectiles.Effects
             new Keyframe(0.00f, 1.00f, 0, 0),
             new Keyframe(0.15f, 0.85f, 0, 0),
             new Keyframe(0.60f, 0.28f, 0, 0),
-            new Keyframe(1.00f, 0.00f, 0, 0)
-        );
+            new Keyframe(1.00f, 0.00f, 0, 0));
 
         [SerializeField] private Gradient _colorGradient = DefaultGradient();
 
@@ -66,8 +65,7 @@ namespace LastTrain.Projectiles.Effects
                     new GradientColorKey(_color2, _color2Time),
                     new GradientColorKey(_color3, _color3Time),
                 },
-                new[] {_alphaKey1, _alphaKey2, _alphaKey3, _alphaKey4,
-                });
+                new[] {_alphaKey1, _alphaKey2, _alphaKey3, _alphaKey4,});
 
             return g;
         }

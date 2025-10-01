@@ -31,7 +31,12 @@ namespace LastTrain.Enemies
         private float _targetSpeed;
         private bool _canDealDamageWindow;
 
-        public enum State { Hold, Charge, Impact }
+        public enum State 
+        {
+            Hold,
+            Charge,
+            Impact,
+        }
 
         protected override void Awake()
         {
@@ -54,9 +59,14 @@ namespace LastTrain.Enemies
 
             switch (_state)
             {
-                case State.Hold: UpdateHold(); break;
-                case State.Charge: UpdateCharge(); break;
-                case State.Impact: UpdateImpact(); break;
+                case State.Hold: UpdateHold();
+                    break;
+
+                case State.Charge: UpdateCharge();
+                    break;
+
+                case State.Impact: UpdateImpact();
+                    break;
             }
         }
 
@@ -69,8 +79,7 @@ namespace LastTrain.Enemies
             float chargeSpeed,
             float impactPause,
             Vector2 holdPauseRange,
-            int damage
-        )
+            int damage)
         {
             _player = player;
             _playerCollider = playerCollider;
@@ -129,7 +138,7 @@ namespace LastTrain.Enemies
             _stateTimer -= Time.deltaTime;
             Vector3 anchor = SafeAnchorOnPlane();
             Vector3 dirOut = SafeOutwardsDir(anchor);
-            Vector3 target = anchor + dirOut * _holdDistance;
+            Vector3 target = anchor + (dirOut * _holdDistance);
             target.y = transform.position.y;
             _movement.MoveForwardTo(target);
 
@@ -150,7 +159,7 @@ namespace LastTrain.Enemies
                 return;
 
             Vector3 anchor = SafeAnchorOnPlane();
-            Vector3 toAnchor = (anchor - transform.position);
+            Vector3 toAnchor = anchor - transform.position;
             toAnchor.y = 0f;
             float dist = toAnchor.magnitude;
 

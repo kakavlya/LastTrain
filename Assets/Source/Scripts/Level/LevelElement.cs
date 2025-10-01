@@ -8,6 +8,7 @@ namespace LastTrain.Level
         [SerializeField] private Transform[] _pickableAmmunitionSpawnPoints;
 
         public Transform[] EnemySpawnPoints => _enemySpawnPoints;
+
         public Transform[] PickableAmmunitionPoints => _pickableAmmunitionSpawnPoints;
     }
 }

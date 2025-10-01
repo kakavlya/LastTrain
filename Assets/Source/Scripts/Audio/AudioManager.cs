@@ -11,6 +11,7 @@ namespace LastTrain.Audio
         [SerializeField] private AudioSource _musicAudioSource;
 
         public float EffectsAudioVolume => _effectsAudioSource.volume;
+
         public float MusicAudioVolume => _musicAudioSource.volume;
 
         private void Awake()

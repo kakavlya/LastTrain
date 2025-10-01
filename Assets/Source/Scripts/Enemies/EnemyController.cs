@@ -5,6 +5,7 @@ namespace LastTrain.Enemies
     public abstract class EnemyController : MonoBehaviour
     {
         protected EnemyHealth Health { get; private set; }
+
         protected bool IsAlive { get; private set; }
 
         protected virtual void Awake()
@@ -31,9 +32,15 @@ namespace LastTrain.Enemies
             OnDespawn();
         }
         
-        protected abstract void ResetStateForSpawn();         
-        protected virtual void OnDespawn() { }        
-        protected virtual void OnDeath() { }
+        protected abstract void ResetStateForSpawn(); 
+        
+        protected virtual void OnDespawn()
+        {
+        }   
+        
+        protected virtual void OnDeath()
+        {
+        }
 
         private void HandleDeath_Internal()
         {

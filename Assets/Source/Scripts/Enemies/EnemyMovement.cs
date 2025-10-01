@@ -53,4 +53,3 @@ namespace LastTrain.Enemies
         }
     }
 }
-

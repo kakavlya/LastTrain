@@ -21,6 +21,40 @@ namespace LastTrain.Enemies
             _movement = GetComponent<EnemyMovement>();
         }
 
+        private void Update()
+        {
+            if (!IsAlive || _hasExploded || _player == null || _playerCollider == null)
+                return;
+
+            _movement.MoveForwardTo(_player.position);
+            Vector3 toPlayer = _player.position - transform.position;
+
+            if (toPlayer.sqrMagnitude > _checkRadiusSqr)
+                return;
+
+            Vector3 closest = _playerCollider.ClosestPoint(transform.position);
+            float dist = Vector3.Distance(closest, transform.position);
+
+            if (dist <= _explosionRadius)
+                Explode();
+        }
+
+        public void Init(Transform player, Collider playerCollider, float speed, float explosionRadius, int damage)
+        {
+            _player = player;
+            _playerCollider = playerCollider;
+            _explosionRadius = Mathf.Max(0f, explosionRadius);
+            _damage = damage;
+
+            if (Health != null && Health.IsDead)
+            {
+                enabled = false;
+                return;
+            }
+
+            _movement?.SetSpeed(speed);
+        }
+
         protected override void ResetStateForSpawn()
         {
             _hasExploded = false;
@@ -46,40 +80,6 @@ namespace LastTrain.Enemies
         {
             _hasExploded = true;
             _movement?.SetSpeed(0f);
-        }
-
-        public void Init(Transform player, Collider playerCollider, float speed, float explosionRadius, int damage)
-        {
-            _player = player;
-            _playerCollider = playerCollider;
-            _explosionRadius = Mathf.Max(0f, explosionRadius);
-            _damage = damage;
-
-            if (Health != null && Health.IsDead)
-            {
-                enabled = false;
-                return;
-            }
-
-            _movement?.SetSpeed(speed);
-        }
-
-        private void Update()
-        {
-            if (!IsAlive || _hasExploded || _player == null || _playerCollider == null)
-                return;
-
-            _movement.MoveForwardTo(_player.position);
-            Vector3 toPlayer = _player.position - transform.position;
-
-            if (toPlayer.sqrMagnitude > _checkRadiusSqr)
-                return;
-
-            Vector3 closest = _playerCollider.ClosestPoint(transform.position);
-            float dist = Vector3.Distance(closest, transform.position);
-
-            if (dist <= _explosionRadius)
-                Explode();
         }
 
         private void Explode()

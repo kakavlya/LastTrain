@@ -12,8 +12,11 @@ namespace LastTrain.Persistence
         [SerializeField] private bool _isAvailable;
 
         public string WeaponId => _weaponId;
+
         public int DamageLevel => _damageLevel;
+
         public int RangeLevel => _rangeLevel;
+
         public bool IsAvailable => _isAvailable;
 
         public WeaponProgress(string weaponId, int defaultStatLevel = 0)

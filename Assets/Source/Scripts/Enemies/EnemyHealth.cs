@@ -29,17 +29,17 @@ namespace LastTrain.Enemies
             Die();
         }
 
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+            CombatEvents.RaiseHit();
+        }
+
         protected override void Die()
         {
             base.Die();
             _deathHandler?.HandleDeath();
             CoinsHandler.Instance.AddCoins(_rewardForKill);
-        }
-
-        public override void TakeDamage(float damage)
-        {
-            base.TakeDamage(damage);
-            CombatEvents.RaiseHit();
         }
     }
 }

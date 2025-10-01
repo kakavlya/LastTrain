@@ -36,8 +36,7 @@ namespace LastTrain.Enemies
                 chargeSpeed: _chargeSpeed,
                 impactPause: _impactPause,
                 holdPauseRange: _holdPauseRange,
-                damage: _damage
-            );
+                damage: _damage);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace LastTrain.Coins
         private bool _isTraining;
 
         public event Action<int> CoinsChanged;
+
         public event Action<int> Added;
 
         public int CoinsCount

@@ -5,17 +5,17 @@ namespace LastTrain.Weapons.System
     public class AimingTargetProvider : MonoBehaviour
     {
         [Header("Aim-from-camera")]
-        [SerializeField] private Camera _cam;       
+        [SerializeField] private Camera _cam;
         [SerializeField] private LayerMask _aimMask = ~0;
         [SerializeField] private float _maxDistance = 5000f;
-        
+
         public Vector2 ScreenPoint { get; set; }
 
         public void Init(Camera cam = null)
         {
             _cam = cam ? cam : Camera.main;
         }
-    
+
         public AimData GetAim()
         {
             if (_cam == null)

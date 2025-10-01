@@ -15,10 +15,13 @@ namespace LastTrain.Enemies
         [SerializeField] private Transform[] _overrideSpawnPoints;
 
         public GameObject Prefab => _prefab;
-        public float SpawnInterval => _spawnInterval;
-        public Vector2 RandRangeXZ => _randRangeXZ;
-        public EnemyBehaviorSettings BehaviorSettings => _behaviorSettings;
-        public Transform[] OverrideSpawnPoints => _overrideSpawnPoints;
 
+        public float SpawnInterval => _spawnInterval;
+
+        public Vector2 RandRangeXZ => _randRangeXZ;
+
+        public EnemyBehaviorSettings BehaviorSettings => _behaviorSettings;
+
+        public Transform[] OverrideSpawnPoints => _overrideSpawnPoints;
     }
 }

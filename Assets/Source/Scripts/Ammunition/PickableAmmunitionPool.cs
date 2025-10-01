@@ -8,10 +8,10 @@ namespace LastTrain.AmmunitionSystem
     {
         public static PickableAmmunitionPool Instance { get; private set; }
 
-        [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
-
         private Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>> _pools =
             new Dictionary<PickableAmmunition, ObjectPool<PickableAmmunition>>();
+
+        [SerializeField] private PickableAmmunition[] _pickableAmmunitionPrefabs;
 
         public void Init()
         {
@@ -60,8 +60,7 @@ namespace LastTrain.AmmunitionSystem
                     createFunc: () => Instantiate(pickableAmmunitionPrefab, transform),
                     actionOnGet: (obj) => obj.gameObject.SetActive(true),
                     actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-                    actionOnDestroy: (obj) => Destroy(obj.gameObject)
-                );
+                    actionOnDestroy: (obj) => Destroy(obj.gameObject));
             }
         }
     }

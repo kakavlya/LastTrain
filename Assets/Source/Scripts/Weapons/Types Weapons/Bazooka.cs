@@ -11,8 +11,6 @@ namespace LastTrain.Weapons.Types
         [SerializeField] private float _aoeDamage;
         [SerializeField] private float _aoeRange;
 
-        private float _selfCollisionOffset = 0.02f;
-        private float _minDirectionSqrMagnitude = 1e-6f;
         private float _currentAoeDamage;
 
         public override void Init(float damage, float range, float? fireDelay, float? fireAngle, float? aoeDamage)
@@ -40,7 +38,7 @@ namespace LastTrain.Weapons.Types
             Vector3 target = ad.WorldPoint;
             Vector3 dir = target - origin;
 
-            if (dir.sqrMagnitude < _minDirectionSqrMagnitude)
+            if (dir.sqrMagnitude < MinDirectionSqrMagnitude)
             {
                 dir = FirePoint.forward;
             }
@@ -51,7 +49,7 @@ namespace LastTrain.Weapons.Types
 
             float distToTarget = Vector3.Distance(origin, target);
             float maxRay = (Range > 0f) ? Mathf.Min(distToTarget, Range) : distToTarget;
-            Vector3 originNoSelf = origin + (dir * _selfCollisionOffset);
+            Vector3 originNoSelf = origin + (dir * SelfCollisionOffset);
 
             if (Physics.Raycast(
                 originNoSelf, dir, out var block, maxRay, ObstacleMask, QueryTriggerInteraction.Ignore))

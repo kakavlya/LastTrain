@@ -16,12 +16,19 @@ namespace LastTrain.Persistence
         [SerializeField] private bool _isShowFractionalValue;
 
         public string LocalizationKey => _localizationKey;
+
         public StatType StatType => _statType;
+
         public AnimationCurve Curve => _curve;
+
         public int MaxLevel => _maxLevel;
+
         public int[] Costs => _costs;
+
         public float MinValue => _minValue;
+
         public float MaxValue => _maxValue;
+
         public bool IsShowFractionalValue => _isShowFractionalValue;
 
         public string Name

@@ -52,7 +52,12 @@ namespace LastTrain.Enemies
         private Vector3 _currentTarget;
         private float _currentSpeed;
 
-        private enum State { Approach, Strafe, Retreat }
+        private enum State 
+        {
+            Approach,
+            Strafe,
+            Retreat,
+        }
 
         protected override void Awake()
         {
@@ -130,8 +135,7 @@ namespace LastTrain.Enemies
             Vector2 changeDirEvery,
             float checkRadius,
             float brainInterval = 0.15f,
-            float fireAngle = 25f
-        )
+            float fireAngle = 25f)
         {
             _player = player;
             _playerCol = playerCollider;
@@ -197,11 +201,11 @@ namespace LastTrain.Enemies
             _state = State.Approach;
             _currentSpeed = _approachSpeed;
             Vector3 pFlat = new Vector3(_player.position.x, transform.position.y, _player.position.z);
-            Vector3 radial = (transform.position - pFlat);
+            Vector3 radial = transform.position - pFlat;
             float rLen = radial.magnitude;
             radial = rLen > _vectorMagnitudeTolerance ? radial / rLen : transform.forward;
             float targetCenterDist = ProjectCenterDistanceForSurface(_keepMaxSurf);
-            _currentTarget = pFlat + radial * targetCenterDist;
+            _currentTarget = pFlat + (radial * targetCenterDist);
         }
 
         private void EnterRetreat()
@@ -209,11 +213,11 @@ namespace LastTrain.Enemies
             _state = State.Retreat;
             _currentSpeed = _approachSpeed * _retreatSpeedMultiplier;
             Vector3 pFlat = new Vector3(_player.position.x, transform.position.y, _player.position.z);
-            Vector3 radial = (transform.position - pFlat);
+            Vector3 radial = transform.position - pFlat;
             float rLen = radial.magnitude;
             radial = rLen > _vectorMagnitudeTolerance ? radial / rLen : -transform.forward;
             float targetCenterDist = ProjectCenterDistanceForSurface(_keepMinSurf);
-            _currentTarget = pFlat + radial * targetCenterDist;
+            _currentTarget = pFlat + (radial * targetCenterDist);
         }
 
         private void EnterStrafe()
@@ -237,7 +241,7 @@ namespace LastTrain.Enemies
 
             Vector3 pos = transform.position;
             Vector3 pFlat = new Vector3(_player.position.x, pos.y, _player.position.z);
-            Vector3 radial = (pos - pFlat);
+            Vector3 radial = pos - pFlat;
             float radius = radial.magnitude;
             radial = radius > _vectorMagnitudeTolerance ? radial / radius : transform.forward;
             Vector3 tangent = Vector3.Cross(Vector3.up, radial).normalized * _orbitDir;
@@ -245,8 +249,8 @@ namespace LastTrain.Enemies
             float orbitStep = Mathf.Max(_minLengthThreshold, wRad * Mathf.Max(radius, _minRadiusThreshold)) * Time.deltaTime;
             float midSurf = 0.5f * (_keepMinSurf + _keepMaxSurf);
             float desiredR = Mathf.Lerp(radius, ProjectCenterDistanceForSurface(midSurf), _strafeInterpolationFactor);
-            Vector3 ringBase = pFlat + radial * desiredR;
-            _currentTarget = ringBase + tangent * orbitStep;
+            Vector3 ringBase = pFlat + (radial * desiredR);
+            _currentTarget = ringBase + (tangent * orbitStep);
         }
 
         private void HandleFire()
@@ -265,7 +269,7 @@ namespace LastTrain.Enemies
             if (distSurf > _shootingDistance)
                 return;
 
-            Vector3 shootDir = (aimPoint - _firePoint.position);
+            Vector3 shootDir = aimPoint - _firePoint.position;
             float len = shootDir.magnitude;
 
             if (len < _minLengthThreshold)
@@ -296,8 +300,7 @@ namespace LastTrain.Enemies
                     owner: gameObject,
                     speed: _projectileSpeed,
                     damage: _projectileDamage,
-                    maxDistance: maxDistance
-                );
+                    maxDistance: maxDistance);
                 proj.SetVelocity();
             }
             else
@@ -310,8 +313,7 @@ namespace LastTrain.Enemies
                     speed: _projectileSpeed,
                     damage: _projectileDamage,
                     maxAttackDistance: maxDistance,
-                    usePooling: usePooling
-                );
+                    usePooling: usePooling);
                 proj.SetVelocity();
             }
         }

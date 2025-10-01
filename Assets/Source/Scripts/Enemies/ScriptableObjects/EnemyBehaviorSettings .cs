@@ -8,6 +8,7 @@ namespace LastTrain.Enemies
         [SerializeField] private float _health;
 
         public int Reward => _reward;
+
         public float Health => _health;
 
         public abstract void Initialize(GameObject enemy, Transform playerTarget, BoxCollider playerCollider);

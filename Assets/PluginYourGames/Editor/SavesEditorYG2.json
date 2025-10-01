@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3517,
+    "idSave": 3522,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -220,7 +220,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -234,7 +236,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -248,7 +252,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -262,7 +268,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -276,7 +284,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
@@ -290,7 +300,9 @@
                     "_weaponId": "",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": false,
+                    "SpecialStatLevel": 0,
+                    "SpecialStatType": 0
                 }
             },
             {
