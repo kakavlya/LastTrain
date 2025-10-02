@@ -76,10 +76,10 @@ namespace LastTrain.Core
             _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
             _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
             _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
-            _uIStateMachine.ShowLevelStart();
+            _uIStateMachine.FSM.Switch<UIStateMachine.LevelStartState>();
 
-            _levelStateMachine.PlayerDied += () => _uIStateMachine.ShowGameOver();
-            _levelStateMachine.LevelCompleted += () => _uIStateMachine.ShowEndLevel();
+            _levelStateMachine.PlayerDied += () => _uIStateMachine.FSM.Switch<UIStateMachine.GameOverState>();
+            _levelStateMachine.LevelCompleted += () => _uIStateMachine.FSM.Switch<UIStateMachine.EndLevelState>();
 
             _gameplayTraining.ScreenShowed += _levelStateMachine.PauseLevel;
             _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeLevel;

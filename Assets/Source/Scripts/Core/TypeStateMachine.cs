@@ -1,4 +1,3 @@
-// Core/FSM/TypeStateMachine.cs
 using System;
 using System.Collections.Generic;
 

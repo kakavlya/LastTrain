@@ -38,37 +38,38 @@ namespace LastTrain.Core
 
         private void Awake()
         {
-            _router = new UIScreenRouter(_startScreen, _hudScreen, _gameOverScreen, _gameEndScreen, _gamePauseScreen, _settingsScreen);
+            _router = new UIScreenRouter(
+                _startScreen, _hudScreen, _gameOverScreen, _gameEndScreen, _gamePauseScreen, _settingsScreen);
 
-            Register(new LevelStartState(this));
-            Register(new PlayingState(this));
-            Register(new GameOverState(this));
-            Register(new EndLevelState(this));
-            Register(new PauseState(this));
-            Register(new SettingsState(this));
+            FSM.Register(new LevelStartState(this));
+            FSM.Register(new PlayingState(this));
+            FSM.Register(new GameOverState(this));
+            FSM.Register(new EndLevelState(this));
+            FSM.Register(new PauseState(this));
+            FSM.Register(new SettingsState(this));
 
-            _startButton.onClick.AddListener(() => { StartClicked?.Invoke(); Switch<PlayingState>(); });
+            _startButton.onClick.AddListener(() => { StartClicked?.Invoke(); FSM.Switch<PlayingState>(); });
 
             foreach (var b in _pauseButtons)
-                b.onClick.AddListener(() => { PauseClicked?.Invoke(); Switch<PauseState>(); });
+                b.onClick.AddListener(() => { PauseClicked?.Invoke(); FSM.Switch<PauseState>(); });
 
-            _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); Switch<PlayingState>(); });
+            _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); FSM.Switch<PlayingState>(); });
 
             foreach (var b in _restartButtons)
-                b.onClick.AddListener(() => { RestartClicked?.Invoke(); Switch<LevelStartState>(); });
+                b.onClick.AddListener(() => { RestartClicked?.Invoke(); FSM.Switch<LevelStartState>(); });
 
             foreach (var b in _menuButtons)
                 b.onClick.AddListener(() => { MenuClicked?.Invoke(); });
 
-            _settingsButton.onClick.AddListener(() => Switch<SettingsState>());
+            _settingsButton.onClick.AddListener(() => FSM.Switch<SettingsState>());
 
             _joustick?.SetActive(PlatformDetector.Instance != null &&
-                                  PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile);
+                                 PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile);
 
             if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
                 foreach (var menu in _menuButtons) menu.interactable = false;
 
-            Switch<LevelStartState>();
+            FSM.Switch<LevelStartState>();
         }
 
         private void OnDestroy()
@@ -81,14 +82,7 @@ namespace LastTrain.Core
             _settingsButton.onClick.RemoveAllListeners();
         }
 
-        public void ShowLevelStart() => Switch<LevelStartState>();
-        public void ShowHUD() => Switch<PlayingState>();
-        public void ShowGameOver() => Switch<GameOverState>();
-        public void ShowEndLevel() => Switch<EndLevelState>();
-        public void ShowPause() => Switch<PauseState>();
-        public void ShowSettings() => Switch<SettingsState>();
-
-        private abstract class UMState : IState
+        public abstract class UMState : IState
         {
             protected readonly UIStateMachine UI;
             protected UMState(UIStateMachine ui) { UI = ui; }
@@ -96,7 +90,7 @@ namespace LastTrain.Core
             public virtual void Exit() { }
         }
 
-        private sealed class LevelStartState : UMState
+        public sealed class LevelStartState : UMState
         {
             public LevelStartState(UIStateMachine ui) : base(ui) { }
             public override void Enter() => UI._router.ShowOnly(UI._startScreen);
@@ -108,13 +102,13 @@ namespace LastTrain.Core
             public override void Enter() => UI._router.ShowOnly(UI._hudScreen);
         }
 
-        private sealed class GameOverState : UMState
+        public sealed class GameOverState : UMState
         {
             public GameOverState(UIStateMachine ui) : base(ui) { }
             public override void Enter() => UI._router.ShowOnly(UI._gameOverScreen);
         }
 
-        private sealed class EndLevelState : UMState
+        public sealed class EndLevelState : UMState
         {
             public EndLevelState(UIStateMachine ui) : base(ui) { }
             public override void Enter() => UI._router.ShowOnly(UI._gameEndScreen);

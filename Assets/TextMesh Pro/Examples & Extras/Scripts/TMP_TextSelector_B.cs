@@ -317,15 +317,15 @@ namespace TMPro.Examples
                 //Debug.Log("Character [" + m_TextMeshPro.textInfo.characterInfo[index].character + "] was selected at POS: " + eventData.position);
                 m_lastIndex = charIndex;
 
-                Color32 _menu = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+                Color32 _menuTraining = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
                 int vertexIndex = m_TextMeshPro.textInfo.characterInfo[charIndex].vertexIndex;
 
                 UIVertex[] uiVertices = m_TextMeshPro.textInfo.meshInfo.uiVertices;
 
-                uiVertices[vertexIndex + 0].color = _menu;
-                uiVertices[vertexIndex + 1].color = _menu;
-                uiVertices[vertexIndex + 2].color = _menu;
-                uiVertices[vertexIndex + 3].color = _menu;
+                uiVertices[vertexIndex + 0].color = _menuTraining;
+                uiVertices[vertexIndex + 1].color = _menuTraining;
+                uiVertices[vertexIndex + 2].color = _menuTraining;
+                uiVertices[vertexIndex + 3].color = _menuTraining;
 
                 m_TextMeshPro.canvasRenderer.SetVertices(uiVertices, uiVertices.Length);
             }
@@ -351,12 +351,12 @@ namespace TMPro.Examples
                 {
                     int vertexIndex = m_TextMeshPro.textInfo.characterInfo[wInfo.firstCharacterIndex + i].vertexIndex;
 
-                    Color32 _menu = uiVertices[vertexIndex + 0].color.Tint(1.33333f);
+                    Color32 _menuTraining = uiVertices[vertexIndex + 0].color.Tint(1.33333f);
 
-                    uiVertices[vertexIndex + 0].color = _menu;
-                    uiVertices[vertexIndex + 1].color = _menu;
-                    uiVertices[vertexIndex + 2].color = _menu;
-                    uiVertices[vertexIndex + 3].color = _menu;
+                    uiVertices[vertexIndex + 0].color = _menuTraining;
+                    uiVertices[vertexIndex + 1].color = _menuTraining;
+                    uiVertices[vertexIndex + 2].color = _menuTraining;
+                    uiVertices[vertexIndex + 3].color = _menuTraining;
                 }
 
                 m_TextMeshPro.canvasRenderer.SetVertices(uiVertices, uiVertices.Length);
@@ -379,12 +379,12 @@ namespace TMPro.Examples
                 {
                     int vertexIndex = m_TextMeshPro.textInfo.characterInfo[wInfo.firstCharacterIndex + i].vertexIndex;
 
-                    Color32 _menu = uiVertices[vertexIndex + 0].color.Tint(0.75f);
+                    Color32 _menuTraining = uiVertices[vertexIndex + 0].color.Tint(0.75f);
 
-                    uiVertices[vertexIndex + 0].color = _menu;
-                    uiVertices[vertexIndex + 1].color = _menu;
-                    uiVertices[vertexIndex + 2].color = _menu;
-                    uiVertices[vertexIndex + 3].color = _menu;
+                    uiVertices[vertexIndex + 0].color = _menuTraining;
+                    uiVertices[vertexIndex + 1].color = _menuTraining;
+                    uiVertices[vertexIndex + 2].color = _menuTraining;
+                    uiVertices[vertexIndex + 3].color = _menuTraining;
                 }
 
                 m_TextMeshPro.canvasRenderer.SetVertices(uiVertices, uiVertices.Length);
@@ -424,7 +424,7 @@ namespace TMPro.Examples
                 #region Vertex Attribute Modification Example
                 UIVertex[] uiVertices = m_TextMeshPro.textInfo.meshInfo.uiVertices;
 
-                Color32 _menu = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
+                Color32 _menuTraining = new Color32((byte)Random.Range(0, 255), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);
                 for (int i = 0; i < linkInfo.characterCount; i++)
                 {
                     TMP_CharacterInfo cInfo = m_TextMeshPro.textInfo.characterInfo[linkInfo.firstCharacterIndex + i];
@@ -433,10 +433,10 @@ namespace TMPro.Examples
 
                     int vertexIndex = cInfo.vertexIndex;
 
-                    uiVertices[vertexIndex + 0].color = _menu;
-                    uiVertices[vertexIndex + 1].color = _menu;
-                    uiVertices[vertexIndex + 2].color = _menu;
-                    uiVertices[vertexIndex + 3].color = _menu;
+                    uiVertices[vertexIndex + 0].color = _menuTraining;
+                    uiVertices[vertexIndex + 1].color = _menuTraining;
+                    uiVertices[vertexIndex + 2].color = _menuTraining;
+                    uiVertices[vertexIndex + 3].color = _menuTraining;
                 }
 
                 m_TextMeshPro.canvasRenderer.SetVertices(uiVertices, uiVertices.Length);

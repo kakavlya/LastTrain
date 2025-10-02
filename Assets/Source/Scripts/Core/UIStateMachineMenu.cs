@@ -40,23 +40,23 @@ namespace LastTrain.Core
                 _leaderBoardButton.gameObject
             };
 
-            Register(new RootState(this));
-            Register(new SettingsState(this));
-            Register(new LevelState(this));
-            Register(new WeaponState(this));
-            Register(new ShopState(this));
-            Register(new LeaderboardState(this));
+            FSM.Register(new RootState(this));
+            FSM.Register(new SettingsState(this));
+            FSM.Register(new LevelState(this));
+            FSM.Register(new WeaponState(this));
+            FSM.Register(new ShopState(this));
+            FSM.Register(new LeaderboardState(this));
 
-            _settingsButton.onClick.AddListener(() => Switch<SettingsState>());
-            _choseLevelButton.onClick.AddListener(() => Switch<LevelState>());
-            _choseWeaponButton.onClick.AddListener(() => Switch<WeaponState>());
-            _shopButton.onClick.AddListener(() => Switch<ShopState>());
-            _leaderBoardButton.onClick.AddListener(() => Switch<LeaderboardState>());
+            _settingsButton.onClick.AddListener(() => FSM.Switch<SettingsState>());
+            _choseLevelButton.onClick.AddListener(() => FSM.Switch<LevelState>());
+            _choseWeaponButton.onClick.AddListener(() => FSM.Switch<WeaponState>());
+            _shopButton.onClick.AddListener(() => FSM.Switch<ShopState>());
+            _leaderBoardButton.onClick.AddListener(() => FSM.Switch<LeaderboardState>());
 
             foreach (var b in _returnOnMainButtons)
-                b.onClick.AddListener(() => Switch<RootState>());
+                b.onClick.AddListener(() => FSM.Switch<RootState>());
 
-            Switch<RootState>();
+            FSM.Switch<RootState>();
         }
 
         private void OnDestroy()

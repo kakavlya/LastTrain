@@ -42,13 +42,13 @@ namespace LastTrain.Training
         {
             if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
             {
-                Register(new StartState(this));
-                Register(new CameraMovementState(this));
-                Register(new ShootingState(this));
-                Register(new SwitchWeaponState(this));
-                Register(new AmmunitionState(this));
+                FSM.Register(new StartState(this));
+                FSM.Register(new CameraMovementState(this));
+                FSM.Register(new ShootingState(this));
+                FSM.Register(new SwitchWeaponState(this));
+                FSM.Register(new AmmunitionState(this));
 
-                Switch<StartState>();
+                FSM.Switch<StartState>();
             }
         }
 
@@ -116,7 +116,7 @@ namespace LastTrain.Training
                 base.Exit();
             }
 
-            private void OnNext() => GT.Switch<CameraMovementState>();
+            private void OnNext() => GT.FSM.Switch<CameraMovementState>();
         }
 
         private sealed class CameraMovementState : GTState
@@ -156,7 +156,7 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.Switch<ShootingState>();
+            private void OnOk() => GT.FSM.Switch<ShootingState>();
         }
 
         private sealed class ShootingState : GTState
@@ -196,7 +196,7 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.Switch<SwitchWeaponState>();
+            private void OnOk() => GT.FSM.Switch<SwitchWeaponState>();
         }
 
         private sealed class SwitchWeaponState : GTState
@@ -236,7 +236,7 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.Switch<AmmunitionState>();
+            private void OnOk() => GT.FSM.Switch<AmmunitionState>();
         }
 
         private sealed class AmmunitionState : GTState
