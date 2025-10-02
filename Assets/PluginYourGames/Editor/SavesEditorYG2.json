@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 3628,
+    "idSave": 77,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -26,24 +26,6 @@
         },
         {
             "rid": 1005
-        },
-        {
-            "rid": 1006
-        },
-        {
-            "rid": 1007
-        },
-        {
-            "rid": 1008
-        },
-        {
-            "rid": 1009
-        },
-        {
-            "rid": 1010
-        },
-        {
-            "rid": 1011
         }
     ],
     "TrainingWeaponsProgress": [
@@ -67,27 +49,20 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 9,
-        "SlotsLevel": 2,
-        "AmmoLevel": 8
+        "HealthLevel": 0,
+        "SlotsLevel": 0,
+        "AmmoLevel": 0
     },
-    "Coins": 5597,
-    "EffectsVolume": 0.17404389381408692,
-    "MusicVolume": 0.12906306982040406,
+    "Coins": 160,
+    "EffectsVolume": 0.33248597383499148,
+    "MusicVolume": 0.12552125751972199,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
-        "SubmachineGun",
-        "GrenadeLauncher",
-        "",
-        "",
-        "",
         ""
     ],
     "PlayerInventorySlots": [
-        "Shotgun",
-        "MachineGun",
-        "Flamethrower"
+        "SubmachineGun"
     ],
     "LevelsAvailability": [
         {
@@ -100,47 +75,47 @@
         },
         {
             "LevelNumber": 3,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 4,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 5,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 6,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 7,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 8,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 9,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 10,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 11,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 12,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 13,
-            "IsAvailable": true
+            "IsAvailable": false
         },
         {
             "LevelNumber": 14,
@@ -217,112 +192,16 @@
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
+                    "_weaponId": "SubmachineGun",
+                    "_damageLevel": 1,
+                    "_rangeLevel": 1,
+                    "_isAvailable": true
                 }
             },
             {
                 "rid": 1001,
                 "type": {
                     "class": "AttackSpeedUpdatingWeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
-                }
-            },
-            {
-                "rid": 1002,
-                "type": {
-                    "class": "AoeDamageUpdatingWeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
-                }
-            },
-            {
-                "rid": 1003,
-                "type": {
-                    "class": "AttackAngleUpdatingWeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
-                }
-            },
-            {
-                "rid": 1004,
-                "type": {
-                    "class": "AttackSpeedUpdatingWeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
-                }
-            },
-            {
-                "rid": 1005,
-                "type": {
-                    "class": "AttackAngleUpdatingWeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false,
-                    "SpecialStatLevel": 0,
-                    "SpecialStatType": 0
-                }
-            },
-            {
-                "rid": 1006,
-                "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "SubmachineGun",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": true
-                }
-            },
-            {
-                "rid": 1007,
-                "type": {
-                    "class": "WeaponProgress",
                     "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
@@ -334,37 +213,23 @@
                 }
             },
             {
-                "rid": 1008,
+                "rid": 1002,
                 "type": {
-                    "class": "WeaponProgress",
+                    "class": "AoeDamageUpdatingWeaponProgress",
                     "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "Shotgun",
+                    "_weaponId": "GrenadeLauncher",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false
                 }
             },
             {
-                "rid": 1009,
+                "rid": 1003,
                 "type": {
-                    "class": "WeaponProgress",
-                    "ns": "LastTrain.Persistence",
-                    "asm": "Assembly-CSharp"
-                },
-                "data": {
-                    "_weaponId": "Crossbow",
-                    "_damageLevel": 0,
-                    "_rangeLevel": 0,
-                    "_isAvailable": false
-                }
-            },
-            {
-                "rid": 1010,
-                "type": {
-                    "class": "WeaponProgress",
+                    "class": "AttackAngleUpdatingWeaponProgress",
                     "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
@@ -376,14 +241,28 @@
                 }
             },
             {
-                "rid": 1011,
+                "rid": 1004,
                 "type": {
-                    "class": "WeaponProgress",
+                    "class": "AttackSpeedUpdatingWeaponProgress",
                     "ns": "LastTrain.Persistence",
                     "asm": "Assembly-CSharp"
                 },
                 "data": {
-                    "_weaponId": "GrenadeLauncher",
+                    "_weaponId": "Crossbow",
+                    "_damageLevel": 0,
+                    "_rangeLevel": 0,
+                    "_isAvailable": false
+                }
+            },
+            {
+                "rid": 1005,
+                "type": {
+                    "class": "AttackAngleUpdatingWeaponProgress",
+                    "ns": "LastTrain.Persistence",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "_weaponId": "Shotgun",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
                     "_isAvailable": false

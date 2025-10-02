@@ -11,7 +11,7 @@ namespace LastTrain.Training
 {
     public class TrainingHandler : MonoBehaviour
     {
-        public static TrainingHandler Instance;
+        public static TrainingHandler Instance { get; private set; }
 
         [SerializeField] private string _menuSceneName;
         [SerializeField] private string _gameplaySceneName;
@@ -22,10 +22,10 @@ namespace LastTrain.Training
         private bool _isDoneMenuTraining = false;
 
         public bool IsDoneGameplayTraining => _isDoneGameplayTraining;
-
         public bool IsDoneMenuTraining => _isDoneMenuTraining;
 
-        private void Start()
+
+        private void Awake()
         {
             if (Instance == null)
             {
@@ -35,8 +35,12 @@ namespace LastTrain.Training
             else
             {
                 Destroy(gameObject);
+                return;
             }
+        }
 
+        private void Start()
+        {
             GetTrainingProgress();
             TryPlayTrainingGameplay();
         }

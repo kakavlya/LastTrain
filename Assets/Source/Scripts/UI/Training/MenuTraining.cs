@@ -439,7 +439,6 @@ namespace LastTrain.Training
             public void Exit() { }
         }
     }
-
     public enum MenuTrainingState
     {
         Start,
