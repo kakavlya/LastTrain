@@ -1,7 +1,7 @@
-using LastTrain.Core;
-using LastTrain.Core.FSM;
 using System;
 using System.Collections;
+using LastTrain.Core;
+using LastTrain.Core.FSM;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,9 +75,13 @@ namespace LastTrain.Training
             protected readonly GameplayTraining GT;
             protected Coroutine DelayRoutine;
 
-            protected GTState(GameplayTraining gt) { GT = gt; }
+            protected GTState(GameplayTraining gt)
+            {
+                GT = gt;
+            }
 
             public virtual void Enter() { }
+
             public virtual void Exit()
             {
                 if (DelayRoutine != null)
@@ -89,17 +93,31 @@ namespace LastTrain.Training
 
             protected void StartDelay(IEnumerator routine)
             {
-                if (DelayRoutine != null) GT.StopCoroutine(DelayRoutine);
+                if (DelayRoutine != null)
+                {
+                    GT.StopCoroutine(DelayRoutine);
+                }
+
                 DelayRoutine = GT.StartCoroutine(routine);
             }
 
-            protected void Showed() => GT.ScreenShowed?.Invoke();
-            protected void Left() => GT.ScreenLeft?.Invoke();
+            protected void Showed()
+            {
+                GT.ScreenShowed?.Invoke();
+            }
+
+            protected void Left()
+            {
+                GT.ScreenLeft?.Invoke();
+            }
         }
 
         private sealed class StartState : GTState
         {
-            public StartState(GameplayTraining gt) : base(gt) { }
+            public StartState(GameplayTraining gt)
+                : base(gt)
+            { }
+
             public override void Enter()
             {
                 GT.HideAll();
@@ -116,12 +134,18 @@ namespace LastTrain.Training
                 base.Exit();
             }
 
-            private void OnNext() => GT.FSM.Switch<CameraMovementState>();
+            private void OnNext()
+            {
+                GT.FSM.Switch<CameraMovementState>();
+            }
         }
 
         private sealed class CameraMovementState : GTState
         {
-            public CameraMovementState(GameplayTraining gt) : base(gt) { }
+            public CameraMovementState(GameplayTraining gt)
+                : base(gt)
+            { }
+
             public override void Enter()
             {
                 GT.HideAll();
@@ -156,12 +180,18 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.FSM.Switch<ShootingState>();
+            private void OnOk()
+            {
+                GT.FSM.Switch<ShootingState>();
+            }
         }
 
         private sealed class ShootingState : GTState
         {
-            public ShootingState(GameplayTraining gt) : base(gt) { }
+            public ShootingState(GameplayTraining gt)
+                : base(gt)
+            { }
+
             public override void Enter()
             {
                 GT.HideAll();
@@ -196,12 +226,18 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.FSM.Switch<SwitchWeaponState>();
+            private void OnOk()
+            {
+                GT.FSM.Switch<SwitchWeaponState>();
+            }
         }
 
         private sealed class SwitchWeaponState : GTState
         {
-            public SwitchWeaponState(GameplayTraining gt) : base(gt) { }
+            public SwitchWeaponState(GameplayTraining gt)
+                : base(gt)
+            { }
+
             public override void Enter()
             {
                 GT.HideAll();
@@ -236,12 +272,18 @@ namespace LastTrain.Training
                 Showed();
             }
 
-            private void OnOk() => GT.FSM.Switch<AmmunitionState>();
+            private void OnOk()
+            {
+                GT.FSM.Switch<AmmunitionState>();
+            }
         }
 
         private sealed class AmmunitionState : GTState
         {
-            public AmmunitionState(GameplayTraining gt) : base(gt) { }
+            public AmmunitionState(GameplayTraining gt)
+                : base(gt)
+            { }
+
             public override void Enter()
             {
                 GT.HideAll();
@@ -259,6 +301,7 @@ namespace LastTrain.Training
             private IEnumerator Flow()
             {
                 yield return new WaitForSeconds(GT._pickUpTrainingDelay);
+
                 GT._pickUpAmmunitionTraining.SetActive(true);
                 GT._pickUpOkButton.onClick.AddListener(OnOk);
                 Showed();

@@ -9,10 +9,22 @@ namespace LastTrain.Core
 {
     public class LevelStateMachine : MonoBehaviour
     {
-        public enum State { Idle, Running, Paused, PlayerDead, Completed }
+        public enum State
+        {
+            Idle,
+            Running,
+            Paused,
+            PlayerDead,
+            Completed
+        }
+
+        private static void SetTimeScale(float value)
+        {
+            if (Math.Abs(Time.timeScale - value) > 0.0001f)
+                Time.timeScale = value;
+        }
 
         private string _menuScene;
-
         private EnemySpawner _spawner;
         private PlayerHealth _playerHealth;
         private TrainMovement _trainMovement;
@@ -31,8 +43,15 @@ namespace LastTrain.Core
                 ResolveFromSceneOrThrow();
         }
 
-        private void OnEnable() => Bind();
-        private void OnDisable() => Unbind();
+        private void OnEnable()
+        {
+            Bind();
+        }
+
+        private void OnDisable()
+        {
+            Unbind();
+        }
 
         public void Construct(
             EnemySpawner spawner,
@@ -53,55 +72,10 @@ namespace LastTrain.Core
                 _spawner.SetTarget(_player);
         }
 
-        private void Bind()
-        {
-            if (_bound) return;
-
-            if (_spawner == null || _playerHealth == null || _trainMovement == null || _levelProgress == null || _player == null)
-                ResolveFromSceneOrThrow();
-
-            _playerHealth.Died += OnPlayerDiedInternal;
-            _levelProgress.LevelCompleted += OnLevelCompletedInternal;
-
-            _bound = true;
-        }
-
-        private void Unbind()
-        {
-            if (!_bound) return;
-
-            if (_playerHealth != null) _playerHealth.Died -= OnPlayerDiedInternal;
-            if (_levelProgress != null) _levelProgress.LevelCompleted -= OnLevelCompletedInternal;
-
-            _bound = false;
-        }
-
-        private void ResolveFromSceneOrThrow()
-        {
-            if (_player == null)
-            {
-                var playerGo = GameObject.FindGameObjectWithTag("Player");
-                if (playerGo == null)
-                    throw new InvalidOperationException("LevelStateMachine: GameObject with tag 'Player' not found.");
-                _player = playerGo.transform;
-            }
-
-            _spawner ??= FindObjectOfType<EnemySpawner>();
-            _playerHealth ??= FindObjectOfType<PlayerHealth>();
-            _trainMovement ??= FindObjectOfType<TrainMovement>();
-            _levelProgress ??= FindObjectOfType<LevelProgress>();
-
-            if (_spawner == null) throw new InvalidOperationException("LevelStateMachine: EnemySpawner not found in scene.");
-            if (_playerHealth == null) throw new InvalidOperationException("LevelStateMachine: PlayerHealth not found in scene.");
-            if (_trainMovement == null) throw new InvalidOperationException("LevelStateMachine: TrainMovement not found in scene.");
-            if (_levelProgress == null) throw new InvalidOperationException("LevelStateMachine: LevelProgress not found in scene.");
-
-            _spawner.SetTarget(_player);
-        }
-
         public void StartLevel()
         {
-            if (_state == State.Running) return;
+            if (_state == State.Running)
+                return;
 
             SetTimeScale(1f);
             _trainMovement.StartMovement();
@@ -113,7 +87,8 @@ namespace LastTrain.Core
 
         public void PauseLevel()
         {
-            if (_state != State.Running) return;
+            if (_state != State.Running)
+                return;
 
             SetTimeScale(0f);
             _trainMovement.StopMovement();
@@ -124,7 +99,8 @@ namespace LastTrain.Core
 
         public void ResumeLevel()
         {
-            if (_state != State.Paused) return;
+            if (_state != State.Paused)
+                return;
 
             SetTimeScale(1f);
             _trainMovement.StartMovement();
@@ -151,6 +127,65 @@ namespace LastTrain.Core
                 SceneManager.LoadScene(_menuScene);
         }
 
+        private void Bind()
+        {
+            if (_bound)
+                return;
+
+            if (_spawner == null || _playerHealth == null || _trainMovement == null || _levelProgress == null || _player == null)
+                ResolveFromSceneOrThrow();
+
+            _playerHealth.Died += OnPlayerDiedInternal;
+            _levelProgress.LevelCompleted += OnLevelCompletedInternal;
+
+            _bound = true;
+        }
+
+        private void Unbind()
+        {
+            if (!_bound)
+                return;
+
+            if (_playerHealth != null)
+                _playerHealth.Died -= OnPlayerDiedInternal;
+
+            if (_levelProgress != null)
+                _levelProgress.LevelCompleted -= OnLevelCompletedInternal;
+
+            _bound = false;
+        }
+
+        private void ResolveFromSceneOrThrow()
+        {
+            if (_player == null)
+            {
+                var playerGo = GameObject.FindGameObjectWithTag("Player");
+                if (playerGo == null)
+                    throw new InvalidOperationException("LevelStateMachine: GameObject with tag 'Player' not found.");
+
+                _player = playerGo.transform;
+            }
+
+            _spawner ??= FindObjectOfType<EnemySpawner>();
+            _playerHealth ??= FindObjectOfType<PlayerHealth>();
+            _trainMovement ??= FindObjectOfType<TrainMovement>();
+            _levelProgress ??= FindObjectOfType<LevelProgress>();
+
+            if (_spawner == null)
+                throw new InvalidOperationException("LevelStateMachine: EnemySpawner not found in scene.");
+
+            if (_playerHealth == null)
+                throw new InvalidOperationException("LevelStateMachine: PlayerHealth not found in scene.");
+
+            if (_trainMovement == null)
+                throw new InvalidOperationException("LevelStateMachine: TrainMovement not found in scene.");
+
+            if (_levelProgress == null)
+                throw new InvalidOperationException("LevelStateMachine: LevelProgress not found in scene.");
+
+            _spawner.SetTarget(_player);
+        }
+
         private void OnPlayerDiedInternal()
         {
             _state = State.PlayerDead;
@@ -171,12 +206,6 @@ namespace LastTrain.Core
         {
             _trainMovement.StopMovement();
             _spawner.Pause();
-        }
-
-        private static void SetTimeScale(float value)
-        {
-            if (Math.Abs(Time.timeScale - value) > 0.0001f)
-                Time.timeScale = value;
         }
     }
 }

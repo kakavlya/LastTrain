@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using LastTrain.Core.FSM;
-using LastTrain.UI;
 using LastTrain.Training;
+using LastTrain.UI;
 
 namespace LastTrain.Core
 {
@@ -39,7 +39,8 @@ namespace LastTrain.Core
         private void Awake()
         {
             _router = new UIScreenRouter(
-                _startScreen, _hudScreen, _gameOverScreen, _gameEndScreen, _gamePauseScreen, _settingsScreen);
+                _startScreen, _hudScreen, _gameOverScreen, _gameEndScreen, _gamePauseScreen, _settingsScreen
+            );
 
             FSM.Register(new LevelStartState(this));
             FSM.Register(new PlayingState(this));
@@ -48,81 +49,132 @@ namespace LastTrain.Core
             FSM.Register(new PauseState(this));
             FSM.Register(new SettingsState(this));
 
-            _startButton.onClick.AddListener(() => { StartClicked?.Invoke(); FSM.Switch<PlayingState>(); });
+            _startButton.onClick.AddListener(() =>
+            {
+                StartClicked?.Invoke();
+                FSM.Switch<PlayingState>();
+            });
 
             foreach (var b in _pauseButtons)
-                b.onClick.AddListener(() => { PauseClicked?.Invoke(); FSM.Switch<PauseState>(); });
+                b.onClick.AddListener(() =>
+                {
+                    PauseClicked?.Invoke();
+                    FSM.Switch<PauseState>();
+                });
 
-            _resumeButton.onClick.AddListener(() => { ResumeClicked?.Invoke(); FSM.Switch<PlayingState>(); });
+            _resumeButton.onClick.AddListener(() =>
+            {
+                ResumeClicked?.Invoke();
+                FSM.Switch<PlayingState>();
+            });
 
             foreach (var b in _restartButtons)
-                b.onClick.AddListener(() => { RestartClicked?.Invoke(); FSM.Switch<LevelStartState>(); });
+                b.onClick.AddListener(() =>
+                {
+                    RestartClicked?.Invoke();
+                    FSM.Switch<LevelStartState>();
+                });
 
             foreach (var b in _menuButtons)
                 b.onClick.AddListener(() => { MenuClicked?.Invoke(); });
 
             _settingsButton.onClick.AddListener(() => FSM.Switch<SettingsState>());
 
-            _joustick?.SetActive(PlatformDetector.Instance != null &&
-                                 PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile);
+            _joustick?.SetActive(
+                PlatformDetector.Instance != null &&
+                PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Mobile
+            );
 
             if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
-                foreach (var menu in _menuButtons) menu.interactable = false;
+            {
+                foreach (var menu in _menuButtons)
+                    menu.interactable = false;
+            }
 
             FSM.Switch<LevelStartState>();
         }
 
         private void OnDestroy()
         {
+            foreach (var b in _pauseButtons)
+                b.onClick.RemoveAllListeners();
+
+            foreach (var b in _restartButtons)
+                b.onClick.RemoveAllListeners();
+
+            foreach (var b in _menuButtons)
+                b.onClick.RemoveAllListeners();
+
             _startButton.onClick.RemoveAllListeners();
-            foreach (var b in _pauseButtons) b.onClick.RemoveAllListeners();
             _resumeButton.onClick.RemoveAllListeners();
-            foreach (var b in _restartButtons) b.onClick.RemoveAllListeners();
-            foreach (var b in _menuButtons) b.onClick.RemoveAllListeners();
             _settingsButton.onClick.RemoveAllListeners();
         }
 
         public abstract class UMState : IState
         {
             protected readonly UIStateMachine UI;
-            protected UMState(UIStateMachine ui) { UI = ui; }
+
+            protected UMState(UIStateMachine ui)
+            {
+                UI = ui;
+            }
+
             public virtual void Enter() { }
+
             public virtual void Exit() { }
         }
 
         public sealed class LevelStartState : UMState
         {
-            public LevelStartState(UIStateMachine ui) : base(ui) { }
+            public LevelStartState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._startScreen);
         }
 
         private sealed class PlayingState : UMState
         {
-            public PlayingState(UIStateMachine ui) : base(ui) { }
+            public PlayingState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._hudScreen);
         }
 
         public sealed class GameOverState : UMState
         {
-            public GameOverState(UIStateMachine ui) : base(ui) { }
+            public GameOverState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._gameOverScreen);
         }
 
         public sealed class EndLevelState : UMState
         {
-            public EndLevelState(UIStateMachine ui) : base(ui) { }
+            public EndLevelState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._gameEndScreen);
         }
 
         private sealed class PauseState : UMState
         {
-            public PauseState(UIStateMachine ui) : base(ui) { }
+            public PauseState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._gamePauseScreen);
         }
 
         private sealed class SettingsState : UMState
         {
-            public SettingsState(UIStateMachine ui) : base(ui) { }
+            public SettingsState(UIStateMachine ui)
+                : base(ui)
+            { }
+
             public override void Enter() => UI._router.ShowOnly(UI._settingsScreen);
         }
     }
