@@ -3,12 +3,6 @@ using System.Collections.Generic;
 
 namespace LastTrain.Core.FSM
 {
-    public interface IState
-    {
-        void Enter(); 
-        void Exit();
-    }
-
     public sealed class TypeStateMachine
     {
         private readonly Dictionary<Type, IState> _states = new();
