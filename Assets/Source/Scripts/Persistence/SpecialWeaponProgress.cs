@@ -5,7 +5,6 @@ namespace LastTrain.Persistence
         private int _specialStatLevel;
         private readonly StatType _specialStatType;
 
-        public int SpecialStatLevel => _specialStatLevel;
         public StatType SpecialStatType => _specialStatType;
 
         public SpecialWeaponProgress(string weaponId, StatType specialStatType, int defaultStatLevel = 0)

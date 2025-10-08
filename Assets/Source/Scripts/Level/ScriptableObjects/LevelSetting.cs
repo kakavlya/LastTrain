@@ -1,5 +1,4 @@
 using LastTrain.Enemies;
-using System;
 using UnityEngine;
 
 namespace LastTrain.Level

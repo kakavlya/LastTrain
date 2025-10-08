@@ -84,7 +84,7 @@ namespace LastTrain.UI.Gameplay
 
                     if (savedLevel != null)
                     {
-                        savedLevel.IsAvailable = true;
+                        savedLevel.SetAvailable(true);
                         _nextLevel = nextLevel;
                         _nextLevelButton.onClick.AddListener(StartNextLevel);
                     }

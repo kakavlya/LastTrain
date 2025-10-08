@@ -65,37 +65,6 @@ namespace LastTrain.Enemies
             _movement = GetComponent<EnemyMovement>();
         }
 
-        protected override void ResetStateForSpawn()
-        {
-            _state = State.Approach;
-            _orbitDir = 1;
-            _changeTimer = 0f;
-            _brainTimer = 0f;
-            _fireTimer = 0f;
-            _currentSpeed = 0f;
-            _currentTarget = transform.position;
-            _movement?.SetSpeed(0f);
-        }
-
-        protected override void OnDespawn()
-        {
-            _movement?.SetSpeed(0f);
-            CancelInvoke();
-            StopAllCoroutines();
-            var rb = GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-            }
-        }
-
-        protected override void OnDeath()
-        {
-            _movement?.SetSpeed(0f);
-        }
-
         private void Update()
         {
             if (!IsAlive || _player == null || _playerCol == null || _movement == null)
@@ -168,6 +137,37 @@ namespace LastTrain.Enemies
             _changeTimer = Random.Range(_changeDirEvery.x, _changeDirEvery.y);
             _fireTimer = Random.Range(0f, Mathf.Max(MinFireInterval, _fireInterval));
             EnterApproach();
+        }
+
+        protected override void ResetStateForSpawn()
+        {
+            _state = State.Approach;
+            _orbitDir = 1;
+            _changeTimer = 0f;
+            _brainTimer = 0f;
+            _fireTimer = 0f;
+            _currentSpeed = 0f;
+            _currentTarget = transform.position;
+            _movement?.SetSpeed(0f);
+        }
+
+        protected override void OnDespawn()
+        {
+            _movement?.SetSpeed(0f);
+            CancelInvoke();
+            StopAllCoroutines();
+            var rb = GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+
+        protected override void OnDeath()
+        {
+            _movement?.SetSpeed(0f);
         }
 
         private void Think()

@@ -45,24 +45,18 @@ namespace LastTrain.AmmunitionSystem
 
         private void SetStartedRandomAmmunition(LevelElement currentElement, LevelElement nextElement)
         {
-            var points = currentElement.PickableAmmunitionPoints;
-
-            foreach (var point in points)
-            {
-                if (Random.Range(0, _maxGeneratePercent + 1) <= _generatePercent &&
-                    _selectedAmmunitionPrefabs.Count > 0)
-                {
-                    int ammoNum = Random.Range(0, _selectedAmmunitionPrefabs.Count);
-                    PickableAmmunitionPool.Instance.Spawn(_selectedAmmunitionPrefabs[ammoNum], point.position, _ammoPercent);
-                }
-            }
-
+            SetRandomAmmunition(currentElement);
             SetNextRandomAmmunition(currentElement, nextElement);
         }
 
         private void SetNextRandomAmmunition(LevelElement currentElement, LevelElement nextElement)
         {
-            var points = nextElement.PickableAmmunitionPoints;
+            SetRandomAmmunition(nextElement);
+        }
+
+        private void SetRandomAmmunition(LevelElement levelElement)
+        {
+            var points = levelElement.PickableAmmunitionPoints;
 
             foreach (var point in points)
             {

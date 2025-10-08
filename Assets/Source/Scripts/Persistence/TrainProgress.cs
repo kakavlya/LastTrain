@@ -1,18 +1,26 @@
+using UnityEngine;
+
 namespace LastTrain.Persistence
 {
     [System.Serializable]
     public class TrainProgress : BaseProgress
     {
-        public int HealthLevel;
-        public int SlotsLevel;
-        public int AmmoLevel;
+        [SerializeField] private int _healthLevel;
+        [SerializeField] private int _slotsLevel;
+        [SerializeField] private int _ammoLevel;
 
         public TrainProgress(int defaultStatLevel = 0)
         {
-            HealthLevel = defaultStatLevel;
-            SlotsLevel = defaultStatLevel;
-            AmmoLevel = defaultStatLevel;
+            _healthLevel = defaultStatLevel;
+            _slotsLevel = defaultStatLevel;
+            _ammoLevel = defaultStatLevel;
         }
+
+        public int HealthLevel => _healthLevel;
+
+        public int SlotsLevel => _slotsLevel;
+
+        public int AmmoLevel => _ammoLevel;
 
         public override int GetLevel(StatType stat)
         {
@@ -25,7 +33,7 @@ namespace LastTrain.Persistence
                     return SlotsLevel;
 
                 case StatType.Ammo:
-                    return AmmoLevel;
+                    return _ammoLevel;
             }
 
             return 0;
@@ -33,7 +41,7 @@ namespace LastTrain.Persistence
 
         public override int GetSumLevels()
         {
-            return HealthLevel + SlotsLevel + AmmoLevel;
+            return _healthLevel + _slotsLevel + _ammoLevel;
         }
 
         public override void Increment(StatType stat)
@@ -41,15 +49,15 @@ namespace LastTrain.Persistence
             switch (stat)
             {
                 case StatType.Health:
-                    HealthLevel++;
+                    _healthLevel++;
                     break;
 
                 case StatType.Slots:
-                    SlotsLevel++;
+                    _slotsLevel++;
                     break;
 
                 case StatType.Ammo:
-                    AmmoLevel++;
+                    _ammoLevel++;
                     break;
             }
         }

@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 135,
+    "idSave": 37,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,134 +49,133 @@
         }
     ],
     "TrainProgress": {
-        "HealthLevel": 0,
-        "SlotsLevel": 0,
-        "AmmoLevel": 0
+        "_healthLevel": 0,
+        "_slotsLevel": 0,
+        "_ammoLevel": 0
     },
-    "Coins": 358,
-    "EffectsVolume": 0.33248597383499148,
-    "MusicVolume": 0.12552125751972199,
+    "Coins": 0,
+    "EffectsVolume": 0.5,
+    "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
-        "",
-        "SubmachineGun"
+        ""
     ],
     "PlayerInventorySlots": [
-        "MachineGun"
+        "SubmachineGun"
     ],
     "LevelsAvailability": [
         {
-            "LevelNumber": 1,
-            "IsAvailable": true
+            "_levelNumber": 1,
+            "_isAvailable": true
         },
         {
-            "LevelNumber": 2,
-            "IsAvailable": true
+            "_levelNumber": 2,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 3,
-            "IsAvailable": true
+            "_levelNumber": 3,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 4,
-            "IsAvailable": false
+            "_levelNumber": 4,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 5,
-            "IsAvailable": false
+            "_levelNumber": 5,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 6,
-            "IsAvailable": false
+            "_levelNumber": 6,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 7,
-            "IsAvailable": false
+            "_levelNumber": 7,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 8,
-            "IsAvailable": false
+            "_levelNumber": 8,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 9,
-            "IsAvailable": false
+            "_levelNumber": 9,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 10,
-            "IsAvailable": false
+            "_levelNumber": 10,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 11,
-            "IsAvailable": false
+            "_levelNumber": 11,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 12,
-            "IsAvailable": false
+            "_levelNumber": 12,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 13,
-            "IsAvailable": false
+            "_levelNumber": 13,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 14,
-            "IsAvailable": false
+            "_levelNumber": 14,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 15,
-            "IsAvailable": false
+            "_levelNumber": 15,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 16,
-            "IsAvailable": false
+            "_levelNumber": 16,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 17,
-            "IsAvailable": false
+            "_levelNumber": 17,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 18,
-            "IsAvailable": false
+            "_levelNumber": 18,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 19,
-            "IsAvailable": false
+            "_levelNumber": 19,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 20,
-            "IsAvailable": false
+            "_levelNumber": 20,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 21,
-            "IsAvailable": false
+            "_levelNumber": 21,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 22,
-            "IsAvailable": false
+            "_levelNumber": 22,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 23,
-            "IsAvailable": false
+            "_levelNumber": 23,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 24,
-            "IsAvailable": false
+            "_levelNumber": 24,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 25,
-            "IsAvailable": false
+            "_levelNumber": 25,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 26,
-            "IsAvailable": false
+            "_levelNumber": 26,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 27,
-            "IsAvailable": false
+            "_levelNumber": 27,
+            "_isAvailable": false
         },
         {
-            "LevelNumber": 28,
-            "IsAvailable": false
+            "_levelNumber": 28,
+            "_isAvailable": false
         }
     ],
     "IsDoneGameplayTraining": true,
@@ -194,8 +193,8 @@
                 },
                 "data": {
                     "_weaponId": "SubmachineGun",
-                    "_damageLevel": 1,
-                    "_rangeLevel": 1,
+                    "_damageLevel": 0,
+                    "_rangeLevel": 0,
                     "_isAvailable": true
                 }
             },
@@ -209,8 +208,8 @@
                 "data": {
                     "_weaponId": "MachineGun",
                     "_damageLevel": 0,
-                    "_rangeLevel": 1,
-                    "_isAvailable": true
+                    "_rangeLevel": 0,
+                    "_isAvailable": false
                 }
             },
             {
