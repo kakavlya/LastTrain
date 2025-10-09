@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 37,
+    "idSave": 44,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -53,7 +53,7 @@
         "_slotsLevel": 0,
         "_ammoLevel": 0
     },
-    "Coins": 0,
+    "Coins": 340,
     "EffectsVolume": 0.5,
     "MusicVolume": 0.5,
     "InventorySlotsCount": 0,
@@ -71,7 +71,7 @@
         },
         {
             "_levelNumber": 2,
-            "_isAvailable": false
+            "_isAvailable": true
         },
         {
             "_levelNumber": 3,

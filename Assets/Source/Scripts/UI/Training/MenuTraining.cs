@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
@@ -53,82 +54,43 @@ namespace LastTrain.Training
         private ShopItemUI[] _shopItems;
         private WeaponSlotUI[] _weaponSlots;
 
+        private readonly Dictionary<MenuTrainingState, Action> _switchers = new();
+
         private void Start()
         {
             if (TrainingHandler.Instance.IsDoneGameplayTraining &&
                 !TrainingHandler.Instance.IsDoneMenuTraining)
             {
-                FSM.Register(new StartState(this));
-                FSM.Register(new ShopOpenState(this));
-                FSM.Register(new ShopInfoState(this));
-                FSM.Register(new ShopUnlockState(this));
-                FSM.Register(new ShopCloseState(this));
-                FSM.Register(new InventoryOpenState(this));
-                FSM.Register(new InventoryDragState(this));
-                FSM.Register(new InventoryCloseState(this));
-                FSM.Register(new ChoseLevelOpenState(this));
-                FSM.Register(new ChoseLevelCloseState(this));
-                FSM.Register(new EndState(this));
+                Register(MenuTrainingState.Start, new StartState(this));
+                Register(MenuTrainingState.ShopOpen, new ShopOpenState(this));
+                Register(MenuTrainingState.ShopInfo, new ShopInfoState(this));
+                Register(MenuTrainingState.ShopUnlock, new ShopUnlockState(this));
+                Register(MenuTrainingState.ShopClose, new ShopCloseState(this));
+                Register(MenuTrainingState.InventoryOpen, new InventoryOpenState(this));
+                Register(MenuTrainingState.InventoryDrag, new InventoryDragState(this));
+                Register(MenuTrainingState.InventoryClose, new InventoryCloseState(this));
+                Register(MenuTrainingState.ChoseLevelOpen, new ChoseLevelOpenState(this));
+                Register(MenuTrainingState.ChoseLevelClose, new ChoseLevelCloseState(this));
+                Register(MenuTrainingState.End, new EndState(this));
 
                 DisableAllTrainingScreens();
                 SwitchToSavedOrStart();
             }
         }
 
+        private void Register<T>(MenuTrainingState key, T state) where T : class, IState
+        {
+            FSM.Register(state);
+            _switchers[key] = () => FSM.Switch<T>();
+        }
+
         private void SwitchToSavedOrStart()
         {
-            var s = YG2.saves.TrainingState;
+            var key = YG2.saves.TrainingState;
+            if (!_switchers.TryGetValue(key, out var go))
+                go = () => FSM.Switch<StartState>();
 
-            switch (s)
-            {
-                case MenuTrainingState.Start:
-                    FSM.Switch<StartState>();
-                    break;
-
-                case MenuTrainingState.ShopOpen:
-                    FSM.Switch<ShopOpenState>();
-                    break;
-
-                case MenuTrainingState.ShopInfo:
-                    FSM.Switch<ShopInfoState>();
-                    break;
-
-                case MenuTrainingState.ShopUnlock:
-                    FSM.Switch<ShopUnlockState>();
-                    break;
-
-                case MenuTrainingState.ShopClose:
-                    FSM.Switch<ShopCloseState>();
-                    break;
-
-                case MenuTrainingState.InventoryOpen:
-                    FSM.Switch<InventoryOpenState>();
-                    break;
-
-                case MenuTrainingState.InventoryDrag:
-                    FSM.Switch<InventoryDragState>();
-                    break;
-
-                case MenuTrainingState.InventoryClose:
-                    FSM.Switch<InventoryCloseState>();
-                    break;
-
-                case MenuTrainingState.ChoseLevelOpen:
-                    FSM.Switch<ChoseLevelOpenState>();
-                    break;
-
-                case MenuTrainingState.ChoseLevelClose:
-                    FSM.Switch<ChoseLevelCloseState>();
-                    break;
-
-                case MenuTrainingState.End:
-                    FSM.Switch<EndState>();
-                    break;
-
-                default:
-                    FSM.Switch<StartState>();
-                    break;
-            }
+            go();
         }
 
         internal void DisableAllTrainingScreens()
@@ -169,71 +131,45 @@ namespace LastTrain.Training
                 item.WeaponUnlocked += onUnlocked;
 
                 var upg = item.GetComponentInChildren<Button>(true);
-                if (upg)
-                {
-                    upg.interactable = false;
-                }
+                if (upg) upg.interactable = false;
             }
         }
 
         internal void UnsubscribeShopItems(Action<WeaponProgress, WeaponUpgradeConfig> onUnlocked)
         {
-            if (_shopItems == null)
-            {
-                return;
-            }
-
+            if (_shopItems == null) return;
             foreach (var item in _shopItems)
-            {
                 item.WeaponUnlocked -= onUnlocked;
-            }
         }
 
         internal void UnlockAllUpgradeButtons()
         {
             _shopItems = _shopContent.GetComponentsInChildren<ShopItemUI>(true);
-
             foreach (var item in _shopItems)
             {
                 var upg = item.GetComponentInChildren<Button>(true);
-                if (upg)
-                {
-                    upg.interactable = true;
-                }
+                if (upg) upg.interactable = true;
             }
         }
 
         internal void SignUpPlayerInventorySlots(Action onFilled)
         {
             _weaponSlots = _playerInventory.GetComponentsInChildren<WeaponSlotUI>(true);
-
             foreach (var slot in _weaponSlots)
-            {
                 slot.Filled += onFilled;
-            }
         }
 
         internal void UnsubscribeInventorySlots(Action onFilled)
         {
-            if (_weaponSlots == null)
-            {
-                return;
-            }
-
+            if (_weaponSlots == null) return;
             foreach (var slot in _weaponSlots)
-            {
                 slot.Filled -= onFilled;
-            }
         }
 
         private sealed class StartState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public StartState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public StartState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -250,20 +186,13 @@ namespace LastTrain.Training
                 _menuTraining._startTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<ShopOpenState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<ShopOpenState>();
         }
 
         private sealed class ShopOpenState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ShopOpenState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ShopOpenState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -284,20 +213,13 @@ namespace LastTrain.Training
                 _menuTraining._shopOpenTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<ShopInfoState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<ShopInfoState>();
         }
 
         private sealed class ShopInfoState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ShopInfoState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ShopInfoState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -316,20 +238,13 @@ namespace LastTrain.Training
                 _menuTraining._shopInfoTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<ShopUnlockState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<ShopUnlockState>();
         }
 
         private sealed class ShopUnlockState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ShopUnlockState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ShopUnlockState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -357,11 +272,7 @@ namespace LastTrain.Training
         private sealed class ShopCloseState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ShopCloseState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ShopCloseState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -379,20 +290,13 @@ namespace LastTrain.Training
                 _menuTraining._shopBackTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<InventoryOpenState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<InventoryOpenState>();
         }
 
         private sealed class InventoryOpenState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public InventoryOpenState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public InventoryOpenState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -411,20 +315,13 @@ namespace LastTrain.Training
                 _menuTraining._inventoryOpenTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<InventoryDragState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<InventoryDragState>();
         }
 
         private sealed class InventoryDragState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public InventoryDragState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public InventoryDragState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -452,11 +349,7 @@ namespace LastTrain.Training
         private sealed class InventoryCloseState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public InventoryCloseState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public InventoryCloseState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -475,20 +368,13 @@ namespace LastTrain.Training
                 _menuTraining._inventoryCloseTrainingScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<ChoseLevelOpenState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<ChoseLevelOpenState>();
         }
 
         private sealed class ChoseLevelOpenState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ChoseLevelOpenState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ChoseLevelOpenState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -510,20 +396,13 @@ namespace LastTrain.Training
                 _menuTraining._choseLevelOpenScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<ChoseLevelCloseState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<ChoseLevelCloseState>();
         }
 
         private sealed class ChoseLevelCloseState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public ChoseLevelCloseState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public ChoseLevelCloseState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
@@ -539,20 +418,13 @@ namespace LastTrain.Training
                 _menuTraining._choseLevelCloseScreen.SetActive(false);
             }
 
-            private void OnNext()
-            {
-                _menuTraining.FSM.Switch<EndState>();
-            }
+            private void OnNext() => _menuTraining.FSM.Switch<EndState>();
         }
 
         private sealed class EndState : IState
         {
             private readonly MenuTraining _menuTraining;
-
-            public EndState(MenuTraining c)
-            {
-                _menuTraining = c;
-            }
+            public EndState(MenuTraining c) => _menuTraining = c;
 
             public void Enter()
             {
