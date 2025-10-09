@@ -1,9 +1,9 @@
 using System;
-using System.Collections;
 using LastTrain.Core;
 using LastTrain.Core.FSM;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace LastTrain.Training
 {
@@ -38,6 +38,46 @@ namespace LastTrain.Training
         public event Action ScreenShowed;
         public event Action ScreenLeft;
 
+        public int SwitchingTrainingDelay => _switchingTrainingDelay;
+
+        public int ShootingTrainingDelay => _shootingTrainingDelay;
+
+        public int CameraTrainingDelay => _cameraTrainingDelay;
+
+        public int PickUpTrainingDelay => _pickUpTrainingDelay;
+
+        public GameObject StartTraining => _startTraining;
+
+        public GameObject ComputerCameraTraining => _computerCameraTraining;
+
+        public GameObject MobileCameraTraining => _mobileCameraTraining;
+
+        public GameObject ComputerShootingTraining => _computerShootingTraining;
+
+        public GameObject MobileShootingTraining => _mobileShootingTraining;
+
+        public GameObject ComputerSwitchTraining => _computerSwitchTraining;
+
+        public GameObject MobileSwitchTraining => _mobileSwitchTraining;
+
+        public GameObject PickUpAmmunitionTraining => _pickUpAmmunitionTraining;
+
+        public Button StartButton => _startButton;
+
+        public Button ComputerCameraOkButton => _computerCameraOkButton;
+
+        public Button MobileCameraOkButton => _mobileCameraOkButton;
+
+        public Button ComputerShootingOkButton => _computerShootingOkButton;
+
+        public Button MobileShootingOkButton => _mobileShootingOkButton;
+
+        public Button ComputerSwitchOkButton => _computerSwitchOkButton;
+
+        public Button MobileSwitchOkButton => _mobileSwitchOkButton;
+
+        public Button PickUpOkButton => _pickUpOkButton;
+
         private void Start()
         {
             if (TrainingHandler.Instance != null && !TrainingHandler.Instance.IsDoneGameplayTraining)
@@ -52,7 +92,7 @@ namespace LastTrain.Training
             }
         }
 
-        internal void HideAll()
+        public void HideAll()
         {
             _startTraining.SetActive(false);
             _computerCameraTraining.SetActive(false);
@@ -64,254 +104,13 @@ namespace LastTrain.Training
             _pickUpAmmunitionTraining.SetActive(false);
         }
 
-        internal static bool IsPC()
+        public bool IsPC()
         {
             return PlatformDetector.Instance == null ||
                    PlatformDetector.Instance.CurrentControlScheme == PlatformDetector.ControlScheme.Computer;
         }
 
-        private abstract class GTState : IState
-        {
-            protected readonly GameplayTraining GT;
-            protected Coroutine DelayRoutine;
-
-            protected GTState(GameplayTraining gt)
-            {
-                GT = gt;
-            }
-
-            public virtual void Enter() { }
-
-            public virtual void Exit()
-            {
-                if (DelayRoutine != null)
-                {
-                    GT.StopCoroutine(DelayRoutine);
-                    DelayRoutine = null;
-                }
-            }
-
-            protected void StartDelay(IEnumerator routine)
-            {
-                if (DelayRoutine != null)
-                {
-                    GT.StopCoroutine(DelayRoutine);
-                }
-
-                DelayRoutine = GT.StartCoroutine(routine);
-            }
-
-            protected void Showed()
-            {
-                GT.ScreenShowed?.Invoke();
-            }
-
-            protected void Left()
-            {
-                GT.ScreenLeft?.Invoke();
-            }
-        }
-
-        private sealed class StartState : GTState
-        {
-            public StartState(GameplayTraining gt)
-                : base(gt)
-            { }
-
-            public override void Enter()
-            {
-                GT.HideAll();
-                GT._startTraining.SetActive(true);
-                Showed();
-                GT._startButton.onClick.AddListener(OnNext);
-            }
-
-            public override void Exit()
-            {
-                GT._startButton.onClick.RemoveListener(OnNext);
-                GT._startTraining.SetActive(false);
-                Left();
-                base.Exit();
-            }
-
-            private void OnNext()
-            {
-                GT.FSM.Switch<CameraMovementState>();
-            }
-        }
-
-        private sealed class CameraMovementState : GTState
-        {
-            public CameraMovementState(GameplayTraining gt)
-                : base(gt)
-            { }
-
-            public override void Enter()
-            {
-                GT.HideAll();
-                StartDelay(Flow());
-            }
-
-            public override void Exit()
-            {
-                GT._computerCameraOkButton.onClick.RemoveListener(OnOk);
-                GT._mobileCameraOkButton.onClick.RemoveListener(OnOk);
-                GT._computerCameraTraining.SetActive(false);
-                GT._mobileCameraTraining.SetActive(false);
-                Left();
-                base.Exit();
-            }
-
-            private IEnumerator Flow()
-            {
-                yield return new WaitForSeconds(GT._cameraTrainingDelay);
-
-                if (IsPC())
-                {
-                    GT._computerCameraTraining.SetActive(true);
-                    GT._computerCameraOkButton.onClick.AddListener(OnOk);
-                }
-                else
-                {
-                    GT._mobileCameraTraining.SetActive(true);
-                    GT._mobileCameraOkButton.onClick.AddListener(OnOk);
-                }
-
-                Showed();
-            }
-
-            private void OnOk()
-            {
-                GT.FSM.Switch<ShootingState>();
-            }
-        }
-
-        private sealed class ShootingState : GTState
-        {
-            public ShootingState(GameplayTraining gt)
-                : base(gt)
-            { }
-
-            public override void Enter()
-            {
-                GT.HideAll();
-                StartDelay(Flow());
-            }
-
-            public override void Exit()
-            {
-                GT._computerShootingOkButton.onClick.RemoveListener(OnOk);
-                GT._mobileShootingOkButton.onClick.RemoveListener(OnOk);
-                GT._computerShootingTraining.SetActive(false);
-                GT._mobileShootingTraining.SetActive(false);
-                Left();
-                base.Exit();
-            }
-
-            private IEnumerator Flow()
-            {
-                yield return new WaitForSeconds(GT._shootingTrainingDelay);
-
-                if (IsPC())
-                {
-                    GT._computerShootingTraining.SetActive(true);
-                    GT._computerShootingOkButton.onClick.AddListener(OnOk);
-                }
-                else
-                {
-                    GT._mobileShootingTraining.SetActive(true);
-                    GT._mobileShootingOkButton.onClick.AddListener(OnOk);
-                }
-
-                Showed();
-            }
-
-            private void OnOk()
-            {
-                GT.FSM.Switch<SwitchWeaponState>();
-            }
-        }
-
-        private sealed class SwitchWeaponState : GTState
-        {
-            public SwitchWeaponState(GameplayTraining gt)
-                : base(gt)
-            { }
-
-            public override void Enter()
-            {
-                GT.HideAll();
-                StartDelay(Flow());
-            }
-
-            public override void Exit()
-            {
-                GT._computerSwitchOkButton.onClick.RemoveListener(OnOk);
-                GT._mobileSwitchOkButton.onClick.RemoveListener(OnOk);
-                GT._computerSwitchTraining.SetActive(false);
-                GT._mobileSwitchTraining.SetActive(false);
-                Left();
-                base.Exit();
-            }
-
-            private IEnumerator Flow()
-            {
-                yield return new WaitForSeconds(GT._switchingTrainingDelay);
-
-                if (IsPC())
-                {
-                    GT._computerSwitchTraining.SetActive(true);
-                    GT._computerSwitchOkButton.onClick.AddListener(OnOk);
-                }
-                else
-                {
-                    GT._mobileSwitchTraining.SetActive(true);
-                    GT._mobileSwitchOkButton.onClick.AddListener(OnOk);
-                }
-
-                Showed();
-            }
-
-            private void OnOk()
-            {
-                GT.FSM.Switch<AmmunitionState>();
-            }
-        }
-
-        private sealed class AmmunitionState : GTState
-        {
-            public AmmunitionState(GameplayTraining gt)
-                : base(gt)
-            { }
-
-            public override void Enter()
-            {
-                GT.HideAll();
-                StartDelay(Flow());
-            }
-
-            public override void Exit()
-            {
-                GT._pickUpOkButton.onClick.RemoveListener(OnOk);
-                GT._pickUpAmmunitionTraining.SetActive(false);
-                Left();
-                base.Exit();
-            }
-
-            private IEnumerator Flow()
-            {
-                yield return new WaitForSeconds(GT._pickUpTrainingDelay);
-
-                GT._pickUpAmmunitionTraining.SetActive(true);
-                GT._pickUpOkButton.onClick.AddListener(OnOk);
-                Showed();
-            }
-
-            private void OnOk()
-            {
-                GT.HideAll();
-                Left();
-            }
-        }
+        public void InvokeScreenShowed() => ScreenShowed?.Invoke();
+        public void InvokeScreenLeft() => ScreenLeft?.Invoke();
     }
 }

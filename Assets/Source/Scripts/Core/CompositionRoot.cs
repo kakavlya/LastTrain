@@ -1,5 +1,6 @@
 ﻿using LastTrain.AmmunitionSystem;
 using LastTrain.CameraSystem;
+using LastTrain.Core.FSM;
 using LastTrain.Enemies;
 using LastTrain.Level;
 using LastTrain.Particles;
@@ -76,10 +77,10 @@ namespace LastTrain.Core
             _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
             _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
             _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
-            _uIStateMachine.FSM.Switch<UIStateMachine.LevelStartState>();
+            _uIStateMachine.FSM.Switch<LevelStartState>();
 
-            _levelStateMachine.PlayerDied += () => _uIStateMachine.FSM.Switch<UIStateMachine.GameOverState>();
-            _levelStateMachine.LevelCompleted += () => _uIStateMachine.FSM.Switch<UIStateMachine.EndLevelState>();
+            _levelStateMachine.PlayerDied += () => _uIStateMachine.FSM.Switch<GameOverState>();
+            _levelStateMachine.LevelCompleted += () => _uIStateMachine.FSM.Switch<EndLevelState>();
 
             _gameplayTraining.ScreenShowed += _levelStateMachine.PauseLevel;
             _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeLevel;

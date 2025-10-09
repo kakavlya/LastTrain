@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using LastTrain.Core.FSM;
 using LastTrain.Training;
 using LastTrain.UI;
 
-namespace LastTrain.Core
+namespace LastTrain.Core.FSM
 {
     public class UIStateMachine : TypeStateMachineMono
     {
@@ -28,13 +27,27 @@ namespace LastTrain.Core
         [Header("Mobile Platform Control")]
         [SerializeField] private GameObject _joustick;
 
+        private UIScreenRouter _router;
+
         public event Action StartClicked;
         public event Action PauseClicked;
         public event Action ResumeClicked;
         public event Action RestartClicked;
         public event Action MenuClicked;
 
-        private UIScreenRouter _router;
+        public UIScreenRouter Router => _router;
+
+        public GameObject StartScreen => _startScreen;
+
+        public GameObject HudScreen => _hudScreen;
+
+        public GameObject GameOverScreen => _gameOverScreen;
+
+        public GameObject GameEndScreen => _gameEndScreen;
+
+        public GameObject GamePauseScreen => _gamePauseScreen;
+
+        public GameObject SettingsScreen => _settingsScreen;
 
         private void Awake()
         {
@@ -108,74 +121,6 @@ namespace LastTrain.Core
             _startButton.onClick.RemoveAllListeners();
             _resumeButton.onClick.RemoveAllListeners();
             _settingsButton.onClick.RemoveAllListeners();
-        }
-
-        public abstract class UMState : IState
-        {
-            protected readonly UIStateMachine UI;
-
-            protected UMState(UIStateMachine ui)
-            {
-                UI = ui;
-            }
-
-            public virtual void Enter() { }
-
-            public virtual void Exit() { }
-        }
-
-        public sealed class LevelStartState : UMState
-        {
-            public LevelStartState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._startScreen);
-        }
-
-        private sealed class PlayingState : UMState
-        {
-            public PlayingState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._hudScreen);
-        }
-
-        public sealed class GameOverState : UMState
-        {
-            public GameOverState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._gameOverScreen);
-        }
-
-        public sealed class EndLevelState : UMState
-        {
-            public EndLevelState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._gameEndScreen);
-        }
-
-        private sealed class PauseState : UMState
-        {
-            public PauseState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._gamePauseScreen);
-        }
-
-        private sealed class SettingsState : UMState
-        {
-            public SettingsState(UIStateMachine ui)
-                : base(ui)
-            { }
-
-            public override void Enter() => UI._router.ShowOnly(UI._settingsScreen);
         }
     }
 }

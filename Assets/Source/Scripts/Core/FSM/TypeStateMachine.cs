@@ -3,15 +3,12 @@ using System.Collections.Generic;
 
 namespace LastTrain.Core.FSM
 {
-    public sealed class TypeStateMachine
+    public class TypeStateMachine
     {
         private readonly Dictionary<Type, IState> _states = new();
         private IState _current;
 
         public Type CurrentKey { get; private set; }
-
-        public void Register<TMarker>(IState state) where TMarker : class
-            => _states[typeof(TMarker)] = state;
 
         public void Register<TState>(TState state) where TState : class, IState
             => _states[typeof(TState)] = state;
@@ -25,13 +22,6 @@ namespace LastTrain.Core.FSM
             _current = next;
             CurrentKey = key;
             _current.Enter();
-        }
-
-        public void Reset()
-        {
-            _current?.Exit();
-            _current = null;
-            CurrentKey = null;
         }
     }
 }

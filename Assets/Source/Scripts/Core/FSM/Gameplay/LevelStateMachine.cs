@@ -5,7 +5,7 @@ using LastTrain.Enemies;
 using LastTrain.Player;
 using LastTrain.UI.Gameplay;
 
-namespace LastTrain.Core
+namespace LastTrain.Core.FSM
 {
     public class LevelStateMachine : MonoBehaviour
     {
