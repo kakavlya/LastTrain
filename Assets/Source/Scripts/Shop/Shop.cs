@@ -44,6 +44,7 @@ namespace LastTrain.ShopSystem
             foreach (var item in _uiItems)
             {
                 item.WeaponUnlocked -= InitialNewInventoryWeapon;
+                item.TurretUnlocked -= InitialNewTurret;
             }
         }
 
@@ -58,6 +59,7 @@ namespace LastTrain.ShopSystem
             foreach (var item in _uiItems)
             {
                 item.WeaponUnlocked -= InitialNewInventoryWeapon;
+                item.TurretUnlocked -= InitialNewTurret;
             }
 
             _uiItems.Clear();
@@ -69,22 +71,19 @@ namespace LastTrain.ShopSystem
 
             foreach (var upgradeConfig in _itemConfigs)
             {
-                BaseProgress progress = null;
+                // This panel is Weapons-only.
+                // Train is handled by TrainShopPanel.
+                // Turrets are handled by HardpointsShopPanel (coming in Step 2).
+                if (upgradeConfig is not WeaponUpgradeConfig weaponUpgradeCfg)
+                    continue;
 
-                if (upgradeConfig is WeaponUpgradeConfig weaponUprgadeCfg)
-                {
-                    string id = weaponUprgadeCfg.WeaponId;
-                    progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
+                string id = weaponUpgradeCfg.WeaponId;
+                BaseProgress progress = _data.WeaponsProgress.Find(w => w.WeaponId == id);
 
-                    if (progress == null)
-                    {
-                        progress = new WeaponProgress(id);
-                        data.WeaponsProgress.Add((WeaponProgress)progress);
-                    }
-                }
-                else if (upgradeConfig is TrainUpgradeConfig trainUpgradeConfig)
+                if (progress == null)
                 {
-                    progress = _data.TrainProgress;
+                    progress = new WeaponProgress(id);
+                    data.WeaponsProgress.Add((WeaponProgress)progress);
                 }
 
                 var itemUi = Instantiate(_shopItemPrefab, _contentParent);
@@ -139,6 +138,15 @@ namespace LastTrain.ShopSystem
             }
 
             YG2.SaveProgress();
+        }
+
+        private void InitialNewTurret(TurretProgress progress, TurretUpgradeConfig turretConfig)
+        {
+            progress.SetUnlocked(true);
+            YG2.SaveProgress();
+            
+            // Note: Unlike weapons, turrets don't have inventory slots.
+            // They are automatically equipped to the train's hardpoints based on progress.IsUnlocked.
         }
 
         private void ResizeContentForGrid()

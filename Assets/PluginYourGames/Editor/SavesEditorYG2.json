@@ -7,7 +7,8 @@
         false,
         false
     ],
-    "idSave": 163,
+    "idSave": 479,
+    "SaveVersion": 2,
     "WeaponsProgress": [
         {
             "rid": 1000
@@ -49,16 +50,47 @@
         }
     ],
     "TrainProgress": {
-        "_healthLevel": 0,
+        "_healthLevel": 1,
         "_slotsLevel": 0,
         "_ammoLevel": 0
     },
-    "Coins": 0,
+    "HardpointsProgress": [
+        {
+            "_hardpointIndex": 0,
+            "_isUnlocked": false,
+            "_level": 0,
+            "_activeTurretId": "",
+            "_turretsProgress": []
+        },
+        {
+            "_hardpointIndex": 1,
+            "_isUnlocked": false,
+            "_level": 0,
+            "_activeTurretId": "",
+            "_turretsProgress": []
+        },
+        {
+            "_hardpointIndex": 2,
+            "_isUnlocked": false,
+            "_level": 0,
+            "_activeTurretId": "",
+            "_turretsProgress": []
+        },
+        {
+            "_hardpointIndex": 3,
+            "_isUnlocked": false,
+            "_level": 0,
+            "_activeTurretId": "",
+            "_turretsProgress": []
+        }
+    ],
+    "Coins": 250,
     "EffectsVolume": 0.41387224197387698,
     "MusicVolume": 0.0,
     "InventorySlotsCount": 0,
     "PlayerInventorySlotsCount": 1,
     "InventorySlots": [
+        "MachineGun",
         ""
     ],
     "PlayerInventorySlots": [
@@ -71,11 +103,11 @@
         },
         {
             "_levelNumber": 2,
-            "_isAvailable": false
+            "_isAvailable": true
         },
         {
             "_levelNumber": 3,
-            "_isAvailable": false
+            "_isAvailable": true
         },
         {
             "_levelNumber": 4,
@@ -209,7 +241,7 @@
                     "_weaponId": "MachineGun",
                     "_damageLevel": 0,
                     "_rangeLevel": 0,
-                    "_isAvailable": false
+                    "_isAvailable": true
                 }
             },
             {

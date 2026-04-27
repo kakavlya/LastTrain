@@ -10,5 +10,6 @@ namespace LastTrain.Persistence
         AoeDamage,
         Health,
         Slots,
+        FireRate,   // turret fire rate (shots per second)
     }
 }

@@ -1,4 +1,4 @@
-﻿using LastTrain.AmmunitionSystem;
+using LastTrain.AmmunitionSystem;
 using LastTrain.CameraSystem;
 using LastTrain.Core.FSM;
 using LastTrain.Enemies;
@@ -7,6 +7,7 @@ using LastTrain.Particles;
 using LastTrain.Player;
 using LastTrain.Projectiles;
 using LastTrain.Training;
+using LastTrain.Turrets;
 using LastTrain.UI.Gameplay;
 using LastTrain.Weapons.System;
 using UnityEngine;
@@ -45,6 +46,10 @@ namespace LastTrain.Core
         [SerializeField] private EnemyPool _enemyPool;
         [SerializeField] private CameraFollower _cameraFollower;
 
+        [Header("Turrets")]
+        [Tooltip("Optional — leave unassigned in scenes without turrets.")]
+        [SerializeField] private TurretsHandler _turretsHandler;
+
         [Header("Scenes")]
         [SerializeField] private string _menuScene = "MainMenu";
 
@@ -64,6 +69,9 @@ namespace LastTrain.Core
             _projectilePool.Init();
             _levelProgress.Init();
 
+            // Turrets — optional; skipped if no TurretsHandler is assigned
+            _turretsHandler?.Init();
+
             _levelStateMachine.Construct(
                 _enemySpawner,
                 _player,
@@ -72,18 +80,37 @@ namespace LastTrain.Core
                 _levelProgress,
                 _menuScene);
 
-            _uIStateMachine.StartClicked += _levelStateMachine.StartLevel;
+            // ── UI → Level state machine ──────────────────────────────────────
+            _uIStateMachine.StartClicked   += _levelStateMachine.StartLevel;
             _uIStateMachine.RestartClicked += _levelStateMachine.RestartLevel;
-            _uIStateMachine.PauseClicked += _levelStateMachine.PauseLevel;
-            _uIStateMachine.ResumeClicked += _levelStateMachine.ResumeLevel;
-            _uIStateMachine.MenuClicked += _levelStateMachine.ReturnToMenu;
+            _uIStateMachine.PauseClicked   += _levelStateMachine.PauseLevel;
+            _uIStateMachine.ResumeClicked  += _levelStateMachine.ResumeLevel;
+            _uIStateMachine.MenuClicked    += _levelStateMachine.ReturnToMenu;
             _uIStateMachine.FSM.Switch<LevelStartState>();
 
-            _levelStateMachine.PlayerDied += () => _uIStateMachine.FSM.Switch<GameOverState>();
-            _levelStateMachine.LevelCompleted += () => _uIStateMachine.FSM.Switch<EndLevelState>();
+            _levelStateMachine.PlayerDied      += () => _uIStateMachine.FSM.Switch<GameOverState>();
+            _levelStateMachine.LevelCompleted  += () => _uIStateMachine.FSM.Switch<EndLevelState>();
 
+            // ── UI → Turrets (mirrors spawner lifecycle) ──────────────────────
+            if (_turretsHandler != null)
+            {
+                _uIStateMachine.StartClicked  += _turretsHandler.Begin;
+                _uIStateMachine.PauseClicked  += _turretsHandler.Pause;
+                _uIStateMachine.ResumeClicked += _turretsHandler.Resume;
+
+                _levelStateMachine.PlayerDied     += _turretsHandler.Pause;
+                _levelStateMachine.LevelCompleted += _turretsHandler.Pause;
+            }
+
+            // ── Training screen pause hooks ───────────────────────────────────
             _gameplayTraining.ScreenShowed += _levelStateMachine.PauseLevel;
-            _gameplayTraining.ScreenLeft += _levelStateMachine.ResumeLevel;
+            _gameplayTraining.ScreenLeft   += _levelStateMachine.ResumeLevel;
+
+            if (_turretsHandler != null)
+            {
+                _gameplayTraining.ScreenShowed += _turretsHandler.Pause;
+                _gameplayTraining.ScreenLeft   += _turretsHandler.Resume;
+            }
         }
     }
-}
+}

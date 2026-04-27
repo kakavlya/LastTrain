@@ -1,4 +1,4 @@
-﻿using LastTrain.Core;
+using LastTrain.Core;
 using LastTrain.Persistence;
 using LastTrain.Training;
 using LastTrain.Data;
@@ -58,10 +58,33 @@ namespace LastTrain.Player
                 if (config.StatType == StatType.Health)
                 {
                     healthConfig = config;
+                    break;
                 }
             }
 
-            return healthConfig.GetValue(healthLevel);
+            float maxHealth = healthConfig != null ? healthConfig.GetValue(healthLevel) : 100f;
+
+            // Add Hardpoint HP bonuses
+            var hardpointConfigs = TransferData.Instance.HardpointConfigs;
+            if (hardpointConfigs != null && YG2.saves.HardpointsProgress != null)
+            {
+                foreach (var hpProgress in YG2.saves.HardpointsProgress)
+                {
+                    if (!hpProgress.IsUnlocked) continue;
+
+                    // Find the matching config for this hardpoint index
+                    foreach (var hpConfig in hardpointConfigs)
+                    {
+                        if (hpConfig != null && hpConfig.HardpointIndex == hpProgress.HardpointIndex)
+                        {
+                            maxHealth += hpProgress.Level * hpConfig.HpBonusPerLevel;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return maxHealth;
         }
     }
 }

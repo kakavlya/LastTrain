@@ -66,7 +66,11 @@ namespace LastTrain.Projectiles.Types
                 Despawn();
             }
 
-            if (Owner != null && collider.transform.IsChildOf(Owner.transform))
+            // Skip if the hit object and the owner share the same hierarchy
+            // (either direction: target is child of owner, or owner is child of target).
+            if (Owner != null &&
+                (collider.transform.IsChildOf(Owner.transform) ||
+                 Owner.transform.IsChildOf(collider.transform)))
                 return;
 
             if (IsFriendlyFire(collider))

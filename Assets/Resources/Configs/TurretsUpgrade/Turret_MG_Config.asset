@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e9a0da9015b7f4ba294b7fd0bdb72d, type: 3}
+  m_Name: Turret_MG_Config
+  m_EditorClassIdentifier: 
+  _name: Machine Gun Turret
+  _localizationKey: MG_UPGRADE
+  _statConfigs:
+  - _localizationKey: MG_UPGRADE_DMG
+    _statType: 0
+    _curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    _maxLevel: 10
+    _costs: 32000000
+    _minValue: 50
+    _maxValue: 70
+    _isShowFractionalValue: 0
+  - _localizationKey: MG_UPGRADE_RNG
+    _statType: 1
+    _curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    _maxLevel: 1
+    _costs: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    _minValue: 50
+    _maxValue: 60
+    _isShowFractionalValue: 0
+  _icon: {fileID: 21300000, guid: ce6a31125f33fe14d9a324696f333226, type: 3}
+  _turretId: Turret_MG_1
+  _turretPrefab: {fileID: 7268161779581684659, guid: 092cc3102aa88744bbd632b5390517e9, type: 3}
+  _unlockCost: 50

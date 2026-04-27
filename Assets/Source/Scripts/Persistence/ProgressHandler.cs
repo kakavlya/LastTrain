@@ -30,8 +30,22 @@ namespace LastTrain.Persistence
             }
         }
 
+        private void OnEnable()
+        {
+            LevelChanged += UpdateLevelText;
+        }
+
+        private void OnDisable()
+        {
+            LevelChanged -= UpdateLevelText;
+        }
+
         private void Start()
         {
+            // Run save migration once, before anything reads from the save.
+            if (SavesYG.MigrateIfNeeded())
+                YG2.SaveProgress();
+
             RefreshSumLevels();
         }
 
@@ -53,8 +67,17 @@ namespace LastTrain.Persistence
             }
 
             _sumLevels += trainProgress.GetSumLevels();
+
+            // Turret levels are intentionally excluded here until Phase 3,
+            // when TurretProgress entries are authored and can be summed.
+
             LevelChanged?.Invoke();
-            _sumLevelsText.text = _sumLevels.ToString();
+        }
+
+        private void UpdateLevelText()
+        {
+            if (_sumLevelsText != null)
+                _sumLevelsText.text = _sumLevels.ToString();
         }
     }
 }

@@ -178,7 +178,7 @@ namespace YG
                 fileName = fileName.Replace(dataPath, string.Empty);
                 fileName = "Assets" + fileName;
 
-                Debug.Log($"<color=#ffffff>{message}</color>\n<color=#6b6b6b>{fileName}: {lineNumber}</color>");
+                //Debug.Log($"<color=#ffffff>{message}</color>\n<color=#6b6b6b>{fileName}: {lineNumber}</color>");
             }
 #else
             iPlatform.Message(message);

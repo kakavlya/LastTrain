@@ -24,6 +24,8 @@ namespace LastTrain.ShopSystem
         private bool _isAvailable;
 
         public event Action<WeaponProgress, WeaponUpgradeConfig> WeaponUnlocked;
+        public event Action<TurretProgress, TurretUpgradeConfig> TurretUnlocked;
+        public event Action<HardpointProgress, HardpointUpgradeConfig> HardpointUnlocked;
 
         public void Init(UpgradeConfig cfg, BaseProgress progress, Action<UpgradeConfig, BaseProgress> onSelected)
         {
@@ -38,6 +40,16 @@ namespace LastTrain.ShopSystem
                 progress is WeaponProgress weaponProgress)
             {
                 InitWeaponUnlockingSystem(weaponUpgradeConfig, weaponProgress);
+            }
+            else if (cfg is TurretUpgradeConfig turretUpgradeConfig &&
+                     progress is TurretProgress turretProgress)
+            {
+                InitTurretUnlockingSystem(turretUpgradeConfig, turretProgress);
+            }
+            else if (cfg is HardpointUpgradeConfig hpUpgradeConfig &&
+                     progress is HardpointProgress hpProgress)
+            {
+                InitHardpointUnlockingSystem(hpUpgradeConfig, hpProgress);
             }
             else if (cfg is TrainUpgradeConfig trainUpgradeConfig
                 && progress is TrainProgress trainProgress)
@@ -73,6 +85,50 @@ namespace LastTrain.ShopSystem
             }
         }
 
+        private void InitTurretUnlockingSystem(TurretUpgradeConfig turretUpgradeConfig, TurretProgress turretProgress)
+        {
+            _unlockingCost = turretUpgradeConfig.UnlockCost;
+            _unlockCostText.text = _unlockingCost.ToString();
+            _isAvailable = turretProgress.IsUnlocked;
+            _upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
+
+            if (!_isAvailable)
+            {
+                _unlockButton.gameObject.SetActive(true);
+                _unlockButton.onClick.AddListener(BuyItem);
+                _lockPanel.SetActive(true);
+                _upgradeButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                _unlockButton.gameObject.SetActive(false);
+                _lockPanel.SetActive(false);
+                _upgradeButton.gameObject.SetActive(true);
+            }
+        }
+
+        private void InitHardpointUnlockingSystem(HardpointUpgradeConfig hpUpgradeConfig, HardpointProgress hpProgress)
+        {
+            _unlockingCost = hpUpgradeConfig.UnlockCost;
+            _unlockCostText.text = _unlockingCost.ToString();
+            _isAvailable = hpProgress.IsUnlocked;
+            _upgradeButton.onClick.AddListener(OnUpgradeButtonClick);
+
+            if (!_isAvailable)
+            {
+                _unlockButton.gameObject.SetActive(true);
+                _unlockButton.onClick.AddListener(BuyItem);
+                _lockPanel.SetActive(true);
+                _upgradeButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                _unlockButton.gameObject.SetActive(false);
+                _lockPanel.SetActive(false);
+                _upgradeButton.gameObject.SetActive(true);
+            }
+        }
+
         private void OnUpgradeButtonClick()
         {
             if (_lockPanel.activeSelf)
@@ -91,17 +147,41 @@ namespace LastTrain.ShopSystem
 
         private void BuyItem()
         {
-            if (CoinsHandler.Instance.CoinsCount >= _unlockingCost &&
-                _progress is WeaponProgress progress &&
-                _upgradeConfig is WeaponUpgradeConfig weaponUpgrade)
+            if (CoinsHandler.Instance.CoinsCount >= _unlockingCost)
             {
-                _unlockButton.onClick.RemoveListener(BuyItem);
-                CoinsHandler.Instance.RemoveCoins(_unlockingCost);
-                _unlockButton.gameObject.SetActive(false);
-                _lockPanel.SetActive(false);
-                _upgradeButton.gameObject.SetActive(true);
-                WeaponUnlocked?.Invoke(progress, weaponUpgrade);
-                ProgressHandler.Instance.RefreshSumLevels();
+                if (_progress is WeaponProgress weaponProgress &&
+                    _upgradeConfig is WeaponUpgradeConfig weaponUpgrade)
+                {
+                    _unlockButton.onClick.RemoveListener(BuyItem);
+                    CoinsHandler.Instance.RemoveCoins(_unlockingCost);
+                    _unlockButton.gameObject.SetActive(false);
+                    _lockPanel.SetActive(false);
+                    _upgradeButton.gameObject.SetActive(true);
+                    WeaponUnlocked?.Invoke(weaponProgress, weaponUpgrade);
+                    ProgressHandler.Instance.RefreshSumLevels();
+                }
+                else if (_progress is TurretProgress turretProgress &&
+                         _upgradeConfig is TurretUpgradeConfig turretUpgrade)
+                {
+                    _unlockButton.onClick.RemoveListener(BuyItem);
+                    CoinsHandler.Instance.RemoveCoins(_unlockingCost);
+                    _unlockButton.gameObject.SetActive(false);
+                    _lockPanel.SetActive(false);
+                    _upgradeButton.gameObject.SetActive(true);
+                    TurretUnlocked?.Invoke(turretProgress, turretUpgrade);
+                    ProgressHandler.Instance.RefreshSumLevels();
+                }
+                else if (_progress is HardpointProgress hpProgress &&
+                         _upgradeConfig is HardpointUpgradeConfig hpUpgrade)
+                {
+                    _unlockButton.onClick.RemoveListener(BuyItem);
+                    CoinsHandler.Instance.RemoveCoins(_unlockingCost);
+                    _unlockButton.gameObject.SetActive(false);
+                    _lockPanel.SetActive(false);
+                    _upgradeButton.gameObject.SetActive(true);
+                    HardpointUnlocked?.Invoke(hpProgress, hpUpgrade);
+                    ProgressHandler.Instance.RefreshSumLevels();
+                }
             }
         }
     }
