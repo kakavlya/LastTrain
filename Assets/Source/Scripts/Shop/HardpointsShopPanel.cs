@@ -23,6 +23,10 @@ namespace LastTrain.ShopSystem
         [SerializeField] private Transform _contentParent;
         [SerializeField] private ShopItemUI _shopItemPrefab;
 
+        [Header("Configs")]
+        [SerializeField] private HardpointUpgradeConfig[] _hardpointConfigs;
+        [SerializeField] private TurretUpgradeConfig[] _turretConfigs;
+
         [Header("Details Overlay (shared)")]
         [SerializeField] private Image _blocker;
         [SerializeField] private DetailsPanel _detailsPrefab;
@@ -96,9 +100,9 @@ namespace LastTrain.ShopSystem
             var hpProgress = YG2.saves.HardpointsProgress[_selectedHardpointIndex];
             
             // 1. Show the Hardpoint itself (Unlock or Upgrade)
-            if (TransferData.Instance.HardpointConfigs != null && _selectedHardpointIndex < TransferData.Instance.HardpointConfigs.Length)
+            if (_hardpointConfigs != null && _selectedHardpointIndex < _hardpointConfigs.Length)
             {
-                var hpConfig = TransferData.Instance.HardpointConfigs[_selectedHardpointIndex];
+                var hpConfig = _hardpointConfigs[_selectedHardpointIndex];
                 if (hpConfig != null)
                 {
                     var hpUi = Instantiate(_shopItemPrefab, _contentParent);
@@ -109,9 +113,9 @@ namespace LastTrain.ShopSystem
             }
 
             // 2. If unlocked, show Turrets for this slot
-            if (hpProgress.IsUnlocked && TransferData.Instance.TurretConfigs != null)
+            if (hpProgress.IsUnlocked && _turretConfigs != null)
             {
-                foreach (var turretConfig in TransferData.Instance.TurretConfigs)
+                foreach (var turretConfig in _turretConfigs)
                 {
                     if (turretConfig == null || string.IsNullOrEmpty(turretConfig.TurretId)) continue;
 

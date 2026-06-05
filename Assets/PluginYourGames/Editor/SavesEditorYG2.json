@@ -7,7 +7,7 @@
         false,
         false
     ],
-    "idSave": 479,
+    "idSave": 554,
     "SaveVersion": 2,
     "WeaponsProgress": [
         {
@@ -57,10 +57,17 @@
     "HardpointsProgress": [
         {
             "_hardpointIndex": 0,
-            "_isUnlocked": false,
+            "_isUnlocked": true,
             "_level": 0,
             "_activeTurretId": "",
-            "_turretsProgress": []
+            "_turretsProgress": [
+                {
+                    "_turretId": "Turret_MG_1",
+                    "_damageLevel": 0,
+                    "_fireRateLevel": 0,
+                    "_isUnlocked": false
+                }
+            ]
         },
         {
             "_hardpointIndex": 1,
@@ -84,7 +91,7 @@
             "_turretsProgress": []
         }
     ],
-    "Coins": 250,
+    "Coins": 200,
     "EffectsVolume": 0.41387224197387698,
     "MusicVolume": 0.0,
     "InventorySlotsCount": 0,
